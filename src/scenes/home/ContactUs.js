@@ -9,7 +9,11 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 
@@ -20,96 +24,97 @@ const validationSchema = Yup.object().shape({
 
 const ContactUs = () => {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>हमसे संपर्क करें</Text>
-      <Formik
-        initialValues={{name: '', mobileno: '', message: ''}}
-        validationSchema={validationSchema}
-        onSubmit={values => console.log(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
-          <View>
-            <TextInput
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-              style={styles.textinput}
-              placeholder="नाम"
-              placeholderTextColor={'#666666'}
-            />
-            {errors.name && touched.name ? (
-              <Text style={styles.error}>{errors.name}</Text>
-            ) : null}
-            <TextInput
-              onChangeText={handleChange('mobileno')}
-              onBlur={handleBlur('mobileno')}
-              value={values.mobileno}
-              style={styles.textinput}
-              placeholder="Mobile No. दर्ज करें"
-              placeholderTextColor={'#666666'}
-            />
-            {errors.mobileno && touched.mobileno ? (
-              <Text style={styles.error}>{errors.mobileno}</Text>
-            ) : null}
-            <TextInput
-              onChangeText={handleChange('message')}
-              onBlur={handleBlur('message')}
-              value={values.message}
-              style={styles.textinput_msg}
-              numberOfLines={7}
-              placeholder="Message"
-              placeholderTextColor={'#666666'}
-            />
-            {errors.message && touched.message ? (
-              <Text style={styles.error}>{errors.message}</Text>
-            ) : null}
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.text_btn}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
+    <RootScreen>
+      <ScrollView>
+        <Text style={styles.title}>हमसे संपर्क करें</Text>
+        <Formik
+          initialValues={{name: '', mobileno: '', message: ''}}
+          validationSchema={validationSchema}
+          onSubmit={values => console.log(values)}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <View>
+              <TextInput
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+                style={styles.textinput}
+                placeholder="नाम"
+                placeholderTextColor={'#666666'}
+              />
+              {errors.name && touched.name ? (
+                <Text style={styles.error}>{errors.name}</Text>
+              ) : null}
+              <TextInput
+                onChangeText={handleChange('mobileno')}
+                onBlur={handleBlur('mobileno')}
+                value={values.mobileno}
+                style={styles.textinput}
+                placeholder="Mobile No. दर्ज करें"
+                placeholderTextColor={'#666666'}
+              />
+              {errors.mobileno && touched.mobileno ? (
+                <Text style={styles.error}>{errors.mobileno}</Text>
+              ) : null}
+              <TextInput
+                onChangeText={handleChange('message')}
+                onBlur={handleBlur('message')}
+                value={values.message}
+                style={styles.textinput_msg}
+                numberOfLines={7}
+                placeholder="Message"
+                placeholderTextColor={'#666666'}
+              />
+              {errors.message && touched.message ? (
+                <Text style={styles.error}>{errors.message}</Text>
+              ) : null}
+              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.text_btn}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </Formik>
 
-      <View style={styles.footer}>
-        <Text style={styles.footer_text}>हमसे संपर्क करें</Text>
-        <View style={styles.info}>
-          <Image
-            style={styles.info_img}
-            source={require('../../assets/phoneCall.png')}
-          />
-          <Text style={styles.info_text}>+91-7987233880</Text>
+        <View style={styles.footer}>
+          <Text style={styles.footer_text}>हमसे संपर्क करें</Text>
+          <View style={styles.info}>
+            <Image
+              style={styles.info_img}
+              source={require('../../assets/phoneCall.png')}
+            />
+            <Text style={styles.info_text}>+91-7987233880</Text>
+          </View>
+          <View style={styles.info}>
+            <Image
+              style={styles.info_img}
+              source={require('../../assets/message.png')}
+            />
+            <Text style={styles.info_text}>contact@kurmishadi.com</Text>
+          </View>
+          <View style={styles.info}>
+            <Image
+              style={styles.info_img}
+              source={require('../../assets/whatsapp.png')}
+            />
+            <Text style={styles.info_text}>+91-7987233880</Text>
+          </View>
         </View>
-        <View style={styles.info}>
-          <Image
-            style={styles.info_img}
-            source={require('../../assets/message.png')}
-          />
-          <Text style={styles.info_text}>contact@kurmishadi.com</Text>
-        </View>
-        <View style={styles.info}>
-          <Image
-            style={styles.info_img}
-            source={require('../../assets/whatsapp.png')}
-          />
-          <Text style={styles.info_text}>+91-7987233880</Text>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </RootScreen>
   );
 };
 
 export default ContactUs;
 
 const styles = StyleSheet.create({
-  container: {
+  bg_img: {
     flex: 1,
-    backgroundColor: '#7a4c4c',
   },
   title: {
     marginTop: 25,
