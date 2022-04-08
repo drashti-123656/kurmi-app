@@ -6,8 +6,12 @@ const RootScreen = ({children}) => {
     <ImageBackground
       style={styles.bg_img}
       source={require('../../../assets/backgroundImage.png')}>
+        {/* <ImageBackground
+      style={styles.bg_img}
+      source={require('../../../assets/background.png')}> */}
       {children}
     </ImageBackground>
+    // </ImageBackground>
   );
 };
 
