@@ -16,35 +16,66 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
+import { RadioGroup } from 'react-native-radio-buttons-group';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('*Required'),
   mobileno: Yup.number().min(10).required('*Required'),
 });
 
-var gender = [
-  {label: 'Male', value: 0},
-  {label: 'Female', value: 1},
-];
-
 const AdvanceSearch = () => {
-  const [selected, setSelected] = useState(0);
+  const [gender, setGender] = useState([
+    {id: 1, value: true, name: 'Male', selected: true},
+    {id: 2, value: false, name: 'Female', selected: false},
+  ]);
+  const [status, setStatus] = useState([
+    {id: 3, value: true, name: 'Married', selected: true },
+    {id: 4, value: false, name: 'Unmarried', selected: false},
+  ]);
+
+  const onRadioBtnClick = item => {
+    let updatedState = gender.map(genderItem =>
+      genderItem.id === item.id
+        ? {...genderItem, selected: true}
+        : {...genderItem, selected: false},
+    );
+    setGender(updatedState);
+  };
+
+  const onPressRadioBtn = item => {
+    let updatedState = status.map(statusItem =>
+      statusItem.id === item.id
+        ? {...statusItem, selected: true}
+        : {...statusItem, selected: false},
+    );
+    setStatus(updatedState);
+  };
+
+  // function onPressRadioButton(radioButtonArray) {
+  //   setGender(radioButtonArray)
+
+  // }
+
   return (
     <RootScreen>
       <ScrollView>
         <Text style={styles.title}>Gender</Text>
-        <View style={styles.radioButton}>
-          <RadioForm
-            initial={0}
-            gender={gender}
-            onPress={value => setSelected(value)}
-          />
+        
+        <View style={styles.radioButtonContainer}>
+          {gender.map(item => (
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity
+                onPress={() => onRadioBtnClick(item)}
+                style={styles.radioButton}>
+                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
+                <Text style={styles.radioButtonText}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         </View>
+        
         <Formik
           initialValues={{
             name: '',
@@ -92,10 +123,20 @@ const AdvanceSearch = () => {
                 <Text style={styles.error}>{errors.subcaste}</Text>
               ) : null}
               <Text style={styles.title}>Marital Status</Text>
-              {/* <View style={styles.radioButton}>
-                <RadioButton value={setSelected} title="Married" />
-                <RadioButton value={setSelected} title="Unmarried" />
-              </View> */}
+              <View style={styles.radioButtonContainer}>
+          {status.map(item => (
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity
+                onPress={() => onPressRadioBtn(item)}
+                style={styles.radioButton}>
+                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => onPressRadioBtn(item)}>
+                <Text style={styles.radioButtonText}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
               <View style={styles.height}>
                 <ExtendedTextInput
                   onChangeText={handleChange('heightFrom')}
@@ -240,8 +281,38 @@ const styles = StyleSheet.create({
   height: {
     flexDirection: 'row',
   },
-  radioButton: {
+  radioButtonContainer: {
     flexDirection: 'row',
+    marginLeft: 20,
+  },
+  ButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 40,
+  },
+  radioButton: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  radioButtonIcon: {
+    height: 12,
+    width: 12,
+    borderRadius: 9,
+    backgroundColor: 'white',
+  },
+  radioButtonText: {
+    fontSize: 17,
+    color: '#FFFFFF',
+    fontWeight: '400',
+    marginTop: 20,
   },
   button: {
     backgroundColor: '#DC1C28',
