@@ -14,7 +14,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-const NewsFeed = () => {
+const NewsFeed = ({navigation}) => {
   const [fromAge, setfromAge] = useState('');
   const [toAge, SettoAge] = useState('');
   const [isLiked, setIsLiked] = useState([
@@ -44,11 +44,14 @@ const NewsFeed = () => {
               source={require('../../assets/Vector.png')}
             />
           </View>
+
           <View style={styles.pinClipart}>
-            <Image
-              style={styles.PinClipart_img}
-              source={require('../../assets/PinClipart.png')}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
+              <Image
+                style={styles.PinClipart_img}
+                source={require('../../assets/PinClipart.png')}
+              />
+            </TouchableOpacity>
           </View>
 
           <Text style={styles.navbarText}>कुर्मी शादी</Text>

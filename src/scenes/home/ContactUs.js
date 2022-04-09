@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
   mobileno: Yup.number().min(10).required('*Required'),
 });
 
-const ContactUs = () => {
+const ContactUs = ({navigation}) => {
   return (
     <RootScreen>
       <ScrollView>
@@ -75,7 +75,7 @@ const ContactUs = () => {
                 <Text style={styles.error}>{errors.message}</Text>
               ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>Submit</Text>
+                <Text style={styles.text_btn} onPress={() => navigation.goBack()} >Submit</Text>
               </TouchableOpacity>
             </View>
           )}
