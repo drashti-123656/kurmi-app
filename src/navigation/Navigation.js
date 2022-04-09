@@ -9,12 +9,20 @@ import NewsFeed from '../scenes/home/NewsFeed';
 import Sampark from '../scenes/search/Sampark';
 import ParivarikParichay from '../scenes/search/ParivarikParichay';
 import Login from '../scenes/auth/Login';
+import Registration from '../scenes/home/Registration';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='परिवारिक परिचय'>
+      <Stack.Navigator initialRouteName='Registration'>
+      <Stack.Screen
+          name="Registration"
+          component={Registration}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Login"
           component={Login}
