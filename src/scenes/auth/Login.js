@@ -16,6 +16,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import translate from './../../translations/configTranslations';
 
 const validationSchema = Yup.object({
   login: Yup.string().required('*Required'),
@@ -51,7 +52,7 @@ const Login = () => {
                 onChangeText={handleChange('login')}
                 onBlur={handleBlur('login')}
                 value={values.Source}
-                placeholder="kurmishadi ID/Mobile No/Email ID"
+                placeholder={translate('login.IdPlaceholder')}
               />
               {errors.login && touched.login ? (
                 <Text style={styles.login}>{errors.login}</Text>
@@ -61,7 +62,7 @@ const Login = () => {
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
-                placeholder="Password"
+                placeholder={translate('login.password')}
               />
               {errors.password && touched.password ? (
                 <Text style={styles.password}>{errors.password}</Text>
@@ -80,12 +81,12 @@ const Login = () => {
                     onValueChange={newValue => setToggleCheckBox(newValue)}
                   />
                   <Text style={{color: 'white', fontSize: 15}}>
-                    Remember me
+                  {translate("login.remenberMe")}
                   </Text>
                 </View>
 
                 <Text style={{color: 'white', fontSize: 15}}>
-                  Forgot Password
+                {translate("login.forgotPassword")}
                 </Text>
               </View>
 
@@ -96,10 +97,10 @@ const Login = () => {
                   alignSelf: 'center',
                   paddingTop: 40,
                 }}>
-                क्या आपके पास अकाउंट नहीं है?
+               {translate("login.createAccountPrefix")}
               </Text>
               <TouchableOpacity style={styles.button2}>
-                <Text style={styles.text_btn}> अभी बनाए </Text>
+                <Text style={styles.text_btn}>{translate("login.createAccount")}</Text>
               </TouchableOpacity>
 
               <Text
@@ -110,7 +111,7 @@ const Login = () => {
                   paddingTop: 20,
                   marginBottom: 20,
                 }}>
-                www.kurmishaddi.com
+                {translate("genral.webLink")}
               </Text>
             </View>
           )}
