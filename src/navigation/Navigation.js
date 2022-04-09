@@ -9,6 +9,7 @@ import NewsFeed from '../scenes/home/NewsFeed';
 import Sampark from '../scenes/search/Sampark';
 import ParivarikParichay from '../scenes/search/ParivarikParichay';
 import Login from '../scenes/auth/Login';
+import Registration from '../scenes/home/Registration';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
