@@ -16,6 +16,7 @@ import {
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import translate from './../../translations/configTranslations';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('*Required'),
@@ -26,7 +27,7 @@ const ContactUs = () => {
   return (
     <RootScreen>
       <ScrollView>
-        <Text style={styles.title}>हमसे संपर्क करें</Text>
+        <Text style={styles.title}> {translate('ContactUs.heading')}</Text>
         <Formik
           initialValues={{name: '', mobileno: '', message: ''}}
           validationSchema={validationSchema}
@@ -45,7 +46,7 @@ const ContactUs = () => {
                 onBlur={handleBlur('name')}
                 value={values.name}
                 style={styles.textinput}
-                placeholder="नाम"
+                placeholder={translate('ContactUs.Name')}
                 placeholderTextColor={'#666666'}
               />
               {errors.name && touched.name ? (
@@ -56,7 +57,7 @@ const ContactUs = () => {
                 onBlur={handleBlur('mobileno')}
                 value={values.mobileno}
                 style={styles.textinput}
-                placeholder="Mobile No. दर्ज करें"
+                 placeholder={translate('ContactUs.MobileNo')}
                 placeholderTextColor={'#666666'}
               />
               {errors.mobileno && touched.mobileno ? (
@@ -68,21 +69,21 @@ const ContactUs = () => {
                 value={values.message}
                 style={styles.textinput_msg}
                 numberOfLines={7}
-                placeholder="Message"
+                placeholder={translate('ContactUs.message')}
                 placeholderTextColor={'#666666'}
               />
               {errors.message && touched.message ? (
                 <Text style={styles.error}>{errors.message}</Text>
               ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>Submit</Text>
+                <Text style={styles.text_btn}>{translate('ContactUs.Submit')}</Text>
               </TouchableOpacity>
             </View>
           )}
         </Formik>
 
         <View style={styles.footer}>
-          <Text style={styles.footer_text}>हमसे संपर्क करें</Text>
+          <Text style={styles.footer_text}>{translate('ContactUs.contactToUs')}</Text>
           <View style={styles.info}>
             <Image
               style={styles.info_img}

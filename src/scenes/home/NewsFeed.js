@@ -14,6 +14,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+import translate from './../../translations/configTranslations';
 const NewsFeed = () => {
   const [fromAge, setfromAge] = useState('');
   const [toAge, SettoAge] = useState('');
@@ -51,11 +52,11 @@ const NewsFeed = () => {
             />
           </View>
 
-          <Text style={styles.navbarText}>कुर्मी शादी</Text>
+          <Text style={styles.navbarText}>{translate('NewsFeed.kurmiShadiHeading')}</Text>
         </View>
-        <Text style={styles.title}>मैं देख रहा हूं</Text>
+        <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
 
-        <Text style={styles.bottomText}>वर या वधू चुनिए</Text>
+        <Text style={styles.bottomText}>{translate('NewsFeed.choose')}</Text>
 
         <View style={styles.radioButtonContainer}>
           {isLiked.map(item => (
@@ -78,7 +79,7 @@ const NewsFeed = () => {
               onChangeText={FromAge => setfromAge(FromAge)}
               value={fromAge}
               style={styles.textinput}
-              placeholder="आयु सेम"
+              placeholder={translate('NewsFeed.ageFrom')}
               keyboardType="numeric"
               placeholderTextColor={'#666666'}
             />
@@ -88,23 +89,23 @@ const NewsFeed = () => {
               value={toAge}
               keyboardType="numeric"
               style={styles.input}
-              placeholder="आयु तक"
+              placeholder={translate('NewsFeed.ageTo')}
               placeholderTextColor={'#666666'}
             />
           </View>
           <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.text_btn}>खोजे</Text>
+            <Text style={styles.text_btn}>{translate('NewsFeed.Search')}</Text>
           </TouchableOpacity>
         </>
         <View>
           <Text style={styles.text}>
-            प्रोफाइल ID से खोजें / फिल्टर लगाना है
+          {translate('NewsFeed.filterProfile')}
           </Text>
           <View style={styles.footeContainer}>
             <View>
-              <Text style={styles.titleText}>नया वैवाहिक परिचय</Text>
+              <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
               <Text style={styles.titleTextnext}>
-                जो लोग अभी अभी नए जुड़े हैं
+              {translate('NewsFeed.recentlyJoint')}
               </Text>
             </View>
             <View style={styles.profileImageContainer}>
@@ -114,8 +115,8 @@ const NewsFeed = () => {
                   source={require('../../assets/profile.png')}
                 />
                 <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>नया प्रोफाइल </Text>
-                  <Text>28 वर्ष रायपुर छत्तीसगढ़ </Text>
+                  <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
+                  <Text>{translate('NewsFeed.intro')} </Text>
                 </View>
               </View>
 
@@ -125,8 +126,8 @@ const NewsFeed = () => {
                   source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>नया प्रोफाइल </Text>
-                  <Text>28 वर्ष रायपुर छत्तीसगढ़ </Text>
+                  <Text style={styles.profileText}> {translate('NewsFeed.newProfile')} </Text>
+                  <Text> {translate('NewsFeed.intro')} </Text>
                 </View>
                 <View></View>
               </View>

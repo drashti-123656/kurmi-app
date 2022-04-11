@@ -5,5 +5,13 @@
     "Password": "Password",
     "createAccount": "Create Account",
     "createAccountPrefix":"Don't have an account?"
+  },
+  "ContactUs" : {
+    "Message" : "Message",
+    "Submit" : "Submit"
+    
+    
+    
+   
   }
 }
