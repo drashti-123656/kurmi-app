@@ -1,32 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ContactUs from '../scenes/home/ContactUs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import NewsFeed from '../scenes/home/NewsFeed';
-import Sampark from '../scenes/search/Sampark';
-import ParivarikParichay from '../scenes/search/ParivarikParichay';
-import Whatsapp from '../scenes/search/Whatsapp';
-import Login from '../scenes/home/Login';
 const Tab = createBottomTabNavigator();
 
 
-const BottomTabNavigation = () => {
+const DashboardNavigation = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        headerStyle: {
-          backgroundColor: 'transparent',
-        },
-        headerTransparent: true,
-        headerTitle: '',
-        headerLeftContainerStyle: {
-          paddingLeft: 20,
-        },
-      }}>
+      <Tab.Navigator>
         <Tab.Screen
          name="NewsFeed"
          component={NewsFeed}
@@ -74,10 +56,9 @@ const BottomTabNavigation = () => {
         }}
         /> */}
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 
-export default BottomTabNavigation;
+export default DashboardNavigation;
 
 const styles = StyleSheet.create({});
