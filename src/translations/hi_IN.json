@@ -1,0 +1,13 @@
+{
+  "genral": {
+    "webLink":"www.kurmishadi.com"
+  },
+  "login": {
+    "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
+    "Password": "Password", 
+    "remenberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",	
+    "createAccount": "अभी बनाए",
+    "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?"
+  }
+}

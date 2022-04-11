@@ -11,6 +11,8 @@ import {
   import * as Yup from 'yup'
   import {Formik} from 'formik';
   import RootScreen from '../../components/molecule/rootScreen/RootScreen'; 
+  import translate from './../../translations/configTranslations';
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('*Required'),
     whatsappno: Yup.number().min(10).required('*Required'),
@@ -74,7 +76,7 @@ import {
         </Formik>
   
         <TouchableOpacity style={styles.footer}>
-            <Text style={styles.footer_text}>www.kurmishaddi.com</Text>
+            <Text style={styles.footer_text}>{translate('genral.webLink')}</Text>
             </TouchableOpacity>
       </View>
       </RootScreen>

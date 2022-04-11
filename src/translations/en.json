@@ -1,0 +1,9 @@
+{
+  "genral": {},
+  "login": {
+    "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
+    "Password": "Password",
+    "createAccount": "Create Account",
+    "createAccountPrefix":"Don't have an account?"
+  }
+}
