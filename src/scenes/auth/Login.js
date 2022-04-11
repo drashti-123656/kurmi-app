@@ -53,6 +53,7 @@ const Login = () => {
                 onBlur={handleBlur('login')}
                 value={values.Source}
                 placeholder={translate('login.IdPlaceholder')}
+                placeholderTextColor={'#666666'}
               />
               {errors.login && touched.login ? (
                 <Text style={styles.login}>{errors.login}</Text>
@@ -63,6 +64,7 @@ const Login = () => {
                 onBlur={handleBlur('password')}
                 value={values.password}
                 placeholder={translate('login.password')}
+                placeholderTextColor={'#666666'}
               />
               {errors.password && touched.password ? (
                 <Text style={styles.password}>{errors.password}</Text>
@@ -73,7 +75,7 @@ const Login = () => {
               </TouchableOpacity>
 
               <View style={styles.alignedRowContainer}>
-                <View style={styles.alignedRowContainer}>
+                <View style={styles.alignedRowContainer1}>
                   <CheckBox
                     style={{color: 'white'}}
                     disabled={false}
@@ -132,6 +134,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: widthPercentageToDP('3'),
+  },
+  alignedRowContainer1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   image: {
     width: 190,
@@ -146,15 +154,18 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     marginBottom: heightPercentageToDP('3'),
+    marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 5,
     padding: 10,
     backgroundColor: 'white',
+    color: 'black',
   },
   button: {
     backgroundColor: '#DC1C28',
     height: 50,
     borderRadius: 10,
     marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('3'),
   },
   text_btn: {
     textAlign: 'center',
@@ -169,7 +180,7 @@ const styles = StyleSheet.create({
   button2: {
     backgroundColor: '#DC1C28',
     height: 50,
-    marginHorizontal: 30,
+    marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 10,
     marginTop: 25,
   },
