@@ -8,6 +8,10 @@ import {
     TouchableOpacity,
   } from 'react-native';
   import React from 'react';
+  import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+  } from 'react-native-responsive-screen';
   import * as Yup from 'yup'
   import {Formik} from 'formik';
   import RootScreen from '../../components/molecule/rootScreen/RootScreen'; 
@@ -31,7 +35,7 @@ import {
         />
   
         <Text style={styles.note}>
-          नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें
+          {translate('whatsapp.Note')}
         </Text>
         <Formik
           initialValues={{name: '', whatsappno: ''}}
@@ -51,8 +55,8 @@ import {
                 onBlur={handleBlur('name')}
                 value={values.name}
                 style={styles.textinput}
-                placeholder="नाम"
-                placeholderTextColor={'lightgrey'}
+                placeholder={translate('whatsapp.name')}
+                placeholderTextColor={'#666666'}
               />
               {errors.name && touched.name ? (
                     <Text style={styles.error}>{errors.name}</Text>
@@ -62,8 +66,8 @@ import {
                 onBlur={handleBlur('whatsappno')}
                 value={values.whatsappno}
                 style={styles.textinput}
-                placeholder="Whatsapp नंबर  दर्ज करें"
-                placeholderTextColor={'lightgrey'}
+                placeholder={translate('whatsapp.phoneno')}
+                placeholderTextColor={'#666666'}
               />
               {errors.whatsappno && touched.whatsappno ? (
                     <Text style={styles.error}>{errors.whatsappno}</Text>
@@ -112,12 +116,13 @@ import {
       marginVertical: 15,
       borderRadius: 10,
       padding: 10,
-      height: 55,
+      height: 50,
       color: 'black',
     },
     button: {
       backgroundColor: '#DC1C28',
       height: 50,
+      marginTop: hp('1'),
       marginHorizontal: 30,
       borderRadius: 10,
     },

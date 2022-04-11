@@ -2,6 +2,8 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
+import Login from '../scenes/auth/Login';
+import Registration from '../scenes/auth/Registration';
 import NewsFeed from '../scenes/home/NewsFeed';
 const Tab = createBottomTabNavigator();
 
@@ -14,6 +16,7 @@ const DashboardNavigation = () => {
          component={NewsFeed}
          options={{
           tabBarLabel: 'Home',
+          headerShown: false,
           // tabBarIcon: () => (
           //   <Icon name="home" color={'black'} size={30} />
           // ),
@@ -35,26 +38,28 @@ const DashboardNavigation = () => {
           // ),
         }}
         />
-        {/* <Tab.Screen
-         name="NewsFeed"
-         component={NewsFeed}
+        <Tab.Screen
+         name="Registration"
+         component={Registration}
          options={{
           tabBarLabel: 'Register',
+          headerShown: false,
           // tabBarIcon: () => (
           //   <Icon name="home" color={'black'} size={30} />
           // ),
         }}
-        /> */}
-        {/* <Tab.Screen
-         name="NewsFeed"
-         component={NewsFeed}
+        />
+        <Tab.Screen
+         name="Login"
+         component={Login}
          options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Login',
+          headerShown: false,
           // tabBarIcon: () => (
           //   <Icon name="home" color={'black'} size={30} />
           // ),
         }}
-        /> */}
+        />
       </Tab.Navigator>
   );
 };

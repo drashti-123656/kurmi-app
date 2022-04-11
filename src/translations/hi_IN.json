@@ -9,5 +9,10 @@
     "forgotPassword": "Forgot Password?",	
     "createAccount": "अभी बनाए",
     "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?"
+  },
+  "whatsapp": {
+    "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
+    "name": "नाम",
+    "phoneno": "Whatsapp नंबर  दर्ज करें"
   }
 }

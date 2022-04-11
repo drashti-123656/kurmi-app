@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
   password: Yup.string().required('*Required'),
 });
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ const Login = () => {
             password: '',
           }}
           validationSchema={validationSchema}
-          onSubmit={values => navigation.navigate('Consultation')}>
+          onSubmit={values => console.log(values)}>
           {({
             handleChange,
             handleBlur,
@@ -56,7 +56,7 @@ const Login = () => {
                 placeholderTextColor={'#666666'}
               />
               {errors.login && touched.login ? (
-                <Text style={styles.login}>{errors.login}</Text>
+                <Text style={styles.error}>{errors.login}</Text>
               ) : null}
               <TextInput
                 style={styles.input}
@@ -67,11 +67,11 @@ const Login = () => {
                 placeholderTextColor={'#666666'}
               />
               {errors.password && touched.password ? (
-                <Text style={styles.password}>{errors.password}</Text>
+                <Text style={styles.error}>{errors.password}</Text>
               ) : null}
 
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>Log in</Text>
+                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >Log in</Text>
               </TouchableOpacity>
 
               <View style={styles.alignedRowContainer}>
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    marginBottom: heightPercentageToDP('3'),
+    marginTop: heightPercentageToDP('1'),
+    marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 5,
     padding: 10,
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DC1C28',
     height: 50,
     borderRadius: 10,
+    marginTop: heightPercentageToDP('1'),
     marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('3'),
   },
@@ -183,5 +185,12 @@ const styles = StyleSheet.create({
     marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 10,
     marginTop: 25,
+  },
+  error: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: 'red',
+    textAlign: 'right',
   },
 });

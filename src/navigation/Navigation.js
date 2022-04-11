@@ -7,20 +7,20 @@ import DashboardNavigation from './DashboardNavigation';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const {isLoggedIn} = useState(false);
+  const [isLoggedIn] = useState(true);
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {!isLoggedIn ? (
+        {isLoggedIn ? (
           <Stack.Screen
-            name="AuthNavigation"
-            component={AuthNavigation}
+            name="DashboardNavigation"
+            component={DashboardNavigation}
             options={{headerShown: false}}
           />
         ) : (
           <Stack.Screen
-            name="DashboardNavigation"
-            component={DashboardNavigation}
+            name="AuthNavigation"
+            component={AuthNavigation}
             options={{headerShown: false}}
           />
         )}

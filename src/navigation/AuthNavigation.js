@@ -8,18 +8,11 @@ const Stack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
   return (
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator>
         <Stack.Screen
           name="Whatsapp"
           component={Whatsapp}
           headershow
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
           options={{
             headerShown: false,
           }}
