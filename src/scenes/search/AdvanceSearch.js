@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
   mobileno: Yup.number().min(10).required('*Required'),
 });
 
-const AdvanceSearch = () => {
+const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
     {id: 1, value: true, name: 'Male', selected: true},
     {id: 2, value: false, name: 'Female', selected: false},
@@ -258,7 +258,7 @@ const AdvanceSearch = () => {
                 <Text style={styles.error}>{errors.income}</Text>
               ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>खोजे</Text>
+                <Text style={styles.text_btn} onPress={() => navigation.goBack()}>खोजे</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -320,6 +320,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginTop: 10,
     borderRadius: 10,
+    marginBottom: 40,
   },
   text_btn: {
     textAlign: 'center',
