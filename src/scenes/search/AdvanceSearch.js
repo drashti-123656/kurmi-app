@@ -13,15 +13,12 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
+import DropDown from '../../components/organisms/DropDown';
+import dropDownList from '../../utils/constant';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import { RadioGroup } from 'react-native-radio-buttons-group';
+import translate from './../../translations/configTranslations';
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('*Required'),
-  mobileno: Yup.number().min(10).required('*Required'),
-});
 
 const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
@@ -29,7 +26,7 @@ const AdvanceSearch = ({navigation}) => {
     {id: 2, value: false, name: 'Female', selected: false},
   ]);
   const [status, setStatus] = useState([
-    {id: 3, value: true, name: 'Married', selected: true },
+    {id: 3, value: true, name: 'Married', selected: true},
     {id: 4, value: false, name: 'Unmarried', selected: false},
   ]);
 
@@ -51,16 +48,11 @@ const AdvanceSearch = ({navigation}) => {
     setStatus(updatedState);
   };
 
-  // function onPressRadioButton(radioButtonArray) {
-  //   setGender(radioButtonArray)
-
-  // }
-
   return (
     <RootScreen>
       <ScrollView>
         <Text style={styles.title}>Gender</Text>
-        
+
         <View style={styles.radioButtonContainer}>
           {gender.map(item => (
             <View style={styles.ButtonContainer}>
@@ -75,7 +67,7 @@ const AdvanceSearch = ({navigation}) => {
             </View>
           ))}
         </View>
-        
+
         <Formik
           initialValues={{
             name: '',
@@ -89,27 +81,25 @@ const AdvanceSearch = ({navigation}) => {
             profession: '',
             income: '',
           }}
-          validationSchema={validationSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             values,
             errors,
             touched,
           }) => (
             <View>
-              <ExtendedTextInput
-                onChangeText={handleChange('name')}
-                onBlur={handleBlur('name')}
-                value={values.name}
-                placeholder="प्रोफाइल बनने वाला"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={translate('advanceSearch.Profile')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value =>
+                  setFieldValue('name', value)
+                }
               />
-              {errors.name && touched.name ? (
-                <Text style={styles.error}>{errors.name}</Text>
-              ) : null}
 
               <ExtendedTextInput
                 onChangeText={handleChange('subcaste')}
@@ -124,19 +114,21 @@ const AdvanceSearch = ({navigation}) => {
               ) : null}
               <Text style={styles.title}>Marital Status</Text>
               <View style={styles.radioButtonContainer}>
-          {status.map(item => (
-            <View style={styles.ButtonContainer}>
-              <TouchableOpacity
-                onPress={() => onPressRadioBtn(item)}
-                style={styles.radioButton}>
-                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => onPressRadioBtn(item)}>
-                <Text style={styles.radioButtonText}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
+                {status.map(item => (
+                  <View style={styles.ButtonContainer}>
+                    <TouchableOpacity
+                      onPress={() => onPressRadioBtn(item)}
+                      style={styles.radioButton}>
+                      {item.selected ? (
+                        <View style={styles.radioButtonIcon} />
+                      ) : null}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => onPressRadioBtn(item)}>
+                      <Text style={styles.radioButtonText}>{item.name}</Text>
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
               <View style={styles.height}>
                 <ExtendedTextInput
                   onChangeText={handleChange('heightFrom')}
@@ -258,7 +250,11 @@ const AdvanceSearch = ({navigation}) => {
                 <Text style={styles.error}>{errors.income}</Text>
               ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.goBack()}>खोजे</Text>
+                <Text
+                  style={styles.text_btn}
+                  onPress={() => navigation.goBack()}>
+                  खोजे
+                </Text>
               </TouchableOpacity>
             </View>
           )}

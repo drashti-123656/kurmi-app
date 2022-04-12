@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Home from 'react-native-vector-icons/Entypo';
-import Search from 'react-native-vector-icons/Feather'
+import HomeIcon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/Feather'
 import Login from '../scenes/auth/Login';
 import Registration from '../scenes/auth/Registration';
 import NewsFeed from '../scenes/home/NewsFeed';
@@ -21,7 +21,7 @@ const DashboardNavigation = () => {
           headerShown: false,
           tabBarActiveTintColor: 'red',
           tabBarIcon: () => (
-            <Home name="home" color={'black'} size={30} />
+            <HomeIcon name="home" color={'black'} size={30} />
           ),
         }}
         />
@@ -38,7 +38,7 @@ const DashboardNavigation = () => {
               backgroundColor: '#DC1C28',
             },
           tabBarIcon: () => (
-            <Search name="search" color={'black'} size={30} />
+            <Icon name="search" color={'black'} size={30} />
           ),
         }}
         />
@@ -50,7 +50,7 @@ const DashboardNavigation = () => {
           headerShown: false,
           tabBarActiveTintColor: 'red',
           tabBarIcon: () => (
-            <Search name="user-plus" color={'black'} size={30} />
+            <Icon name="user-plus" color={'black'} size={30} />
           ),
         }}
         />
@@ -62,7 +62,7 @@ const DashboardNavigation = () => {
           headerShown: false,
           tabBarActiveTintColor: 'red',
           tabBarIcon: () => (
-            <Search name="log-in" color={'black'} size={30} />
+            <Icon name="log-in" color={'black'} size={30} />
           ),
         }}
         />
