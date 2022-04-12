@@ -2,6 +2,8 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
+import Home from 'react-native-vector-icons/Entypo';
+import Search from 'react-native-vector-icons/Feather'
 import Login from '../scenes/auth/Login';
 import Registration from '../scenes/auth/Registration';
 import NewsFeed from '../scenes/home/NewsFeed';
@@ -17,9 +19,10 @@ const DashboardNavigation = () => {
          options={{
           tabBarLabel: 'Home',
           headerShown: false,
-          // tabBarIcon: () => (
-          //   <Icon name="home" color={'black'} size={30} />
-          // ),
+          tabBarActiveTintColor: 'red',
+          tabBarIcon: () => (
+            <Home name="home" color={'black'} size={30} />
+          ),
         }}
         />
         <Tab.Screen
@@ -29,13 +32,14 @@ const DashboardNavigation = () => {
           tabBarLabel: 'search',
           headerTitle: 'Advance Search',
           headerTitleAlign: 'center',
+          tabBarActiveTintColor: 'red',
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: '#DC1C28',
             },
-          // tabBarIcon: () => (
-          //   <Icon name="home" color={'black'} size={30} />
-          // ),
+          tabBarIcon: () => (
+            <Search name="search" color={'black'} size={30} />
+          ),
         }}
         />
         <Tab.Screen
@@ -44,9 +48,10 @@ const DashboardNavigation = () => {
          options={{
           tabBarLabel: 'Register',
           headerShown: false,
-          // tabBarIcon: () => (
-          //   <Icon name="home" color={'black'} size={30} />
-          // ),
+          tabBarActiveTintColor: 'red',
+          tabBarIcon: () => (
+            <Search name="user-plus" color={'black'} size={30} />
+          ),
         }}
         />
         <Tab.Screen
@@ -55,9 +60,10 @@ const DashboardNavigation = () => {
          options={{
           tabBarLabel: 'Login',
           headerShown: false,
-          // tabBarIcon: () => (
-          //   <Icon name="home" color={'black'} size={30} />
-          // ),
+          tabBarActiveTintColor: 'red',
+          tabBarIcon: () => (
+            <Search name="log-in" color={'black'} size={30} />
+          ),
         }}
         />
       </Tab.Navigator>
