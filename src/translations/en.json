@@ -6,17 +6,7 @@
     "createAccount": "Create Account",
     "createAccountPrefix":"Don't have an account?"
   },
-<<<<<<< HEAD
-  "ContactUs" : {
-    "Message" : "Message",
-    "Submit" : "Submit"
-    
-    
-    
-   
-=======
   "whatsapp": {
     "Note": "Note: Only kurmi community can register"
->>>>>>> 15fe4baa277263bb48291c6e446bd0d75a569bc0
   }
 }

@@ -19,8 +19,15 @@ import {
 import translate from './../../translations/configTranslations';
 
 const validationSchema = Yup.object({
-  login: Yup.string().required('*Required'),
-  password: Yup.string().required('*Required'),
+  login: Yup.string().required(translate('login.IdPlaceholderRequired')),
+  password: Yup
+  .string()
+  .required(translate('login.enterPassword'))
+  .matches(
+    "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
+    translate('login.passwordMustHave')
+    
+  ),
 });
 
 const Login = ({navigation}) => {
@@ -63,7 +70,7 @@ const Login = ({navigation}) => {
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
-                placeholder={translate('login.password')}
+                placeholder={translate('login.Password')}
                 placeholderTextColor={'#666666'}
               />
               {errors.password && touched.password ? (
@@ -71,13 +78,13 @@ const Login = ({navigation}) => {
               ) : null}
 
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >Log in</Text>
+                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >{translate("login.Log-in")}</Text>
               </TouchableOpacity>
 
               <View style={styles.alignedRowContainer}>
                 <View style={styles.alignedRowContainer1}>
                   <CheckBox
-                    style={{color: 'white'}}
+                    tintColors={{ true: 'white' }}
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={newValue => setToggleCheckBox(newValue)}

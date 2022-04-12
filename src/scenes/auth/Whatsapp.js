@@ -18,12 +18,19 @@ import {
   import translate from './../../translations/configTranslations';
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required('*Required'),
-    whatsappno: Yup.number().min(10).required('*Required'),
+    name: Yup.string().required(translate('whatsapp.NameRequired')).min(3, "Name must be at least 3 characters"),
+    whatsappno: Yup.string()
+    .required(translate('whatsapp.fieldRequired'))
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      "Phone number is not valid"
+    )
   })
   
   
   const Whatsapp = () => {
+
+    
   
     return (
         <RootScreen>
@@ -73,7 +80,7 @@ import {
                     <Text style={styles.error}>{errors.whatsappno}</Text>
                   ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit} >
-                <Text style={styles.text_btn}>CONTINUE</Text>
+                <Text style={styles.text_btn}>{translate('whatsapp.Continue')}</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -130,7 +137,8 @@ import {
       textAlign: 'center',
       fontWeight: '400',
       marginTop: 10,
-      fontSize: 20
+      fontSize: 20,
+      color: 'white',
     },
     footer: {
       marginTop: 160,
@@ -139,6 +147,8 @@ import {
       textAlign: 'center',
       fontWeight: '400',
       fontSize: 18,
+      color: 'white',
+      marginTop: '25%'
     },
     error: {
       fontSize: 12,
