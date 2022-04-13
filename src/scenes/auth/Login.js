@@ -52,7 +52,7 @@ const Login = () => {
             password: '',
           }}
           validationSchema={validationSchema}
-          onSubmit={values => navigation.navigate('Consultation')}>
+          onSubmit={values => console.log(values)}>
           {({
             handleChange,
             handleBlur,
@@ -68,9 +68,10 @@ const Login = () => {
                 onBlur={handleBlur('login')}
                 value={values.Source}
                 placeholder={translate('login.IdPlaceholder')}
+                placeholderTextColor={'#666666'}
               />
               {errors.login && touched.login ? (
-                <Text style={styles.login}>{errors.login}</Text>
+                <Text style={styles.error}>{errors.login}</Text>
               ) : null}
               <TextInput
                 style={styles.input}
@@ -78,17 +79,18 @@ const Login = () => {
                 onBlur={handleBlur('password')}
                 value={values.password}
                 placeholder={translate('login.password')}
+                placeholderTextColor={'#666666'}
               />
               {errors.password && touched.password ? (
-                <Text style={styles.password}>{errors.password}</Text>
+                <Text style={styles.error}>{errors.password}</Text>
               ) : null}
 
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>Log in</Text>
+                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >Log in</Text>
               </TouchableOpacity>
 
               <View style={styles.alignedRowContainer}>
-                <View style={styles.alignedRowContainer}>
+                <View style={styles.alignedRowContainer1}>
                   <CheckBox
                     style={{color: 'white'}}
                     disabled={false}
@@ -149,6 +151,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: widthPercentageToDP('3'),
+  },
+  alignedRowContainer1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   image: {
     width: 190,
@@ -162,16 +170,21 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    marginBottom: heightPercentageToDP('3'),
+    marginTop: heightPercentageToDP('1'),
+    marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 5,
     padding: 10,
     backgroundColor: 'white',
+    color: 'black',
   },
   button: {
     backgroundColor: '#DC1C28',
     height: 50,
     borderRadius: 10,
+    marginTop: heightPercentageToDP('1'),
     marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('3'),
   },
   text_btn: {
     textAlign: 'center',
@@ -186,8 +199,15 @@ const styles = StyleSheet.create({
   button2: {
     backgroundColor: '#DC1C28',
     height: 50,
-    marginHorizontal: 30,
+    marginHorizontal: widthPercentageToDP('3'),
     borderRadius: 10,
     marginTop: 25,
+  },
+  error: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: 'red',
+    textAlign: 'right',
   },
 });

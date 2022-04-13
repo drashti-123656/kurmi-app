@@ -9,5 +9,36 @@
     "forgotPassword": "Forgot Password?",	
     "createAccount": "अभी बनाए",
     "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?"
+  },
+  "ContactUs" : {
+    "heading" : "हमसे संपर्क करें",
+    "Name" : "नाम",
+    "MobileNo" : "फ़ोन नंबर दर्ज करें",
+    "contactToUs" : "हमसे संपर्क करें",
+    "Submit" : "जमा करें",
+    "message" : "संदेश"
+  },
+  "NewsFeed" : {
+    "kurmiShadiHeading" : "कुर्मी शादी",
+    "title" : "मैं देख रहा हूं",
+    "choose" : "वर या वधू चुनिए",
+    "boy" : "वर",
+    "girl" : "वधू",
+    "ageFrom" : "आयु से",
+    "ageTo" : "आयु तक",
+    "Search" : "खोजे",
+    "filterProfile" : "प्रोफाइल ID से खोजें / फिल्टर लगाना है" ,
+    "newIntro" : "नया वैवाहिक परिचय",
+    "recentlyJoint" : " जो लोग अभी अभी नए जुड़े हैं",
+    "newProfile" : "नया प्रोफाइल",
+    "intro" : "28 वर्ष रायपुर छत्तीसगढ़"
+  },
+
+
+
+  "whatsapp": {
+    "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
+    "name": "नाम",
+    "phoneno": "Whatsapp नंबर  दर्ज करें"
   }
 }
