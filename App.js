@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect} from 'react'
 import Navigation from './src/navigation/Navigation'
 import SplashScreen from 'react-native-splash-screen'
+import {Provider} from 'react-redux'
+import store from './src/store/index'
 
 const App = () => {
 
@@ -12,7 +14,10 @@ const App = () => {
   }, [])
   
   return (
-    <Navigation />
+    <Provider store={store}>
+          <Navigation />
+    </Provider>
+
   )
 }
 

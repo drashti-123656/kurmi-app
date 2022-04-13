@@ -10,9 +10,12 @@ import Sampark from '../scenes/search/Sampark';
 import ParivarikParichay from '../scenes/search/ParivarikParichay';
 import Login from '../scenes/auth/Login';
 import Registration from '../scenes/home/Registration';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
+  const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer>
       <Stack.Navigator>
