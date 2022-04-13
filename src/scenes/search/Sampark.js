@@ -16,12 +16,23 @@ import {
   import RootScreen from '../../components/molecule/rootScreen/RootScreen';
   import * as Yup from 'yup';
   import {Formik} from 'formik';
-  
+  import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+  import translate from './../../translations/configTranslations';
   const validationSchema = Yup.object().shape({
-    mobileno: Yup.number().min(10).required('*Required'),
-    whatsappno: Yup.number().min(10).required('*Required'),
-    presentadd: Yup.string().required('*Required'),
-    permanentadd: Yup.string().required('*Required'),
+    mobileno: Yup.string()
+    .required(translate('Sampark.Required'))
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      translate('Sampark.PhoneNumberValid')
+    ),
+    whatsappno: Yup.string()
+    .required(translate('Sampark.Required'))
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      translate('Sampark.WhatsappNumberValid')
+    ),
+    presentadd: Yup.string().required(translate('Sampark.Required')),
+    permanentadd: Yup.string().required(translate('Sampark.Required')),
   });
   
   const Sampark = () => {
@@ -41,52 +52,61 @@ import {
               touched,
             }) => (
               <View>
-                <TextInput
-                  onChangeText={handleChange('mobileno')}
+              <ExtendedTextInput 
+                onChangeText={handleChange('mobileno')}
                   onBlur={handleBlur('mobileno')}
                   value={values.mobileno}
                   style={styles.textinput}
-                  placeholder="मोबाइल नंबर"
+                  placeholder={translate('Sampark.mobileno')}
                   placeholderTextColor={'#666666'}
-                />
+
+              />
+                
                 {errors.mobileno && touched.mobileno ? (
                   <Text style={styles.error}>{errors.mobileno}</Text>
                 ) : null}
-                <TextInput
+                <ExtendedTextInput 
                   onChangeText={handleChange('whatsappno')}
                   onBlur={handleBlur('whatsappno')}
                   value={values.whatsappno}
                   style={styles.textinput}
-                  placeholder="whatsapp नंबर"
+                  placeholder={translate('Sampark.whatsappno')}
                   placeholderTextColor={'#666666'}
+
                 />
+                
                 {errors.whatsappno && touched.whatsappno ? (
                   <Text style={styles.error}>{errors.whatsappno}</Text>
                 ) : null}
-                <TextInput
+                <ExtendedTextInput 
                   onChangeText={handleChange('presentadd')}
                   onBlur={handleBlur('presentadd')}
                   value={values.presentadd}
                   style={styles.textinput}
-                  placeholder="वर्तमान पता"
+                  placeholder={translate('Sampark.presentadd')}
                   placeholderTextColor={'#666666'}
+
                 />
+                
                 {errors.presentadd && touched.presentadd ? (
                   <Text style={styles.error}>{errors.presentadd}</Text>
                 ) : null}
-                <TextInput
+
+                <ExtendedTextInput 
                   onChangeText={handleChange('permanentadd')}
                   onBlur={handleBlur('permanentadd')}
                   value={values.permanentadd}
                   style={styles.textinput}
-                  placeholder="स्थायी पता"
+                  placeholder={translate('Sampark.permanentadd')}
                   placeholderTextColor={'#666666'}
+
                 />
+               
                 {errors.permanentadd && touched.permanentadd ? (
                   <Text style={styles.error}>{errors.permanentadd}</Text>
                 ) : null}
                 <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                  <Text style={styles.text_btn}>आगे</Text>
+                  <Text style={styles.text_btn}>{translate('Sampark.Next')}</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -159,7 +179,7 @@ import {
       fontWeight: 'bold',
       marginRight: 10,
       color: 'red',
-      textAlign: 'right',
+      marginLeft : '75%'
     },
   });
   

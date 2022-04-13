@@ -8,24 +8,31 @@ const Stack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
   return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Whatsapp"
-          component={Whatsapp}
-          headershow
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Registration"
-          component={Registration}
-          options={{
-            headerShown: false,
-          }}
-        />
-        
-      </Stack.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Whatsapp"
+        component={Whatsapp}
+        headershow
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Registration"
+        component={Registration}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="परिवारिक परिचय"
+        component={ParivarikParichay}
+        options={{
+          headerShown: true,
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 

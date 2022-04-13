@@ -33,12 +33,31 @@
     "newProfile" : "नया प्रोफाइल",
     "intro" : "28 वर्ष रायपुर छत्तीसगढ़"
   },
-
-
-
   "whatsapp": {
     "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
     "name": "नाम",
     "phoneno": "Whatsapp नंबर  दर्ज करें"
+  },
+  "ParivarikParichay": {
+     "fatherName" : "पिता का नाम ",
+     "fatherOccupation" : "पिता का व्यवसाय",
+     "motherName" : "माँ का नाम",
+     "motherMayaka" : "माँ का मायका",
+     "brother" : "भाई",
+     "sister" : "बहन",
+     "land" : "जमीन",
+     "register" : "रजिस्टर करें",
+     "Required" : "*आवश्यक"
+
+  },
+  "Sampark" : {
+    "mobileno" : "मोबाइल नंबर",
+    "whatsappno" : "whatsapp नंबर",
+    "presentadd" : "वर्तमान पता",
+    "permanentadd" : "स्थायी पता",
+    "Next" : "आगे",
+    "Required" : "*आवश्यक",
+    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
+    "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है"
   }
 }
