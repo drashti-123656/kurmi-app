@@ -17,14 +17,29 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {login} from './redux/authReducer';
 
 const validationSchema = Yup.object({
   login: Yup.string().required('*Required'),
   password: Yup.string().required('*Required'),
 });
 
-const Login = ({navigation}) => {
+const Login = () => {
+  const dispatch = useDispatch();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const handleLogin = () => {
+    dispatch(
+      login({
+        isAuthenticated: true,
+        user: {},
+        token: '',
+        error: null,
+        loading: false,
+      }),
+    );
+  };
 
   return (
     <RootScreen>
@@ -83,12 +98,12 @@ const Login = ({navigation}) => {
                     onValueChange={newValue => setToggleCheckBox(newValue)}
                   />
                   <Text style={{color: 'white', fontSize: 15}}>
-                  {translate("login.remenberMe")}
+                    {translate('login.remenberMe')}
                   </Text>
                 </View>
 
                 <Text style={{color: 'white', fontSize: 15}}>
-                {translate("login.forgotPassword")}
+                  {translate('login.forgotPassword')}
                 </Text>
               </View>
 
@@ -99,10 +114,12 @@ const Login = ({navigation}) => {
                   alignSelf: 'center',
                   paddingTop: 40,
                 }}>
-               {translate("login.createAccountPrefix")}
+                {translate('login.createAccountPrefix')}
               </Text>
-              <TouchableOpacity style={styles.button2}>
-                <Text style={styles.text_btn}>{translate("login.createAccount")}</Text>
+              <TouchableOpacity style={styles.button2} onPress={handleLogin}>
+                <Text style={styles.text_btn}>
+                  {translate('login.createAccount')}
+                </Text>
               </TouchableOpacity>
 
               <Text
@@ -113,7 +130,7 @@ const Login = ({navigation}) => {
                   paddingTop: 20,
                   marginBottom: 20,
                 }}>
-                {translate("genral.webLink")}
+                {translate('genral.webLink')}
               </Text>
             </View>
           )}
