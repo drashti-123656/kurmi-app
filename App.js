@@ -5,8 +5,9 @@ import SplashScreen from 'react-native-splash-screen'
 import {Provider} from 'react-redux'
 import store from './src/store/index'
 
-const App = () => {
 
+
+const App = () => {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -21,6 +22,8 @@ const App = () => {
   )
 }
 
-export default App
+  
 
-const styles = StyleSheet.create({})
+export default App;
+
+const styles = StyleSheet.create({});

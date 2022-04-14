@@ -1,52 +1,42 @@
 import {
-    Image,
-    ImageBackground,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableOpacity,
-  } from 'react-native';
-  import React from 'react';
-  import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from 'react-native-responsive-screen';
-  import * as Yup from 'yup'
-  import {Formik} from 'formik';
-  import RootScreen from '../../components/molecule/rootScreen/RootScreen'; 
-  import translate from './../../translations/configTranslations';
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {Formik} from 'formik';
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required(translate('whatsapp.NameRequired')).min(3, "Name must be at least 3 characters"),
-    whatsappno: Yup.string()
-    .required(translate('whatsapp.fieldRequired'))
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      "Phone number is not valid"
-    )
-  })
-  
-  
-  const Whatsapp = () => {
 
-    
+import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import translate from './../../translations/configTranslations';
+
+
+import {WhatsappSchema} from './../../utils/Schemas/LoginSchema';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+
+const Whatsapp = () => {
   
-    return (
-        <RootScreen>
-      <View style={styles.container}>
-        
-        <Image
-          source={require('../../assets/logo.png')}
-          style={styles.image}
-        />
-  
-        <Text style={styles.note}>
-          {translate('whatsapp.Note')}
-        </Text>
+
+  return (
+    <RootScreen>
+      <ScrollView>
+        <Image source={require('../../assets/logo.png')} style={styles.image} />
+        <Text style={styles.note}>{translate('whatsapp.Note')}</Text>
         <Formik
-          initialValues={{name: '', whatsappno: ''}}
-          validationSchema={validationSchema}
+          initialValues={{
+            name: '',
+            whatsappno: '',
+          }}
+          validationSchema={WhatsappSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,
@@ -56,105 +46,81 @@ import {
             errors,
             touched,
           }) => (
-            <View>
-              <TextInput
+            <View style={styles.formikContainer}>
+              <ExtendedTextInput
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
-                value={values.name}
-                style={styles.textinput}
+                value={values.Source}
                 placeholder={translate('whatsapp.name')}
                 placeholderTextColor={'#666666'}
               />
               {errors.name && touched.name ? (
-                    <Text style={styles.error}>{errors.name}</Text>
-                  ) : null}
-              <TextInput
+                <Text style={styles.error}>{errors.name}</Text>
+              ) : null}
+              <ExtendedTextInput
                 onChangeText={handleChange('whatsappno')}
                 onBlur={handleBlur('whatsappno')}
-                value={values.whatsappno}
-                style={styles.textinput}
+                value={values.password}
                 placeholder={translate('whatsapp.phoneno')}
                 placeholderTextColor={'#666666'}
               />
               {errors.whatsappno && touched.whatsappno ? (
-                    <Text style={styles.error}>{errors.whatsappno}</Text>
-                  ) : null}
-              <TouchableOpacity style={styles.button} onPress={handleSubmit} >
-                <Text style={styles.text_btn}>{translate('whatsapp.Continue')}</Text>
-              </TouchableOpacity>
+                <Text style={styles.error}>{errors.whatsappno}</Text>
+              ) : null}
+
+              <LoginButton 
+                     title={translate('whatsapp.Continue')}
+                  onPress={handleSubmit}
+  
+                />
+
+              
             </View>
           )}
         </Formik>
-  
+      
         <TouchableOpacity style={styles.footer}>
             <Text style={styles.footer_text}>{translate('genral.webLink')}</Text>
-            </TouchableOpacity>
-      </View>
-      </RootScreen>
-    );
-  };
-  
-  export default Whatsapp;
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    image: {
-      width: 180,
-      height: 180,
-      marginTop: 37,
-      alignSelf: 'center',
-    },
-    note: {
-      marginTop: 10,
-      textAlign: 'center',
-      fontWeight: 'bold',
-      fontSize: 15,
-      lineHeight: 25,
-      color: '#ffffff',
-    },
-    input_view: {
-      flex: 1,
-    },
-    textinput: {
-      backgroundColor: 'white',
-      marginHorizontal: 30,
-      marginVertical: 15,
-      borderRadius: 10,
-      padding: 10,
-      height: 50,
-      color: 'black',
-    },
-    button: {
-      backgroundColor: '#DC1C28',
-      height: 50,
-      marginTop: hp('1'),
-      marginHorizontal: 30,
-      borderRadius: 10,
-    },
-    text_btn: {
-      textAlign: 'center',
-      fontWeight: '400',
-      marginTop: 10,
-      fontSize: 20,
-      color: 'white',
-    },
-    footer: {
-      marginTop: 160,
-    },
-    footer_text: {
-      textAlign: 'center',
-      fontWeight: '400',
-      fontSize: 18,
-      color: 'white',
-      marginTop: '25%'
-    },
-    error: {
-      fontSize: 12,
-      fontWeight: 'bold',
-      marginRight: 10,
-      color: 'red',
-      textAlign: 'right',
-    },
-  });
+          </TouchableOpacity>
+
+      </ScrollView>
+    </RootScreen>
+  );
+};
+
+export default Whatsapp;
+
+const styles = StyleSheet.create({
+  image: {
+    width: 180,
+    height: 180,
+    marginTop: 37,
+    alignSelf: 'center',
+  },
+  note: {
+    marginTop: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 15,
+    lineHeight: 25,
+    color: '#ffffff',
+  },
+  footer: {
+    marginTop: 160,
+  },
+  footer_text: {
+    textAlign: 'center',
+    fontWeight: '400',
+    fontSize: 18,
+    color: 'white',
+    marginTop: '25%',
+  },
+  error: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: 'red',
+    textAlign: 'right',
+  },
+ 
+});
