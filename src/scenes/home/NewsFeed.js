@@ -13,6 +13,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 
@@ -41,10 +42,7 @@ const NewsFeed = ({navigation}) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.vector_img}
-              source={require('../../assets/Vector.png')}
-            />
+            <EvilIcons name="navicon" size={30} color={'white'} />
           </View>
 
           <View style={styles.pinClipart}>
@@ -92,7 +90,7 @@ const NewsFeed = ({navigation}) => {
               onChangeText={ToAge => SettoAge(ToAge)}
               value={toAge}
               keyboardType="numeric"
-              style={styles.input}
+              style={styles.textinput}
               placeholder={translate('NewsFeed.ageTo')}
               placeholderTextColor={'#666666'}
             />
@@ -133,7 +131,6 @@ const NewsFeed = ({navigation}) => {
                   <Text style={styles.profileText}> {translate('NewsFeed.newProfile')} </Text>
                   <Text> {translate('NewsFeed.intro')} </Text>
                 </View>
-                <View></View>
               </View>
             </View>
           </View>
@@ -154,18 +151,104 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  vector_img: {
-    width: 15,
+  imageContainer: {
+    marginTop: 18,
+  },
+  pinClipart: {
+    position: 'absolute',
+    left: 325,
+    top: 15,
+  },
+  PinClipart_img: {
+    width: 25,
+    height: 25,
+  },
+  navbarText: {
+    color: '#FFFFFF',
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginHorizontal: 20,
+  },
+  title: {
+    marginTop: 10,
+    marginBottom: 10,
+    textAlign: 'center',
+    fontWeight: '500',
+    fontSize: 22,
+    color: '#ffffff',
+  },
+  bottomText: {
+    marginHorizontal: 30,
+    fontSize: 18,
+    color: '#FFFFFF',
+  },
+  radioButtonContainer: {
+    flexDirection: 'row',
+    marginLeft: 10,
+  },
+  ButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 80,
+  },
+  radioButton: {
+    height: 25,
+    width: 25,
+    backgroundColor: 'transparent',
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  radioButtonIcon: {
     height: 15,
+    width: 15,
+    borderRadius: 9,
+    backgroundColor: 'white',
+  },
+  radioButtonText: {
+    fontSize: 22,
+    color: '#FFFFFF',
+    fontWeight: '400',
+    marginTop: 15,
   },
   ageContainer: {
     flexDirection: 'row',
   },
-  firstImage: {
-    marginHorizontal: 10,
+  textinput: {
+    backgroundColor: 'white',
+    marginHorizontal: 30,
+    marginVertical: 10,
+    flex: 1,
+    borderRadius: 10,
+    padding: 10,
+    height: hp(8),
+    color: 'black',
+    width: 160,
   },
-  SecondImage: {
-    marginHorizontal: 170,
+  submitButton: {
+    backgroundColor: '#DC1C28',
+    height: hp(8),
+    marginHorizontal: 30,
+    borderRadius: 10,
+  },
+  text_btn: {
+    textAlign: 'center',
+    fontWeight: '400',
+    marginTop: 15,
+    fontSize: 20,
+    color: 'white',
+  },
+  text: {
+    marginTop: 10,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontSize: 18,
+    color: '#FFFFFF',
   },
   footeContainer: {
     backgroundColor: '#EDEDED',
@@ -174,6 +257,21 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 40,
+  },
+  titleText: {
+    fontWeight: 'bold',
+    marginTop: 15,
+  },
+  titleTextnext: {
+    marginTop: 3,
+    color: '#8A8787',
+  },
+  profileImageContainer: {
+    flexDirection: 'row',
+    marginTop: 40,
+  },
+  firstImage: {
+    marginHorizontal: 10,
   },
   profile_img: {
     width: 180,
@@ -189,202 +287,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  pinClipart: {
-    position: 'absolute',
-    left: 340,
-    top: 15,
-  },
-  titleText: {
-    fontWeight: 'bold',
-    marginTop: 15,
-  },
-  titleTextnext: {
-    marginTop: 3,
-    color: '#8A8787',
-  },
-  bottomText: {
-    marginHorizontal: 20,
-    fontSize: 20,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-  PinClipart_img: {
-    width: 25,
-    height: 25,
-  },
-  navbarText: {
-    color: '#FFFFFF',
-    fontSize: 25,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginHorizontal: 20,
-  },
   profileText: {
     fontWeight: 'bold',
   },
-  profileImageContainer: {
-    flexDirection: 'row',
-    marginTop: 40,
-  },
-
-  imageContainer: {
-    marginTop: 18,
-  },
-  bg_img: {
-    flex: 1,
-  },
-  title: {
-    marginTop: 20,
-    marginBottom: 30,
-    textAlign: 'center',
-    fontWeight: '700',
-    fontSize: 20,
-    color: '#ffffff',
-  },
-  input_view: {
-    flex: 1,
-  },
-  textinput: {
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 10,
-    height: hp(8),
-    color: 'black',
-    width: 160,
-  },
-  input: {
-    backgroundColor: 'white',
-    // marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 90,
-    height: hp(8),
-    color: 'black',
-    width: 160,
-  },
-  textinput_msg: {
-    backgroundColor: 'white',
-    marginHorizontal: 30,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 20,
-    textAlignVertical: 'top',
-    color: 'black',
-  },
-  submitButton: {
-    backgroundColor: '#DC1C28',
-    height: hp(7),
-    marginHorizontal: 30,
-    marginTop: 10,
-    borderRadius: 10,
-  },
-  text_btn: {
-    textAlign: 'center',
-    fontWeight: '400',
-    marginTop: 10,
-    fontSize: 20,
-    color: 'white',
-  },
-  footer: {
-    backgroundColor: '#DC1C28',
-    marginTop: 60,
-    marginHorizontal: 30,
-    borderRadius: 10,
-    height: hp(15),
-  },
-  footer_text: {
-    textAlign: 'center',
-    fontWeight: '400',
-    fontSize: 16,
-    color: 'white',
-    marginVertical: 5,
-  },
-  info: {
-    flexDirection: 'row',
-  },
-  info_img: {
-    marginHorizontal: 20,
-    height: hp(2.5),
-    width: wp(5),
-  },
-  info_text: {
-    color: 'white',
-    fontWeight: '500',
-  },
-  error: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginRight: 10,
-    color: 'red',
-    textAlign: 'right',
-  },
-  radioButtonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 45,
-  },
-  ButtonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 115,
-  },
-  radioButton: {
-    height: 20,
-    width: 20,
-    backgroundColor: '#F8F8F8',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E6E6E6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-  button: {
-    height: 20,
-    width: 20,
-    backgroundColor: '#F8F8F8',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E6E6E6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-  radioButtonIcon: {
-    height: 14,
-    width: 14,
-    borderRadius: 9,
-    backgroundColor: 'black',
-  },
-  buttonIcon: {
-    height: 14,
-    width: 14,
-    borderRadius: 9,
-    backgroundColor: 'black',
-  },
-
-  radioButtonText: {
-    fontSize: 25,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
-  ButtonText: {
-    fontSize: 25,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
-  text: {
-    marginTop: 30,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    fontSize: 15,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+  SecondImage: {
+    marginHorizontal: 170,
   },
 });
