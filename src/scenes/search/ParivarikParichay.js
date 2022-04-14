@@ -18,16 +18,8 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
+import {parivarikScreen} from './../../utils/schema';
 
-const validationSchema = Yup.object().shape({
-  fatherName: Yup.string().required(translate('ParivarikParichay.Required')),
-  fatherOccupation: Yup.string().required(translate('ParivarikParichay.Required')),
-  motherName: Yup.string().required(translate('ParivarikParichay.Required')),
-  motherMayaka: Yup.string().required(translate('ParivarikParichay.Required')),
-  brother: Yup.string().required(translate('ParivarikParichay.Required')),
-  sister: Yup.string().required(translate('ParivarikParichay.Required')),
-  land: Yup.string().required(translate('ParivarikParichay.Required')),
-});
 
 const ParivarikParichay = () => {
   return (
@@ -43,7 +35,7 @@ const ParivarikParichay = () => {
             sister: '',
             land: '',
           }}
-          validationSchema={validationSchema}
+          validationSchema={parivarikScreen}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,

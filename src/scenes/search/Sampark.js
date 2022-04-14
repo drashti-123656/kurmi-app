@@ -18,22 +18,8 @@ import {
   import {Formik} from 'formik';
   import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
   import translate from './../../translations/configTranslations';
-  const validationSchema = Yup.object().shape({
-    mobileno: Yup.string()
-    .required(translate('Sampark.Required'))
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      translate('Sampark.PhoneNumberValid')
-    ),
-    whatsappno: Yup.string()
-    .required(translate('Sampark.Required'))
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      translate('Sampark.WhatsappNumberValid')
-    ),
-    presentadd: Yup.string().required(translate('Sampark.Required')),
-    permanentadd: Yup.string().required(translate('Sampark.Required')),
-  });
+  import {samparkScreen} from './../../utils/schema'
+  
   
   const Sampark = () => {
     return (
@@ -41,7 +27,7 @@ import {
         <ScrollView style={styles.container}>
           <Formik
             initialValues={{mobileno: '', whatsappno: '', presentadd: '', permanentadd: ''}}
-            validationSchema={validationSchema}
+            validationSchema={samparkScreen}
             onSubmit={values => console.log(values)}>
             {({
               handleChange,
