@@ -4,14 +4,14 @@
     "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
     "Password": "Password",
     "createAccount": "Create Account",
-    "createAccountPrefix":"Don't have an account?"
+    "createAccountPrefix": "Don't have an account?"
   },
-  "ContactUs" : {
-    "Message" : "Message",
-    "Submit" : "Submit"
+  "ContactUs": {
+    "Message": "Message",
+    "Submit": "Submit"
   },
   "whatsapp": {
-    "Note": "Note: Only kurmi community can register"
+    "Note": "Note: Only kurmi community can register",
+    "Submit": "Submit"
   }
 }
-

@@ -8,7 +8,7 @@ import MultiSelect from 'react-native-multiple-select';
 
 const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange}) => {
   return (
-    <View>
+    <View style={styles.dropdown}>
       <MultiSelect
         hideTags
         items={items}
@@ -43,6 +43,9 @@ const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange}) => 
 export default DropDown;
 
 const styles = StyleSheet.create({
+  dropdown: {
+  marginVertical: 8,
+  },
   brandSearchInputStyle: {
     height: hp(7),
     fontSize: 18,

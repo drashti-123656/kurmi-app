@@ -14,11 +14,16 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
+import * as Yup from 'yup';
 import DropDown from '../../components/organisms/DropDown';
 import dropDownList from '../../utils/constant';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
 
+
+const validationSchema = Yup.object({
+  manglik: Yup.string().required('*Required'),
+});
 
 const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
@@ -72,6 +77,8 @@ const AdvanceSearch = ({navigation}) => {
           initialValues={{
             name: '',
             subcaste: '',
+            heightFrom: '',
+            heightTo: '',
             manglik: '',
             country: '',
             state: '',
@@ -81,6 +88,7 @@ const AdvanceSearch = ({navigation}) => {
             profession: '',
             income: '',
           }}
+          validationSchema={validationSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,
@@ -96,22 +104,17 @@ const AdvanceSearch = ({navigation}) => {
                 items={dropDownList}
                 selectText={translate('advanceSearch.Profile')}
                 selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+
+              <DropDown
+                items={dropDownList}
+                selectText={'Subcaste'}
+                selectedItems={values.subcaste}
                 onSelectedItemsChange={value =>
-                  setFieldValue('name', value)
+                  setFieldValue('Subcaste', value)
                 }
               />
-
-              <ExtendedTextInput
-                onChangeText={handleChange('subcaste')}
-                onBlur={handleBlur('subcaste')}
-                value={values.subcaste}
-                placeholder="Subcaste"
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.subcaste && touched.subcaste ? (
-                <Text style={styles.error}>{errors.subcaste}</Text>
-              ) : null}
               <Text style={styles.title}>Marital Status</Text>
               <View style={styles.radioButtonContainer}>
                 {status.map(item => (
@@ -130,125 +133,91 @@ const AdvanceSearch = ({navigation}) => {
                 ))}
               </View>
               <View style={styles.height}>
-                <ExtendedTextInput
-                  onChangeText={handleChange('heightFrom')}
-                  onBlur={handleBlur('heightFrom')}
-                  value={values.heightFrom}
-                  placeholder="Height From"
-                  placeholderTextColor={'#666666'}
+                <DropDown
+                  items={dropDownList}
+                  selectText={'Height From'}
+                  selectedItems={values.heightFrom}
+                  onSelectedItemsChange={value =>
+                    setFieldValue('heightFrom', value)
+                  }
                 />
 
-                {errors.heightFrom && touched.heightFrom ? (
-                  <Text style={styles.error}>{errors.heightFrom}</Text>
-                ) : null}
-
-                <ExtendedTextInput
-                  onChangeText={handleChange('heightTo')}
-                  onBlur={handleBlur('heightTo')}
-                  value={values.heightTo}
-                  placeholder="Height To"
-                  placeholderTextColor={'#666666'}
+                <DropDown
+                  items={dropDownList}
+                  selectText={'Height To'}
+                  selectedItems={values.heightTo}
+                  onSelectedItemsChange={value =>
+                    setFieldValue('heightTo', value)
+                  }
                 />
-
-                {errors.heightTo && touched.heightTo ? (
-                  <Text style={styles.error}>{errors.heightTo}</Text>
-                ) : null}
               </View>
+                <TextInput
+                  onChangeText={handleChange('manglik')}
+                  onBlur={handleBlur('manglik')}
+                  value={values.manglik}
+                  style={styles.textinput}
+                  placeholder="Manglik"
+                  placeholderTextColor={'#666666'}
+                />
+                {errors.manglik && touched.manglik ? (
+                  <Text style={styles.error}>{errors.manglik}</Text>
+                ) : null}
 
-              <ExtendedTextInput
-                onChangeText={handleChange('manglik')}
-                onBlur={handleBlur('manglik')}
-                value={values.manglik}
-                placeholder="Manglik"
-                placeholderTextColor={'#666666'}
-              />
-              {errors.manglik && touched.manglik ? (
-                <Text style={styles.error}>{errors.manglik}</Text>
-              ) : null}
 
-              <ExtendedTextInput
-                onChangeText={handleChange('country')}
-                onBlur={handleBlur('country')}
-                value={values.country}
-                placeholder="Country"
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.country && touched.country ? (
-                <Text style={styles.error}>{errors.country}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('state')}
-                onBlur={handleBlur('state')}
-                value={values.state}
-                placeholder="State"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'Country'}
+                selectedItems={values.country}
+                onSelectedItemsChange={value => setFieldValue('country', value)}
               />
 
-              {errors.state && touched.state ? (
-                <Text style={styles.error}>{errors.state}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('city')}
-                onBlur={handleBlur('city')}
-                value={values.city}
-                placeholder="City"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'State'}
+                selectedItems={values.state}
+                onSelectedItemsChange={value => setFieldValue('state', value)}
               />
 
-              {errors.city && touched.city ? (
-                <Text style={styles.error}>{errors.city}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('education')}
-                onBlur={handleBlur('education')}
-                value={values.education}
-                placeholder="Education"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'City'}
+                selectedItems={values.city}
+                onSelectedItemsChange={value => setFieldValue('city', value)}
               />
 
-              {errors.education && touched.education ? (
-                <Text style={styles.error}>{errors.education}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('occupation')}
-                onBlur={handleBlur('occupation')}
-                value={values.occupation}
-                placeholder="Occupation"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'Education'}
+                selectedItems={values.education}
+                onSelectedItemsChange={value =>
+                  setFieldValue('education', value)
+                }
               />
 
-              {errors.occupation && touched.occupation ? (
-                <Text style={styles.error}>{errors.occupation}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('profession')}
-                onBlur={handleBlur('profession')}
-                value={values.profession}
-                placeholder="Profession"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'Occupation'}
+                selectedItems={values.occupation}
+                onSelectedItemsChange={value =>
+                  setFieldValue('occupation', value)
+                }
               />
 
-              {errors.profession && touched.profession ? (
-                <Text style={styles.error}>{errors.profession}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('income')}
-                onBlur={handleBlur('income')}
-                value={values.income}
-                placeholder="Income"
-                placeholderTextColor={'#666666'}
+              <DropDown
+                items={dropDownList}
+                selectText={'Profession'}
+                selectedItems={values.profession}
+                onSelectedItemsChange={value =>
+                  setFieldValue('profession', value)
+                }
               />
 
-              {errors.income && touched.income ? (
-                <Text style={styles.error}>{errors.income}</Text>
-              ) : null}
+              <DropDown
+                items={dropDownList}
+                selectText={'Income'}
+                selectedItems={values.income}
+                onSelectedItemsChange={value => setFieldValue('income', value)}
+              />
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text
                   style={styles.text_btn}
@@ -275,7 +244,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   height: {
-    flexDirection: 'row',
+    
   },
   radioButtonContainer: {
     flexDirection: 'row',
@@ -310,6 +279,20 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginTop: 20,
   },
+  textinput: {
+    backgroundColor: 'white',
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 10,
+    marginBottom: 5,
+    borderRadius: 10,
+    paddingLeft: 10,
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+    height: hp(7),
+    color: 'black',
+  },
   button: {
     backgroundColor: '#DC1C28',
     height: hp(7),
@@ -328,7 +311,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
     textAlign: 'right',
   },
