@@ -45,6 +45,7 @@ export default DropDown;
 const styles = StyleSheet.create({
   dropdown: {
   marginVertical: 8,
+  flex: 1,
   },
   brandSearchInputStyle: {
     height: hp(7),

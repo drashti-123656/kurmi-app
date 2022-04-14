@@ -112,7 +112,7 @@ const AdvanceSearch = ({navigation}) => {
                 selectText={'Subcaste'}
                 selectedItems={values.subcaste}
                 onSelectedItemsChange={value =>
-                  setFieldValue('Subcaste', value)
+                  setFieldValue('subcaste', value)
                 }
               />
               <Text style={styles.title}>Marital Status</Text>
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   height: {
-    
+    flexDirection: 'row',
   },
   radioButtonContainer: {
     flexDirection: 'row',
