@@ -6,6 +6,9 @@
     "createAccount": "Create Account",
     "createAccountPrefix":"Don't have an account?"
   },
+  "whatsapp": {
+    "Note": "Note: Only kurmi community can register"
+  },
   "ContactUs" : {
     "Message" : "Message",
     "Submit" : "Submit" 
