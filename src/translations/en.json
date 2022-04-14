@@ -8,5 +8,9 @@
   },
   "whatsapp": {
     "Note": "Note: Only kurmi community can register"
+  },
+  "ContactUs" : {
+    "Message" : "Message",
+    "Submit" : "Submit" 
   }
 }
