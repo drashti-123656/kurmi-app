@@ -4,28 +4,21 @@ import {
   View,
   Image,
   ScrollView,
-  TextInput,
+  
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
 
-
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
-import translate from './../../translations/configTranslations';
 
+import translate from './../../translations/configTranslations';
 
 import {WhatsappSchema} from './../../utils/Schemas/LoginSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 
 const Whatsapp = () => {
-  
-
   return (
     <RootScreen>
       <ScrollView>
@@ -68,21 +61,17 @@ const Whatsapp = () => {
                 <Text style={styles.error}>{errors.whatsappno}</Text>
               ) : null}
 
-              <LoginButton 
-                     title={translate('whatsapp.Continue')}
-                  onPress={handleSubmit}
-  
-                />
-
-              
+              <LoginButton
+                title={translate('whatsapp.Continue')}
+                onPress={handleSubmit}
+              />
             </View>
           )}
         </Formik>
-      
-        <TouchableOpacity style={styles.footer}>
-            <Text style={styles.footer_text}>{translate('genral.webLink')}</Text>
-          </TouchableOpacity>
 
+        <TouchableOpacity style={styles.footer}>
+          <Text style={styles.footer_text}>{translate('genral.webLink')}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </RootScreen>
   );
@@ -122,5 +111,4 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'right',
   },
- 
 });
