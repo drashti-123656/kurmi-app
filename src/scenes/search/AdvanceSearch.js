@@ -14,16 +14,10 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
 import DropDown from '../../components/organisms/DropDown';
 import dropDownList from '../../utils/constant';
-import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
-
-
-const validationSchema = Yup.object({
-  manglik: Yup.string().required('*Required'),
-});
+import { ManglikSchema } from '../../utils/schema';
 
 const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
@@ -88,7 +82,7 @@ const AdvanceSearch = ({navigation}) => {
             profession: '',
             income: '',
           }}
-          validationSchema={validationSchema}
+          validationSchema={ManglikSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,

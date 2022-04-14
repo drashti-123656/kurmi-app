@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import HomeIcon from 'react-native-vector-icons/Entypo';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather'
 import Login from '../scenes/auth/Login';
 import Registration from '../scenes/auth/Registration';
@@ -21,7 +21,7 @@ const DashboardNavigation = () => {
           headerShown: false,
           tabBarActiveTintColor: 'red',
           tabBarIcon: () => (
-            <HomeIcon name="home" color={'black'} size={30} />
+            <EntypoIcon name="home" color={'black'} size={30} />
           ),
         }}
         />
