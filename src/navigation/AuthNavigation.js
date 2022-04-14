@@ -10,6 +10,14 @@ const AuthNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="login"
+        component={Login}
+        headershow
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="Whatsapp"
         component={Whatsapp}
         headershow
@@ -22,14 +30,6 @@ const AuthNavigation = () => {
         component={Registration}
         options={{
           headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="परिवारिक परिचय"
-        component={ParivarikParichay}
-        options={{
-          headerShown: true,
         }}
       />
     </Stack.Navigator>

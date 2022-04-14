@@ -16,7 +16,7 @@ import {
   } from 'react-native-responsive-screen';
   import RootScreen from '../../components/molecule/rootScreen/RootScreen';
   import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-  import CheckBox from '../../components/atoms/buttons/Checkbox';
+  // import CheckBox from '../../components/atoms/buttons/Checkbox';
   const Registration = () => {
     const [FirstName, setFirstName] = useState('');
     const [LastName, SetLastName] = useState('');
@@ -163,7 +163,7 @@ import {
               <Text style={styles.star}>*</Text> पासवर्ड कम से कम कैरेक्टर नंबर का हो 
             </Text>
             <View style={{}}>
-              <CheckBox text="में  Privacy Policy और  Terms of use  से  सहमत हु  " />
+              {/* <CheckBox text="में  Privacy Policy और  Terms of use  से  सहमत हु  " /> */}
             </View>
             <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
               <Text style={styles.text_btn}>अकाउंट बनाएं  </Text>
