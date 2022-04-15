@@ -18,7 +18,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
-import {parivarikScreen} from './../../utils/schema';
+import {parivarikSchema} from '../../utils/Schemas/registerSchema';
 
 
 const ParivarikParichay = () => {
@@ -35,7 +35,7 @@ const ParivarikParichay = () => {
             sister: '',
             land: '',
           }}
-          validationSchema={parivarikScreen}
+          validationSchema={parivarikSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,

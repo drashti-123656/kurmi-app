@@ -9,7 +9,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder}) => {
   return (
     <View style={styles.textinput}>
       <TextInput
-      style={styles.input}
+        style={styles.input}
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
   },
   input : {
     flex: 1,
+    color: 'black',
   }
 });
