@@ -4,24 +4,24 @@ import {
   View,
   Image,
   ScrollView,
-  
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
-
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-
 import translate from './../../translations/configTranslations';
+<<<<<<< HEAD
 
 import {WhatsappSchema} from '../../utils/schema/login';
+=======
+import {WhatsappSchema} from './../../utils/Schemas/LoginSchema';
+>>>>>>> 853d6943aa6c34669e765602a6f949678fa5c1f3
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 
 const Whatsapp = () => {
   return (
-    <RootScreen>
-      <ScrollView>
+    <RootScreen scrollable={true}>
         <Image source={require('../../assets/logo.png')} style={styles.image} />
         <Text style={styles.note}>{translate('whatsapp.Note')}</Text>
         <Formik
@@ -72,7 +72,6 @@ const Whatsapp = () => {
         <TouchableOpacity style={styles.footer}>
           <Text style={styles.footer_text}>{translate('genral.webLink')}</Text>
         </TouchableOpacity>
-      </ScrollView>
     </RootScreen>
   );
 };
@@ -83,31 +82,29 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 180,
-    marginTop: 37,
+    marginTop: 40,
     alignSelf: 'center',
   },
   note: {
-    marginTop: 10,
+    marginBottom: 10,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 15,
-    lineHeight: 25,
     color: '#ffffff',
   },
   footer: {
-    marginTop: 160,
+    marginTop: 10,
   },
   footer_text: {
     textAlign: 'center',
     fontWeight: '400',
     fontSize: 18,
     color: 'white',
-    marginTop: '25%',
   },
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
     textAlign: 'right',
   },

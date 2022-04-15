@@ -40,99 +40,96 @@ const Login = () => {
   };
 
   return (
-    <RootScreen>
-      <ScrollView>
-        <Image source={require('../../assets/logo.png')} style={styles.image} />
+    <RootScreen scrollable={true}>
+      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Formik
+        initialValues={{
+          login: '',
+          password: '',
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={values => navigation.navigate('NewsFeed')}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.formContainer}>
+            <ExtendedTextInput
+              onChangeText={handleChange('login')}
+              onBlur={handleBlur('login')}
+              value={values.Source}
+              placeholder={translate('login.IdPlaceholder')}
+              placeholderTextColor={'#666666'}
+            />
+            {errors.login && touched.login ? (
+              <Text style={styles.error}>{errors.login}</Text>
+            ) : null}
+            <ExtendedTextInput
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              placeholder={translate('login.Password')}
+              placeholderTextColor={'#666666'}
+            />
+            {errors.password && touched.password ? (
+              <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
 
-        <Formik
-          initialValues={{
-            login: '',
-            password: '',
-          }}
-          validationSchema={LoginSchema}
-          onSubmit={values => navigation.navigate('NewsFeed')}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <View>
-              <ExtendedTextInput
-                onChangeText={handleChange('login')}
-                onBlur={handleBlur('login')}
-                value={values.Source}
-                placeholder={translate('login.IdPlaceholder')}
-                placeholderTextColor={'#666666'}
-              />
-              {errors.login && touched.login ? (
-                <Text style={styles.error}>{errors.login}</Text>
-              ) : null}
-              <ExtendedTextInput
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                placeholder={translate('login.Password')}
-                placeholderTextColor={'#666666'}
-              />
-              {errors.password && touched.password ? (
-                <Text style={styles.error}>{errors.password}</Text>
-              ) : null}
+            <LoginButton
+              title={translate('login.Log-in')}
+              onPress={handleSubmit}
+            />
 
-              <LoginButton
-                title={translate('login.Log-in')}
-                onPress={handleSubmit}
-              />
-
-              <View style={styles.alignedRowContainer}>
-                <View style={styles.alignedRowContainer1}>
-                  <CheckBox
-                    tintColors={{true: 'white'}}
-                    disabled={false}
-                    value={toggleCheckBox}
-                    onValueChange={newValue => setToggleCheckBox(newValue)}
-                  />
-                  <Text style={{color: 'white', fontSize: 15}}>
-                    {translate('login.remenberMe')}
-                  </Text>
-                </View>
-
+            <View style={styles.alignedRowContainer}>
+              <View style={styles.alignedRowContainer1}>
+                <CheckBox
+                  tintColors={{true: 'white'}}
+                  disabled={false}
+                  value={toggleCheckBox}
+                  onValueChange={newValue => setToggleCheckBox(newValue)}
+                />
                 <Text style={{color: 'white', fontSize: 15}}>
-                  {translate('login.forgotPassword')}
+                  {translate('login.remenberMe')}
                 </Text>
               </View>
 
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: widthPercentageToDP('4.5%'),
-                  alignSelf: 'center',
-                  paddingTop: 40,
-                }}>
-                {translate('login.createAccountPrefix')}
+              <Text style={{color: 'white', fontSize: 15}}>
+                {translate('login.forgotPassword')}
               </Text>
+            </View>
 
-              <LoginButton
-                title={translate('login.createAccount')}
-                onPress={handleLogin}
-              />
+            <Text
+              style={{
+                color: 'white',
+                fontSize: widthPercentageToDP('4.5%'),
+                alignSelf: 'center',
+                marginTop: heightPercentageToDP('5%'),
+              }}>
+              {translate('login.createAccountPrefix')}
+            </Text>
 
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: widthPercentageToDP('4.5%'),
-                  alignSelf: 'center',
-                  paddingTop: 20,
-                  marginBottom: 20,
-                }}>
-                {translate('genral.webLink')}
-              </Text>
-              </View>
-          )}
-        </Formik>
-      </ScrollView>
+            <LoginButton
+              title={translate('login.createAccount')}
+              onPress={handleLogin}
+            />
+
+            <Text
+              style={{
+                color: 'white',
+                fontSize: widthPercentageToDP('4.5%'),
+                alignSelf: 'center',
+                paddingTop: 20,
+                marginBottom: 20,
+              }}>
+              {translate('genral.webLink')}
+            </Text>
+          </View>
+        )}
+      </Formik>
     </RootScreen>
   );
 };
@@ -143,6 +140,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#7a4c4c',
+  },
+  formContainer:{
+    flex: 1,
   },
   alignedRowContainer: {
     flexDirection: 'row',
