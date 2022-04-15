@@ -19,11 +19,9 @@ import {
 import translate from './../../translations/configTranslations';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {login} from './redux/authReducer';
-
-const validationSchema = Yup.object({
-  login: Yup.string().required('*Required'),
-  password: Yup.string().required('*Required'),
-});
+import {LoginSchema} from './../../utils/Schemas/LoginSchema';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -51,8 +49,8 @@ const Login = () => {
             login: '',
             password: '',
           }}
-          validationSchema={validationSchema}
-          onSubmit={values => console.log(values)}>
+          validationSchema={LoginSchema}
+          onSubmit={values => navigation.navigate('NewsFeed')}>
           {({
             handleChange,
             handleBlur,
@@ -61,9 +59,8 @@ const Login = () => {
             errors,
             touched,
           }) => (
-            <View style={styles.formikContainer}>
-              <TextInput
-                style={styles.input}
+            <View>
+              <ExtendedTextInput
                 onChangeText={handleChange('login')}
                 onBlur={handleBlur('login')}
                 value={values.Source}
@@ -73,26 +70,26 @@ const Login = () => {
               {errors.login && touched.login ? (
                 <Text style={styles.error}>{errors.login}</Text>
               ) : null}
-              <TextInput
-                style={styles.input}
+              <ExtendedTextInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
-                placeholder={translate('login.password')}
+                placeholder={translate('login.Password')}
                 placeholderTextColor={'#666666'}
               />
               {errors.password && touched.password ? (
                 <Text style={styles.error}>{errors.password}</Text>
               ) : null}
 
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >Log in</Text>
-              </TouchableOpacity>
+              <LoginButton
+                title={translate('login.Log-in')}
+                onPress={handleSubmit}
+              />
 
               <View style={styles.alignedRowContainer}>
                 <View style={styles.alignedRowContainer1}>
                   <CheckBox
-                    style={{color: 'white'}}
+                    tintColors={{true: 'white'}}
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={newValue => setToggleCheckBox(newValue)}
@@ -116,11 +113,11 @@ const Login = () => {
                 }}>
                 {translate('login.createAccountPrefix')}
               </Text>
-              <TouchableOpacity style={styles.button2} onPress={handleLogin}>
-                <Text style={styles.text_btn}>
-                  {translate('login.createAccount')}
-                </Text>
-              </TouchableOpacity>
+
+              <LoginButton
+                title={translate('login.createAccount')}
+                onPress={handleLogin}
+              />
 
               <Text
                 style={{
@@ -132,7 +129,7 @@ const Login = () => {
                 }}>
                 {translate('genral.webLink')}
               </Text>
-            </View>
+              </View>
           )}
         </Formik>
       </ScrollView>
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: widthPercentageToDP('3'),
+    marginHorizontal: widthPercentageToDP('6'),
   },
   alignedRowContainer1: {
     flexDirection: 'row',

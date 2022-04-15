@@ -1,24 +1,24 @@
 import * as Yup from 'yup';
-import translate from './../translations/configTranslations';
+import translate from '../../translations/configTranslations';
 
-export const samparkScreen = Yup.object().shape({
-    mobileno: Yup.string()
-    .required(translate('Sampark.Required'))
+export const samparkSchema = Yup.object().shape({
+  mobileNo: Yup.string()
+    .required(translate('samPark.Required'))
     .matches(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      translate('Sampark.PhoneNumberValid')
+      translate('samPark.PhoneNumberValid')
     ),
-    whatsappno: Yup.string()
-    .required(translate('Sampark.Required'))
+    whatsAppNo: Yup.string()
+    .required(translate('samPark.Required'))
     .matches(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      translate('Sampark.WhatsappNumberValid')
+      translate('samPark.WhatsappNumberValid')
     ),
-    presentadd: Yup.string().required(translate('Sampark.Required')),
-    permanentadd: Yup.string().required(translate('Sampark.Required')),
+    presentAdd: Yup.string().required(translate('samPark.Required')),
+    permanentAdd: Yup.string().required(translate('samPark.Required')),
 });
 
-export const parivarikScreen = Yup.object().shape({
+export const parivarikSchema = Yup.object().shape({
     fatherName: Yup.string().required(translate('ParivarikParichay.Required')),
     fatherOccupation: Yup.string().required(translate('ParivarikParichay.Required')),
     motherName: Yup.string().required(translate('ParivarikParichay.Required')),

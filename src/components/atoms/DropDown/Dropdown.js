@@ -6,7 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 import MultiSelect from 'react-native-multiple-select';
 
-const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange,style}) => {
+const Dropdown = ({items, selectText, selectedItems, onSelectedItemsChange,style}) => {
   return (
     <View style={style}>
       <MultiSelect
@@ -41,7 +41,7 @@ const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange,style
   );
 };
 
-export default DropDown;
+export default Dropdown;
 
 const styles = StyleSheet.create({
   brandSearchInputStyle: {

@@ -3,12 +3,16 @@
     "webLink":"www.kurmishadi.com"
   },
   "login": {
-    "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
-    "Password": "Password", 
-    "remenberMe": "Remember me",
-    "forgotPassword": "Forgot Password?",	
+    "IdPlaceholder": "कुर्मीशदी आईडी/मोबाइल नंबर/ईमेल आईडी",
+    "Password": "पासवर्ड", 
+    "remenberMe": "मुझे याद रखें",
+    "forgotPassword": "पासवर्ड भूल गए?",	
     "createAccount": "अभी बनाए",
-    "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?"
+    "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?",
+    "Log-in" : "लॉग इन करें",
+    "IdPlaceholderRequired" : "*आवश्यक",
+    "enterPassword" : "कृपया अपना पासवर्ड दर्ज करें",
+    "passwordMustHave" : "इसमें 8 अक्षर होने चाहिए, एक अपरकेस, एक लोअरकेस, एक नंबर और एक विशेष केस कैरेक्टर"
   },
   "ContactUs" : {
     "heading" : "हमसे संपर्क करें",
@@ -36,7 +40,11 @@
   "whatsapp": {
     "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
     "name": "नाम",
-    "phoneno": "Whatsapp नंबर  दर्ज करें"
+    "phoneno": "Whatsapp नंबर  दर्ज करें",
+    "Continue" : "जारी रखें",
+    "NameRequired" : "नाम आवश्यक है",
+    "fieldRequired" : "यह फ़ील्ड आवश्यक है"
+    
   },
   "ParivarikParichay": {
      "fatherName" : "पिता का नाम ",
@@ -50,11 +58,11 @@
      "Required" : "*आवश्यक"
 
   },
-  "Sampark" : {
-    "mobileno" : "मोबाइल नंबर",
-    "whatsappno" : "whatsapp नंबर",
-    "presentadd" : "वर्तमान पता",
-    "permanentadd" : "स्थायी पता",
+  "samPark" : {
+    "mobileNo" : "मोबाइल नंबर",
+    "whatsAppNo" : "whatsapp नंबर",
+    "presentAdd" : "वर्तमान पता",
+    "permanentAdd" : "स्थायी पता",
     "Next" : "आगे",
     "Required" : "*आवश्यक",
     "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
