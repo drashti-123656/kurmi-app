@@ -12,6 +12,24 @@
   },
   "whatsapp": {
     "Note": "Note: Only kurmi community can register",
-    "Submit": "Submit"
+    "Submit": "Submit",
+  },
+  "register":{
+    "ProfileName": "Profile Name",
+    "FirstName": "First Name",
+    "LastName":"Last Name",
+    "EmailId":"Email Id",
+    "MobileNumber":"Mobile Number",
+    "birthdate":"Birth date",
+    "caste":"Caste",
+    "country":"Country",
+    "state":" State ",
+    "city":" City ",
+    "enter password":"Enter Your Password",
+    "Note":"Age must be 18 years",
+    "Note@":" Password must be in character number ",
+    "checkbox":"I agree to the Privacy Policy and Terms of Use",
+    "create Account":"Create Account "
+
   }
 }
