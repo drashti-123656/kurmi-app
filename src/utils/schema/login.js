@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import translate from './../../translations/configTranslations';
+import translate from '../../translations/configTranslations';
 
 export const LoginSchema = Yup.object().shape({
     login: Yup.string().required(translate('login.IdPlaceholderRequired')),

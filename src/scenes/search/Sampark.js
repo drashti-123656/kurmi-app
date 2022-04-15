@@ -17,7 +17,7 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
-import {samparkSchema} from '../../utils/Schemas/registerSchema';
+import {samparkSchema} from '../../utils/schema/registerSchema';
 
 const Sampark = () => {
   return (

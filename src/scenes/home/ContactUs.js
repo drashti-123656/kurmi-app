@@ -17,11 +17,9 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import translate from './../../translations/configTranslations';
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('*Required'),
-  mobileno: Yup.number().min(10).required('*Required'),
-});
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {contactUsValidationSchema} from '../../utils/schema/contactUsSchema';
 
 const ContactUs = ({navigation}) => {
   return (
@@ -29,9 +27,9 @@ const ContactUs = ({navigation}) => {
       <ScrollView>
         <Text style={styles.title}> {translate('ContactUs.heading')}</Text>
         <Formik
-          initialValues={{name: '', mobileno: '', message: ''}}
-          validationSchema={validationSchema}
-          onSubmit={values => console.log(values)}>
+          initialValues={{name: '', mobileNo: '', message: ''}}
+          validationSchema={contactUsValidationSchema}
+          onSubmit={values => navigation.goBack()}>
           {({
             handleChange,
             handleBlur,
@@ -41,7 +39,7 @@ const ContactUs = ({navigation}) => {
             touched,
           }) => (
             <View>
-              <TextInput
+              <ExtendedTextInput
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
                 value={values.name}
@@ -52,16 +50,16 @@ const ContactUs = ({navigation}) => {
               {errors.name && touched.name ? (
                 <Text style={styles.error}>{errors.name}</Text>
               ) : null}
-              <TextInput
-                onChangeText={handleChange('mobileno')}
-                onBlur={handleBlur('mobileno')}
-                value={values.mobileno}
+              <ExtendedTextInput
+                onChangeText={handleChange('mobileNo')}
+                onBlur={handleBlur('mobileNo')}
+                value={values.mobileNo}
                 style={styles.textinput}
-                 placeholder={translate('ContactUs.MobileNo')}
+                placeholder={translate('ContactUs.MobileNo')}
                 placeholderTextColor={'#666666'}
               />
-              {errors.mobileno && touched.mobileno ? (
-                <Text style={styles.error}>{errors.mobileno}</Text>
+              {errors.mobileNo && touched.mobileNo ? (
+                <Text style={styles.error}>{errors.mobileNo}</Text>
               ) : null}
               <TextInput
                 onChangeText={handleChange('message')}
@@ -75,36 +73,41 @@ const ContactUs = ({navigation}) => {
               {errors.message && touched.message ? (
                 <Text style={styles.error}>{errors.message}</Text>
               ) : null}
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                
-                <Text style={styles.text_btn} onPress={() => navigation.goBack()} >{translate('ContactUs.Submit')}</Text>
-              </TouchableOpacity>
+
+              <LoginButton
+                title={translate('ContactUs.Submit')}
+                onPress={handleSubmit}
+              />
             </View>
           )}
         </Formik>
 
         <View style={styles.footer}>
-          <Text style={styles.footer_text}>{translate('ContactUs.contactToUs')}</Text>
+          <Text style={styles.footer_text}>
+            {translate('ContactUs.contactToUs')}
+          </Text>
           <View style={styles.info}>
             <Image
               style={styles.info_img}
               source={require('../../assets/phoneCall.png')}
             />
-            <Text style={styles.info_text}>+91-7987233880</Text>
+            <Text style={styles.info_text}>{translate('genral.phoneNo')}</Text>
           </View>
           <View style={styles.info}>
             <Image
               style={styles.info_img}
               source={require('../../assets/message.png')}
             />
-            <Text style={styles.info_text}>contact@kurmishadi.com</Text>
+            <Text style={styles.info_text}>{translate('genral.email')}</Text>
           </View>
           <View style={styles.info}>
             <Image
               style={styles.info_img}
               source={require('../../assets/whatsapp.png')}
             />
-            <Text style={styles.info_text}>+91-7987233880</Text>
+            <Text style={styles.info_text}>
+              {translate('genral.whatsappNo')}
+            </Text>
           </View>
         </View>
       </ScrollView>

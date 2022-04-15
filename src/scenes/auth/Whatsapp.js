@@ -14,7 +14,7 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 
 import translate from './../../translations/configTranslations';
 
-import {WhatsappSchema} from './../../utils/Schemas/LoginSchema';
+import {WhatsappSchema} from '../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 

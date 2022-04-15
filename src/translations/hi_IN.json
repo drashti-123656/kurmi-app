@@ -1,6 +1,9 @@
 {
   "genral": {
-    "webLink":"www.kurmishadi.com"
+    "webLink":"www.kurmishadi.com",
+    "phoneNo": "+91-7987233880",
+    "whatsappNo": "+91-7987233880",
+    "email": "contact@kurmishadi.com"
   },
   "login": {
     "IdPlaceholder": "कुर्मीशदी आईडी/मोबाइल नंबर/ईमेल आईडी",
@@ -20,7 +23,9 @@
     "MobileNo" : "फ़ोन नंबर दर्ज करें",
     "contactToUs" : "हमसे संपर्क करें",
     "Submit" : "जमा करें",
-    "message" : "संदेश"
+    "message" : "संदेश",
+    "Required" : "*आवश्यक",
+    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है"
   },
   "NewsFeed" : {
     "kurmiShadiHeading" : "कुर्मी शादी",
