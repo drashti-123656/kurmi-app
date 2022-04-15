@@ -14,11 +14,10 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
-import {samparkScreen} from './../../utils/Schemas/RegistrationSchema';
+import {samparkSchema} from '../../utils/Schemas/registerSchema';
 
 const Sampark = () => {
   return (
@@ -26,12 +25,12 @@ const Sampark = () => {
       <ScrollView style={styles.container}>
         <Formik
           initialValues={{
-            mobileno: '',
-            whatsappno: '',
-            presentadd: '',
-            permanentadd: '',
+            mobileNo: '',
+            whatsAppNo: '',
+            presentAdd: '',
+            permanentAdd: '',
           }}
-          validationSchema={samparkScreen}
+          validationSchema={samparkSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,
@@ -43,56 +42,56 @@ const Sampark = () => {
           }) => (
             <View>
               <ExtendedTextInput
-                onChangeText={handleChange('mobileno')}
-                onBlur={handleBlur('mobileno')}
-                value={values.mobileno}
-                style={styles.textinput}
-                placeholder={translate('Sampark.mobileno')}
+                onChangeText={handleChange('mobileNo')}
+                onBlur={handleBlur('mobileNo')}
+                value={values.mobileNo}
+                style={styles.textInput}
+                placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
               />
 
-              {errors.mobileno && touched.mobileno ? (
-                <Text style={styles.error}>{errors.mobileno}</Text>
+              {errors.mobileNo && touched.mobileNo ? (
+                <Text style={styles.errorStyle}>{errors.mobileNo}</Text>
               ) : null}
               <ExtendedTextInput
-                onChangeText={handleChange('whatsappno')}
-                onBlur={handleBlur('whatsappno')}
-                value={values.whatsappno}
-                style={styles.textinput}
-                placeholder={translate('Sampark.whatsappno')}
+                onChangeText={handleChange('whatsAppNo')}
+                onBlur={handleBlur('whatsAppNo')}
+                value={values.whatsAppNo}
+                style={styles.textInput}
+                placeholder={translate('samPark.whatsAppNo')}
                 placeholderTextColor={'#666666'}
               />
 
-              {errors.whatsappno && touched.whatsappno ? (
-                <Text style={styles.error}>{errors.whatsappno}</Text>
+              {errors.whatsAppNo && touched.whatsAppNo ? (
+                <Text style={styles.errorStyle}>{errors.whatsAppNo}</Text>
               ) : null}
               <ExtendedTextInput
-                onChangeText={handleChange('presentadd')}
-                onBlur={handleBlur('presentadd')}
-                value={values.presentadd}
-                style={styles.textinput}
-                placeholder={translate('Sampark.presentadd')}
+                onChangeText={handleChange('presentAdd')}
+                onBlur={handleBlur('presentAdd')}
+                value={values.presentAdd}
+                style={styles.textInput}
+                placeholder={translate('samPark.presentAdd')}
                 placeholderTextColor={'#666666'}
               />
 
-              {errors.presentadd && touched.presentadd ? (
-                <Text style={styles.error}>{errors.presentadd}</Text>
+              {errors.presentAdd && touched.presentAdd ? (
+                <Text style={styles.errorStyle}>{errors.presentAdd}</Text>
               ) : null}
 
               <ExtendedTextInput
-                onChangeText={handleChange('permanentadd')}
-                onBlur={handleBlur('permanentadd')}
-                value={values.permanentadd}
-                style={styles.textinput}
-                placeholder={translate('Sampark.permanentadd')}
+                onChangeText={handleChange('permanentAdd')}
+                onBlur={handleBlur('permanentAdd')}
+                value={values.permanentAdd}
+                style={styles.textInput}
+                placeholder={translate('samPark.permanentAdd')}
                 placeholderTextColor={'#666666'}
               />
 
-              {errors.permanentadd && touched.permanentadd ? (
-                <Text style={styles.error}>{errors.permanentadd}</Text>
+              {errors.permanentAdd && touched.permanentAdd ? (
+                <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>{translate('Sampark.Next')}</Text>
+                <Text style={styles.text_btn}>{translate('samPark.Next')}</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
   input_view: {
     flex: 1,
   },
-  textinput: {
+  textInput: {
     backgroundColor: 'white',
     marginHorizontal: 30,
     marginVertical: 10,
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
   },
-  error: {
+  errorStyle: {
     fontSize: 12,
     fontWeight: 'bold',
     marginRight: 10,

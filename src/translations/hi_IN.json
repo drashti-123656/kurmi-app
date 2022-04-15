@@ -58,11 +58,11 @@
      "Required" : "*आवश्यक"
 
   },
-  "Sampark" : {
-    "mobileno" : "मोबाइल नंबर",
-    "whatsappno" : "whatsapp नंबर",
-    "presentadd" : "वर्तमान पता",
-    "permanentadd" : "स्थायी पता",
+  "samPark" : {
+    "mobileNo" : "मोबाइल नंबर",
+    "whatsAppNo" : "whatsapp नंबर",
+    "presentAdd" : "वर्तमान पता",
+    "permanentAdd" : "स्थायी पता",
     "Next" : "आगे",
     "Required" : "*आवश्यक",
     "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
