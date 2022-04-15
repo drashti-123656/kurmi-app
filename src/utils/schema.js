@@ -27,3 +27,16 @@ export const parivarikScreen = Yup.object().shape({
     sister: Yup.string().required(translate('ParivarikParichay.Required')),
     land: Yup.string().required(translate('ParivarikParichay.Required')),
 });
+export const RegistrationvalidationSchema = Yup.object({
+    profilemaker: Yup.string().required('*Required'),
+    firstname: Yup.string().required('*Required'),
+    lastname: Yup.string().required('*Required'),
+    emailid: Yup.string().required('*Required'),
+    mobilenumber: Yup.string().required('*Required'),
+    birthdate: Yup.string().required('*Required'),
+    caste: Yup.string().required('*Required'),
+    country: Yup.string().required('*Required'),
+    state: Yup.string().required('*Required'),
+    city: Yup.string().required('*Required'),
+    password: Yup.string().required('*Required'),
+  });
