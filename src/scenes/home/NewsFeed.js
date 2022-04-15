@@ -110,19 +110,9 @@ const NewsFeed = ({navigation}) => {
               {translate('NewsFeed.recentlyJoint')}
               </Text>
             </View>
+            <View style={styles.profileContainer}>
             <View style={styles.profileImageContainer}>
               <Image
-                  style={styles.profile_img}
-                  source={require('../../assets/profile.png')}
-                />
-                <View>
-                <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
-                  <Text style={styles.profileIntroText}>{translate('NewsFeed.intro')} </Text>
-                </View>
-            </View>
-            {/* <View style={styles.profileImageContainer}>
-              <View style={styles.Image}>
-                <Image
                   style={styles.profile_img}
                   source={require('../../assets/profile.png')}
                 />
@@ -130,19 +120,18 @@ const NewsFeed = ({navigation}) => {
                   <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
                   <Text style={styles.profileIntroText}>{translate('NewsFeed.intro')} </Text>
                 </View>
-              </View>
-
-              <View style={styles.Image}>
-                <Image
+            </View>
+            <View style={styles.profileImageContainer}>
+              <Image
                   style={styles.profile_img}
                   source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}> {translate('NewsFeed.newProfile')} </Text>
-                  <Text style={styles.profileIntroText}> {translate('NewsFeed.intro')} </Text>
+                  <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
+                  <Text style={styles.profileIntroText}>{translate('NewsFeed.intro')} </Text>
                 </View>
-              </View>
-            </View> */}
+            </View>
+            </View>
           </ScrollView>
         </View>
       </View>
@@ -277,10 +266,12 @@ const styles = StyleSheet.create({
   titleTextnext: {
     color: '#666666',
   },
+  profileContainer: {
+    flexDirection: 'row',
+  },
   profileImageContainer: {
     // flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'white',
+  
     height: hp('30'),
     width: wp('50'),
     marginTop: 30,
@@ -294,22 +285,19 @@ const styles = StyleSheet.create({
     height: hp('23'),
   },
   footerTextContainer: {
-    marginHorizontal: -160,
-    height: 50,
-    width: 180,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: 'white', 
+    height: hp('10'),
   },
   profileText: {
     fontWeight: 'bold',
-    marginTop: 10,
     color: 'black',
+    marginTop: 5,
     textAlign: 'center',
     fontSize: 16,
   },
   profileIntroText: {
     color: '#666666',
-    marginBottom: 10,
+    textAlign: 'center',
+    fontSize: 13,
   }
 });
