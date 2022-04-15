@@ -19,7 +19,7 @@ import {Formik} from 'formik';
 import translate from './../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../utils/schema';
 import dropDownList from '../../utils/constants/dropDownList';
-import DropDown from '../../components/atoms/DropDown/Dropdown';
+import DropDown from '../../components/atoms/DropDown/dropDown';
 const Registration = props => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isLiked, setIsLiked] = useState([
