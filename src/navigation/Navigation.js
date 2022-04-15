@@ -14,21 +14,21 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {!isAuthenticated ? (
+        {isAuthenticated ? (
           <>
-          <Stack.Screen
-        name="Whatsapp"
-        component={Whatsapp}
-        headershow
-        options={{
-          headerShown: false,
-        }}
-      />
-          <Stack.Screen
-            name="DashboardNavigation"
-            component={DashboardNavigation}
-            options={{headerShown: false}}
-          />
+            <Stack.Screen
+              name="Whatsapp"
+              component={Whatsapp}
+              headershow
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="DashboardNavigation"
+              component={DashboardNavigation}
+              options={{headerShown: false}}
+            />
           </>
         ) : (
           <Stack.Screen
