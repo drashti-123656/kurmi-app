@@ -17,9 +17,17 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import CheckBox from '@react-native-community/checkbox';
 import {Formik} from 'formik';
 import translate from './../../translations/configTranslations';
+<<<<<<< HEAD
 import {RegistrationvalidationSchema} from '../../utils/schema/registerSchema';
 import dropDownList from '../../components/atoms/DropDown/Dropdown';
 import Dropdown from '../../components/atoms/DropDown/Dropdown';
+=======
+import {RegistrationvalidationSchema} from '../../utils/Schemas/registerSchema';
+import dropDownList from '../../utils/constants/dropDownList';
+
+import DropDown from '../../components/atoms/DropDown/Dropdown';
+
+>>>>>>> c3b1acec6dfb033f1c731365f83ac6adcc010a4a
 const Registration = props => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isLiked, setIsLiked] = useState([
