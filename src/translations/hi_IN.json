@@ -28,7 +28,7 @@
     "ageTo": "आयु तक",
     "Search": "खोजे",
     "filterProfile": "प्रोफाइल ID से खोजें / फिल्टर लगाना है",
-    "newIntro": "नया वैवाहिक परिचय",
+    "newIntro": " नया  प्रोफाइल ",
     "recentlyJoint": " जो लोग अभी अभी नए जुड़े हैं",
     "newProfile": "नया प्रोफाइल",
     "intro": "28 वर्ष रायपुर छत्तीसगढ़"
@@ -40,5 +40,27 @@
   },
   "advanceSearch": {
     "Profile": "प्रोफाइल बनने वाला"
+  },
+  "ParivarikParichay": {
+     "fatherName" : "पिता का नाम ",
+     "fatherOccupation" : "पिता का व्यवसाय",
+     "motherName" : "माँ का नाम",
+     "motherMayaka" : "माँ का मायका",
+     "brother" : "भाई",
+     "sister" : "बहन",
+     "land" : "जमीन",
+     "register" : "रजिस्टर करें",
+     "Required" : "*आवश्यक"
+
+  },
+  "Sampark" : {
+    "mobileno" : "मोबाइल नंबर",
+    "whatsappno" : "whatsapp नंबर",
+    "presentadd" : "वर्तमान पता",
+    "permanentadd" : "स्थायी पता",
+    "Next" : "आगे",
+    "Required" : "*आवश्यक",
+    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
+    "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है"
   }
 }

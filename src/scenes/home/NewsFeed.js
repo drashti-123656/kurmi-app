@@ -39,7 +39,7 @@ const NewsFeed = ({navigation}) => {
 
   return (
     <RootScreen>
-      <ScrollView>
+      <View>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
             <EvilIcons name="navicon" size={30} color={'white'} />
@@ -103,7 +103,7 @@ const NewsFeed = ({navigation}) => {
           <Text style={styles.text}>
           {translate('NewsFeed.filterProfile')}
           </Text>
-          <View style={styles.footeContainer}>
+          <ScrollView style={styles.footerContainer}>
             <View>
               <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
               <Text style={styles.titleTextnext}>
@@ -111,31 +111,41 @@ const NewsFeed = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileImageContainer}>
-              <View style={styles.firstImage}>
+              <Image
+                  style={styles.profile_img}
+                  source={require('../../assets/profile.png')}
+                />
+                <View>
+                <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
+                  <Text style={styles.profileIntroText}>{translate('NewsFeed.intro')} </Text>
+                </View>
+            </View>
+            {/* <View style={styles.profileImageContainer}>
+              <View style={styles.Image}>
                 <Image
                   style={styles.profile_img}
                   source={require('../../assets/profile.png')}
                 />
                 <View style={styles.footerTextContainer}>
                   <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
-                  <Text>{translate('NewsFeed.intro')} </Text>
+                  <Text style={styles.profileIntroText}>{translate('NewsFeed.intro')} </Text>
                 </View>
               </View>
 
-              <View style={styles.SecondImage}>
+              <View style={styles.Image}>
                 <Image
                   style={styles.profile_img}
                   source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
                   <Text style={styles.profileText}> {translate('NewsFeed.newProfile')} </Text>
-                  <Text> {translate('NewsFeed.intro')} </Text>
+                  <Text style={styles.profileIntroText}> {translate('NewsFeed.intro')} </Text>
                 </View>
               </View>
-            </View>
-          </View>
+            </View> */}
+          </ScrollView>
         </View>
-      </ScrollView>
+      </View>
     </RootScreen>
   );
 };
@@ -250,34 +260,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
   },
-  footeContainer: {
+  footerContainer: {
     backgroundColor: '#EDEDED',
     height: 380,
     flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 40,
+    marginTop: 20,
   },
   titleText: {
     fontWeight: 'bold',
-    marginTop: 15,
+    color: 'black',
+    fontSize: 22,
+    marginTop: 10,
   },
   titleTextnext: {
-    marginTop: 3,
-    color: '#8A8787',
+    color: '#666666',
   },
   profileImageContainer: {
+    // flex: 1,
     flexDirection: 'row',
-    marginTop: 40,
+    backgroundColor: 'white',
+    height: hp('30'),
+    width: wp('50'),
+    marginTop: 30,
+    marginRight:10,
+    // marginBottom: 20,
   },
-  firstImage: {
-    marginHorizontal: 10,
+  Image: {
   },
   profile_img: {
-    width: 180,
-    height: 180,
-    marginTop: 50,
-    marginLeft: -160,
+    width: wp('50'),
+    height: hp('23'),
   },
   footerTextContainer: {
     marginHorizontal: -160,
@@ -289,8 +303,13 @@ const styles = StyleSheet.create({
   },
   profileText: {
     fontWeight: 'bold',
+    marginTop: 10,
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 16,
   },
-  SecondImage: {
-    marginHorizontal: 170,
-  },
+  profileIntroText: {
+    color: '#666666',
+    marginBottom: 10,
+  }
 });
