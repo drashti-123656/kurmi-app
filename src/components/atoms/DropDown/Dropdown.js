@@ -6,15 +6,16 @@ import {
 } from 'react-native-responsive-screen';
 import MultiSelect from 'react-native-multiple-select';
 
-const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange}) => {
+const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange,style}) => {
   return (
-    <View>
+    <View style={style}>
       <MultiSelect
         hideTags
         items={items}
         uniqueKey="id"
         displayKey="name"
         single
+        style={styles.dropdownMargin}
         onSelectedItemsChange={onSelectedItemsChange}
         selectText={selectText}
         selectedItems={selectedItems}
@@ -80,4 +81,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
+  dropdownMargin:{
+      marginTop:40
+  }
 });
