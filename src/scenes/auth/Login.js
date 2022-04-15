@@ -19,7 +19,7 @@ import {
 import translate from './../../translations/configTranslations';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {login} from './redux/authReducer';
-import {LoginSchema} from './../../utils/Schemas/LoginSchema';
+import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 

@@ -6,7 +6,6 @@ import {Provider} from 'react-redux'
 import store from './src/store/index'
 
 
-
 const App = () => {
   useEffect(() => {
     setTimeout(() => {

@@ -18,7 +18,7 @@ import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import translate from './../../translations/configTranslations';
-import {parivarikSchema} from '../../utils/Schemas/registerSchema';
+import {parivarikSchema} from '../../utils/schema/registerSchema';
 
 
 const ParivarikParichay = () => {
