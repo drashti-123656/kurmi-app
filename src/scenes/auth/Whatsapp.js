@@ -43,7 +43,7 @@ const Whatsapp = () => {
               <ExtendedTextInput
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
-                value={values.Source}
+                value={values.name}
                 placeholder={translate('whatsapp.name')}
                 placeholderTextColor={'#666666'}
               />

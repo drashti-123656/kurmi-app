@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
   },
   input : {
     flex: 1,
+    color: 'black',
   }
 });
