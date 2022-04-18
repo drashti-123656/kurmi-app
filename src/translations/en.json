@@ -40,5 +40,14 @@
     "Zodiacsign":"Zodiacsign",
     "auspicious":"auspicious",
     "Next":"Next"
+  },
+  "Vyaktigatdata": {
+    "Height": "Height",
+    "Marital Status": "Marital Status",
+    "Knowledge": "Knowledge",
+    "Job": "Job",
+    "Colour": "Colour",
+    "Disability": "Disability",
+    "BloodGroup": "BloodGroup"
   }
 }
