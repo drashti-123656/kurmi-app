@@ -100,5 +100,16 @@
     "Zodiacsign": "राशी",
     "auspicious": "मांगलिक",
     "Next": "आगे"
+  },
+  "Vyaktigatdata": {
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Colour": "रंग",
+    "Disability": "विकलांगता",
+    "BloodGroup": " ब्लड ग्रुप  ",
+    "Next": "आगे"
   }
 }
