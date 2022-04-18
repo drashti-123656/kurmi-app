@@ -5,8 +5,6 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 import {WhatsappSchema} from '../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import LoginButton from '../../components/atoms/buttons/LoginButton';
-<<<<<<< HEAD
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
 
@@ -16,6 +14,7 @@ const Whatsapp = () => {
     const payload = {
       visitorName: values.name,
       visitorMobileNo: values.whatsappno,
+      visitorDeviceInfo: 'apple',
     };
     dispatch({
       type: LOG_USER,
@@ -23,12 +22,6 @@ const Whatsapp = () => {
     });
   };
 
-=======
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
-
-const Whatsapp = ({navigation}) => {
->>>>>>> fd6d3c78b27468774a38c979d2da39920359aaa5
   return (
     <RootScreen scrollable={true}>
       <Image source={require('../../assets/logo.png')} style={styles.image} />
@@ -70,8 +63,12 @@ const Whatsapp = ({navigation}) => {
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.navigate('DashboardNavigation')}>{translate('whatsapp.Continue')}</Text>
-              </TouchableOpacity>
+              <Text
+                style={styles.text_btn}
+                onPress={() => navigation.navigate('DashboardNavigation')}>
+                {translate('whatsapp.Continue')}
+              </Text>
+            </TouchableOpacity>
             {/* <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
