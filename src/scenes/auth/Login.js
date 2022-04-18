@@ -19,11 +19,9 @@ import {
 import translate from './../../translations/configTranslations';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {login} from './redux/authReducer';
-
-const validationSchema = Yup.object({
-  login: Yup.string().required('*Required'),
-  password: Yup.string().required('*Required'),
-});
+import {LoginSchema} from './../../utils/schema/login';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,100 +40,96 @@ const Login = () => {
   };
 
   return (
-    <RootScreen>
-      <ScrollView>
-        <Image source={require('../../assets/logo.png')} style={styles.image} />
+    <RootScreen scrollable={true}>
+      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Formik
+        initialValues={{
+          login: '',
+          password: '',
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={values => navigation.navigate('NewsFeed')}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.formContainer}>
+            <ExtendedTextInput
+              onChangeText={handleChange('login')}
+              onBlur={handleBlur('login')}
+              value={values.Source}
+              placeholder={translate('login.IdPlaceholder')}
+              placeholderTextColor={'#666666'}
+            />
+            {errors.login && touched.login ? (
+              <Text style={styles.error}>{errors.login}</Text>
+            ) : null}
+            <ExtendedTextInput
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              placeholder={translate('login.Password')}
+              placeholderTextColor={'#666666'}
+            />
+            {errors.password && touched.password ? (
+              <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
 
-        <Formik
-          initialValues={{
-            login: '',
-            password: '',
-          }}
-          validationSchema={validationSchema}
-          onSubmit={values => console.log(values)}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <View style={styles.formikContainer}>
-              <TextInput
-                style={styles.input}
-                onChangeText={handleChange('login')}
-                onBlur={handleBlur('login')}
-                value={values.Source}
-                placeholder={translate('login.IdPlaceholder')}
-                placeholderTextColor={'#666666'}
-              />
-              {errors.login && touched.login ? (
-                <Text style={styles.error}>{errors.login}</Text>
-              ) : null}
-              <TextInput
-                style={styles.input}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                placeholder={translate('login.password')}
-                placeholderTextColor={'#666666'}
-              />
-              {errors.password && touched.password ? (
-                <Text style={styles.error}>{errors.password}</Text>
-              ) : null}
+            <LoginButton
+              title={translate('login.Log-in')}
+              onPress={handleSubmit}
+            />
 
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.navigate('NewsFeed')} >Log in</Text>
-              </TouchableOpacity>
-
-              <View style={styles.alignedRowContainer}>
-                <View style={styles.alignedRowContainer1}>
-                  <CheckBox
-                    style={{color: 'white'}}
-                    disabled={false}
-                    value={toggleCheckBox}
-                    onValueChange={newValue => setToggleCheckBox(newValue)}
-                  />
-                  <Text style={{color: 'white', fontSize: 15}}>
-                    {translate('login.remenberMe')}
-                  </Text>
-                </View>
-
+            <View style={styles.alignedRowContainer}>
+              <View style={styles.alignedRowContainer1}>
+                <CheckBox
+                  tintColors={{true: 'white'}}
+                  disabled={false}
+                  value={toggleCheckBox}
+                  onValueChange={newValue => setToggleCheckBox(newValue)}
+                />
                 <Text style={{color: 'white', fontSize: 15}}>
-                  {translate('login.forgotPassword')}
+                  {translate('login.remenberMe')}
                 </Text>
               </View>
 
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: widthPercentageToDP('4.5%'),
-                  alignSelf: 'center',
-                  paddingTop: 40,
-                }}>
-                {translate('login.createAccountPrefix')}
-              </Text>
-              <TouchableOpacity style={styles.button2} onPress={handleLogin}>
-                <Text style={styles.text_btn}>
-                  {translate('login.createAccount')}
-                </Text>
-              </TouchableOpacity>
-
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: widthPercentageToDP('4.5%'),
-                  alignSelf: 'center',
-                  paddingTop: 20,
-                  marginBottom: 20,
-                }}>
-                {translate('genral.webLink')}
+              <Text style={{color: 'white', fontSize: 15}}>
+                {translate('login.forgotPassword')}
               </Text>
             </View>
-          )}
-        </Formik>
-      </ScrollView>
+
+            <Text
+              style={{
+                color: 'white',
+                fontSize: widthPercentageToDP('4.5%'),
+                alignSelf: 'center',
+                marginTop: heightPercentageToDP('5%'),
+              }}>
+              {translate('login.createAccountPrefix')}
+            </Text>
+
+            <LoginButton
+              title={translate('login.createAccount')}
+              onPress={handleLogin}
+            />
+
+            <Text
+              style={{
+                color: 'white',
+                fontSize: widthPercentageToDP('4.5%'),
+                alignSelf: 'center',
+                paddingTop: 20,
+                marginBottom: 20,
+              }}>
+              {translate('genral.webLink')}
+            </Text>
+          </View>
+        )}
+      </Formik>
     </RootScreen>
   );
 };
@@ -147,11 +141,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7a4c4c',
   },
+  formContainer:{
+    flex: 1,
+  },
   alignedRowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: widthPercentageToDP('3'),
+    marginHorizontal: widthPercentageToDP('6'),
   },
   alignedRowContainer1: {
     flexDirection: 'row',

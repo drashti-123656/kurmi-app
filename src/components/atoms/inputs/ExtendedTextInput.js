@@ -9,6 +9,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder}) => {
   return (
     <View style={styles.textinput}>
       <TextInput
+        style={styles.input}
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
@@ -16,10 +17,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder}) => {
         placeholderTextColor={'#666666'}
       />
 
-      <Image
-        style={styles.input_img}
-        source={require('../../../assets/down_arrow.png')}
-      />
+      
     </View>
   );
 };
@@ -46,4 +44,8 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     width: wp('7'),
   },
+  input : {
+    flex: 1,
+    color: 'black',
+  }
 });

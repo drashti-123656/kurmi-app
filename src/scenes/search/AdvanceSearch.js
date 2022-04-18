@@ -14,10 +14,10 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
-import DropDown from '../../components/organisms/DropDown';
-import dropDownList from '../../utils/constant';
-import translate from './../../translations/configTranslations';
-import { ManglikSchema } from '../../utils/schema';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import { manglikSchema } from '../../utils/schema/manglikSchema';
+
+
 
 const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
@@ -82,7 +82,7 @@ const AdvanceSearch = ({navigation}) => {
             profession: '',
             income: '',
           }}
-          validationSchema={ManglikSchema}
+          validationSchema={manglikSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,

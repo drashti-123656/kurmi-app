@@ -1,15 +1,15 @@
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet, ScrollView, View} from 'react-native';
 import React from 'react';
 
-const RootScreen = ({children}) => {
+const RootScreen = ({children, scrollable = false}) => {
   return (
     <ImageBackground
       style={styles.bg_img}
       source={require('../../../assets/backgroundImage.png')}>
-          <StatusBar
-        animated={true}
-        backgroundColor="#DC1C28"/>
-      <View style={styles.overLay}>{children}</View>
+      <StatusBar animated={true} backgroundColor="#DC1C28" />
+      <View style={styles.overLay}>
+        {scrollable ? <ScrollView>{children}</ScrollView> : children}
+      </View>
     </ImageBackground>
   );
 };
