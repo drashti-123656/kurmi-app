@@ -31,5 +31,24 @@
     "checkbox":"I agree to the Privacy Policy and Terms of Use",
     "create Account":"Create Account "
 
+  },
+  "Dharmikjankari":{
+    "Dharmik Jankari":"Dharmik Jankari",
+    "Caste": "Caste",
+    "Native": "Native",
+    "Birthtime":"Birthtime",
+    "Birthplace":"Birthplace",
+    "Zodiacsign":"Zodiacsign",
+    "auspicious":"auspicious",
+    "Next":"Next"
+  },
+  "Vyaktigatdata": {
+    "Height": "Height",
+    "Marital Status": "Marital Status",
+    "Knowledge": "Knowledge",
+    "Job": "Job",
+    "Colour": "Colour",
+    "Disability": "Disability",
+    "BloodGroup": "BloodGroup"
   }
 }

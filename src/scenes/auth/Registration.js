@@ -17,9 +17,10 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import CheckBox from '@react-native-community/checkbox';
 import {Formik} from 'formik';
 import translate from './../../translations/configTranslations';
-import {RegistrationvalidationSchema} from '../../utils/schema';
+import {RegistrationvalidationSchema} from '../../utils/schema/registerSchema';
 import dropDownList from '../../utils/constants/dropDownList';
-import DropDown from '../../components/atoms/DropDown/dropDown';
+import Dropdown from '../../components/atoms/dropdown/Dropdown';
+
 const Registration = props => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isLiked, setIsLiked] = useState([
@@ -99,8 +100,8 @@ const Registration = props => {
                 ))}
               </View>
               <>
-                <DropDown
-                style={styles.dropdownMargin}
+                <Dropdown
+                  style={styles.dropdownMargin}
                   items={dropDownList}
                   selectText={translate('register.ProfileName')}
                   selectedItems={values.name}
@@ -165,7 +166,7 @@ const Registration = props => {
                 </View>
 
                 <View style={styles.birthdayInput}>
-                  <DropDown
+                  <Dropdown
                     items={dropDownList}
                     selectText={translate('register.birthdate')}
                     selectedItems={values.name}
@@ -181,54 +182,46 @@ const Registration = props => {
                   <Text style={styles.star}>*</Text>
                   {translate('register.Note')}
                 </Text>
-                
-                  <DropDown
+
+                <Dropdown
                   style={styles.inputMargin}
-                    items={dropDownList}
-                    selectText={translate('register.caste')}
-                    selectedItems={values.name}
-                    onSelectedItemsChange={value =>
-                      setFieldValue('name', value)
-                    }
-                  />
+                  items={dropDownList}
+                  selectText={translate('register.caste')}
+                  selectedItems={values.name}
+                  onSelectedItemsChange={value => setFieldValue('name', value)}
+                />
                 {errors.caste && touched.caste ? (
                   <Text style={styles.error}>{errors.caste}</Text>
                 ) : null}
-              
-                  <DropDown
+
+                <Dropdown
                   style={styles.inputMargin}
-                    items={dropDownList}
-                    selectText={translate('register.country')}
-                    selectedItems={values.name}
-                    onSelectedItemsChange={value =>
-                      setFieldValue('name', value)
-                    }
-                  />
+                  items={dropDownList}
+                  selectText={translate('register.country')}
+                  selectedItems={values.name}
+                  onSelectedItemsChange={value => setFieldValue('name', value)}
+                />
                 {errors.country && touched.country ? (
                   <Text style={styles.error}>{errors.country}</Text>
                 ) : null}
-                  <DropDown
+                <Dropdown
                   style={styles.inputMargin}
-                    items={dropDownList}
-                    selectText={translate('register.state')}
-                    selectedItems={values.name}
-                    onSelectedItemsChange={value =>
-                      setFieldValue('name', value)
-                    }
-                  />
+                  items={dropDownList}
+                  selectText={translate('register.state')}
+                  selectedItems={values.name}
+                  onSelectedItemsChange={value => setFieldValue('name', value)}
+                />
                 {errors.state && touched.state ? (
                   <Text style={styles.error}>{errors.state}</Text>
                 ) : null}
-                
-                  <DropDown
-                   style={styles.inputMargin}
-                    items={dropDownList}
-                    selectText={translate('register.city')}
-                    selectedItems={values.name}
-                    onSelectedItemsChange={value =>
-                      setFieldValue('name', value)
-                    }
-                  />
+
+                <Dropdown
+                  style={styles.inputMargin}
+                  items={dropDownList}
+                  selectText={translate('register.city')}
+                  selectedItems={values.name}
+                  onSelectedItemsChange={value => setFieldValue('name', value)}
+                />
                 {errors.city && touched.city ? (
                   <Text style={styles.error}>{errors.city}</Text>
                 ) : null}
@@ -291,8 +284,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 25,
   },
-  errorText:{
-flexDirection:'row'
+  errorText: {
+    flexDirection: 'row',
   },
   dropdownMargin: {
     marginTop: 40,

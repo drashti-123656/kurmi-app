@@ -1,22 +1,31 @@
 {
   "genral": {
-    "webLink": "www.kurmishadi.com"
+    "webLink":"www.kurmishadi.com",
+    "phoneNo": "+91-7987233880",
+    "whatsappNo": "+91-7987233880",
+    "email": "contact@kurmishadi.com"
   },
   "login": {
-    "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
-    "Password": "Password",
-    "remenberMe": "Remember me",
-    "forgotPassword": "Forgot Password?",
+    "IdPlaceholder": "कुर्मीशदी आईडी/मोबाइल नंबर/ईमेल आईडी",
+    "Password": "पासवर्ड", 
+    "remenberMe": "मुझे याद रखें",
+    "forgotPassword": "पासवर्ड भूल गए?",	
     "createAccount": "अभी बनाए",
-    "createAccountPrefix": " क्या आपके पास अकाउंट नहीं है?"
+    "createAccountPrefix":" क्या आपके पास अकाउंट नहीं है?",
+    "Log-in" : "लॉग इन करें",
+    "IdPlaceholderRequired" : "*आवश्यक",
+    "enterPassword" : "कृपया अपना पासवर्ड दर्ज करें",
+    "passwordMustHave" : "इसमें 8 अक्षर होने चाहिए, एक अपरकेस, एक लोअरकेस, एक नंबर और एक विशेष केस कैरेक्टर"
   },
-  "ContactUs": {
-    "heading": "हमसे संपर्क करें",
-    "Name": "नाम",
-    "MobileNo": "फ़ोन नंबर दर्ज करें",
-    "contactToUs": "हमसे संपर्क करें",
-    "Submit": "जमा करें",
-    "message": "संदेश"
+  "ContactUs" : {
+    "heading" : "हमसे संपर्क करें",
+    "Name" : "नाम",
+    "MobileNo" : "फ़ोन नंबर दर्ज करें",
+    "contactToUs" : "हमसे संपर्क करें",
+    "Submit" : "जमा करें",
+    "message" : "संदेश",
+    "Required" : "*आवश्यक",
+    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है"
   },
   "NewsFeed": {
     "kurmiShadiHeading": "कुर्मी शादी",
@@ -36,7 +45,11 @@
   "whatsapp": {
     "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
     "name": "नाम",
-    "phoneno": "Whatsapp नंबर  दर्ज करें"
+    "phoneno": "Whatsapp नंबर  दर्ज करें",
+    "Continue" : "जारी रखें",
+    "NameRequired" : "नाम आवश्यक है",
+    "fieldRequired" : "यह फ़ील्ड आवश्यक है"
+    
   },
   "advanceSearch": {
     "Profile": "प्रोफाइल बनने वाला"
@@ -53,11 +66,11 @@
      "Required" : "*आवश्यक"
 
   },
-  "Sampark" : {
-    "mobileno" : "मोबाइल नंबर",
-    "whatsappno" : "whatsapp नंबर",
-    "presentadd" : "वर्तमान पता",
-    "permanentadd" : "स्थायी पता",
+  "samPark" : {
+    "mobileNo" : "मोबाइल नंबर",
+    "whatsAppNo" : "whatsapp नंबर",
+    "presentAdd" : "वर्तमान पता",
+    "permanentAdd" : "स्थायी पता",
     "Next" : "आगे",
     "Required" : "*आवश्यक",
     "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
@@ -80,5 +93,26 @@
     "Note@": " पासवर्ड कम से कम कैरेक्टर नंबर का हो ",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
     "create Account": "अकाउंट बनाएं "
+  },
+  "Dharmikjankari": {
+    "Dharmik Jankari": "धार्मिक जानकारी",
+    "Caste": "गोत्र",
+    "Native": "माँ का गोत्र:",
+    "Birthtime": "जन्म का समय",
+    "Birthplace": "जन्म स्थान",
+    "Zodiacsign": "राशी",
+    "auspicious": "मांगलिक",
+    "Next": "आगे"
+  },
+  "Vyaktigatdata": {
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Colour": "रंग",
+    "Disability": "विकलांगता",
+    "BloodGroup": " ब्लड ग्रुप  ",
+    "Next": "आगे"
   }
 }
