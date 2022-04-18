@@ -13,15 +13,11 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import { RadioGroup } from 'react-native-radio-buttons-group';
+import { manglikSchema } from '../../utils/schema/manglikSchema';
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('*Required'),
-  mobileno: Yup.number().min(10).required('*Required'),
-});
+
 
 const AdvanceSearch = ({navigation}) => {
   const [gender, setGender] = useState([
@@ -89,7 +85,7 @@ const AdvanceSearch = ({navigation}) => {
             profession: '',
             income: '',
           }}
-          validationSchema={validationSchema}
+          validationSchema={manglikSchema}
           onSubmit={values => console.log(values)}>
           {({
             handleChange,

@@ -90,5 +90,26 @@
     "Note@": " पासवर्ड कम से कम कैरेक्टर नंबर का हो ",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
     "create Account": "अकाउंट बनाएं "
+  },
+  "Dharmikjankari": {
+    "Dharmik Jankari": "धार्मिक जानकारी",
+    "Caste": "गोत्र",
+    "Native": "माँ का गोत्र:",
+    "Birthtime": "जन्म का समय",
+    "Birthplace": "जन्म स्थान",
+    "Zodiacsign": "राशी",
+    "auspicious": "मांगलिक",
+    "Next": "आगे"
+  },
+  "Vyaktigatdata": {
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Colour": "रंग",
+    "Disability": "विकलांगता",
+    "BloodGroup": " ब्लड ग्रुप  ",
+    "Next": "आगे"
   }
 }

@@ -6,6 +6,7 @@ import translate from './../../translations/configTranslations';
 import {WhatsappSchema} from '../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+<<<<<<< HEAD
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
 
@@ -22,6 +23,12 @@ const Whatsapp = () => {
     });
   };
 
+=======
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+
+const Whatsapp = ({navigation}) => {
+>>>>>>> fd6d3c78b27468774a38c979d2da39920359aaa5
   return (
     <RootScreen scrollable={true}>
       <Image source={require('../../assets/logo.png')} style={styles.image} />
@@ -62,11 +69,13 @@ const Whatsapp = () => {
             {errors.whatsappno && touched.whatsappno ? (
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
-
-            <LoginButton
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.text_btn} onPress={() => navigation.navigate('DashboardNavigation')}>{translate('whatsapp.Continue')}</Text>
+              </TouchableOpacity>
+            {/* <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
-            />
+            /> */}
           </View>
         )}
       </Formik>
@@ -94,8 +103,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#ffffff',
   },
-  footer: {
+  button: {
+    backgroundColor: '#DC1C28',
+    height: 50,
+    borderRadius: 10,
+    marginTop: heightPercentageToDP('1'),
+    marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('8'),
+  },
+  text_btn: {
+    textAlign: 'center',
+    fontWeight: '400',
     marginTop: 10,
+    fontSize: 20,
+    color: 'white',
+  },
+  footer: {
+    marginTop: heightPercentageToDP('25'),
   },
   footer_text: {
     textAlign: 'center',

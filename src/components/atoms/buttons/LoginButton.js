@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: heightPercentageToDP('1'),
     marginBottom: heightPercentageToDP('2'),
-    marginHorizontal: widthPercentageToDP('3'),
-    marginHorizontal: 30,
+    marginHorizontal: widthPercentageToDP('8'),
   },
   title: {
     textAlign: 'center',
