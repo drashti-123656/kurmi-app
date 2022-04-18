@@ -14,7 +14,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isAuthenticated ? (
+        {!isAuthenticated ? (
           <>
             <Stack.Screen
               name="Whatsapp"
