@@ -19,7 +19,7 @@ import {
   import Dropdown from '../../components/atoms/dropdown/Dropdown';
   const Personalinformation = ({navigation}) => {
     return (
-      <RootScreen>
+      <RootScreen  scrollable={true}>
           <Formik
             initialValues={{
               height: '',
