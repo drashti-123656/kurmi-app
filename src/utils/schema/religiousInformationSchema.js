@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const DharmikjankarivalidationSchema = Yup.object({
+export const ReligiousinformationvalidationSchema = Yup.object({
     caste: Yup.string().required('*Required'),
     native: Yup.string().required('*Required'),
     birthtime: Yup.string().required('*Required'),

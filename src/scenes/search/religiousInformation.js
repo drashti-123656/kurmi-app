@@ -14,11 +14,11 @@ import {
   } from 'react-native-responsive-screen';
   import RootScreen from '../../components/molecule/rootScreen/RootScreen';
   import {Formik} from 'formik';
-  import translate from './../../translations/configTranslations';
+  import translate from '../../translations/configTranslations';
   import Dropdown from '../../components/atoms/dropdown/Dropdown'
   import dropDownList from '../../utils/constants/dropDownList';
-  import { DharmikjankarivalidationSchema } from '../../utils/schema/dharmikJankariSchema';
-  const Dharmikjankari = ({navigation}) => {
+ import { ReligiousinformationvalidationSchema } from '../../utils/schema/religiousInformationSchema';
+  const ReligiousInformation = ({navigation}) => {
     return (
       <RootScreen>
         <ScrollView>
@@ -32,7 +32,7 @@ import {
               auspicious: '',
               bloodgroup: '',
             }}
-            validationSchema={DharmikjankarivalidationSchema}
+            validationSchema={ReligiousinformationvalidationSchema}
             onSubmit={values => console.log(values)}>
             {({
               handleChange,
@@ -149,7 +149,7 @@ import {
     );
   };
 
-  export default Dharmikjankari;
+  export default ReligiousInformation;
 
   const styles = StyleSheet.create({
     container: {
