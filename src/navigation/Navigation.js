@@ -6,13 +6,14 @@ import {useSelector} from 'react-redux';
 import AuthNavigation from './AuthNavigation';
 import Whatsapp from '../scenes/auth/Whatsapp';
 import DashboardNavigation from './DashboardNavigation';
+import {navigationRef} from './RootNavigation';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         {!isAuthenticated ? (
           <>

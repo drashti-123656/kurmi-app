@@ -1,22 +1,27 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
-
 import {WhatsappSchema} from '../../utils/schema/login';
-
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {LOG_USER} from './redux/authActions';
+import {useDispatch} from 'react-redux';
 
 const Whatsapp = () => {
+  const dispatch = useDispatch();
+  const handlelogUser = values => {
+    const payload = {
+      visitorName: values.name,
+      visitorMobileNo: values.whatsappno,
+    };
+    dispatch({
+      type: LOG_USER,
+      payload,
+    });
+  };
+
   return (
     <RootScreen scrollable={true}>
       <Image source={require('../../assets/logo.png')} style={styles.image} />
@@ -27,7 +32,7 @@ const Whatsapp = () => {
           whatsappno: '',
         }}
         validationSchema={WhatsappSchema}
-        onSubmit={values => console.log(values)}>
+        onSubmit={values => handlelogUser(values)}>
         {({
           handleChange,
           handleBlur,
