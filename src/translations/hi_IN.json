@@ -48,7 +48,9 @@
     "phoneno": "Whatsapp नंबर  दर्ज करें",
     "Continue" : "जारी रखें",
     "NameRequired" : "नाम आवश्यक है",
-    "fieldRequired" : "यह फ़ील्ड आवश्यक है"
+    "fieldRequired" : "यह फ़ील्ड आवश्यक है",
+    "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए",
+    "phoneNumberNotValid" : "फ़ोन नंबर मान्य नहीं है यह 10 अंकों का होना चाहिए"
     
   },
   "ParivarikParichay": {
