@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import store from './src/store/index'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import FlashMessage from "react-native-flash-message";
-import ParivarikParichay from './src/scenes/auth/registration/ParivarikParichay'
+
 
 
 Appearance.getColorScheme(
@@ -29,7 +29,7 @@ const App = () => {
   
   return (
     <Provider store={store}>
-          <ParivarikParichay />
+          <Navigation />
           <FlashMessage position="top" />
     </Provider>
 
