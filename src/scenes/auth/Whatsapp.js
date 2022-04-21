@@ -7,8 +7,12 @@ import {WhatsappSchema} from '../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
-const Whatsapp = () => {
+const Whatsapp = ({navigation}) => {
   const dispatch = useDispatch();
   const handlelogUser = values => {
     const payload = {

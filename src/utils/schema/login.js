@@ -6,11 +6,11 @@ export const LoginSchema = Yup.object().shape({
     password: Yup
     .string()
     .required(translate('login.enterPassword'))
-    .matches(
-      "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
-      translate('login.passwordMustHave')
+    // .matches(
+    //   "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{6,}$",
+    //   translate('login.passwordMustHave')
       
-    ),
+    // ),
 });
 
 export const WhatsappSchema = Yup.object().shape({

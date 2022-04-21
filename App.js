@@ -5,6 +5,8 @@ import SplashScreen from 'react-native-splash-screen'
 import {Provider} from 'react-redux'
 import store from './src/store/index'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import FlashMessage from "react-native-flash-message";
+
 
 Appearance.getColorScheme(
   EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
@@ -27,6 +29,7 @@ const App = () => {
   return (
     <Provider store={store}>
           <Navigation />
+          <FlashMessage position="top" />
     </Provider>
 
   )
