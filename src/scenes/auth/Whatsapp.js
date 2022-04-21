@@ -1,10 +1,7 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 import {WhatsappSchema} from '../../utils/schema/login';
@@ -12,6 +9,10 @@ import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const Whatsapp = ({navigation}) => {
   const dispatch = useDispatch();
@@ -67,11 +68,7 @@ const Whatsapp = ({navigation}) => {
             {errors.whatsappno && touched.whatsappno ? (
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
-            {/* <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.text_btn}>
-                {translate('whatsapp.Continue')}
-              </Text>
-            </TouchableOpacity> */}
+
             <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
@@ -107,9 +104,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#DC1C28',
     height: 50,
     borderRadius: 10,
-    marginTop: hp('1'),
-    marginBottom: hp('2'),
-    marginHorizontal: wp('8'),
+    marginTop: heightPercentageToDP('1'),
+    marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('8'),
   },
   text_btn: {
     textAlign: 'center',
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   footer: {
-    marginTop: hp('25'),
+    marginTop: heightPercentageToDP('25'),
   },
   footer_text: {
     textAlign: 'center',
