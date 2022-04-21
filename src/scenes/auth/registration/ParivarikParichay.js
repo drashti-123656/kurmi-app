@@ -20,6 +20,7 @@ import translate from './../../../translations/configTranslations';
 import {parivarikSchema} from '../../../utils/schema/registerSchema';
 import {useDispatch, useSelector} from 'react-redux';
 import { REGISTER_USER } from './redux/registrationActions';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
@@ -39,8 +40,8 @@ const ParivarikParichay = () => {
       userEducationInfoAnnualIncome: 'asasas',
 
       userFamilyInfoFatherName: values.fatherName,
-      userFamilyInfoFatherOccupation: '1',
-      userFamilyInfoMotherName: 'asasas',
+      userFamilyInfoFatherOccupation: values.fatherOccupation,
+      userFamilyInfoMotherName: values.motherName,
       userFamilyInfoMotherOccupation: 2,
       userFamilyInfoNoOfMarriedBrothers: '1',
       userFamilyInfoNoOfUnmarriedBrothers: '2',
@@ -204,11 +205,12 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.land}</Text>
               ) : null}
 
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>
-                  {translate('ParivarikParichay.register')}
-                </Text>
-              </TouchableOpacity>
+              <LoginButton 
+                title={translate('ParivarikParichay.register')}
+                onPress={handleSubmit}
+              />
+
+              
             </View>
           )}
         </Formik>
