@@ -15,7 +15,7 @@ export function* logUser(action) {
 export function* loginUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.LOG_IN, payload);
-  console.log('response=>', response);
+  
   if (response.ok) {
     showMessage({
       message: "Successfully, You logged in",
