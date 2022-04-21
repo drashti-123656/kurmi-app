@@ -5,7 +5,7 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
 // react-native-splash-screen >= 0.3.1
-import org.devio.rn.splashscreen.SplashScreen; // here
+import org.devio.rn.splashscreen.SplashScreen; 
 
 public class MainActivity extends ReactActivity {
 
@@ -43,6 +43,7 @@ public class MainActivity extends ReactActivity {
       ReactRootView reactRootView = new ReactRootView(getContext());
       // If you opted-in for the New Architecture, we enable the Fabric Renderer.
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
+      return reactRootView;
       return reactRootView;
     }
   }
