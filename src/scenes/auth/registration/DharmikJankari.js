@@ -12,13 +12,13 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-  import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+  import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
   import {Formik} from 'formik';
-  import translate from '../../translations/configTranslations';
-  import Dropdown from '../../components/atoms/dropdown/Dropdown'
-  import dropDownList from '../../utils/constants/dropDownList';
- import { ReligiousinformationvalidationSchema } from '../../utils/schema/religiousInformationSchema';
-  const ReligiousInformation = ({navigation}) => {
+  import translate from '../../../translations/configTranslations';
+  import Dropdown from '../../../components/atoms/dropdown/Dropdown'
+  import dropDownList from '../../../utils/constants/dropDownList';
+ import { ReligiousinformationvalidationSchema } from '../../../utils/schema/religiousInformationSchema';
+  const DharmikJankari = ({navigation}) => {
     return (
       <RootScreen>
         <ScrollView>
@@ -49,7 +49,7 @@ import {
                     <TouchableOpacity>
                       <Image
                         style={styles.backArrow_img}
-                        source={require('../../assets/backarrow.png')}
+                        source={require('./../../../assets/backarrow.png')}
                       />
                     </TouchableOpacity>
                   </View>
@@ -149,7 +149,7 @@ import {
     );
   };
 
-  export default ReligiousInformation;
+  export default DharmikJankari;
 
   const styles = StyleSheet.create({
     container: {
