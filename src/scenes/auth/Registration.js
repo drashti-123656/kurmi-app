@@ -102,7 +102,7 @@ const Registration = props => {
               <>
                 <Dropdown
                   style={styles.dropdownMargin}
-                  items={dropDownList}
+                  items={dropDownList.profilemakerDropdownlist}
                   selectText={translate('register.ProfileName')}
                   selectedItems={values.name}
                   onSelectedItemsChange={value => setFieldValue('name', value)}

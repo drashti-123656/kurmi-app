@@ -111,5 +111,31 @@
     "Disability": "विकलांगता",
     "BloodGroup": " ब्लड ग्रुप  ",
     "Next": "आगे"
+  },
+  "profilemaker":{
+    "Myself":"स्वयं",
+    "Relatives":"सबंधी",
+    "Parents":"माता पिता",
+    "Other":"अन्य"
+  },
+  "colour":{
+    "Fair":"गोरा",
+    "Light":"हल्का रंग",
+    "Medium":"मध्यम रंग",
+    "Dark":"डार्क रंग "
+  },
+  "Disability":{
+    "Yes":"हां",
+    "No":"नहीं"
+  },
+  "BloodGroup":{
+    "O+":"O+",
+    "O-": "O-",
+    "A+":"A+",
+    "A-":"A-",
+    "B+":"B+",
+    "B-":"B-",
+    "AB+":"AB+",
+    "AB-":"AB-"
   }
 }
