@@ -7,6 +7,7 @@ import AuthNavigation from './AuthNavigation';
 import Whatsapp from '../scenes/auth/Whatsapp';
 import DashboardNavigation from './DashboardNavigation';
 import {navigationRef} from './RootNavigation';
+import ContactUs from '../scenes/contact/ContactUs';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ const Navigation = () => {
             <Stack.Screen
               name="DashboardNavigation"
               component={DashboardNavigation}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ContactUs"
+              component={ContactUs}
               options={{headerShown: false}}
             />
           </>

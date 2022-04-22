@@ -7,6 +7,20 @@ const initialState = {
     presentAdd: '',
     permanentAdd: '',
   },
+  parivarikData: {
+    fatherName: '',
+    fatherOccupation: '',
+    motherName: '',
+    motherMayaka: '',
+    brother: '',
+    sister: '',
+    land: '',
+  },
+  registrationData:{
+    registered: false,
+    isRegistering: false,
+    error:''
+  }
 };
 
 const authSlice = createSlice({
@@ -21,8 +35,32 @@ const authSlice = createSlice({
       state.samparkData.permanentAdd =
         action.payload.userContactInfoPermanentAddress;
     },
+
+    parivarik(state, action) {
+      state.parivarikData.fatherName = action.payload.userFamilyInfoFatherName;
+      state.parivarikData.fatherOccupation =
+        action.payload.userFamilyInfoFatherOccupation;
+      state.parivarikData.motherName = action.payload.userFamilyInfoMotherName;
+      state.parivarikData.motherMayaka =
+        action.payload.userFamilyInfoMotherOccupation;
+      state.parivarikData.brother =
+        action.payload.userFamilyInfoNoOfMarriedBrothers;
+      state.parivarikData.sister =
+        action.payload.userFamilyInfoNoOfMarriedSisters;
+      state.parivarikData.land = action.payload.fatherName;
+    },
+
+    registrationSuccess(state, action) {
+      state.registrationData.registered = true;
+      state.registrationData.isRegistering = false;
+    },
+    registrationsFail(state, action) {
+      state.registrationData.registered = false;
+      state.registrationData.isRegistering = false;
+      state.registrationData.error = action.payload;
+    },
   },
 });
 
-export const {sampark} = authSlice.actions;
+export const {sampark, parivarik, registrationSuccess, registrationsFail} = authSlice.actions;
 export default authSlice.reducer;
