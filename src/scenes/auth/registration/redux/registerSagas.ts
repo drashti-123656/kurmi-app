@@ -9,15 +9,15 @@ export function* registerUser(action) {
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
   if (response.ok) {
     showMessage({
-      message: 'successfully registered',
-      type: 'success',
-    });
+        message: 'successfully registered',
+        type: "success", 
+      });
     registrationSuccess({});
   } else {
     showMessage({
-      message: 'Ops, something went wrong',
-      type: 'danger',
-    });
+        message: 'Ops, something went wrong',
+        type: "danger", 
+      });
     registrationsFail(response.problem);
   }
 }
