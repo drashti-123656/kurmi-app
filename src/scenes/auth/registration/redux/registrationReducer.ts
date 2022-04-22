@@ -16,11 +16,23 @@ const initialState = {
     sister: '',
     land: '',
   },
-  registrationData:{
+  registrationData: {
     registered: false,
     isRegistering: false,
-    error:''
-  }
+    error: '',
+  },
+  dharmikJankariData: {
+    caste: '',
+    native: '',
+    birthtime: '',
+    birthplace: '',
+    zodiacsign: '',
+    auspicious: '',
+  },
+  dropDownsData: {
+    zodiacSign: [],
+    auspicious: [],
+  },
 };
 
 const authSlice = createSlice({
@@ -59,8 +71,37 @@ const authSlice = createSlice({
       state.registrationData.isRegistering = false;
       state.registrationData.error = action.payload;
     },
+    dharmikJankari(state, action) {
+      state.dharmikJankariData.caste = action.payload.userReligiousInfoGotra;
+      state.dharmikJankariData.native =
+        action.payload.userReligiousInfoSubCaste;
+      state.dharmikJankariData.birthtime =
+        action.payload.userReligiousInfoTimeOfBirth;
+      state.dharmikJankariData.birthplace =
+        action.payload.userReligiousInfoPlaceOfBirth;
+      state.dharmikJankariData.zodiacsign =
+        action.payload.userReligiousInfoZodiac;
+      state.dharmikJankariData.auspicious =
+        action.payload.userReligiousInfoManglik;
+    },
+
+    fetchZodiacDropdownSuccess(state, action) {
+      state.dropDownsData.zodiacSign = action.payload;
+    },
+
+    fetchAuspiciousDropdownSuccess(state, action) {
+      state.dropDownsData.auspicious = action.payload;
+    },
   },
 });
 
-export const {sampark, parivarik, registrationSuccess, registrationsFail} = authSlice.actions;
+export const {
+  sampark,
+  parivarik,
+  registrationSuccess,
+  registrationsFail,
+  dharmikJankari,
+  fetchZodiacDropdownSuccess,
+  fetchAuspiciousDropdownSuccess
+} = authSlice.actions;
 export default authSlice.reducer;

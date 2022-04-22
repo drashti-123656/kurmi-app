@@ -3,4 +3,5 @@ export const API_URL = {
   CONTACT_USER: 'api/contact-us',
   LOG_IN: 'api/login',
   REGISTER_USER: 'api/user-registration',
+  FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
 };

@@ -10,6 +10,7 @@ import FlashMessage from "react-native-flash-message";
 
 
 
+
 Appearance.getColorScheme(
   EStyleSheet.build({
     // always call EStyleSheet.build() even if you don't use global variables!
