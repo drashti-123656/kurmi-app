@@ -32,7 +32,19 @@ const initialState = {
   dropDownsData: {
     zodiacSign: [],
     auspicious: [],
+    height: [],
+    maritalstatus: [],
+    education: [],
+    job: [],
+    colour: [],
+    disability: [],
+    bloodgroup: [],
   },
+  registerData:{
+    emailid:'',
+    mobilenumber:'',
+  }
+
 };
 
 const authSlice = createSlice({
@@ -92,6 +104,23 @@ const authSlice = createSlice({
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
     },
+    fetchHeightDropdownSuccess(state, action) {
+      state.dropDownsData.height = action.payload;
+    },
+    fetchMaritalstatusDropdownSuccess(state, action) {
+      state.dropDownsData.maritalstatus = action.payload;
+    },
+    fetchEducationDropdownSuccess(state, action) {
+      state.dropDownsData.education = action.payload;
+    },
+    fetchJobDropdownSuccess(state, action) {
+      state.dropDownsData.job = action.payload;
+    },
+
+    register(state,action){
+      state.registerData.emailid = action.payload.userEmail;
+      state.registerData.mobilenumber = action.payload.userMobileNo;
+    },
   },
 });
 
@@ -102,6 +131,11 @@ export const {
   registrationsFail,
   dharmikJankari,
   fetchZodiacDropdownSuccess,
-  fetchAuspiciousDropdownSuccess
+  fetchAuspiciousDropdownSuccess,
+  fetchHeightDropdownSuccess,
+  fetchMaritalstatusDropdownSuccess,
+  fetchEducationDropdownSuccess,
+  fetchJobDropdownSuccess,
+  register
 } = authSlice.actions;
 export default authSlice.reducer;

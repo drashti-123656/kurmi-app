@@ -10,16 +10,9 @@ import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 import Personalinformation from '../scenes/auth/registration/personalInformation';
 const Stack = createNativeStackNavigator();
 
-
-
-const AuthNavigation = () => {
+const RegistrationStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="login"
-        component={Login}
-        options={{headerShown: false}}
-      />
       <Stack.Screen
         name="Registration"
         component={Registration}
@@ -40,7 +33,7 @@ const AuthNavigation = () => {
         component={Sampark}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="ParivarikParichay"
         component={ParivarikParichay}
         options={{headerShown: false}}
@@ -49,6 +42,6 @@ const AuthNavigation = () => {
   );
 };
 
-export default AuthNavigation;
+export default {RegistrationStack};
 
 const styles = StyleSheet.create({});

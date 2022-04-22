@@ -4,8 +4,8 @@ import {logUser} from '../scenes/auth/redux/authSagas';
 import { CONTACT_USER } from '../scenes/contact/redux/contactAction';
 import { contactUser } from '../scenes/contact/redux/contactSaga';
 import { loginUser } from '../scenes/auth/redux/authSagas';
-import { auspiciousDropdown, registerUser, zodiacDropDowns } from '../scenes/auth/registration/redux/registerSagas';
-import { FETCH_AUSPICIOUS_DROPDOWN, FETCH_ZODIC_SIGN, REGISTER_USER } from '../scenes/auth/registration/redux/registrationActions';
+import { auspiciousDropdown, educationDropdown, jobDropdown, martialstatusDropdown, registerUser, registerUserVerification, zodiacDropDowns } from '../scenes/auth/registration/redux/registerSagas';
+import { FETCH_AUSPICIOUS_DROPDOWN, FETCH_EDUCATION_DROPDOWN, FETCH_JOB_DROPDOWN, FETCH_MARITALSTATUS_DROPDOWN, FETCH_ZODIC_SIGN, REGISTER_USER, VERIFY_USER } from '../scenes/auth/registration/redux/registrationActions';
 
 export default function* sagas() {
   yield all([
@@ -15,6 +15,11 @@ export default function* sagas() {
     takeLatest(REGISTER_USER, registerUser),
     takeLatest(FETCH_ZODIC_SIGN, zodiacDropDowns),
     takeLatest(FETCH_AUSPICIOUS_DROPDOWN, auspiciousDropdown),
+    takeLatest(FETCH_MARITALSTATUS_DROPDOWN, martialstatusDropdown),
+    takeLatest(FETCH_EDUCATION_DROPDOWN, educationDropdown),
+    takeLatest(FETCH_JOB_DROPDOWN, jobDropdown),
+    takeLatest(VERIFY_USER, registerUserVerification),
     
   ]);
 }
+
