@@ -1,4 +1,4 @@
-import registrationReducer from '../scenes/auth/registration/redux/registrationReducer';
+import registrationReducer from './../scenes/auth/registration/redux/registrationReducer';
 import authReducer from './../scenes/auth/redux/authReducer';
 
 const rootReducer = {
