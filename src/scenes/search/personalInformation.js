@@ -105,7 +105,7 @@ import {
                   ) : null}
                   <View style={styles.inputMargin}>
                     <Dropdown
-                      items={dropDownList}
+                      items={dropDownList.colourDropdownList}
                       selectText={translate('Vyaktigatdata.Colour')}
                       selectedItems={values.name}
                       onSelectedItemsChange={value =>
@@ -118,7 +118,7 @@ import {
                   ) : null}
                   <Dropdown
                     style={styles.inputMargin}
-                    items={dropDownList}
+                    items={dropDownList.disabilityDropdownList}
                     selectText={translate('Vyaktigatdata.Disability')}
                     selectedItems={values.name}
                     onSelectedItemsChange={value => setFieldValue('name', value)}
@@ -128,7 +128,7 @@ import {
                   ) : null}
                   <Dropdown
                     style={styles.inputMargin}
-                    items={dropDownList}
+                    items={dropDownList.bloodgroupDropdownList}
                     selectText={translate('Vyaktigatdata.BloodGroup')}
                     selectedItems={values.name}
                     onSelectedItemsChange={value => setFieldValue('name', value)}

@@ -1,12 +1,14 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
+
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 import {WhatsappSchema} from '../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
@@ -66,17 +68,11 @@ const Whatsapp = ({navigation}) => {
             {errors.whatsappno && touched.whatsappno ? (
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text
-                style={styles.text_btn}
-                onPress={() => navigation.navigate('DashboardNavigation')}>
-                {translate('whatsapp.Continue')}
-              </Text>
-            </TouchableOpacity>
-            {/* <LoginButton
+
+            <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
-            /> */}
+            />
           </View>
         )}
       </Formik>
