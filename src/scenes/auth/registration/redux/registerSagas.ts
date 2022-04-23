@@ -121,7 +121,8 @@ export function* registerUserVerification(action) {
   };
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
   if (response.ok) {
-    put(register(payload));
+    yield put(register(payload));
+    console.log(payload)
     navigate('Personalinformation');
   } else {
     showMessage({

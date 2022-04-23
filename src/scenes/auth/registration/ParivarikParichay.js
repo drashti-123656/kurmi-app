@@ -81,10 +81,10 @@ const ParivarikParichay = () => {
 
       userName: 'adsd',
       userGender: 'male',
-      userEmail: 'zxzXZXcsdfsdfdf@asdd.com',
-      userMobileNo: '6754645664',
+      userEmail: registerData.emailid,
+      userMobileNo: registerData.mobilenumber,
       userDob: '1988-06-27',
-      password: '123456',
+      password: registerData.password,
       userCountry: '10',
       userState: '5',
       userCity: '8',
@@ -96,6 +96,8 @@ const ParivarikParichay = () => {
       type: REGISTER_USER,
       payload,
     });
+
+    console.log('registerData.emailid', registerData.emailid);
   };
   return (
     <RootScreen>
