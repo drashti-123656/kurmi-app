@@ -21,7 +21,10 @@ import {ReligiousinformationvalidationSchema} from '../../../utils/schema/religi
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import {useDispatch, useSelector} from 'react-redux';
 import {dharmikJankari} from './redux/registrationReducer';
-import {FETCH_AUSPICIOUS_DROPDOWN, FETCH_ZODIC_SIGN} from './redux/registrationActions';
+import {
+  FETCH_AUSPICIOUS_DROPDOWN,
+  FETCH_ZODIC_SIGN,
+} from './redux/registrationActions';
 
 const DharmikJankari = ({navigation}) => {
   const dispatch = useDispatch();
@@ -53,7 +56,7 @@ const DharmikJankari = ({navigation}) => {
     };
     console.log('payload=>', payload);
 
-    navigation.navigate('Sampark')
+    navigation.navigate('Sampark');
 
     dispatch(dharmikJankari(payload));
   };
@@ -81,107 +84,90 @@ const DharmikJankari = ({navigation}) => {
           touched,
         }) => (
           <>
-            <View style={styles.container}>
-              <View style={styles.imageContainer}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.backArrow_img}
-                    source={require('./../../../assets/backarrow.png')}
-                  />
-                </TouchableOpacity>
-              </View>
+            <ExtendedTextInput
+              onChangeText={handleChange('caste')}
+              onBlur={handleBlur('caste')}
+              value={values.caste}
+              style={styles.textInput}
+              placeholder={translate('Dharmikjankari.Caste')}
+              placeholderTextColor={'#666666'}
+            />
 
-              <Text style={styles.navbarText}>
-                {translate('Dharmikjankari.Dharmik Jankari')}
+            {errors.caste && touched.caste ? (
+              <Text style={styles.error}>{errors.caste}</Text>
+            ) : null}
+
+            <ExtendedTextInput
+              onChangeText={handleChange('native')}
+              onBlur={handleBlur('native')}
+              value={values.native}
+              style={styles.textInput}
+              placeholder={translate('Dharmikjankari.Native')}
+              placeholderTextColor={'#666666'}
+            />
+
+            {errors.native && touched.native ? (
+              <Text style={styles.error}>{errors.native}</Text>
+            ) : null}
+
+            <ExtendedTextInput
+              onChangeText={handleChange('birthtime')}
+              onBlur={handleBlur('birthtime')}
+              value={values.birthtime}
+              style={styles.textInput}
+              placeholder={translate('Dharmikjankari.Birthtime')}
+              placeholderTextColor={'#666666'}
+            />
+
+            {errors.birthtime && touched.birthtime ? (
+              <Text style={styles.error}>{errors.birthtime}</Text>
+            ) : null}
+            <ExtendedTextInput
+              onChangeText={handleChange('birthplace')}
+              onBlur={handleBlur('birthplace')}
+              value={values.birthplace}
+              style={styles.textInput}
+              placeholder={translate('Dharmikjankari.Birthplace')}
+              placeholderTextColor={'#666666'}
+            />
+
+            {errors.birthplace && touched.birthplace ? (
+              <Text style={styles.error}>{errors.birthplace}</Text>
+            ) : null}
+
+            <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'zodiacId'}
+              displayKey={'zodiacTitleEn'}
+              items={zodiacSign}
+              selectText={translate('Dharmikjankari.Zodiacsign')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.zodiacsign && touched.zodiacsign ? (
+              <Text style={styles.error}>{errors.zodiacsign}</Text>
+            ) : null}
+
+            <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'nakshatraId'}
+              displayKey={'nakshatraTitleHi'}
+              items={auspicious}
+              selectText={translate('Dharmikjankari.auspicious')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.auspicious && touched.auspicious ? (
+              <Text style={styles.error}>{errors.auspicious}</Text>
+            ) : null}
+
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSubmit}>
+              <Text style={styles.text_btn}>
+                {translate('Dharmikjankari.Next')}
               </Text>
-            </View>
-
-            <>
-              <ExtendedTextInput
-                onChangeText={handleChange('caste')}
-                onBlur={handleBlur('caste')}
-                value={values.caste}
-                style={styles.textInput}
-                placeholder={translate('Dharmikjankari.Caste')}
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.caste && touched.caste ? (
-                <Text style={styles.error}>{errors.caste}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('native')}
-                onBlur={handleBlur('native')}
-                value={values.native}
-                style={styles.textInput}
-                placeholder={translate('Dharmikjankari.Native')}
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.native && touched.native ? (
-                <Text style={styles.error}>{errors.native}</Text>
-              ) : null}
-
-              <ExtendedTextInput
-                onChangeText={handleChange('birthtime')}
-                onBlur={handleBlur('birthtime')}
-                value={values.birthtime}
-                style={styles.textInput}
-                placeholder={translate('Dharmikjankari.Birthtime')}
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.birthtime && touched.birthtime ? (
-                <Text style={styles.error}>{errors.birthtime}</Text>
-              ) : null}
-              <ExtendedTextInput
-                onChangeText={handleChange('birthplace')}
-                onBlur={handleBlur('birthplace')}
-                value={values.birthplace}
-                style={styles.textInput}
-                placeholder={translate('Dharmikjankari.Birthplace')}
-                placeholderTextColor={'#666666'}
-              />
-
-              {errors.birthplace && touched.birthplace ? (
-                <Text style={styles.error}>{errors.birthplace}</Text>
-              ) : null}
-
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'zodiacId'}
-                displayKey={'zodiacTitleEn'}
-                items={zodiacSign}
-                selectText={translate('Dharmikjankari.Zodiacsign')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.zodiacsign && touched.zodiacsign ? (
-                <Text style={styles.error}>{errors.zodiacsign}</Text>
-              ) : null}
-
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'nakshatraId'}
-                displayKey={'nakshatraTitleHi'}
-                items={auspicious}
-                selectText={translate('Dharmikjankari.auspicious')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.auspicious && touched.auspicious ? (
-                <Text style={styles.error}>{errors.auspicious}</Text>
-              ) : null}
-
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={handleSubmit}>
-                <Text style={styles.text_btn}>
-                  {translate('Dharmikjankari.Next')}
-                </Text>
-              </TouchableOpacity>
-            </>
+            </TouchableOpacity>
           </>
         )}
       </Formik>

@@ -16,14 +16,14 @@ const Navigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
               name="Whatsapp"
               component={Whatsapp}
               headershow
               options={{
                 headerShown: false,
               }}
-            />
+            /> */}
         <Stack.Screen
           name="DashboardNavigation"
           component={DashboardNavigation}
