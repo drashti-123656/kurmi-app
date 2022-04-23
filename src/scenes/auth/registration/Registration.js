@@ -128,7 +128,7 @@ const Registration = () => {
               <View style={styles.profileContainer}>
                 <Image
                   style={styles.upload_img}
-                  source={require('../../../assets/upload.png')}
+                  source={require('../../../assets/profile.png')}
                 />
               </View>
               <View style={styles.radioButtonContainer}>
