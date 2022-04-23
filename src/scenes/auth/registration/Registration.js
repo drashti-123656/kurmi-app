@@ -29,7 +29,7 @@ import {
 } from './redux/registrationActions';
 
 import {useDispatch, useSelector} from 'react-redux';
-import { register } from './redux/registrationReducer';
+import {register} from './redux/registrationReducer';
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const Registration = () => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    console.log('registerData',registerData)
+    console.log('registerData', registerData);
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -66,19 +66,18 @@ const Registration = () => {
     const payload = {
       userEmail: values.emailid,
       userMobileNo: values.mobilenumber,
-      profileCreatedByNameHi : values.profilemaker,
-      userName : values.firstname,
-      userDob : values.birthdate,
-      userCountry : values.country,
-      userState : values.state,
-      userCity : values.city,
-      password : values.password,
-
+      profileCreatedByNameHi: values.profilemaker,
+      userName: values.firstname,
+      userDob: values.birthdate,
+      userCountry: values.country,
+      userState: values.state,
+      userCity: values.city,
+      password: values.password,
     };
-    dispatch(register(payload));
+
+    console.log(payload);
 
     dispatch({
-      
       type: VERIFY_USER,
       payload,
     });
@@ -98,155 +97,140 @@ const Registration = () => {
   };
 
   return (
-    <RootScreen>
-      <ScrollView>
-        <Formik
-          initialValues={{
-            profilemaker: '',
-            firstname: '',
-            lastname: '',
-            emailid: '',
-            mobilenumber: '',
-            birthdate: '',
-            caste: '',
-            country: '',
-            state: '',
-            city: '',
-            password: '',
-          }}
-          validationSchema={RegistrationvalidationSchema}
-          onSubmit={values => handleregisterUser(values)}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            setFieldValue,
-            values,
-            errors,
-            touched,
-          }) => (
-            <>
-              <View style={styles.container}>
-                <View style={styles.imageContainer}>
-                  <TouchableOpacity>
-                    <Image
-                      style={styles.backArrow_img}
-                      source={require('../../../assets/backarrow.png')}
-                    />
+    <RootScreen scrollable={true}>
+      <Formik
+        initialValues={{
+          profilemaker: '',
+          firstname: '',
+          lastname: '',
+          emailid: '',
+          mobilenumber: '',
+          birthdate: '',
+          caste: '',
+          country: '',
+          state: '',
+          city: '',
+          password: '',
+        }}
+        validationSchema={RegistrationvalidationSchema}
+        onSubmit={values => handleregisterUser(values)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.formContainer}>
+            <View style={styles.profileContainer}>
+              <Image
+                style={styles.upload_img}
+                source={require('../../../assets/profile.png')}
+              />
+            </View>
+            <View style={styles.radioButtonContainer}>
+              {isLiked.map(item => (
+                <View style={styles.ButtonContainer}>
+                  <TouchableOpacity
+                    onPress={() => onRadioBtnClick(item)}
+                    style={styles.radioButton}>
+                    {item.selected ? (
+                      <View style={styles.radioButtonIcon} />
+                    ) : null}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
+                    <Text style={styles.radioButtonText}>{item.name}</Text>
                   </TouchableOpacity>
                 </View>
+              ))}
+            </View>
+            <Dropdown
+              style={styles.dropdownStyle}
+              uniqueKey={'profileCreatedById'}
+              displayKey={'profileCreatedByNameHi'}
+              items={profilemaker}
+              selectText={translate('register.ProfileName')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('ProfileName', value)}
+            />
 
-                <Text style={styles.navbarText}>Registration</Text>
-              </View>
-              <View style={styles.profileContainer}>
-                <Image
-                  style={styles.upload_img}
-                  source={require('../../../assets/profile.png')}
-                />
-              </View>
-              <View style={styles.radioButtonContainer}>
-                {isLiked.map(item => (
-                  <View style={styles.ButtonContainer}>
-                    <TouchableOpacity
-                      onPress={() => onRadioBtnClick(item)}
-                      style={styles.radioButton}>
-                      {item.selected ? (
-                        <View style={styles.radioButtonIcon} />
-                      ) : null}
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-                      <Text style={styles.radioButtonText}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </View>
-              <>
-                <Dropdown
-                  style={styles.dropdownMargin}
-                  uniqueKey={'profileCreatedById'}
-                  displayKey={'profileCreatedByNameHi'}
-                  items={profilemaker}
-                  selectText={translate('register.ProfileName')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
+            {errors.profilemaker && touched.profilemaker ? (
+              <Text style={styles.error}>{errors.profilemaker}</Text>
+            ) : null}
+            <View style={styles.nameContainer}>
+              <TextInput
+                onChangeText={handleChange('firstname')}
+                onBlur={handleBlur('firstname')}
+                value={values.Source}
+                style={styles.textinput}
+                placeholder={translate('register.FirstName')}
+                placeholderTextColor={'#666666'}
+              />
 
-                {errors.profilemaker && touched.profilemaker ? (
-                  <Text style={styles.error}>{errors.profilemaker}</Text>
+              <TextInput
+                onChangeText={handleChange('lastname')}
+                onBlur={handleBlur('lastname')}
+                value={values.Source}
+                style={styles.textinput}
+                placeholder="Last Name"
+                placeholderTextColor={'#666666'}
+              />
+            </View>
+            <View style={styles.errorText}>
+              {errors.firstname && touched.firstname ? (
+                <Text style={styles.error}>{errors.firstname}</Text>
+              ) : null}
+              <View style={styles.lastnameError}>
+                {errors.lastname && touched.lastname ? (
+                  <Text style={styles.error}>{errors.lastname}</Text>
                 ) : null}
-                <View style={styles.dataContainer}>
-                  <TextInput
-                    onChangeText={handleChange('firstname')}
-                    onBlur={handleBlur('firstname')}
-                    value={values.Source}
-                    style={styles.textinput}
-                    placeholder={translate('register.FirstName')}
-                    placeholderTextColor={'#666666'}
-                  />
+              </View>
+            </View>
+            <View>
+              <TextInput
+                onChangeText={handleChange('emailid')}
+                onBlur={handleBlur('emailid')}
+                value={values.Source}
+                style={styles.commonInput}
+                placeholder={translate('register.EmailId')}
+                placeholderTextColor={'#666666'}
+              />
+              {errors.emailid && touched.emailid ? (
+                <Text style={styles.error}>{errors.emailid}</Text>
+              ) : null}
+              <TextInput
+                onChangeText={handleChange('mobilenumber')}
+                onBlur={handleBlur('mobilenumber')}
+                value={values.Source}
+                style={styles.commonInput}
+                placeholder={translate('register.MobileNumber')}
+                placeholderTextColor={'#666666'}
+              />
+              {errors.mobilenumber && touched.mobilenumber ? (
+                <Text style={styles.error}>{errors.mobilenumber}</Text>
+              ) : null}
+            </View>
 
-                  <TextInput
-                    onChangeText={handleChange('lastname')}
-                    onBlur={handleBlur('lastname')}
-                    value={values.Source}
-                    style={styles.input}
-                    placeholder="Last Name"
-                    placeholderTextColor={'#666666'}
-                  />
-                </View>
-                <View style={styles.errorText}>
-                  {errors.firstname && touched.firstname ? (
-                    <Text style={styles.error}>{errors.firstname}</Text>
-                  ) : null}
-                  <View style={styles.lastnameError}>
-                    {errors.lastname && touched.lastname ? (
-                      <Text style={styles.error}>{errors.lastname}</Text>
-                    ) : null}
-                  </View>
-                </View>
-                <View>
-                  <TextInput
-                    onChangeText={handleChange('emailid')}
-                    onBlur={handleBlur('emailid')}
-                    value={values.Source}
-                    style={styles.commonInput}
-                    placeholder={translate('register.EmailId')}
-                    placeholderTextColor={'#666666'}
-                  />
-                  {errors.emailid && touched.emailid ? (
-                    <Text style={styles.error}>{errors.emailid}</Text>
-                  ) : null}
-                  <TextInput
-                    onChangeText={handleChange('mobilenumber')}
-                    onBlur={handleBlur('mobilenumber')}
-                    value={values.Source}
-                    style={styles.commonInput}
-                    placeholder={translate('register.MobileNumber')}
-                    placeholderTextColor={'#666666'}
-                  />
-                  {errors.mobilenumber && touched.mobilenumber ? (
-                    <Text style={styles.error}>{errors.mobilenumber}</Text>
-                  ) : null}
-                </View>
+            <View style={styles.birthdayInput}>
+              <Dropdown
+              style={styles.dropdownStyle}
+                items={dropDownList}
+                selectText={translate('register.birthdate')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+            </View>
+            {errors.birthdate && touched.birthdate ? (
+              <Text style={styles.error}>{errors.birthdate}</Text>
+            ) : null}
+            <Text style={styles.text}>
+              <Text style={styles.star}>*</Text>
+              {translate('register.Note')}
+            </Text>
 
-                <View style={styles.birthdayInput}>
-                  <Dropdown
-                    items={dropDownList}
-                    selectText={translate('register.birthdate')}
-                    selectedItems={values.name}
-                    onSelectedItemsChange={value =>
-                      setFieldValue('name', value)
-                    }
-                  />
-                </View>
-                {errors.birthdate && touched.birthdate ? (
-                  <Text style={styles.error}>{errors.birthdate}</Text>
-                ) : null}
-                <Text style={styles.text}>
-                  <Text style={styles.star}>*</Text>
-                  {translate('register.Note')}
-                </Text>
-
-                {/* <Dropdown
+            {/* <Dropdown
                   style={styles.inputMargin}
                   items={dropDownList}
                   selectText={translate('register.caste')}
@@ -257,83 +241,80 @@ const Registration = () => {
                   <Text style={styles.error}>{errors.caste}</Text>
                 ) : null} */}
 
-                <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'countryId'}
-                  displayKey={'countryName'}
-                  items={country}
-                  selectText={translate('register.country')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
-                {errors.country && touched.country ? (
-                  <Text style={styles.error}>{errors.country}</Text>
-                ) : null}
-                <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={state}
-                  selectText={translate('register.state')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
-                {errors.state && touched.state ? (
-                  <Text style={styles.error}>{errors.state}</Text>
-                ) : null}
+            <Dropdown
+              style={styles.dropdownStyle}
+              uniqueKey={'countryId'}
+              displayKey={'countryName'}
+              items={country}
+              selectText={translate('register.country')}
+              selectedItems={values.country}
+              onSelectedItemsChange={value => setFieldValue('country', value)}
+            />
+            {errors.country && touched.country ? (
+              <Text style={styles.error}>{errors.country}</Text>
+            ) : null}
+            <Dropdown
+              style={styles.dropdownStyle}
+              uniqueKey={'id'}
+              displayKey={'name'}
+              items={state}
+              selectText={translate('register.state')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.state && touched.state ? (
+              <Text style={styles.error}>{errors.state}</Text>
+            ) : null}
 
-                <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'cityId'}
-                  displayKey={'cityName'}
-                  items={city}
-                  selectText={translate('register.city')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
-                {errors.city && touched.city ? (
-                  <Text style={styles.error}>{errors.city}</Text>
-                ) : null}
-                <View style={styles.inputMargin}>
-                  <TextInput
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.Source}
-                    style={styles.commonInput}
-                    placeholder={translate('register.enterpassword')}
-                    placeholderTextColor={'#666666'}
-                  />
-                </View>
-                {errors.password && touched.password ? (
-                  <Text style={styles.error}>{errors.password}</Text>
-                ) : null}
-                <Text style={styles.text}>
-                  <Text style={styles.star}>*</Text>{' '}
-                  {translate('register.Note@')}
-                </Text>
-                <View style={styles.checkboxcontainer}>
-                  <CheckBox
-                    disabled={false}
-                    value={toggleCheckBox}
-                    onValueChange={newValue => setToggleCheckBox(newValue)}
-                  />
-                  <Text style={styles.term}>
-                    {' '}
-                    {translate('register.checkbox')}{' '}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.submitButton}
-                  onPress={handleSubmit}>
-                  <Text style={styles.text_btn}>
-                    {translate('register.create Account')}
-                  </Text>
-                </TouchableOpacity>
-              </>
-            </>
-          )}
-        </Formik>
-      </ScrollView>
+            <Dropdown
+              style={styles.dropdownStyle}
+              uniqueKey={'cityId'}
+              displayKey={'cityName'}
+              items={city}
+              selectText={translate('register.city')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.city && touched.city ? (
+              <Text style={styles.error}>{errors.city}</Text>
+            ) : null}
+            <View style={styles.inputMargin}>
+              <TextInput
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.Source}
+                style={styles.commonInput}
+                placeholder={translate('register.enterpassword')}
+                placeholderTextColor={'#666666'}
+              />
+            </View>
+            {errors.password && touched.password ? (
+              <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
+            <Text style={styles.text}>
+              <Text style={styles.star}>*</Text> {translate('register.Note@')}
+            </Text>
+            <View style={styles.checkboxcontainer}>
+              <CheckBox
+                disabled={false}
+                value={toggleCheckBox}
+                onValueChange={newValue => setToggleCheckBox(newValue)}
+              />
+              <Text style={styles.term}>
+                {' '}
+                {translate('register.checkbox')}{' '}
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSubmit}>
+              <Text style={styles.text_btn}>
+                {translate('register.create Account')}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </Formik>
     </RootScreen>
   );
 };
@@ -341,13 +322,8 @@ const Registration = () => {
 export default Registration;
 
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'stretch',
-    height: 52,
-    flexDirection: 'row',
-    backgroundColor: '#DC1C28',
-    paddingLeft: 10,
-    paddingRight: 10,
+  formContainer: {
+    flex: 1,
   },
   backArrow_img: {
     width: 30,
@@ -356,8 +332,9 @@ const styles = StyleSheet.create({
   errorText: {
     flexDirection: 'row',
   },
-  dropdownMargin: {
-    marginTop: 40,
+  dropdownStyle: {
+    marginBottom: 20,
+    borderWidth: 0,
   },
   inputMargin: {
     marginTop: 20,
@@ -365,10 +342,19 @@ const styles = StyleSheet.create({
   lastnameError: {
     marginHorizontal: 30,
   },
-  dataContainer: {
+  nameContainer: {
     flexDirection: 'row',
-    marginHorizontal: 16,
-    marginTop: 20,
+    marginHorizontal: 30,
+    marginBottom: 20,
+    justifyContent: 'space-between',
+  },
+  textinput: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    height: hp(7),
+    color: 'black',
+    fontSize: 15,
+    flex:0.9,
   },
   term: {
     color: '#FFFFFF',
@@ -481,18 +467,7 @@ const styles = StyleSheet.create({
   input_view: {
     flex: 1,
   },
-  textinput: {
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 10,
-    height: hp(7),
-    color: 'black',
-    width: 155,
-    fontSize: 15,
-    marginTop: 5,
-  },
+  
   input: {
     backgroundColor: 'white',
     marginVertical: 10,

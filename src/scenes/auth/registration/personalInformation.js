@@ -25,7 +25,7 @@ const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
   const {
     personalinfoData,
-    dropDownsData: {maritalstatus, education, job},
+    dropDownsData: {maritalstatus, education, job, height},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
@@ -85,27 +85,13 @@ const Personalinformation = ({navigation}) => {
           touched,
         }) => (
           <>
-            <View style={styles.container}>
-              <View style={styles.imageContainer}>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.backArrow_img}
-                    source={require('./../../../assets/backarrow.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-
-              <Text style={styles.navbarText}>
-                {translate('Vyaktigatdata.Personal information')}{' '}
-              </Text>
-            </View>
-
-            <>
               <Dropdown
                 style={styles.inputHeight}
-                items={dropDownList}
+                uniqueKey={'id'}
+                displayKey={'name'}
+                items={height}
                 selectText={translate('Vyaktigatdata.Height')}
-                selectedItems={values.name}
+                selectedItems={values.height}
                 onSelectedItemsChange={value => setFieldValue('name', value)}
               />
 
@@ -194,7 +180,7 @@ const Personalinformation = ({navigation}) => {
                 </Text>
               </TouchableOpacity>
             </>
-          </>
+    
         )}
       </Formik>
     </RootScreen>

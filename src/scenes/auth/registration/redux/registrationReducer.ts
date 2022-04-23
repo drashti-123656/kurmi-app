@@ -32,7 +32,10 @@ const initialState = {
   dropDownsData: {
     zodiacSign: [],
     auspicious: [],
-    height: [],
+    height: [
+      {id: 1, name: '5ft 5in'},
+      {id: 2, name: '5ft 9in'},
+    ],
     maritalstatus: [],
     education: [],
     job: [],
@@ -69,8 +72,8 @@ const initialState = {
   },
 };
 
-const authSlice = createSlice({
-  name: 'sampark',
+const registerationSlice = createSlice({
+  name: 'registration',
   initialState,
   reducers: {
     sampark(state, action) {
@@ -185,6 +188,8 @@ const authSlice = createSlice({
   },
 });
 
+const {actions, reducer} = registerationSlice;
+
 export const {
   sampark,
   parivarik,
@@ -204,5 +209,5 @@ export const {
   fetchStateDropdownSuccess,
   fetchCityDropdownSuccess,
   personalInfo,
-} = authSlice.actions;
-export default authSlice.reducer;
+} = actions;
+export default reducer;

@@ -9,10 +9,15 @@ import Registration from '../scenes/auth/registration/Registration';
 import NewsFeed from '../scenes/home/NewsFeed';
 import RegistrationStack from './RegistrationStack';
 import {useSelector} from 'react-redux';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import translate from './../translations/configTranslations';
+
 const Tab = createBottomTabNavigator();
 
 const DashboardNavigation = () => {
-  const {userData: isAuthenticated} = useSelector(state => state.auth);
+  const {
+    registrationData: {registered},
+  } = useSelector(({registration}) => registration);
 
   return (
     <Tab.Navigator>
@@ -21,6 +26,9 @@ const DashboardNavigation = () => {
         component={NewsFeed}
         options={{
           tabBarLabel: 'Home',
+          headerTitle:translate('NewsFeed.kurmiShadiHeading'),
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerTintColor: '#fff',
           headerShown: false,
           tabBarActiveTintColor: 'red',
           tabBarIcon: () => <Home name="home" color={'black'} size={30} />,
@@ -41,7 +49,7 @@ const DashboardNavigation = () => {
           tabBarIcon: () => <Search name="search" color={'black'} size={30} />,
         }}
       />
-      {!isAuthenticated ? (
+      {!registered ? (
         <>
           <Tab.Screen
             name="Registration"

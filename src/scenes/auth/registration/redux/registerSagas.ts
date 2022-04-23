@@ -16,17 +16,21 @@ import {
   registrationsFail,
   registrationSuccess,
 } from './registrationReducer';
-import { navigate } from '../../../../navigation/RootNavigation';
+import {navigate} from '../../../../navigation/RootNavigation';
+import {loginSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
+  console.log('response=>>', response.data);
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
       type: 'success',
     });
-    registrationSuccess({});
+    yield put(loginSuccess(response.data.User));
+    yield put(registrationSuccess({}));
+    yield put(loginSuccess(response.data.User));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
@@ -35,6 +39,7 @@ export function* registerUser(action) {
     registrationsFail(response.problem);
   }
 }
+
 
 export function* zodiacDropDowns(action) {
   const payload = action.payload;
@@ -108,20 +113,21 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-
-  const response = yield call(apiClient.post, API_URL.VERIFY_USER, payload);
+  const apiBody = {
+    where: {
+      userEmail: payload.userEmail,
+      userMobileNo: payload.userMobileNo,
+    },
+  };
+  const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
   if (response.ok) {
+    put(register(payload));
+    navigate('Personalinformation');
+  } else {
     showMessage({
-      message: 'User already Registered',
+      message: response.problem,
       type: 'danger',
     });
-   
-    
-    put(register(payload));
-  } else {
-    
-    navigate('Personalinformation');
-    registrationsFail(response.problem);
   }
 }
 
@@ -147,7 +153,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-
+  console.log('response111 =>', response.data.data);
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }

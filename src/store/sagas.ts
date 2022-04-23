@@ -19,10 +19,13 @@ import {
 } from '../scenes/auth/registration/redux/registerSagas';
 import {
   FETCH_AUSPICIOUS_DROPDOWN,
+  FETCH_CITY_DROPDOWN,
+  FETCH_COUNTRY_DROPDOWN,
   FETCH_EDUCATION_DROPDOWN,
   FETCH_JOB_DROPDOWN,
   FETCH_MARITALSTATUS_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
+  FETCH_STATE_DROPDOWN,
   FETCH_ZODIC_SIGN,
   REGISTER_USER,
   VERIFY_USER,
@@ -42,8 +45,8 @@ export default function* sagas() {
     takeLatest(VERIFY_USER, registerUserVerification),
     takeLatest(FETCH_PROFILECREATER_DROPDOWN, profilemakerDropdown),
 
-    takeLatest(FETCH_PROFILECREATER_DROPDOWN, countryDropdown),
-    takeLatest(FETCH_PROFILECREATER_DROPDOWN, stateDropdown),
-    takeLatest(FETCH_PROFILECREATER_DROPDOWN, cityDropdown),
+    takeLatest(FETCH_COUNTRY_DROPDOWN, countryDropdown),
+    takeLatest(FETCH_STATE_DROPDOWN, stateDropdown),
+    takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
   ]);
 }

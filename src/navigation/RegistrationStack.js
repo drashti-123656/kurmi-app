@@ -8,35 +8,39 @@ import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 import Personalinformation from '../scenes/auth/registration/personalInformation';
+import EStyleSheet from 'react-native-extended-stylesheet';
 const Stack = createNativeStackNavigator();
 
 const RegistrationStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator      screenOptions={{
+      headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+      headerTintColor: '#fff',
+    }}>
       <Stack.Screen
         name="Registration"
         component={Registration}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="Personalinformation"
         component={Personalinformation}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="DharmikJankari"
         component={DharmikJankari}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="Sampark"
         component={Sampark}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="ParivarikParichay"
         component={ParivarikParichay}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );

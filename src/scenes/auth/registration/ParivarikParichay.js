@@ -19,16 +19,23 @@ import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextIn
 import translate from './../../../translations/configTranslations';
 import {parivarikSchema} from '../../../utils/schema/registerSchema';
 import {useDispatch, useSelector} from 'react-redux';
-import { REGISTER_USER } from './redux/registrationActions';
+import {REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
-  const {parivarikData, samparkData,dharmikJankariData,dropDownsData,registerData,personalinfoData} = useSelector(state => state.registration);
+  const {
+    parivarikData,
+    samparkData,
+    dharmikJankariData,
+    dropDownsData,
+    registerData,
+    personalinfoData,
+  } = useSelector(state => state.registration);
 
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo:'8888888888' ,
+      userContactInfoContactNo: '8888888888',
       userContactInfoWhatsappNo: '9999999999',
       userContactInfoPresentAddress: 'asasas',
       userContactInfoPermanentAddress: 'asasas',
@@ -72,13 +79,12 @@ const ParivarikParichay = () => {
       profileCreatedByNameHi: 'KHud',
       profileCreatedByNameEn: 'Self',
 
-      
-      userName: registerData.firstname,
+      userName: 'adsd',
       userGender: 'male',
-      userEmail: registerData.emailid,
-      userMobileNo: registerData.mobilenumber,
+      userEmail: 'zxzXZXcsdfsdfdf@asdd.com',
+      userMobileNo: '6754645664',
       userDob: '1988-06-27',
-      password: registerData.password,
+      password: '123456',
       userCountry: '10',
       userState: '5',
       userCity: '8',
@@ -205,12 +211,10 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.land}</Text>
               ) : null}
 
-              <LoginButton 
+              <LoginButton
                 title={translate('ParivarikParichay.register')}
                 onPress={handleSubmit}
               />
-
-              
             </View>
           )}
         </Formik>
