@@ -15,13 +15,15 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+
 
 const NewsFeed = ({navigation}) => {
   const [fromAge, setfromAge] = useState('');
   const [toAge, SettoAge] = useState('');
   const [isLiked, setIsLiked] = useState([
-    {id: 1, value: true, name: 'वर', selected: true},
-    {id: 2, value: false, name: 'वधू', selected: false},
+    {id: 1, value: true, name: translate('NewsFeed.boy'), selected: true},
+    {id: 2, value: false, name: translate('NewsFeed.girl'), selected: false},
   ]);
   const onRadioBtnClick = item => {
     let updatedState = isLiked.map(isLikedItem =>
@@ -41,17 +43,27 @@ const NewsFeed = ({navigation}) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
+          <TouchableOpacity>
             <Image
               style={styles.vector_img}
-              source={require('../../assets/Vector.png')}
+              source={require('../../assets/Vector6.png')}
             />
+             <Image
+              style={styles.vector_img}
+              source={require('../../assets/Vector7.png')}
+            />
+             <Image
+              style={styles.vector_img}
+              source={require('../../assets/Vector8.png')}
+            />
+            </TouchableOpacity>
           </View>
 
           <View style={styles.pinClipart}>
             <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
               <Image
                 style={styles.PinClipart_img}
-                source={require('../../assets/PinClipart.png')}
+                source={require('../../assets/contact.png')}
               />
             </TouchableOpacity>
           </View>
@@ -97,9 +109,12 @@ const NewsFeed = ({navigation}) => {
               placeholderTextColor={'#666666'}
             />
           </View>
-          <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.text_btn}>{translate('NewsFeed.Search')}</Text>
-          </TouchableOpacity>
+
+          <LoginButton
+            title={translate('NewsFeed.Search')}
+            onPress={submitButton}
+           />
+         
         </>
         <View>
           <Text style={styles.text}>
@@ -107,7 +122,7 @@ const NewsFeed = ({navigation}) => {
           </Text>
           <View style={styles.footeContainer}>
             <View>
-              <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
+              <Text style={styles.titleText}>{translate('NewsFeed.newProfile')}</Text>
               <Text style={styles.titleTextnext}>
               {translate('NewsFeed.recentlyJoint')}
               </Text>
@@ -116,7 +131,7 @@ const NewsFeed = ({navigation}) => {
               <View style={styles.firstImage}>
                 <Image
                   style={styles.profile_img}
-                  source={require('../../assets/profile.png')}
+                  source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
                   <Text style={styles.profileText}>{translate('NewsFeed.newProfile')} </Text>
@@ -127,7 +142,7 @@ const NewsFeed = ({navigation}) => {
               <View style={styles.SecondImage}>
                 <Image
                   style={styles.profile_img}
-                  source={require('../../assets/profile1.png')}
+                  source={require('../../assets/profile2.png')}
                 />
                 <View style={styles.footerTextContainer}>
                   <Text style={styles.profileText}> {translate('NewsFeed.newProfile')} </Text>
@@ -155,17 +170,18 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   vector_img: {
-    width: 15,
-    height: 15,
+    width: 20,
+    height: 5,
   },
   ageContainer: {
     flexDirection: 'row',
+    marginHorizontal: wp('7'),
   },
   firstImage: {
-    marginHorizontal: 10,
+    marginHorizontal:0,
   },
   SecondImage: {
-    marginHorizontal: 170,
+    marginHorizontal: 180,
   },
   footeContainer: {
     backgroundColor: '#EDEDED',
@@ -173,18 +189,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 40,
+    marginTop: 20,
+    
+    
   },
   profile_img: {
-    width: 180,
-    height: 180,
+    width: 190,
+    height: 190,
     marginTop: 50,
     marginLeft: -160,
   },
   footerTextContainer: {
     marginHorizontal: -160,
     height: 50,
-    width: 180,
+    width: 190,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
@@ -197,16 +215,20 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
     marginTop: 15,
+    fontSize: 20,
+    color: 'black'
   },
   titleTextnext: {
     marginTop: 3,
     color: '#8A8787',
+    
   },
   bottomText: {
-    marginHorizontal: 20,
+    //marginHorizontal: 30,
     fontSize: 20,
     color: '#FFFFFF',
     fontWeight: 'bold',
+    marginHorizontal: wp('10'),
   },
   PinClipart_img: {
     width: 25,
@@ -221,24 +243,25 @@ const styles = StyleSheet.create({
   },
   profileText: {
     fontWeight: 'bold',
+    color: 'black'
   },
   profileImageContainer: {
     flexDirection: 'row',
-    marginTop: 40,
+    marginTop: 60,
   },
 
   imageContainer: {
-    marginTop: 18,
+    marginTop: 21,
   },
   bg_img: {
     flex: 1,
   },
   title: {
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 20,
     textAlign: 'center',
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 25,
     color: '#ffffff',
   },
   input_view: {
@@ -246,23 +269,26 @@ const styles = StyleSheet.create({
   },
   textinput: {
     backgroundColor: 'white',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 10,
     paddingLeft: 10,
-    height: hp(8),
+    height: hp(7),
     color: 'black',
-    width: 160,
+    width: 150,
+    fontSize: 15
+    
   },
   input: {
     backgroundColor: 'white',
-    // marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 10,
     paddingLeft: 90,
-    height: hp(8),
+    height: hp(7),
     color: 'black',
-    width: 160,
+    width: 150,
+    fontSize: 15
   },
   textinput_msg: {
     backgroundColor: 'white',
@@ -328,7 +354,9 @@ const styles = StyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 115,
+    marginRight: 50,
+    marginHorizontal: wp('6'),
+    marginBottom: 10,
   },
   radioButton: {
     height: 20,
@@ -359,12 +387,15 @@ const styles = StyleSheet.create({
     width: 14,
     borderRadius: 9,
     backgroundColor: 'black',
+    
+    
   },
   buttonIcon: {
     height: 14,
     width: 14,
     borderRadius: 9,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
+    
   },
 
   radioButtonText: {
@@ -380,10 +411,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   text: {
-    marginTop: 30,
+    marginTop: 10,
     justifyContent: 'center',
     alignSelf: 'center',
-    fontSize: 15,
+    fontSize: 18,
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
