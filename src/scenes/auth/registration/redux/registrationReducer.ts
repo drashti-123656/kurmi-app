@@ -48,6 +48,15 @@ const initialState = {
   registerData: {
     emailid: '',
     mobilenumber: '',
+    profilemaker: '',
+    firstname: '',
+    lastname: '',
+    birthdate: '',
+    caste: '',
+    country: '',
+    state: '',
+    city: '',
+    password: '',
   },
   personalinfoData: {
     height: '',
@@ -133,6 +142,15 @@ const authSlice = createSlice({
     register(state, action) {
       state.registerData.emailid = action.payload.userEmail;
       state.registerData.mobilenumber = action.payload.userMobileNo;
+      state.registerData.profilemaker = action.payload.profileCreatedByNameHi;
+      state.registerData.firstname = action.payload.userName;
+      state.registerData.lastname = action.payload;
+      state.registerData.birthdate = action.payload.userDob;
+      state.registerData.caste = action.payload.userPersonalInfoHeight;
+      state.registerData.country = action.payload.userCountry;
+      state.registerData.state = action.payload.userState;
+      state.registerData.city = action.payload.userCity;
+      state.registerData.password = action.payload.password;
     },
 
     fetchProfilemakerDropdownSuccess(state, action) {

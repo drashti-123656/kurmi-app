@@ -29,16 +29,18 @@ import {
 } from './redux/registrationActions';
 
 import {useDispatch, useSelector} from 'react-redux';
+import { register } from './redux/registrationReducer';
 
 const Registration = () => {
   const dispatch = useDispatch();
 
   const {
-    registrationData,
+    registerData,
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
+    console.log('registerData',registerData)
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -64,8 +66,19 @@ const Registration = () => {
     const payload = {
       userEmail: values.emailid,
       userMobileNo: values.mobilenumber,
+      profileCreatedByNameHi : values.profilemaker,
+      userName : values.firstname,
+      userDob : values.birthdate,
+      userCountry : values.country,
+      userState : values.state,
+      userCity : values.city,
+      password : values.password,
+
     };
+    dispatch(register(payload));
+
     dispatch({
+      
       type: VERIFY_USER,
       payload,
     });
