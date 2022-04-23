@@ -21,8 +21,9 @@ import {samparkSchema} from './../../../utils/schema/registerSchema';
 
 import {sampark} from './redux/registrationReducer';
 import {useDispatch, useSelector} from 'react-redux';
+import { navigationRef } from '../../../navigation/RootNavigation';
 
-const Sampark = () => {
+const Sampark = ({navigation}) => {
   const dispatch = useDispatch();
   const {samparkData} = useSelector(state => state.registration);
 
@@ -40,6 +41,7 @@ const Sampark = () => {
     };
 
     dispatch(sampark(payload));
+    navigation.navigate('ParivarikParichay')
   };
 
  
