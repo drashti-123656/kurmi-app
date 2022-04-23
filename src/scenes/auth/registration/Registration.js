@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {
   widthPercentageToDP as wp,
@@ -16,15 +16,49 @@ import {
 import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
 import CheckBox from '@react-native-community/checkbox';
 import {Formik} from 'formik';
-import translate from './../../../translations/configTranslations';
+import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-import { VERIFY_USER } from './redux/registrationActions';
+import {
+  FETCH_CITY_DROPDOWN,
+  FETCH_COUNTRY_DROPDOWN,
+  FETCH_PROFILECREATER_DROPDOWN,
+  FETCH_STATE_DROPDOWN,
+  VERIFY_USER,
+} from './redux/registrationActions';
+
+import {useDispatch, useSelector} from 'react-redux';
 
 const Registration = () => {
   const dispatch = useDispatch();
-  const {registerData} = useSelector(state => state.registration);
+
+  const {
+    registrationData,
+    dropDownsData: {profilemaker, country, state, city},
+  } = useSelector(state => state.registration);
+
+  useEffect(() => {
+    dispatch({
+      type: FETCH_PROFILECREATER_DROPDOWN,
+      payload: {moduleType: 'ProfileCreatedBy'},
+    });
+
+    dispatch({
+      type: FETCH_COUNTRY_DROPDOWN,
+      payload: {moduleType: 'Country'},
+    });
+
+    dispatch({
+      type: FETCH_STATE_DROPDOWN,
+      payload: {moduleType: 'State'},
+    });
+
+    dispatch({
+      type: FETCH_CITY_DROPDOWN,
+      payload: {moduleType: 'City'},
+    });
+  }, []);
 
   const handleregisterUser = values => {
     const payload = {
@@ -67,7 +101,7 @@ const Registration = () => {
             city: '',
             password: '',
           }}
-         validationSchema={RegistrationvalidationSchema}
+          validationSchema={RegistrationvalidationSchema}
           onSubmit={values => handleregisterUser(values)}>
           {({
             handleChange,
@@ -116,7 +150,9 @@ const Registration = () => {
               <>
                 <Dropdown
                   style={styles.dropdownMargin}
-                  items={dropDownList.profilemakerDropdownlist}
+                  uniqueKey={'profileCreatedById'}
+                  displayKey={'profileCreatedByNameHi'}
+                  items={profilemaker}
                   selectText={translate('register.ProfileName')}
                   selectedItems={values.name}
                   onSelectedItemsChange={value => setFieldValue('name', value)}
@@ -197,7 +233,7 @@ const Registration = () => {
                   {translate('register.Note')}
                 </Text>
 
-                <Dropdown
+                {/* <Dropdown
                   style={styles.inputMargin}
                   items={dropDownList}
                   selectText={translate('register.caste')}
@@ -206,11 +242,13 @@ const Registration = () => {
                 />
                 {errors.caste && touched.caste ? (
                   <Text style={styles.error}>{errors.caste}</Text>
-                ) : null}
+                ) : null} */}
 
                 <Dropdown
                   style={styles.inputMargin}
-                  items={dropDownList}
+                  uniqueKey={'countryId'}
+                  displayKey={'countryName'}
+                  items={country}
                   selectText={translate('register.country')}
                   selectedItems={values.name}
                   onSelectedItemsChange={value => setFieldValue('name', value)}
@@ -220,7 +258,9 @@ const Registration = () => {
                 ) : null}
                 <Dropdown
                   style={styles.inputMargin}
-                  items={dropDownList}
+                  uniqueKey={'id'}
+                  displayKey={'name'}
+                  items={state}
                   selectText={translate('register.state')}
                   selectedItems={values.name}
                   onSelectedItemsChange={value => setFieldValue('name', value)}
@@ -231,7 +271,9 @@ const Registration = () => {
 
                 <Dropdown
                   style={styles.inputMargin}
-                  items={dropDownList}
+                  uniqueKey={'cityId'}
+                  displayKey={'cityName'}
+                  items={city}
                   selectText={translate('register.city')}
                   selectedItems={values.name}
                   onSelectedItemsChange={value => setFieldValue('name', value)}

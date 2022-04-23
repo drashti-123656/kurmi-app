@@ -22,11 +22,12 @@ import { FETCH_EDUCATION_DROPDOWN, FETCH_JOB_DROPDOWN, FETCH_MARITALSTATUS_DROPD
 const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
   const {
-    parivarikparichayData,
+    personalinfoData,
     dropDownsData: {maritalstatus, education, job},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
+    console.log('personalinfoData',personalinfoData)
     dispatch({
       type: FETCH_MARITALSTATUS_DROPDOWN,
       payload: {moduleType: 'MaritalStatus'},
@@ -43,11 +44,25 @@ const Personalinformation = ({navigation}) => {
     });
   }, []);
 
+  const handleSampark = values => {
+    const payload = {
+      userPersonalInfoHeight: values.height,
+      userPersonalInfoMaritalStatusId: values.maritalstatus,
+      userEducationInfoEducation: values.education,
+      userEducationInfoOccupation: values.job,
+      userPersonalInfoComplexion: values.colour,
+      userPersonalInfoDisability: values.disability,
+      userPersonalInfoBloodGroup: values.bloodgroup,
+    };
+
+    dispatch(personalInfo(payload));
+  };
+
   return (
     <RootScreen scrollable={true}>
       <Formik
         initialValues={{
-          height: '',
+          height: personalinfoData.height,
           maritalstatus: '',
           education: '',
           job: '',

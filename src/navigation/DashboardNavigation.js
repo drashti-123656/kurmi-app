@@ -5,8 +5,9 @@ import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import Home from 'react-native-vector-icons/Entypo';
 import Search from 'react-native-vector-icons/Feather'
 import Login from '../scenes/auth/Login';
-import Registration from '../scenes/auth/Registration';
+import Registration from '../scenes/auth/registration/Registration';
 import NewsFeed from '../scenes/home/NewsFeed';
+import RegistrationStack from './RegistrationStack';
 const Tab = createBottomTabNavigator();
 
 
@@ -44,7 +45,7 @@ const DashboardNavigation = () => {
         />
         <Tab.Screen
          name="Registration"
-         component={Registration}
+         component={RegistrationStack}
          options={{
           tabBarLabel: 'Register',
           headerShown: false,

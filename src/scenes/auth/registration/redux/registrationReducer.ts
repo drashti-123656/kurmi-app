@@ -39,12 +39,25 @@ const initialState = {
     colour: [],
     disability: [],
     bloodgroup: [],
+    profilemaker: [],
+    birthdate: [],
+    country: [],
+    state: [],
+    city: [],
   },
-  registerData:{
-    emailid:'',
-    mobilenumber:'',
-  }
-
+  registerData: {
+    emailid: '',
+    mobilenumber: '',
+  },
+  personalinfoData: {
+    height: '',
+    maritalstatus: '',
+    education: '',
+    job: '',
+    colour: '',
+    disability: '',
+    bloodgroup: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -117,9 +130,39 @@ const authSlice = createSlice({
       state.dropDownsData.job = action.payload;
     },
 
-    register(state,action){
+    register(state, action) {
       state.registerData.emailid = action.payload.userEmail;
       state.registerData.mobilenumber = action.payload.userMobileNo;
+    },
+
+    fetchProfilemakerDropdownSuccess(state, action) {
+      state.dropDownsData.profilemaker = action.payload;
+    },
+
+    fetchCountryDropdownSuccess(state, action) {
+      state.dropDownsData.country = action.payload;
+    },
+
+    fetchStateDropdownSuccess(state, action) {
+      state.dropDownsData.state = action.payload;
+    },
+
+    fetchCityDropdownSuccess(state, action) {
+      state.dropDownsData.city = action.payload;
+    },
+
+    personalInfo(state, action) {
+      state.personalinfoData.height = action.payload.userPersonalInfoHeight;
+      state.personalinfoData.maritalstatus =
+        action.payload.userPersonalInfoMaritalStatusId;
+      state.personalinfoData.education =
+        action.payload.userEducationInfoEducation;
+      state.personalinfoData.job = action.payload.userEducationInfoOccupation;
+      state.personalinfoData.colour = action.payload.userPersonalInfoComplexion;
+      state.personalinfoData.disability =
+        action.payload.userPersonalInfoDisability;
+      state.personalinfoData.bloodgroup =
+        action.payload.userPersonalInfoBloodGroup;
     },
   },
 });
@@ -136,6 +179,12 @@ export const {
   fetchMaritalstatusDropdownSuccess,
   fetchEducationDropdownSuccess,
   fetchJobDropdownSuccess,
-  register
+  register,
+  fetchProfilemakerDropdownSuccess,
+
+  fetchCountryDropdownSuccess,
+  fetchStateDropdownSuccess,
+  fetchCityDropdownSuccess,
+  personalInfo,
 } = authSlice.actions;
 export default authSlice.reducer;

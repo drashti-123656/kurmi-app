@@ -42,6 +42,6 @@ const RegistrationStack = () => {
   );
 };
 
-export default {RegistrationStack};
+export default RegistrationStack;
 
 const styles = StyleSheet.create({});
