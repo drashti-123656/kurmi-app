@@ -53,6 +53,8 @@ const DharmikJankari = ({navigation}) => {
     };
     console.log('payload=>', payload);
 
+    navigation.navigate('Sampark')
+
     dispatch(dharmikJankari(payload));
   };
 
