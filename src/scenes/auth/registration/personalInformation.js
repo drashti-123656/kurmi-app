@@ -19,6 +19,8 @@ import {PersonalinformationSchema} from '../../../utils/schema/personalInformati
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
 import { FETCH_EDUCATION_DROPDOWN, FETCH_JOB_DROPDOWN, FETCH_MARITALSTATUS_DROPDOWN } from './redux/registrationActions';
+import { personalInfo } from './redux/registrationReducer';
+
 const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
   const {
@@ -27,7 +29,7 @@ const Personalinformation = ({navigation}) => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    console.log('personalinfoData',personalinfoData)
+    
     dispatch({
       type: FETCH_MARITALSTATUS_DROPDOWN,
       payload: {moduleType: 'MaritalStatus'},
@@ -56,6 +58,7 @@ const Personalinformation = ({navigation}) => {
     };
 
     dispatch(personalInfo(payload));
+    navigation.navigate('DharmikJankari')
   };
 
   return (
@@ -71,7 +74,7 @@ const Personalinformation = ({navigation}) => {
           bloodgroup: '',
         }}
         validationSchema={PersonalinformationSchema}
-        onSubmit={values => console.log(values)}>
+        onSubmit={values => handleSampark(values)}>
         {({
           handleChange,
           handleBlur,
@@ -185,8 +188,8 @@ const Personalinformation = ({navigation}) => {
                 style={styles.submitButton}
                 onPress={handleSubmit}>
                 <Text
-                  style={styles.text_btn}
-                  onPress={() => navigation.navigate('Dharmikjankari')}>
+                  style={styles.text_btn}>
+                  
                   {translate('Vyaktigatdata.Next')}{' '}
                 </Text>
               </TouchableOpacity>
