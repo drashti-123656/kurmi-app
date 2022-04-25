@@ -3,11 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,65 +14,67 @@ import {
 import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
 import translate from '../../../translations/configTranslations';
-import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import dropDownList from '../../../utils/constants/dropDownList';
-import {ReligiousinformationvalidationSchema} from '../../../utils/schema/religiousInformationSchema';
-import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
+import {PersonalinformationSchema} from '../../../utils/schema/personalInformationSchema';
+import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
-import {dharmikJankari} from './redux/registrationReducer';
-import {
-  FETCH_AUSPICIOUS_DROPDOWN,
-  FETCH_ZODIC_SIGN,
-} from './redux/registrationActions';
+import { FETCH_EDUCATION_DROPDOWN, FETCH_JOB_DROPDOWN, FETCH_MARITALSTATUS_DROPDOWN } from './redux/registrationActions';
+import { personalInfo } from './redux/registrationReducer';
 
-const DharmikJankari = ({navigation}) => {
+const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
   const {
-    dharmikJankariData,
-    dropDownsData: {zodiacSign, auspicious},
+    personalinfoData,
+    dropDownsData: {maritalstatus, education, job, height},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
+    
     dispatch({
-      type: FETCH_ZODIC_SIGN,
-      payload: {moduleType: 'Zodiac'},
+      type: FETCH_MARITALSTATUS_DROPDOWN,
+      payload: {moduleType: 'MaritalStatus'},
     });
 
     dispatch({
-      type: FETCH_AUSPICIOUS_DROPDOWN,
-      payload: {moduleType: 'Nakshatra'},
+      type: FETCH_EDUCATION_DROPDOWN,
+      payload: {moduleType: 'Education'},
+    });
+
+    dispatch({
+      type: FETCH_JOB_DROPDOWN,
+      payload: {moduleType: 'Occupation'},
     });
   }, []);
 
-  const handleDharmikJankari = values => {
+  const handleSampark = values => {
     const payload = {
-      userReligiousInfoGotra: values.caste,
-      userReligiousInfoSubCaste: values.native,
-      userReligiousInfoTimeOfBirth: values.birthtime,
-      userReligiousInfoPlaceOfBirth: values.birthplace,
-      userReligiousInfoZodiac: values.zodiacsign,
-      userReligiousInfoManglik: values.auspicious,
+      userPersonalInfoHeight: values.height,
+      userPersonalInfoMaritalStatusId: values.maritalstatus,
+      userEducationInfoEducation: values.education,
+      userEducationInfoOccupation: values.job,
+      userPersonalInfoComplexion: values.colour,
+      userPersonalInfoDisability: values.disability,
+      userPersonalInfoBloodGroup: values.bloodgroup,
     };
-    console.log('payload=>', payload);
 
-    navigation.navigate('Sampark');
-
-    dispatch(dharmikJankari(payload));
+    dispatch(personalInfo(payload));
+    navigation.navigate('DharmikJankari')
   };
 
   return (
     <RootScreen scrollable={true}>
       <Formik
         initialValues={{
-          caste: '',
-          native: '',
-          birthtime: '',
-          birthplace: '',
-          zodiacsign: '',
-          auspicious: '',
+          height: personalinfoData.height,
+          maritalstatus: '',
+          education: '',
+          job: '',
+          colour: '',
+          disability: '',
+          bloodgroup: '',
         }}
-        validationSchema={ReligiousinformationvalidationSchema}
-        onSubmit={values => handleDharmikJankari(values)}>
+        validationSchema={PersonalinformationSchema}
+        onSubmit={values => handleSampark(values)}>
         {({
           handleChange,
           handleBlur,
@@ -84,98 +85,109 @@ const DharmikJankari = ({navigation}) => {
           touched,
         }) => (
           <>
-            <ExtendedTextInput
-              onChangeText={handleChange('caste')}
-              onBlur={handleBlur('caste')}
-              value={values.caste}
-              style={styles.textInput}
-              placeholder={translate('Dharmikjankari.Caste')}
-              placeholderTextColor={'#666666'}
-            />
+              <Dropdown
+                style={styles.inputHeight}
+                uniqueKey={'id'}
+                displayKey={'name'}
+                items={height}
+                selectText={translate('Vyaktigatdata.Height')}
+                selectedItems={values.height}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
 
-            {errors.caste && touched.caste ? (
-              <Text style={styles.error}>{errors.caste}</Text>
-            ) : null}
+              {errors.height && touched.height ? (
+                <Text style={styles.error}>{errors.height}</Text>
+              ) : null}
 
-            <ExtendedTextInput
-              onChangeText={handleChange('native')}
-              onBlur={handleBlur('native')}
-              value={values.native}
-              style={styles.textInput}
-              placeholder={translate('Dharmikjankari.Native')}
-              placeholderTextColor={'#666666'}
-            />
+              <Dropdown
+                style={styles.textinputstyle}
+                uniqueKey={'maritalStatusId'}
+                displayKey={'maritalStatusTitleHi'}
+                items={maritalstatus}
+                selectText={translate('Vyaktigatdata.Marital Status')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
 
-            {errors.native && touched.native ? (
-              <Text style={styles.error}>{errors.native}</Text>
-            ) : null}
+              {errors.maritalstatus && touched.maritalstatus ? (
+                <Text style={styles.error}>{errors.maritalstatus}</Text>
+              ) : null}
 
-            <ExtendedTextInput
-              onChangeText={handleChange('birthtime')}
-              onBlur={handleBlur('birthtime')}
-              value={values.birthtime}
-              style={styles.textInput}
-              placeholder={translate('Dharmikjankari.Birthtime')}
-              placeholderTextColor={'#666666'}
-            />
+              <Dropdown
+                style={styles.inputMargin}
+                uniqueKey={'educationId'}
+                displayKey={'educationTitleHi'}
+                items={education}
+                selectText={translate('Vyaktigatdata.Knowledge')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+              {errors.knowledge && touched.knowledge ? (
+                <Text style={styles.error}>{errors.knowledge}</Text>
+              ) : null}
 
-            {errors.birthtime && touched.birthtime ? (
-              <Text style={styles.error}>{errors.birthtime}</Text>
-            ) : null}
-            <ExtendedTextInput
-              onChangeText={handleChange('birthplace')}
-              onBlur={handleBlur('birthplace')}
-              value={values.birthplace}
-              style={styles.textInput}
-              placeholder={translate('Dharmikjankari.Birthplace')}
-              placeholderTextColor={'#666666'}
-            />
+              <Dropdown
+                style={styles.inputMargin}
+                uniqueKey={'occupationId'}
+                displayKey={'occupationTitleHi'}
+                items={job}
+                selectText={translate('Vyaktigatdata.Job')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+              {errors.job && touched.job ? (
+                <Text style={styles.error}>{errors.job}</Text>
+              ) : null}
+              <View style={styles.inputMargin}>
+                <Dropdown
+                  items={dropDownList.colourDropdownList}
+                  selectText={translate('Vyaktigatdata.Colour')}
+                  selectedItems={values.name}
+                  onSelectedItemsChange={value => setFieldValue('name', value)}
+                />
+              </View>
+              {errors.colour && touched.colour ? (
+                <Text style={styles.error}>{errors.colour}</Text>
+              ) : null}
+              <Dropdown
+                style={styles.inputMargin}
+                items={dropDownList.disabilityDropdownList}
+                selectText={translate('Vyaktigatdata.Disability')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+              {errors.disability && touched.disability ? (
+                <Text style={styles.error}>{errors.disability}</Text>
+              ) : null}
+              <Dropdown
+                style={styles.inputMargin}
+                items={dropDownList.bloodgroupDropdownList}
+                selectText={translate('Vyaktigatdata.BloodGroup')}
+                selectedItems={values.name}
+                onSelectedItemsChange={value => setFieldValue('name', value)}
+              />
+              {errors.bloodgroup && touched.bloodgroup ? (
+                <Text style={styles.error}>{errors.bloodgroup}</Text>
+              ) : null}
 
-            {errors.birthplace && touched.birthplace ? (
-              <Text style={styles.error}>{errors.birthplace}</Text>
-            ) : null}
-
-            <Dropdown
-              style={styles.inputMargin}
-              uniqueKey={'zodiacId'}
-              displayKey={'zodiacTitleEn'}
-              items={zodiacSign}
-              selectText={translate('Dharmikjankari.Zodiacsign')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
-            />
-            {errors.zodiacsign && touched.zodiacsign ? (
-              <Text style={styles.error}>{errors.zodiacsign}</Text>
-            ) : null}
-
-            <Dropdown
-              style={styles.inputMargin}
-              uniqueKey={'nakshatraId'}
-              displayKey={'nakshatraTitleHi'}
-              items={auspicious}
-              selectText={translate('Dharmikjankari.auspicious')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
-            />
-            {errors.auspicious && touched.auspicious ? (
-              <Text style={styles.error}>{errors.auspicious}</Text>
-            ) : null}
-
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}>
-              <Text style={styles.text_btn}>
-                {translate('Dharmikjankari.Next')}
-              </Text>
-            </TouchableOpacity>
-          </>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSubmit}>
+                <Text
+                  style={styles.text_btn}>
+                  
+                  {translate('Vyaktigatdata.Next')}{' '}
+                </Text>
+              </TouchableOpacity>
+            </>
+    
         )}
       </Formik>
     </RootScreen>
   );
 };
 
-export default DharmikJankari;
+export default Personalinformation;
 
 const styles = StyleSheet.create({
   container: {
@@ -190,15 +202,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 25,
   },
-  inputHeight: {
-    marginTop: 40,
-  },
-  inputMargin: {
-    marginTop: 20,
-  },
-  dropdownMargin: {
-    marginTop: 5,
-  },
+
   dataContainer: {
     flexDirection: 'row',
     marginHorizontal: 16,
@@ -224,6 +228,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     marginTop: 30,
+  },
+  inputMargin: {
+    marginTop: 20,
   },
   ageContainer: {
     flexDirection: 'row',
@@ -288,7 +295,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginHorizontal: 70,
+    marginHorizontal: 90,
   },
   profileText: {
     fontWeight: 'bold',
@@ -327,9 +334,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 5,
   },
-  inputHeight: {
-    marginTop: 40,
-  },
   input: {
     backgroundColor: 'white',
     marginVertical: 10,
@@ -340,6 +344,9 @@ const styles = StyleSheet.create({
     width: 150,
     fontSize: 17,
     marginTop: 5,
+  },
+  inputHeight: {
+    marginTop: 70,
   },
   commonInput: {
     backgroundColor: 'white',
@@ -492,14 +499,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 20,
-  },
-  textInput: {
-    backgroundColor: 'white',
-    marginHorizontal: 30,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 20,
-    height: hp(8),
-    color: 'black',
   },
 });

@@ -54,6 +54,7 @@
     
   },
   "ParivarikParichay": {
+    "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",
      "fatherOccupation" : "पिता का व्यवसाय",
      "motherName" : "माँ का नाम",
@@ -66,6 +67,7 @@
 
   },
   "samPark" : {
+    "samparkheader" : "संपर्क जानकारी",
     "mobileNo" : "मोबाइल नंबर",
     "whatsAppNo" : "whatsapp नंबर",
     "presentAdd" : "वर्तमान पता",
@@ -76,6 +78,7 @@
     "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है"
   },
   "register": {
+    "registration" : "पंजीकरण",
     "Var": "वर",
     "Vadhu": "वधू ",
     "ProfileName": "प्रोफाइल बनने वाला",

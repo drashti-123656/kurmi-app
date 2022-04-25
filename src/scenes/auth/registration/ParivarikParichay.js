@@ -19,17 +19,24 @@ import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextIn
 import translate from './../../../translations/configTranslations';
 import {parivarikSchema} from '../../../utils/schema/registerSchema';
 import {useDispatch, useSelector} from 'react-redux';
-import { REGISTER_USER } from './redux/registrationActions';
+import {REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
-  const {parivarikData, samparkData} = useSelector(state => state.registration);
+  const {
+    parivarikData,
+    samparkData,
+    dharmikJankariData,
+    dropDownsData,
+    registerData,
+    personalinfoData,
+  } = useSelector(state => state.registration);
 
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo: '9876541230',
-      userContactInfoWhatsappNo: 9874563210,
+      userContactInfoContactNo: '8888888888',
+      userContactInfoWhatsappNo: '9999999999',
       userContactInfoPresentAddress: 'asasas',
       userContactInfoPermanentAddress: 'asasas',
 
@@ -39,9 +46,9 @@ const ParivarikParichay = () => {
       userEducationInfoOccupationDetails: 'asasas',
       userEducationInfoAnnualIncome: 'asasas',
 
-      userFamilyInfoFatherName: values.fatherName,
-      userFamilyInfoFatherOccupation: values.fatherOccupation,
-      userFamilyInfoMotherName: values.motherName,
+      userFamilyInfoFatherName: 'yyhh',
+      userFamilyInfoFatherOccupation: '7',
+      userFamilyInfoMotherName: 'gfff',
       userFamilyInfoMotherOccupation: 2,
       userFamilyInfoNoOfMarriedBrothers: '1',
       userFamilyInfoNoOfUnmarriedBrothers: '2',
@@ -72,13 +79,12 @@ const ParivarikParichay = () => {
       profileCreatedByNameHi: 'KHud',
       profileCreatedByNameEn: 'Self',
 
-      userUserName: 'test1@1232',
-      userName: 'te1st2',
+      userName: 'adsd',
       userGender: 'male',
-      userEmail: 'test1@1234.com',
-      userMobileNo: '9174563210',
+      userEmail: registerData.emailid,
+      userMobileNo: registerData.mobilenumber,
       userDob: '1988-06-27',
-      password: '123456',
+      password: registerData.password,
       userCountry: '10',
       userState: '5',
       userCity: '8',
@@ -90,19 +96,21 @@ const ParivarikParichay = () => {
       type: REGISTER_USER,
       payload,
     });
+
+    console.log('registerData.emailid', registerData.emailid);
   };
   return (
     <RootScreen>
       <ScrollView style={styles.container}>
         <Formik
           initialValues={{
-            fatherName: '',
-            fatherOccupation: '',
-            motherName: '',
-            motherMayaka: '',
-            brother: '',
-            sister: '',
-            land: '',
+            fatherName: parivarikData.fatherName,
+            fatherOccupation: parivarikData.fatherOccupation,
+            motherName: parivarikData.motherName,
+            motherMayaka: parivarikData.motherMayaka,
+            brother: parivarikData.brother,
+            sister: parivarikData.sister,
+            land: parivarikData.land,
           }}
           validationSchema={parivarikSchema}
           onSubmit={values => handleParivarik(values)}>
@@ -205,12 +213,10 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.land}</Text>
               ) : null}
 
-              <LoginButton 
+              <LoginButton
                 title={translate('ParivarikParichay.register')}
                 onPress={handleSubmit}
               />
-
-              
             </View>
           )}
         </Formik>
