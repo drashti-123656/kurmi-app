@@ -30,6 +30,8 @@ import {
 
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
+import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -40,7 +42,7 @@ const Registration = () => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    console.log('registerData', registerData);
+    console.log('registerData', profilemaker);
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -75,8 +77,7 @@ const Registration = () => {
       password: values.password,
     };
 
-    console.log(payload);
-
+  
     dispatch({
       type: VERIFY_USER,
       payload,
@@ -129,7 +130,9 @@ const Registration = () => {
                 style={styles.upload_img}
                 source={require('../../../assets/profile.png')}
               />
+               <Text style={styles.profileText}> {translate('register.picUpload')} </Text>
             </View>
+           
             <View style={styles.radioButtonContainer}>
               {isLiked.map(item => (
                 <View style={styles.ButtonContainer}>
@@ -152,8 +155,8 @@ const Registration = () => {
               displayKey={'profileCreatedByNameHi'}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('ProfileName', value)}
+              selectedItems={values.profilemaker}
+              onSelectedItemsChange={value => setFieldValue('profilemaker', value)}
             />
 
             {errors.profilemaker && touched.profilemaker ? (
@@ -168,13 +171,14 @@ const Registration = () => {
                 placeholder={translate('register.FirstName')}
                 placeholderTextColor={'#666666'}
               />
+              
 
               <TextInput
                 onChangeText={handleChange('lastname')}
                 onBlur={handleBlur('lastname')}
                 value={values.Source}
                 style={styles.textinput}
-                placeholder="Last Name"
+                placeholder={translate('register.lastName')}
                 placeholderTextColor={'#666666'}
               />
             </View>
@@ -189,18 +193,20 @@ const Registration = () => {
               </View>
             </View>
             <View>
-              <TextInput
-                onChangeText={handleChange('emailid')}
+            <ExtendedTextInput 
+              onChangeText={handleChange('emailid')}
                 onBlur={handleBlur('emailid')}
                 value={values.Source}
                 style={styles.commonInput}
                 placeholder={translate('register.EmailId')}
                 placeholderTextColor={'#666666'}
-              />
+            />
+              
               {errors.emailid && touched.emailid ? (
                 <Text style={styles.error}>{errors.emailid}</Text>
               ) : null}
-              <TextInput
+
+              <ExtendedTextInput 
                 onChangeText={handleChange('mobilenumber')}
                 onBlur={handleBlur('mobilenumber')}
                 value={values.Source}
@@ -208,6 +214,7 @@ const Registration = () => {
                 placeholder={translate('register.MobileNumber')}
                 placeholderTextColor={'#666666'}
               />
+             
               {errors.mobilenumber && touched.mobilenumber ? (
                 <Text style={styles.error}>{errors.mobilenumber}</Text>
               ) : null}
@@ -230,16 +237,7 @@ const Registration = () => {
               {translate('register.Note')}
             </Text>
 
-            {/* <Dropdown
-                  style={styles.inputMargin}
-                  items={dropDownList}
-                  selectText={translate('register.caste')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
-                {errors.caste && touched.caste ? (
-                  <Text style={styles.error}>{errors.caste}</Text>
-                ) : null} */}
+            
 
             <Dropdown
               style={styles.dropdownStyle}
@@ -259,8 +257,8 @@ const Registration = () => {
               displayKey={'name'}
               items={state}
               selectText={translate('register.state')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
+              selectedItems={values.state}
+              onSelectedItemsChange={value => setFieldValue('state', value)}
             />
             {errors.state && touched.state ? (
               <Text style={styles.error}>{errors.state}</Text>
@@ -272,22 +270,23 @@ const Registration = () => {
               displayKey={'cityName'}
               items={city}
               selectText={translate('register.city')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
+              selectedItems={values.city}
+              onSelectedItemsChange={value => setFieldValue('city', value)}
             />
             {errors.city && touched.city ? (
               <Text style={styles.error}>{errors.city}</Text>
             ) : null}
-            <View style={styles.inputMargin}>
-              <TextInput
-                onChangeText={handleChange('password')}
+
+            <ExtendedTextInput 
+               onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.Source}
                 style={styles.commonInput}
                 placeholder={translate('register.enterpassword')}
                 placeholderTextColor={'#666666'}
               />
-            </View>
+            
+           
             {errors.password && touched.password ? (
               <Text style={styles.error}>{errors.password}</Text>
             ) : null}
@@ -297,6 +296,7 @@ const Registration = () => {
             <View style={styles.checkboxcontainer}>
               <CheckBox
                 disabled={false}
+                tintColors={{true: 'white'}}
                 value={toggleCheckBox}
                 onValueChange={newValue => setToggleCheckBox(newValue)}
               />
@@ -305,13 +305,12 @@ const Registration = () => {
                 {translate('register.checkbox')}{' '}
               </Text>
             </View>
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}>
-              <Text style={styles.text_btn}>
-                {translate('register.create Account')}
-              </Text>
-            </TouchableOpacity>
+
+            <LoginButton 
+              title={translate('register.create Account')}
+              onPress={handleSubmit}
+            />
+            
           </View>
         )}
       </Formik>
@@ -324,6 +323,7 @@ export default Registration;
 const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
+    marginHorizontal: 10,
   },
   backArrow_img: {
     width: 30,
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
-    borderWidth: 0,
+    
   },
   inputMargin: {
     marginTop: 20,
@@ -344,17 +344,19 @@ const styles = StyleSheet.create({
   },
   nameContainer: {
     flexDirection: 'row',
-    marginHorizontal: 30,
-    marginBottom: 20,
+    marginHorizontal: 20,
+    marginBottom: 10,
     justifyContent: 'space-between',
   },
   textinput: {
     backgroundColor: 'white',
+    marginHorizontal: 10,
     borderRadius: 10,
     height: hp(7),
     color: 'black',
     fontSize: 15,
     flex:0.9,
+    paddingLeft: 10,
   },
   term: {
     color: '#FFFFFF',
@@ -370,6 +372,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     resizeMode: 'contain',
+    marginBottom: 10,
   },
   profileContainer: {
     justifyContent: 'center',
@@ -559,8 +562,8 @@ const styles = StyleSheet.create({
   radioButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 45,
-    marginTop: 20,
+    marginHorizontal : 10,
+    marginBottom: 20
   },
   ButtonContainer: {
     flexDirection: 'row',
@@ -620,7 +623,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     fontSize: 15,
     color: '#FFFFFF',
-    marginTop: 15,
+    marginBottom : 10,
+
   },
   star: {
     color: '#FF0000',
@@ -631,4 +635,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 20,
   },
+  profileText : {
+    color : 'white',
+    fontSize : 20,
+    fontWeight: 'bold'
+
+  }
 });

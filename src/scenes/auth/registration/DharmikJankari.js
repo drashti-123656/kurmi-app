@@ -54,7 +54,7 @@ const DharmikJankari = ({navigation}) => {
       userReligiousInfoZodiac: values.zodiacsign,
       userReligiousInfoManglik: values.auspicious,
     };
-    console.log('payload=>', payload);
+   
 
     navigation.navigate('Sampark');
 

@@ -91,10 +91,12 @@
     "state": " राज्य ",
     "city": " शहर ",
     "enterpassword": "पासवर्ड  डाले",
-    "Note": "उम्र काम से काम 18 वर्ष होनी चाहिए",
-    "Note@": " पासवर्ड कम से कम कैरेक्टर नंबर का हो ",
+    "Note": "उम्र कम से कम 18 वर्ष होनी चाहिए",
+    "Note@": " पासवर्ड कम से कम करैक्टर के हो",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
-    "create Account": "अकाउंट बनाएं "
+    "create Account": "अकाउंट बनाएं ",
+    "lastName" : "आखरी नाम",
+    "picUpload" : "फोटो अपलोड करे"
   },
   "Dharmikjankari": {
     "Dharmik Jankari": "धार्मिक जानकारी",

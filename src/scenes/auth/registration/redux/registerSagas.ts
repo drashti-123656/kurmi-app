@@ -22,7 +22,7 @@ import {loginSuccess} from '../../redux/authReducer';
 export function* registerUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
-  console.log('response=>>', response.data);
+ console.log('final=====>>>>',payload)
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -113,6 +113,7 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
+  console.log('payload2222',payload)
   const apiBody = {
     where: {
       userEmail: payload.userEmail,
@@ -120,13 +121,14 @@ export function* registerUserVerification(action) {
     },
   };
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
+  
   if (response.ok) {
+   
     yield put(register(payload));
-    console.log(payload)
     navigate('Personalinformation');
   } else {
     showMessage({
-      message: response.problem,
+      message: 'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
   }
@@ -140,7 +142,7 @@ export function* profilemakerDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  console.log('response=>', response);
+  
   if (response.ok) {
     yield put(fetchProfilemakerDropdownSuccess(response.data.data));
   }
@@ -154,7 +156,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  console.log('response111 =>', response.data.data);
+  
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }

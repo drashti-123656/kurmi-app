@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -33,14 +33,16 @@ const ParivarikParichay = () => {
     personalinfoData,
   } = useSelector(state => state.registration);
 
+  
+
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo: '8888888888',
-      userContactInfoWhatsappNo: '9999999999',
-      userContactInfoPresentAddress: 'asasas',
-      userContactInfoPermanentAddress: 'asasas',
+      userContactInfoContactNo: samparkData.mobileNo,
+      userContactInfoWhatsappNo: samparkData.whatsAppNo,
+      userContactInfoPresentAddress: samparkData.presentAdd,
+      userContactInfoPermanentAddress: samparkData.permanentAdd,
 
-      userEducationInfoEducation: '5',
+      userEducationInfoEducation: '5' ,
       userEducationInfoOccupation: '2',
       userEducationInfoProfession: '1',
       userEducationInfoOccupationDetails: 'asasas',
@@ -85,9 +87,9 @@ const ParivarikParichay = () => {
       userMobileNo: registerData.mobilenumber,
       userDob: '1988-06-27',
       password: registerData.password,
-      userCountry: '10',
-      userState: '5',
-      userCity: '8',
+      userCountry: dropDownsData.country,
+      userState: dropDownsData.state,
+      userCity: dropDownsData.city,
       userTown: 'test duniya',
       userPartnerPreference: '1',
     };
@@ -96,8 +98,8 @@ const ParivarikParichay = () => {
       type: REGISTER_USER,
       payload,
     });
-
-    console.log('registerData.emailid', registerData.emailid);
+   console.log('payload====',payload)
+   
   };
   return (
     <RootScreen>
