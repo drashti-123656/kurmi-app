@@ -71,7 +71,7 @@ const Registration = () => {
       showMessage({
         message: 'Please check privacy policy checkbox ',
         type: 'info',
-        backgroundColor: 'red',
+        //backgroundColor: 'white',
       });
       return;
     }

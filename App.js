@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import store from './src/store/index';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import FlashMessage from 'react-native-flash-message';
-import Personalinformation from './src/scenes/auth/registration/personalInformation';
+import Sampark from './src/scenes/auth/registration/Sampark';
 
 
 Appearance.getColorScheme(
@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Personalinformation />
+      <Navigation />
       <FlashMessage position="top" />
     </Provider>
   );

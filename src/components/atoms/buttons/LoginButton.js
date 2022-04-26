@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View,ActivityIndicator,TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View,ActivityIndicator,TouchableOpacity, Pressable} from 'react-native';
 import React from 'react';
 import {
   heightPercentageToDP,
@@ -7,7 +7,7 @@ import {
 
 const LoginButton = ({title, onPress, loading}) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       style={styles.container}
       disabled={loading}>
@@ -16,7 +16,7 @@ const LoginButton = ({title, onPress, loading}) => {
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

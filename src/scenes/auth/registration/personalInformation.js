@@ -24,6 +24,7 @@ import {
   FETCH_MARITALSTATUS_DROPDOWN,
 } from './redux/registrationActions';
 import {personalInfo} from './redux/registrationReducer';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -156,14 +157,13 @@ const Personalinformation = ({navigation}) => {
             {errors.disability && touched.disability ? (
               <Text style={styles.error}>{errors.disability}</Text>
             ) : null}
+           
+            <LoginButton 
+                 title={translate('Vyaktigatdata.Next')}
+              onPress={handleSubmit}
 
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}>
-              <Text style={styles.text_btn}>
-                {translate('Vyaktigatdata.Next')}{' '}
-              </Text>
-            </TouchableOpacity>
+            />
+           
           </>
         )}
       </Formik>

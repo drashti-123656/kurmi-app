@@ -7,6 +7,7 @@ import {
   fetchCityDropdownSuccess,
   fetchCountryDropdownSuccess,
   fetchEducationDropdownSuccess,
+  fetchGotraDropdownSuccess,
   fetchJobDropdownSuccess,
   fetchMaritalstatusDropdownSuccess,
   fetchProfilemakerDropdownSuccess,
@@ -66,6 +67,20 @@ export function* auspiciousDropdown(action) {
 
   if (response.ok) {
     yield put(fetchAuspiciousDropdownSuccess(response.data.data));
+  }
+}
+
+export function* gotraDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchGotraDropdownSuccess(response.data.data));
   }
 }
 

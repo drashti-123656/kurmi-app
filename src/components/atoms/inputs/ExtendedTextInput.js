@@ -27,8 +27,8 @@ export default ExtendedTextInput;
 const styles = StyleSheet.create({
   textinput: {
     backgroundColor: 'white',
-    marginLeft: 30,
-    marginRight: 30,
+   
+    marginHorizontal: 30,
     marginVertical: 10,
     borderRadius: 10,
     paddingLeft: 10,

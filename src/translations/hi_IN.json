@@ -117,7 +117,9 @@
     "Colour": "रंग",
     "Disability": "विकलांगता",
     "BloodGroup": " ब्लड ग्रुप  ",
-    "Next": "आगे"
+    "Next": "आगे",
+    "Gotra" : "गोत्र",
+    "MaaKaGotra" : "माँ का गोत्र"
   },
   "profilemaker":{
     "Myself":"स्वयं",

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -21,17 +21,19 @@ import {samparkSchema} from './../../../utils/schema/registerSchema';
 
 import {sampark} from './redux/registrationReducer';
 import {useDispatch, useSelector} from 'react-redux';
-import { navigationRef } from '../../../navigation/RootNavigation';
+import {navigationRef} from '../../../navigation/RootNavigation';
+import CustomInput from '../../../components/atoms/inputs/CustomInput';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const Sampark = ({navigation}) => {
   const dispatch = useDispatch();
   const {samparkData} = useSelector(state => state.registration);
+  const [notes, setNotes] = useState('');
 
   useEffect(() => {
-    console.log('samparkData', samparkData)
-  }, [samparkData])
-  
-  
+    console.log('samparkData', samparkData);
+  }, [samparkData]);
+
   const handleSampark = values => {
     const payload = {
       userContactInfoContactNo: values.mobileNo,
@@ -41,10 +43,8 @@ const Sampark = ({navigation}) => {
     };
 
     dispatch(sampark(payload));
-    navigation.navigate('ParivarikParichay')
+    navigation.navigate('ParivarikParichay');
   };
-
- 
 
   return (
     <RootScreen>
@@ -91,34 +91,46 @@ const Sampark = ({navigation}) => {
               {errors.whatsAppNo && touched.whatsAppNo ? (
                 <Text style={styles.errorStyle}>{errors.whatsAppNo}</Text>
               ) : null}
-              <ExtendedTextInput
+              {/* <ExtendedTextInput
                 onChangeText={handleChange('presentAdd')}
                 onBlur={handleBlur('presentAdd')}
                 value={values.presentAdd}
                 style={styles.textInput}
                 placeholder={translate('samPark.presentAdd')}
                 placeholderTextColor={'#666666'}
+              /> */}
+              <CustomInput
+                onChangeText={handleChange('presentAdd')}
+                value={values.presentAdd}
+                placeholder={translate('samPark.presentAdd')}
+                editable={true}
+                multiline={true}
+                height={150}
               />
 
               {errors.presentAdd && touched.presentAdd ? (
                 <Text style={styles.errorStyle}>{errors.presentAdd}</Text>
               ) : null}
 
-              <ExtendedTextInput
+              <CustomInput
                 onChangeText={handleChange('permanentAdd')}
-                onBlur={handleBlur('permanentAdd')}
                 value={values.permanentAdd}
-                style={styles.textInput}
                 placeholder={translate('samPark.permanentAdd')}
-                placeholderTextColor={'#666666'}
+                editable={true}
+                multiline={true}
+                height={150}
               />
 
               {errors.permanentAdd && touched.permanentAdd ? (
                 <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>{translate('samPark.Next')}</Text>
-              </TouchableOpacity>
+
+            <LoginButton 
+                 title={translate('samPark.Next')}
+              onPress={handleSubmit}
+
+            />
+             
             </View>
           )}
         </Formik>
@@ -143,6 +155,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 20,
     height: hp(8),
+    color: 'black',
+  },
+  richTextbox: {
+    backgroundColor: 'white',
+    marginHorizontal: 30,
+    marginVertical: 10,
+    borderRadius: 10,
+    paddingLeft: 20,
+    height: hp(20),
     color: 'black',
   },
   button: {

@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
-
+import {heightDropdwonList} from '../../../../utils/constants/dropDownList'
 const initialState = {
   samparkData: {
     mobileNo: '',
@@ -23,7 +23,7 @@ const initialState = {
     error: '',
   },
   dharmikJankariData: {
-    caste: '',
+    gotra: '',
     native: '',
     birthtime: '',
     birthplace: '',
@@ -33,10 +33,7 @@ const initialState = {
   dropDownsData: {
     zodiacSign: [],
     auspicious: [],
-    height: [
-      {id: 1, name: '5ft 5in'},
-      {id: 2, name: '5ft 9in'},
-    ],
+    height: heightDropdwonList,
     maritalstatus: [],
     education: [],
     job: [],
@@ -51,6 +48,7 @@ const initialState = {
     country: [],
     state: [],
     city: [],
+    gotra: []
   },
   registerData: {
     emailid: '',
@@ -128,6 +126,10 @@ const registerationSlice = createSlice({
 
     fetchZodiacDropdownSuccess(state, action) {
       state.dropDownsData.zodiacSign = action.payload;
+    },
+
+    fetchGotraDropdownSuccess(state, action) {
+      state.dropDownsData.gotra = action.payload;
     },
 
     fetchAuspiciousDropdownSuccess(state, action) {
@@ -211,7 +213,7 @@ export const {
   fetchJobDropdownSuccess,
   register,
   fetchProfilemakerDropdownSuccess,
-
+  fetchGotraDropdownSuccess,
   fetchCountryDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchCityDropdownSuccess,
