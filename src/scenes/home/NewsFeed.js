@@ -43,7 +43,7 @@ const NewsFeed = ({navigation}) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.imageContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.openDrawer()}>
             <Image
               style={styles.vector_img}
               source={require('../../assets/Vector6.png')}
