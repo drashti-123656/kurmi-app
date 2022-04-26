@@ -8,14 +8,14 @@ import Whatsapp from '../scenes/auth/Whatsapp';
 import DashboardNavigation from './DashboardNavigation';
 import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
-
+import DrawerContent from './DrawerNavigation';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator>
+      {/* <Stack.Navigator> */}
         {/* <Stack.Screen
               name="Whatsapp"
               component={Whatsapp}
@@ -24,7 +24,7 @@ const Navigation = () => {
                 headerShown: false,
               }}
             /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="DashboardNavigation"
           component={DashboardNavigation}
           options={{headerShown: false}}
@@ -34,7 +34,8 @@ const Navigation = () => {
           component={ContactUs}
           options={{headerShown: false}}
         />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+       <DrawerContent />
     </NavigationContainer>
   );
 };
