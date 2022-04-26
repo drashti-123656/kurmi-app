@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import translate from '../../../../translations/configTranslations';
 
 const initialState = {
   samparkData: {
@@ -39,9 +40,12 @@ const initialState = {
     maritalstatus: [],
     education: [],
     job: [],
-    colour: [],
-    disability: [],
-    bloodgroup: [],
+   
+    disability: [
+      {id: 1, name:  translate('Disability.Yes')},
+      {id: 2, name: translate('Disability.No')},
+    ],
+   
     profilemaker: [],
     birthdate: [],
     country: [],
@@ -132,6 +136,9 @@ const registerationSlice = createSlice({
     fetchHeightDropdownSuccess(state, action) {
       state.dropDownsData.height = action.payload;
     },
+    fetchDisabilityDropdownSuccess(state, action) {
+      state.dropDownsData.disability = action.payload;
+    },
     fetchMaritalstatusDropdownSuccess(state, action) {
       state.dropDownsData.maritalstatus = action.payload;
     },
@@ -209,5 +216,6 @@ export const {
   fetchStateDropdownSuccess,
   fetchCityDropdownSuccess,
   personalInfo,
+  fetchDisabilityDropdownSuccess,
 } = actions;
 export default reducer;

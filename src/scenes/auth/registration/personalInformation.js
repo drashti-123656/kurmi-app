@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -18,18 +18,21 @@ import dropDownList from '../../../utils/constants/dropDownList';
 import {PersonalinformationSchema} from '../../../utils/schema/personalInformationSchema';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
-import { FETCH_EDUCATION_DROPDOWN, FETCH_JOB_DROPDOWN, FETCH_MARITALSTATUS_DROPDOWN } from './redux/registrationActions';
-import { personalInfo } from './redux/registrationReducer';
+import {
+  FETCH_EDUCATION_DROPDOWN,
+  FETCH_JOB_DROPDOWN,
+  FETCH_MARITALSTATUS_DROPDOWN,
+} from './redux/registrationActions';
+import {personalInfo} from './redux/registrationReducer';
 
 const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
   const {
     personalinfoData,
-    dropDownsData: {maritalstatus, education, job, height},
+    dropDownsData: {maritalstatus, education, job, height,disability},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    
     dispatch({
       type: FETCH_MARITALSTATUS_DROPDOWN,
       payload: {moduleType: 'MaritalStatus'},
@@ -58,7 +61,7 @@ const Personalinformation = ({navigation}) => {
     };
 
     dispatch(personalInfo(payload));
-    navigation.navigate('DharmikJankari')
+    navigation.navigate('DharmikJankari');
   };
 
   return (
@@ -70,7 +73,7 @@ const Personalinformation = ({navigation}) => {
           education: '',
           job: '',
           colour: '',
-          disability: '',
+          disability: personalinfoData.disability,
           bloodgroup: '',
         }}
         validationSchema={PersonalinformationSchema}
@@ -85,102 +88,83 @@ const Personalinformation = ({navigation}) => {
           touched,
         }) => (
           <>
-              <Dropdown
-                style={styles.inputHeight}
-                uniqueKey={'id'}
-                displayKey={'name'}
-                items={height}
-                selectText={translate('Vyaktigatdata.Height')}
-                selectedItems={values.height}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
+            <Dropdown
+              style={styles.inputHeight}
+              uniqueKey={'id'}
+              displayKey={'name'}
+              items={height}
+              selectText={translate('Vyaktigatdata.Height')}
+              selectedItems={values.height}
+              onSelectedItemsChange={value => setFieldValue('height', value)}
+            />
 
-              {errors.height && touched.height ? (
-                <Text style={styles.error}>{errors.height}</Text>
-              ) : null}
+            {errors.height && touched.height ? (
+              <Text style={styles.error}>{errors.height}</Text>
+            ) : null}
 
-              <Dropdown
-                style={styles.textinputstyle}
-                uniqueKey={'maritalStatusId'}
-                displayKey={'maritalStatusTitleHi'}
-                items={maritalstatus}
-                selectText={translate('Vyaktigatdata.Marital Status')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
+            <Dropdown
+              style={styles.textinputstyle}
+              uniqueKey={'maritalStatusId'}
+              displayKey={'maritalStatusTitleHi'}
+              items={maritalstatus}
+              selectText={translate('Vyaktigatdata.Marital Status')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
 
-              {errors.maritalstatus && touched.maritalstatus ? (
-                <Text style={styles.error}>{errors.maritalstatus}</Text>
-              ) : null}
+            {errors.maritalstatus && touched.maritalstatus ? (
+              <Text style={styles.error}>{errors.maritalstatus}</Text>
+            ) : null}
 
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'educationId'}
-                displayKey={'educationTitleHi'}
-                items={education}
-                selectText={translate('Vyaktigatdata.Knowledge')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.knowledge && touched.knowledge ? (
-                <Text style={styles.error}>{errors.knowledge}</Text>
-              ) : null}
+            <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'educationId'}
+              displayKey={'educationTitleHi'}
+              items={education}
+              selectText={translate('Vyaktigatdata.Knowledge')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.knowledge && touched.knowledge ? (
+              <Text style={styles.error}>{errors.knowledge}</Text>
+            ) : null}
 
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'occupationId'}
-                displayKey={'occupationTitleHi'}
-                items={job}
-                selectText={translate('Vyaktigatdata.Job')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.job && touched.job ? (
-                <Text style={styles.error}>{errors.job}</Text>
-              ) : null}
-              <View style={styles.inputMargin}>
-                <Dropdown
-                  items={dropDownList.colourDropdownList}
-                  selectText={translate('Vyaktigatdata.Colour')}
-                  selectedItems={values.name}
-                  onSelectedItemsChange={value => setFieldValue('name', value)}
-                />
-              </View>
-              {errors.colour && touched.colour ? (
-                <Text style={styles.error}>{errors.colour}</Text>
-              ) : null}
-              <Dropdown
-                style={styles.inputMargin}
-                items={dropDownList.disabilityDropdownList}
-                selectText={translate('Vyaktigatdata.Disability')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.disability && touched.disability ? (
-                <Text style={styles.error}>{errors.disability}</Text>
-              ) : null}
-              <Dropdown
-                style={styles.inputMargin}
-                items={dropDownList.bloodgroupDropdownList}
-                selectText={translate('Vyaktigatdata.BloodGroup')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-              {errors.bloodgroup && touched.bloodgroup ? (
-                <Text style={styles.error}>{errors.bloodgroup}</Text>
-              ) : null}
+            <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'occupationId'}
+              displayKey={'occupationTitleHi'}
+              items={job}
+              selectText={translate('Vyaktigatdata.Job')}
+              selectedItems={values.name}
+              onSelectedItemsChange={value => setFieldValue('name', value)}
+            />
+            {errors.job && touched.job ? (
+              <Text style={styles.error}>{errors.job}</Text>
+            ) : null}
 
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={handleSubmit}>
-                <Text
-                  style={styles.text_btn}>
-                  
-                  {translate('Vyaktigatdata.Next')}{' '}
-                </Text>
-              </TouchableOpacity>
-            </>
-    
+            <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'id'}
+              displayKey={'name'}
+              items={disability}
+              selectText={translate('Vyaktigatdata.Disability')}
+              selectedItems={values.disability}
+              onSelectedItemsChange={value =>
+                setFieldValue('disability', value)
+              }
+            />
+            {errors.disability && touched.disability ? (
+              <Text style={styles.error}>{errors.disability}</Text>
+            ) : null}
+
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSubmit}>
+              <Text style={styles.text_btn}>
+                {translate('Vyaktigatdata.Next')}{' '}
+              </Text>
+            </TouchableOpacity>
+          </>
         )}
       </Formik>
     </RootScreen>

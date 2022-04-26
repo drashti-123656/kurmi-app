@@ -6,6 +6,8 @@ import {Provider} from 'react-redux';
 import store from './src/store/index';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import FlashMessage from 'react-native-flash-message';
+import Personalinformation from './src/scenes/auth/registration/personalInformation';
+
 
 Appearance.getColorScheme(
   EStyleSheet.build({
@@ -28,7 +30,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Navigation />
+      <Personalinformation />
       <FlashMessage position="top" />
     </Provider>
   );

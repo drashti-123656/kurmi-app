@@ -20,6 +20,7 @@ import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
+import {showMessage} from 'react-native-flash-message';
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
@@ -35,6 +36,7 @@ import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const Registration = () => {
   const dispatch = useDispatch();
+  const [termsCondition, setTermsCondition] = useState(false);
 
   const {
     registerData,
@@ -53,18 +55,26 @@ const Registration = () => {
       payload: {moduleType: 'Country'},
     });
 
-    dispatch({
-      type: FETCH_STATE_DROPDOWN,
-      payload: {moduleType: 'State'},
-    });
+    // dispatch({
+    //   type: FETCH_STATE_DROPDOWN,
+    //   payload: {moduleType: 'State'},
+    // });
 
-    dispatch({
-      type: FETCH_CITY_DROPDOWN,
-      payload: {moduleType: 'City'},
-    });
+    // dispatch({
+    //   type: FETCH_CITY_DROPDOWN,
+    //   payload: {moduleType: 'City'},
+    // });
   }, []);
 
   const handleregisterUser = values => {
+    if (!termsCondition) {
+      showMessage({
+        message: 'Please check privacy policy checkbox ',
+        type: 'info',
+        backgroundColor: 'red',
+      });
+      return;
+    }
     const payload = {
       userEmail: values.emailid,
       userMobileNo: values.mobilenumber,
@@ -77,13 +87,12 @@ const Registration = () => {
       password: values.password,
     };
 
-  
     dispatch({
       type: VERIFY_USER,
       payload,
     });
   };
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  
   const [isLiked, setIsLiked] = useState([
     {id: 1, value: true, name: translate('register.Var'), selected: true},
     {id: 2, value: false, name: translate('register.Vadhu'), selected: false},
@@ -130,9 +139,12 @@ const Registration = () => {
                 style={styles.upload_img}
                 source={require('../../../assets/profile.png')}
               />
-               <Text style={styles.profileText}> {translate('register.picUpload')} </Text>
+              <Text style={styles.profileText}>
+                {' '}
+                {translate('register.picUpload')}{' '}
+              </Text>
             </View>
-           
+
             <View style={styles.radioButtonContainer}>
               {isLiked.map(item => (
                 <View style={styles.ButtonContainer}>
@@ -156,7 +168,9 @@ const Registration = () => {
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
-              onSelectedItemsChange={value => setFieldValue('profilemaker', value)}
+              onSelectedItemsChange={value =>
+                setFieldValue('profilemaker', value)
+              }
             />
 
             {errors.profilemaker && touched.profilemaker ? (
@@ -171,7 +185,6 @@ const Registration = () => {
                 placeholder={translate('register.FirstName')}
                 placeholderTextColor={'#666666'}
               />
-              
 
               <TextInput
                 onChangeText={handleChange('lastname')}
@@ -193,20 +206,20 @@ const Registration = () => {
               </View>
             </View>
             <View>
-            <ExtendedTextInput 
-              onChangeText={handleChange('emailid')}
+              <ExtendedTextInput
+                onChangeText={handleChange('emailid')}
                 onBlur={handleBlur('emailid')}
                 value={values.Source}
                 style={styles.commonInput}
                 placeholder={translate('register.EmailId')}
                 placeholderTextColor={'#666666'}
-            />
-              
+              />
+
               {errors.emailid && touched.emailid ? (
                 <Text style={styles.error}>{errors.emailid}</Text>
               ) : null}
 
-              <ExtendedTextInput 
+              <ExtendedTextInput
                 onChangeText={handleChange('mobilenumber')}
                 onBlur={handleBlur('mobilenumber')}
                 value={values.Source}
@@ -214,7 +227,7 @@ const Registration = () => {
                 placeholder={translate('register.MobileNumber')}
                 placeholderTextColor={'#666666'}
               />
-             
+
               {errors.mobilenumber && touched.mobilenumber ? (
                 <Text style={styles.error}>{errors.mobilenumber}</Text>
               ) : null}
@@ -222,7 +235,7 @@ const Registration = () => {
 
             <View style={styles.birthdayInput}>
               <Dropdown
-              style={styles.dropdownStyle}
+                style={styles.dropdownStyle}
                 items={dropDownList}
                 selectText={translate('register.birthdate')}
                 selectedItems={values.name}
@@ -237,28 +250,51 @@ const Registration = () => {
               {translate('register.Note')}
             </Text>
 
-            
-
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'countryId'}
               displayKey={'countryName'}
               items={country}
+              single
               selectText={translate('register.country')}
               selectedItems={values.country}
-              onSelectedItemsChange={value => setFieldValue('country', value)}
+              onSelectedItemsChange={value => {
+                setFieldValue('country', value);
+
+                dispatch({
+                  type: FETCH_STATE_DROPDOWN,
+                  payload: {
+                    filter: {
+                      countryId: value[0],
+                    },
+                    moduleType: 'State',
+                  },
+                });
+              }}
             />
             {errors.country && touched.country ? (
               <Text style={styles.error}>{errors.country}</Text>
             ) : null}
             <Dropdown
               style={styles.dropdownStyle}
-              uniqueKey={'id'}
+              uniqueKey={'stateId'}
               displayKey={'name'}
+              single
               items={state}
               selectText={translate('register.state')}
               selectedItems={values.state}
-              onSelectedItemsChange={value => setFieldValue('state', value)}
+              onSelectedItemsChange={value => {
+                setFieldValue('state', value);
+                dispatch({
+                  type: FETCH_CITY_DROPDOWN,
+                  payload: {
+                    filter: {
+                      cityStateId: value[0],
+                    },
+                    moduleType: 'City',
+                  },
+                });
+              }}
             />
             {errors.state && touched.state ? (
               <Text style={styles.error}>{errors.state}</Text>
@@ -268,6 +304,7 @@ const Registration = () => {
               style={styles.dropdownStyle}
               uniqueKey={'cityId'}
               displayKey={'cityName'}
+              single
               items={city}
               selectText={translate('register.city')}
               selectedItems={values.city}
@@ -277,16 +314,15 @@ const Registration = () => {
               <Text style={styles.error}>{errors.city}</Text>
             ) : null}
 
-            <ExtendedTextInput 
-               onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.Source}
-                style={styles.commonInput}
-                placeholder={translate('register.enterpassword')}
-                placeholderTextColor={'#666666'}
-              />
-            
-           
+            <ExtendedTextInput
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.Source}
+              style={styles.commonInput}
+              placeholder={translate('register.enterpassword')}
+              placeholderTextColor={'#666666'}
+            />
+
             {errors.password && touched.password ? (
               <Text style={styles.error}>{errors.password}</Text>
             ) : null}
@@ -294,23 +330,25 @@ const Registration = () => {
               <Text style={styles.star}>*</Text> {translate('register.Note@')}
             </Text>
             <View style={styles.checkboxcontainer}>
+          
               <CheckBox
                 disabled={false}
                 tintColors={{true: 'white'}}
-                value={toggleCheckBox}
-                onValueChange={newValue => setToggleCheckBox(newValue)}
+                value={termsCondition}
+                onValueChange={newValue => setTermsCondition(newValue)}
+                boxType={'square'}
               />
+          
               <Text style={styles.term}>
                 {' '}
                 {translate('register.checkbox')}{' '}
               </Text>
             </View>
 
-            <LoginButton 
+            <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
             />
-            
           </View>
         )}
       </Formik>
@@ -334,7 +372,6 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
-    
   },
   inputMargin: {
     marginTop: 20,
@@ -355,7 +392,7 @@ const styles = StyleSheet.create({
     height: hp(7),
     color: 'black',
     fontSize: 15,
-    flex:0.9,
+    flex: 0.9,
     paddingLeft: 10,
   },
   term: {
@@ -470,7 +507,7 @@ const styles = StyleSheet.create({
   input_view: {
     flex: 1,
   },
-  
+
   input: {
     backgroundColor: 'white',
     marginVertical: 10,
@@ -562,8 +599,8 @@ const styles = StyleSheet.create({
   radioButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal : 10,
-    marginBottom: 20
+    marginHorizontal: 10,
+    marginBottom: 20,
   },
   ButtonContainer: {
     flexDirection: 'row',
@@ -623,8 +660,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     fontSize: 15,
     color: '#FFFFFF',
-    marginBottom : 10,
-
+    marginBottom: 10,
   },
   star: {
     color: '#FF0000',
@@ -635,10 +671,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 20,
   },
-  profileText : {
-    color : 'white',
-    fontSize : 20,
-    fontWeight: 'bold'
-
-  }
+  profileText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
