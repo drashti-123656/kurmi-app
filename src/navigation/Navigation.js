@@ -9,13 +9,34 @@ import DashboardNavigation from './DashboardNavigation';
 import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
 import DrawerContent from './DrawerNavigation';
+import PasswordChange from '../scenes/passwordChange';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-      {/* <Stack.Navigator> */}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="DrawerContent"
+          component={DrawerContent}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Password Change"
+          component={PasswordChange}
+          options={{
+            headerShown: true,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color:'white',
+            
+            },
+            headerTintColor: '#ffff',
+            headerStyle: {
+              backgroundColor: '#DC1C28'
+          }}}
+        />
         {/* <Stack.Screen
               name="Whatsapp"
               component={Whatsapp}
@@ -28,14 +49,18 @@ const Navigation = () => {
           name="DashboardNavigation"
           component={DashboardNavigation}
           options={{headerShown: false}}
-        />
-        <Stack.Screen
+        /> */}
+        {/* <Stack.Screen
           name="ContactUs"
           component={ContactUs}
           options={{headerShown: false}}
-        />
-      </Stack.Navigator> */}
-       <DrawerContent />
+        /> */}
+        {/* <Stack.Screen
+          name="Password Change"
+          component={PasswordChange}
+          options={{headerShown: false}}
+        /> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
