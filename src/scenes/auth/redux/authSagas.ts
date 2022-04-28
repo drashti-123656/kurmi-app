@@ -9,7 +9,7 @@ export function* logUser(action) {
   const response = yield call(apiClient.post, API_URL.LOG_USER, payload);
   
   if (response.ok) {
-    navigate('DashboardNavigation');
+    navigate('DrawerNavigation');
   }
 }
 

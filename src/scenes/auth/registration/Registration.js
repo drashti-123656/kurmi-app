@@ -44,7 +44,7 @@ const Registration = () => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    console.log('registerData', profilemaker);
+    console.log('registerData===>>>', registerData);
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -54,16 +54,6 @@ const Registration = () => {
       type: FETCH_COUNTRY_DROPDOWN,
       payload: {moduleType: 'Country'},
     });
-
-    // dispatch({
-    //   type: FETCH_STATE_DROPDOWN,
-    //   payload: {moduleType: 'State'},
-    // });
-
-    // dispatch({
-    //   type: FETCH_CITY_DROPDOWN,
-    //   payload: {moduleType: 'City'},
-    // });
   }, []);
 
   const handleregisterUser = values => {
@@ -78,6 +68,7 @@ const Registration = () => {
     const payload = {
       userEmail: values.emailid,
       userMobileNo: values.mobilenumber,
+      userGender: values.gender,
       profileCreatedByNameHi: values.profilemaker,
       userName: values.firstname,
       userDob: values.birthdate,
@@ -87,16 +78,26 @@ const Registration = () => {
       password: values.password,
     };
 
+    console.log('gender===>>',payload)
+
     dispatch({
       type: VERIFY_USER,
       payload,
     });
+
+    dispatch(register(payload));
   };
-  
+
   const [isLiked, setIsLiked] = useState([
     {id: 1, value: true, name: translate('register.Var'), selected: true},
     {id: 2, value: false, name: translate('register.Vadhu'), selected: false},
   ]);
+
+  const genderSelectData = [
+    {id: 1, name: translate('register.Var')},
+    {id: 2, name: translate('register.Vadhu')},
+  ];
+
   const onRadioBtnClick = item => {
     let updatedState = isLiked.map(isLikedItem =>
       isLikedItem.id === item.id
@@ -110,13 +111,14 @@ const Registration = () => {
     <RootScreen scrollable={true}>
       <Formik
         initialValues={{
+          gender: 'male',
           profilemaker: '',
           firstname: '',
           lastname: '',
           emailid: '',
           mobilenumber: '',
           birthdate: '',
-          caste: '',
+         
           country: '',
           state: '',
           city: '',
@@ -146,25 +148,40 @@ const Registration = () => {
             </View>
 
             <View style={styles.radioButtonContainer}>
-              {isLiked.map(item => (
-                <View style={styles.ButtonContainer}>
-                  <TouchableOpacity
-                    onPress={() => onRadioBtnClick(item)}
-                    style={styles.radioButton}>
-                    {item.selected ? (
-                      <View style={styles.radioButtonIcon} />
-                    ) : null}
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-                    <Text style={styles.radioButtonText}>{item.name}</Text>
-                  </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'male')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'male' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
                 </View>
-              ))}
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Var')}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'female')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'female' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Vadhu')}
+                </Text>
+              </TouchableOpacity>
+              {errors.gender && touched.gender ? (
+                <Text style={styles.error}>{errors.gender}</Text>
+              ) : null}
             </View>
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'profileCreatedById'}
               displayKey={'profileCreatedByNameHi'}
+              autoFocus={true}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
@@ -174,13 +191,14 @@ const Registration = () => {
             />
 
             {errors.profilemaker && touched.profilemaker ? (
-              <Text style={styles.error}>{errors.profilemaker}</Text>
+              <Text style={styles.dropboxError}>{errors.profilemaker}</Text>
             ) : null}
             <View style={styles.nameContainer}>
               <TextInput
                 onChangeText={handleChange('firstname')}
                 onBlur={handleBlur('firstname')}
-                value={values.Source}
+              
+                value={values.firstname}
                 style={styles.textinput}
                 placeholder={translate('register.FirstName')}
                 placeholderTextColor={'#666666'}
@@ -189,7 +207,8 @@ const Registration = () => {
               <TextInput
                 onChangeText={handleChange('lastname')}
                 onBlur={handleBlur('lastname')}
-                value={values.Source}
+               
+                value={values.lastname}
                 style={styles.textinput}
                 placeholder={translate('register.lastName')}
                 placeholderTextColor={'#666666'}
@@ -197,11 +216,11 @@ const Registration = () => {
             </View>
             <View style={styles.errorText}>
               {errors.firstname && touched.firstname ? (
-                <Text style={styles.error}>{errors.firstname}</Text>
+                <Text style={styles.userFirstnameError}>{errors.firstname}</Text>
               ) : null}
               <View style={styles.lastnameError}>
                 {errors.lastname && touched.lastname ? (
-                  <Text style={styles.error}>{errors.lastname}</Text>
+                  <Text style={styles.userLastnameError}>{errors.lastname}</Text>
                 ) : null}
               </View>
             </View>
@@ -209,7 +228,8 @@ const Registration = () => {
               <ExtendedTextInput
                 onChangeText={handleChange('emailid')}
                 onBlur={handleBlur('emailid')}
-                value={values.Source}
+                autoFocus={true}
+                value={values.emailid}
                 style={styles.commonInput}
                 placeholder={translate('register.EmailId')}
                 placeholderTextColor={'#666666'}
@@ -222,7 +242,8 @@ const Registration = () => {
               <ExtendedTextInput
                 onChangeText={handleChange('mobilenumber')}
                 onBlur={handleBlur('mobilenumber')}
-                value={values.Source}
+                value={values.mobilenumber}
+                autoFocus={true}
                 style={styles.commonInput}
                 placeholder={translate('register.MobileNumber')}
                 placeholderTextColor={'#666666'}
@@ -236,6 +257,7 @@ const Registration = () => {
             <View style={styles.birthdayInput}>
               <Dropdown
                 style={styles.dropdownStyle}
+                autoFocus={true}
                 items={dropDownList}
                 selectText={translate('register.birthdate')}
                 selectedItems={values.name}
@@ -243,7 +265,7 @@ const Registration = () => {
               />
             </View>
             {errors.birthdate && touched.birthdate ? (
-              <Text style={styles.error}>{errors.birthdate}</Text>
+              <Text style={styles.dropboxError}>{errors.birthdate}</Text>
             ) : null}
             <Text style={styles.text}>
               <Text style={styles.star}>*</Text>
@@ -254,6 +276,7 @@ const Registration = () => {
               style={styles.dropdownStyle}
               uniqueKey={'countryId'}
               displayKey={'countryName'}
+              autoFocus={true}
               items={country}
               single
               selectText={translate('register.country')}
@@ -273,12 +296,13 @@ const Registration = () => {
               }}
             />
             {errors.country && touched.country ? (
-              <Text style={styles.error}>{errors.country}</Text>
+              <Text style={styles.dropboxError}>{errors.country}</Text>
             ) : null}
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'stateId'}
               displayKey={'name'}
+              autoFocus={true}
               single
               items={state}
               selectText={translate('register.state')}
@@ -297,13 +321,14 @@ const Registration = () => {
               }}
             />
             {errors.state && touched.state ? (
-              <Text style={styles.error}>{errors.state}</Text>
+              <Text style={styles.dropboxError}>{errors.state}</Text>
             ) : null}
 
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'cityId'}
               displayKey={'cityName'}
+              autoFocus={true}
               single
               items={city}
               selectText={translate('register.city')}
@@ -311,13 +336,14 @@ const Registration = () => {
               onSelectedItemsChange={value => setFieldValue('city', value)}
             />
             {errors.city && touched.city ? (
-              <Text style={styles.error}>{errors.city}</Text>
+              <Text style={styles.dropboxError}>{errors.city}</Text>
             ) : null}
 
             <ExtendedTextInput
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
-              value={values.Source}
+              autoFocus={true}
+              value={values.password}
               style={styles.commonInput}
               placeholder={translate('register.enterpassword')}
               placeholderTextColor={'#666666'}
@@ -330,7 +356,6 @@ const Registration = () => {
               <Text style={styles.star}>*</Text> {translate('register.Note@')}
             </Text>
             <View style={styles.checkboxcontainer}>
-          
               <CheckBox
                 disabled={false}
                 tintColors={{true: 'white'}}
@@ -338,7 +363,7 @@ const Registration = () => {
                 onValueChange={newValue => setTermsCondition(newValue)}
                 boxType={'square'}
               />
-          
+
               <Text style={styles.term}>
                 {' '}
                 {translate('register.checkbox')}{' '}
@@ -561,6 +586,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: hp(15),
   },
+
   footer_text: {
     textAlign: 'center',
     fontWeight: '400',
@@ -583,11 +609,9 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginHorizontal: 50,
+    marginRight: 30,
     color: 'red',
-    marginRight: 40,
-    position: 'relative',
-    top: 5,
+    textAlign: 'right',
   },
   lastnameerror: {
     fontSize: 12,
@@ -676,4 +700,29 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  dropboxError : {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 30,
+    color: 'red',
+    textAlign: 'right',
+    marginBottom: 5,
+  },
+  userLastnameError : {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: 'red',
+    textAlign: 'right',
+    marginBottom: 5,
+    marginLeft : '20%'
+
+},
+userFirstnameError : {
+  fontSize: 12,
+  fontWeight: 'bold',
+  marginRight: 30,
+  color: 'red',
+ marginLeft: '30%',
+},
 });

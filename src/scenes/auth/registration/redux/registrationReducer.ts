@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
-import {heightDropdwonList} from '../../../../utils/constants/dropDownList'
+import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
   samparkData: {
     mobileNo: '',
@@ -37,27 +37,28 @@ const initialState = {
     maritalstatus: [],
     education: [],
     job: [],
-   
+
     disability: [
-      {id: 1, name:  translate('Disability.Yes')},
+      {id: 1, name: translate('Disability.Yes')},
       {id: 2, name: translate('Disability.No')},
     ],
-   
+
     profilemaker: [],
     birthdate: [],
     country: [],
     state: [],
     city: [],
-    gotra: []
+    gotra: [],
   },
   registerData: {
     emailid: '',
     mobilenumber: '',
+    gender: '',
     profilemaker: '',
     firstname: '',
     lastname: '',
     birthdate: '',
-    caste: '',
+
     country: '',
     state: '',
     city: '',
@@ -154,11 +155,12 @@ const registerationSlice = createSlice({
     register(state, action) {
       state.registerData.emailid = action.payload.userEmail;
       state.registerData.mobilenumber = action.payload.userMobileNo;
+      state.registerData.gender = action.payload.userGender;
       state.registerData.profilemaker = action.payload.profileCreatedByNameHi;
       state.registerData.firstname = action.payload.userName;
       state.registerData.lastname = action.payload;
       state.registerData.birthdate = action.payload.userDob;
-      state.registerData.caste = action.payload.userPersonalInfoHeight;
+
       state.registerData.country = action.payload.userCountry;
       state.registerData.state = action.payload.userState;
       state.registerData.city = action.payload.userCity;
