@@ -8,30 +8,56 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+import RootScreen from './../../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
-import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import translate from './../../translations/configTranslations';
-import {samparkSchema} from '../../utils/schema/registerSchema';
+import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextInput';
+import translate from './../../../translations/configTranslations';
+import {samparkSchema} from './../../../utils/schema/registerSchema';
 
-const Sampark = () => {
+import {sampark} from './redux/registrationReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import { navigationRef } from '../../../navigation/RootNavigation';
+
+const Sampark = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {samparkData} = useSelector(state => state.registration);
+
+  useEffect(() => {
+    console.log('samparkData', samparkData)
+  }, [samparkData])
+  
+  
+  const handleSampark = values => {
+    const payload = {
+      userContactInfoContactNo: values.mobileNo,
+      userContactInfoWhatsappNo: values.whatsAppNo,
+      userContactInfoPresentAddress: values.presentAdd,
+      userContactInfoPermanentAddress: values.permanentAdd,
+    };
+
+    dispatch(sampark(payload));
+    navigation.navigate('ParivarikParichay')
+  };
+
+ 
+
   return (
     <RootScreen>
       <ScrollView style={styles.container}>
         <Formik
           initialValues={{
-            mobileNo: '',
-            whatsAppNo: '',
-            presentAdd: '',
-            permanentAdd: '',
+            mobileNo: samparkData.mobileNo,
+            whatsAppNo: samparkData.whatsAppNo,
+            presentAdd: samparkData.permanentAdd,
+            permanentAdd: samparkData.presentAdd,
           }}
           validationSchema={samparkSchema}
-          onSubmit={values => console.log(values)}>
+          onSubmit={values => handleSampark(values)}>
           {({
             handleChange,
             handleBlur,

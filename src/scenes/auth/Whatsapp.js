@@ -1,24 +1,33 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
+
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
-
 import {WhatsappSchema} from '../../utils/schema/login';
-
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import {LOG_USER} from './redux/authActions';
+import {useDispatch} from 'react-redux';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const Whatsapp = ({navigation}) => {
+  const dispatch = useDispatch();
+  const handlelogUser = values => {
+    const payload = {
+      visitorName: values.name,
+      visitorMobileNo: values.whatsappno,
+      visitorDeviceInfo: 'apple',
+    };
+    dispatch({
+      type: LOG_USER,
+      payload,
+    });
+  };
+
   return (
     <RootScreen scrollable={true}>
       <Image source={require('../../assets/logo.png')} style={styles.image} />
@@ -29,7 +38,7 @@ const Whatsapp = ({navigation}) => {
           whatsappno: '',
         }}
         validationSchema={WhatsappSchema}
-        onSubmit={values => console.log(values)}>
+        onSubmit={values => handlelogUser(values)}>
         {({
           handleChange,
           handleBlur,
@@ -59,13 +68,11 @@ const Whatsapp = ({navigation}) => {
             {errors.whatsappno && touched.whatsappno ? (
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn} onPress={() => navigation.navigate('DashboardNavigation')}>{translate('whatsapp.Continue')}</Text>
-              </TouchableOpacity>
-            {/* <LoginButton
+
+            <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
-            /> */}
+            />
           </View>
         )}
       </Formik>

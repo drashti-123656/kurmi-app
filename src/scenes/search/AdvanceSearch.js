@@ -14,6 +14,9 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
+import DropDown from '../../components/organisms/DropDown';
+import dropDownList from '../../utils/constants/dropDownList';
+import translate from '../../translations/configTranslations';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import { manglikSchema } from '../../utils/schema/manglikSchema';
 
