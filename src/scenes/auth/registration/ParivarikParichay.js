@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -21,9 +21,11 @@ import {parivarikSchema} from '../../../utils/schema/registerSchema';
 import {useDispatch, useSelector} from 'react-redux';
 import {REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
+import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const {
     parivarikData,
     samparkData,
@@ -37,10 +39,10 @@ const ParivarikParichay = () => {
 
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo: samparkData.mobileNo,
-      userContactInfoWhatsappNo: samparkData.whatsAppNo,
-      userContactInfoPresentAddress: samparkData.presentAdd,
-      userContactInfoPermanentAddress: samparkData.permanentAdd,
+      userContactInfoContactNo: '55555',
+      userContactInfoWhatsappNo: '5555',
+      userContactInfoPresentAddress: 'hhhh',
+      userContactInfoPermanentAddress: 'ggg',
 
       userEducationInfoEducation: '5' ,
       userEducationInfoOccupation: '2',
@@ -87,9 +89,9 @@ const ParivarikParichay = () => {
       userMobileNo: registerData.mobilenumber,
       userDob: '1988-06-27',
       password: registerData.password,
-      userCountry: dropDownsData.country,
-      userState: dropDownsData.state,
-      userCity: dropDownsData.city,
+      userCountry: registerData.country,
+      userState: 22,
+      userCity: 33,
       userTown: 'test duniya',
       userPartnerPreference: '1',
     };
@@ -98,7 +100,7 @@ const ParivarikParichay = () => {
       type: REGISTER_USER,
       payload,
     });
-   console.log('payload====',payload)
+    setLoading(true);
    
   };
   return (
@@ -124,7 +126,7 @@ const ParivarikParichay = () => {
             errors,
             touched,
           }) => (
-            <View>
+            <View style={{marginTop: '10%'}}>
               <ExtendedTextInput
                 onChangeText={handleChange('fatherName')}
                 onBlur={handleBlur('fatherName')}
@@ -202,13 +204,23 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.sister}</Text>
               ) : null}
 
-              <ExtendedTextInput
+              {/* <ExtendedTextInput
                 onChangeText={handleChange('land')}
                 onBlur={handleBlur('land')}
                 value={values.land}
                 style={styles.textinput}
                 placeholder={translate('ParivarikParichay.land')}
                 placeholderTextColor={'#666666'}
+              /> */}
+
+              <Dropdown 
+                style={styles.inputMargin}
+                uniqueKey={'land'}
+                displayKey={'land'}
+                // items={land}
+                selectText={translate('ParivarikParichay.land')}
+                selectedItems={values.land}
+                onSelectedItemsChange={value => setFieldValue('land', value)}
               />
 
               {errors.land && touched.land ? (
@@ -218,6 +230,7 @@ const ParivarikParichay = () => {
               <LoginButton
                 title={translate('ParivarikParichay.register')}
                 onPress={handleSubmit}
+                loading={loading}
               />
             </View>
           )}
@@ -245,6 +258,9 @@ const styles = StyleSheet.create({
     height: hp(8),
     color: 'black',
   },
+  inputMargin: {
+    marginBottom: 20
+   },
   button: {
     backgroundColor: '#DC1C28',
     height: hp(7),

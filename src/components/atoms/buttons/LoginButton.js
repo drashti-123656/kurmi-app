@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#c3773b',
     height: 50,
     borderRadius: 10,
-    marginTop: heightPercentageToDP('1'),
+    marginTop: heightPercentageToDP('2'),
     marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('8'),
     justifyContent: 'center',

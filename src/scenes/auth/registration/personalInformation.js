@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -18,6 +18,7 @@ import dropDownList from '../../../utils/constants/dropDownList';
 import {PersonalinformationSchema} from '../../../utils/schema/personalInformationSchema';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
+
 import {
   FETCH_EDUCATION_DROPDOWN,
   FETCH_JOB_DROPDOWN,
@@ -28,6 +29,7 @@ import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const Personalinformation = ({navigation}) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const {
     personalinfoData,
     dropDownsData: {maritalstatus, education, job, height,disability},
@@ -62,7 +64,9 @@ const Personalinformation = ({navigation}) => {
     };
 
     dispatch(personalInfo(payload));
+    setLoading(true);
     navigation.navigate('DharmikJankari');
+
   };
 
   return (
@@ -88,9 +92,10 @@ const Personalinformation = ({navigation}) => {
           errors,
           touched,
         }) => (
-          <>
+          <View style={{marginTop : '15%'}}> 
+          
             <Dropdown
-              style={styles.inputHeight}
+               style={styles.inputMargin}
               uniqueKey={'id'}
               displayKey={'name'}
               items={height}
@@ -104,13 +109,13 @@ const Personalinformation = ({navigation}) => {
             ) : null}
 
             <Dropdown
-              style={styles.textinputstyle}
+               style={styles.inputMargin}
               uniqueKey={'maritalStatusId'}
               displayKey={'maritalStatusTitleHi'}
               items={maritalstatus}
               selectText={translate('Vyaktigatdata.Marital Status')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
+              selectedItems={values.maritalstatus}
+              onSelectedItemsChange={value => setFieldValue('maritalstatus', value)}
             />
 
             {errors.maritalstatus && touched.maritalstatus ? (
@@ -123,11 +128,11 @@ const Personalinformation = ({navigation}) => {
               displayKey={'educationTitleHi'}
               items={education}
               selectText={translate('Vyaktigatdata.Knowledge')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
+              selectedItems={values.education}
+              onSelectedItemsChange={value => setFieldValue('education', value)}
             />
-            {errors.knowledge && touched.knowledge ? (
-              <Text style={styles.error}>{errors.knowledge}</Text>
+            {errors.education && touched.education ? (
+              <Text style={styles.error}>{errors.education}</Text>
             ) : null}
 
             <Dropdown
@@ -136,8 +141,8 @@ const Personalinformation = ({navigation}) => {
               displayKey={'occupationTitleHi'}
               items={job}
               selectText={translate('Vyaktigatdata.Job')}
-              selectedItems={values.name}
-              onSelectedItemsChange={value => setFieldValue('name', value)}
+              selectedItems={values.job}
+              onSelectedItemsChange={value => setFieldValue('job', value)}
             />
             {errors.job && touched.job ? (
               <Text style={styles.error}>{errors.job}</Text>
@@ -161,10 +166,10 @@ const Personalinformation = ({navigation}) => {
             <LoginButton 
                  title={translate('Vyaktigatdata.Next')}
               onPress={handleSubmit}
-
+              loading={loading}
             />
            
-          </>
+           </View>
         )}
       </Formik>
     </RootScreen>
@@ -214,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   inputMargin: {
-    marginTop: 20,
+  marginBottom: 20
   },
   ageContainer: {
     flexDirection: 'row',
@@ -396,11 +401,12 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginHorizontal: 50,
+    //marginHorizontal: 50,
     color: 'red',
+    textAlign: 'right',
     marginRight: 40,
     position: 'relative',
-    top: 5,
+    //top: 5,
   },
   lastnameerror: {
     fontSize: 12,

@@ -15,6 +15,6 @@ export function* contactUser(action) {
         type: "success",
       });
 
-    navigate('DashboardNavigation');
+    navigate('DrawerNavigation');
   }
 }

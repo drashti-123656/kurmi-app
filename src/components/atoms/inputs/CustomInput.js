@@ -37,21 +37,15 @@ const CustomInput = ({onChangeText,value,placeholder,editable,keyboardType,multi
 export default CustomInput;
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginTop:15,
-    color : '$TEXT'
-  },
+ 
   input: {
-    height: 50,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
-    borderColor: '$PRIMARY',
-    color:'$TEXT',
-    backgroundColor: 'transparent',
+    // height: 50,
+    // margin: 12,
+    // borderWidth: 1,
+    // padding: 10,
+    // borderRadius: 10,
+   
+    // textAlignVertical : 'top'
   },
   container : {
     backgroundColor: 'white',
@@ -63,12 +57,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between',
-    height: hp(20),
+    height: hp(15),
     color: 'black',
   },
   input : {
     flex: 1,
     color: 'black',
+    textAlignVertical : 'top'
   }
 });
 

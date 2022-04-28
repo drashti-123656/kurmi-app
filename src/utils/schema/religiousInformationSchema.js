@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
+import translate from './../../translations/configTranslations';
 
 export const ReligiousinformationvalidationSchema = Yup.object({
-    // caste: Yup.string().required('*Required'),
-    // native: Yup.string().required('*Required'),
-    // birthtime: Yup.string().required('*Required'),
-    // birthplace: Yup.string().required('*Required'),
-    // zodiacsign: Yup.string().required('*Required'),
-    // auspicious: Yup.string().required('*Required'),
-    // bloodgroup: Yup.string().required('*Required'),
+    gotra: Yup.number().required(translate('Dharmikjankari.Required')),
+    native: Yup.number().required(translate('Dharmikjankari.Required')),
+    birthtime: Yup.string().required(translate('Dharmikjankari.Required')),
+    birthplace: Yup.string().required(translate('Dharmikjankari.Required')),
+    zodiacsign: Yup.number().required(translate('Dharmikjankari.Required')),
+    auspicious: Yup.number().required(translate('Dharmikjankari.Required')),
+   
   })

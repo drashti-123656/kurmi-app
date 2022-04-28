@@ -33,10 +33,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
+import { number } from 'yup';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Registration = () => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     registerData,
@@ -61,9 +64,10 @@ const Registration = () => {
       showMessage({
         message: 'Please check privacy policy checkbox ',
         type: 'info',
-        //backgroundColor: 'white',
-      });
+        backgroundColor: EStyleSheet.value('$WARNING_RED')},
+      );
       return;
+      
     }
     const payload = {
       userEmail: values.emailid,
@@ -86,6 +90,7 @@ const Registration = () => {
     });
 
     dispatch(register(payload));
+    setLoading(true);
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -244,6 +249,7 @@ const Registration = () => {
                 onBlur={handleBlur('mobilenumber')}
                 value={values.mobilenumber}
                 autoFocus={true}
+                keyboardType = 'numeric'
                 style={styles.commonInput}
                 placeholder={translate('register.MobileNumber')}
                 placeholderTextColor={'#666666'}
@@ -373,6 +379,7 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
+              loading={loading}
             />
           </View>
         )}
@@ -394,6 +401,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
   dropdownStyle: {
     marginBottom: 20,
@@ -715,14 +723,14 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'right',
     marginBottom: 5,
-    marginLeft : '20%'
+    //marginLeft : '20%'
 
 },
 userFirstnameError : {
   fontSize: 12,
   fontWeight: 'bold',
-  marginRight: 30,
+  marginRight: '20%',
   color: 'red',
- marginLeft: '30%',
+ //marginLeft: '20%',
 },
 });

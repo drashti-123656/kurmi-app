@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 180,
-    marginTop: 40,
+    marginTop: '40%',
     alignSelf: 'center',
   },
   note: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   footer: {
-    marginTop: heightPercentageToDP('25'),
+    marginTop: heightPercentageToDP('15'),
   },
   footer_text: {
     textAlign: 'center',

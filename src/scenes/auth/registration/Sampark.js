@@ -29,6 +29,7 @@ const Sampark = ({navigation}) => {
   const dispatch = useDispatch();
   const {samparkData} = useSelector(state => state.registration);
   const [notes, setNotes] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     console.log('samparkData', samparkData);
@@ -43,6 +44,7 @@ const Sampark = ({navigation}) => {
     };
 
     dispatch(sampark(payload));
+    setLoading(true);
     navigation.navigate('ParivarikParichay');
   };
 
@@ -66,12 +68,12 @@ const Sampark = ({navigation}) => {
             errors,
             touched,
           }) => (
-            <View>
+            <View >
               <ExtendedTextInput
                 onChangeText={handleChange('mobileNo')}
                 onBlur={handleBlur('mobileNo')}
                 value={values.mobileNo}
-                style={styles.textInput}
+                keyboardType = 'numeric'
                 placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -83,7 +85,7 @@ const Sampark = ({navigation}) => {
                 onChangeText={handleChange('whatsAppNo')}
                 onBlur={handleBlur('whatsAppNo')}
                 value={values.whatsAppNo}
-                style={styles.textInput}
+                keyboardType = 'numeric'
                 placeholder={translate('samPark.whatsAppNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -128,6 +130,7 @@ const Sampark = ({navigation}) => {
             <LoginButton 
                  title={translate('samPark.Next')}
               onPress={handleSubmit}
+              loading={loading}
 
             />
              
