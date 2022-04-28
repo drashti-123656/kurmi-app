@@ -53,6 +53,9 @@
     "phoneNumberNotValid" : "फ़ोन नंबर मान्य नहीं है यह 10 अंकों का होना चाहिए"
     
   },
+  "advanceSearch": {
+    "Profile": "प्रोफाइल बनने वाला"
+  },
   "ParivarikParichay": {
     "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",
