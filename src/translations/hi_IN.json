@@ -63,6 +63,9 @@
     "validName" : "कृपया मान्य नाम दर्ज करें"
     
   },
+  "advanceSearch": {
+    "Profile": "प्रोफाइल बनने वाला"
+  },
   "ParivarikParichay": {
     "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",

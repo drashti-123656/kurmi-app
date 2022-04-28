@@ -22,10 +22,9 @@ import {login} from './redux/authReducer';
 import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
-import { LOG_IN } from './redux/authActions';
+import {LOG_IN} from './redux/authActions';
 
-const Login = () => {
-  const dispatch = useDispatch();
+const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const handleLogin = values => {
@@ -34,7 +33,7 @@ const Login = () => {
       userPassword: values.password,
     };
     dispatch({
-      type:LOG_IN,
+      type: LOG_IN,
       payload,
     });
   };
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7a4c4c',
   },
-  formContainer:{
+  formContainer: {
     flex: 1,
   },
   alignedRowContainer: {
