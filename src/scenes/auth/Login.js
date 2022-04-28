@@ -26,7 +26,7 @@ import {LOG_IN} from './redux/authActions';
 
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -36,6 +36,7 @@ const Login = ({navigation}) => {
       type: LOG_IN,
       payload,
     });
+    setLoading(true);
   };
 
   // const handleLogin = () => {
@@ -126,6 +127,7 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.createAccount')}
               onPress={handleLogin}
+              loading={loading}
             />
 
             <Text
