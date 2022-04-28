@@ -22,9 +22,33 @@ import {login} from './redux/authReducer';
 import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {LOG_IN} from './redux/authActions';
 
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const handleLogin = values => {
+    const payload = {
+      userLoginId: values.login,
+      userPassword: values.password,
+    };
+    dispatch({
+      type: LOG_IN,
+      payload,
+    });
+  };
+
+  // const handleLogin = () => {
+  //   dispatch(
+  //     login({
+  //       isAuthenticated: true,
+  //       user: {},
+  //       token: '',
+  //       error: null,
+  //       loading: false,
+  //     }),
+  //   );
+  // };
 
   return (
     <RootScreen scrollable={true}>
@@ -35,7 +59,7 @@ const Login = ({navigation}) => {
           password: '',
         }}
         validationSchema={LoginSchema}
-        onSubmit={values => navigation.navigate('NewsFeed')}>
+        onSubmit={values => handleLogin(values)}>
         {({
           handleChange,
           handleBlur,
@@ -128,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7a4c4c',
   },
-  formContainer:{
+  formContainer: {
     flex: 1,
   },
   alignedRowContainer: {

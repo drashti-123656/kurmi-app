@@ -27,20 +27,20 @@
     "Required" : "*आवश्यक",
     "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है"
   },
-  "NewsFeed": {
-    "kurmiShadiHeading": "कुर्मी शादी",
-    "title": "मैं देख रहा हूं",
-    "choose": "वर या वधू चुनिए",
-    "boy": "वर",
-    "girl": "वधू",
-    "ageFrom": "आयु से",
-    "ageTo": "आयु तक",
-    "Search": "खोजे",
-    "filterProfile": "प्रोफाइल ID से खोजें / फिल्टर लगाना है",
-    "newIntro": " नया  प्रोफाइल ",
-    "recentlyJoint": " जो लोग अभी अभी नए जुड़े हैं",
-    "newProfile": "नया प्रोफाइल",
-    "intro": "28 वर्ष रायपुर छत्तीसगढ़"
+  "NewsFeed" : {
+    "kurmiShadiHeading" : "कुर्मी शादी",
+    "title" : "मैं देख रहा हूं",
+    "choose" : "वर या वधू चुनिए",
+    "boy" : "वर",
+    "girl" : "वधू",
+    "ageFrom" : "आयु से",
+    "ageTo" : "आयु तक",
+    "Search" : "खोजे",
+    "filterProfile" : "प्रोफाइल ID से खोजें / फिल्टर लगाना है" ,
+    "newIntro" : "नया वैवाहिक परिचय",
+    "recentlyJoint" : " वे लोग अभी अभी नए जुड़े हैं",
+    "newProfile" : "नया प्रोफाइल",
+    "intro" : "28 वर्ष रायपुर छत्तीसगढ़"
   },
   "whatsapp": {
     "Note": "नोट: केवल कुर्मी समाज के लोग ही रजिस्टर करें",
@@ -48,13 +48,16 @@
     "phoneno": "Whatsapp नंबर  दर्ज करें",
     "Continue" : "जारी रखें",
     "NameRequired" : "नाम आवश्यक है",
-    "fieldRequired" : "यह फ़ील्ड आवश्यक है"
+    "fieldRequired" : "यह फ़ील्ड आवश्यक है",
+    "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए",
+    "phoneNumberNotValid" : "फ़ोन नंबर मान्य नहीं है यह 10 अंकों का होना चाहिए"
     
   },
   "advanceSearch": {
     "Profile": "प्रोफाइल बनने वाला"
   },
   "ParivarikParichay": {
+    "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",
      "fatherOccupation" : "पिता का व्यवसाय",
      "motherName" : "माँ का नाम",
@@ -67,6 +70,7 @@
 
   },
   "samPark" : {
+    "samparkheader" : "संपर्क जानकारी",
     "mobileNo" : "मोबाइल नंबर",
     "whatsAppNo" : "whatsapp नंबर",
     "presentAdd" : "वर्तमान पता",
@@ -77,6 +81,7 @@
     "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है"
   },
   "register": {
+    "registration" : "पंजीकरण",
     "Var": "वर",
     "Vadhu": "वधू ",
     "ProfileName": "प्रोफाइल बनने वाला",
@@ -114,5 +119,31 @@
     "Disability": "विकलांगता",
     "BloodGroup": " ब्लड ग्रुप  ",
     "Next": "आगे"
+  },
+  "profilemaker":{
+    "Myself":"स्वयं",
+    "Relatives":"सबंधी",
+    "Parents":"माता पिता",
+    "Other":"अन्य"
+  },
+  "colour":{
+    "Fair":"गोरा",
+    "Light":"हल्का रंग",
+    "Medium":"मध्यम रंग",
+    "Dark":"डार्क रंग "
+  },
+  "Disability":{
+    "Yes":"हां",
+    "No":"नहीं"
+  },
+  "BloodGroup":{
+    "O+":"O+",
+    "O-": "O-",
+    "A+":"A+",
+    "A-":"A-",
+    "B+":"B+",
+    "B-":"B-",
+    "AB+":"AB+",
+    "AB-":"AB-"
   }
 }

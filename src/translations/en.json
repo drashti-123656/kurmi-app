@@ -50,5 +50,32 @@
     "Colour": "Colour",
     "Disability": "Disability",
     "BloodGroup": "BloodGroup"
+  },
+  "profilemaker":{
+    "Myself":"Myself",
+    "Relatives":"Relatives",
+    "Parents":"Parents",
+    "Other":"Other"
+  },
+  "colour":{
+    "Fair":"Fair",
+    "Light":"Light",
+    "Medium":"medium",
+    "Dark":"Dark"
+  },
+  "Disability":{
+    "Yes":"Yes",
+    "No":"No"
+  },
+  "BloodGroup":{
+    "O+":"O+",
+    "O-": "O-",
+    "A+":"A+",
+    "A-":"A-",
+    "B+":"B+",
+    "B-":"B-",
+    "AB+":"AB+",
+    "AB-":"AB-"
+
   }
 }

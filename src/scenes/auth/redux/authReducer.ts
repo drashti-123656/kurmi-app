@@ -1,42 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
 
-const initialState = { 
+const initialState = {
   authData: {
-    isAuthenticated: true,
-    user: {},
+    isAuthenticated: false,
+    userData: {},
     token: '',
     error: null,
-    loading: false
-  }
-}
+    loading: false,
+  },
+};
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action) {
-      state.authData.isAuthenticated = true
-      state.authData.user = action.payload.user
-      state.authData.token = action.payload.token
-      state.authData.error = null
-      state.authData.loading = false
+    loginSuccess(state, action) {
+      state.authData.isAuthenticated = true;
+      state.authData.userData = action.payload;
+      state.authData.token = 'randomToken';
+      state.authData.error = null;
+      state.authData.loading = false;
     },
     logout(state) {
-      state.authData.isAuthenticated = false
-      state.authData.user = {}
-      state.authData.token = ''
-      state.authData.error = null
-      state.authData.loading = false
+      state.authData.isAuthenticated = false;
+      state.authData.userData = {};
+      state.authData.token = '';
+      state.authData.error = null;
+      state.authData.loading = false;
     },
     authError(state, action) {
-      state.authData.error = action.payload
-      state.authData.loading = false
+      state.authData.error = action.payload;
+      state.authData.loading = false;
     },
     authLoading(state, action) {
-      state.authData.loading = action.payload
+      state.authData.loading = action.payload;
     },
   },
-})
+});
 
-export const { login, logout, authError, authLoading} = authSlice.actions
-export default authSlice.reducer
+const {actions, reducer} = authSlice;
+
+export const {loginSuccess, logout, authError, authLoading} = actions;
+export default reducer;

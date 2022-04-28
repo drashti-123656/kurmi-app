@@ -8,47 +8,45 @@ import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 import Personalinformation from '../scenes/auth/registration/personalInformation';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import translate from './../translations/configTranslations';
 const Stack = createNativeStackNavigator();
 
-
-
-const AuthNavigation = () => {
+const RegistrationStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="login"
-        component={Login}
-        options={{headerShown: false}}
-      />
+    <Stack.Navigator      screenOptions={{
+      headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+      headerTintColor: '#fff',
+    }}>
       <Stack.Screen
         name="Registration"
         component={Registration}
-        options={{headerShown: false}}
+        options={{headerShown: true, headerTitle:translate('register.registration')}}
       />
       <Stack.Screen
         name="Personalinformation"
         component={Personalinformation}
-        options={{headerShown: false}}
+        options={{headerShown: true, headerTitle:translate('Vyaktigatdata.Personal information')}}
       />
       <Stack.Screen
         name="DharmikJankari"
         component={DharmikJankari}
-        options={{headerShown: false}}
+        options={{headerShown: true, headerTitle:translate('Dharmikjankari.Dharmik Jankari') }}
       />
       <Stack.Screen
         name="Sampark"
         component={Sampark}
-        options={{headerShown: false}}
+        options={{headerShown: true, headerTitle:translate('samPark.samparkheader')}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="ParivarikParichay"
         component={ParivarikParichay}
-        options={{headerShown: false}}
+        options={{headerShown: true, headerTitle:translate('ParivarikParichay.parivarikHeader')}}
       />
     </Stack.Navigator>
   );
 };
 
-export default AuthNavigation;
+export default RegistrationStack;
 
 const styles = StyleSheet.create({});
