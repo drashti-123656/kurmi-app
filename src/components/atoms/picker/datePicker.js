@@ -8,19 +8,19 @@ const CalendarPicker = props => {
 
   return (
     <View>
-      {props.value.dateString ? (
+     
         <TouchableOpacity
           style={styles.input}
           onPress={() => setShowModal(true)}>
+           {props.value.dateString ? (
           <Text style={{color: 'black'}}>{props.value.dateString}</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.input}
-          onPress={() => setShowModal(true)}>
+          ) : (
           <Text style={{color: 'black'}}>{props.placeholder}</Text>
+          )}
         </TouchableOpacity>
-      )}
+    
+       
+    
 
       <Modal animationType="fade" visible={showModal} transparent={true}>
         <View style={{flex: 1, justifyContent: 'center'}}>
@@ -32,7 +32,7 @@ const CalendarPicker = props => {
               opacity: 0.7,
               backgroundColor: '#000',
               position: 'absolute',
-            }}></Pressable>
+            }}> </Pressable>
           <View style={styles.modalCont}>
             <Calendar
               onDayPress={day => {
