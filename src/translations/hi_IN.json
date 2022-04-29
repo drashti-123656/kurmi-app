@@ -76,7 +76,12 @@
      "sister" : "बहन",
      "land" : "जमीन",
      "register" : "रजिस्टर करें",
-     "Required" : "*आवश्यक"
+     "Required" : "*आवश्यक",
+     "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NotLookLikePhnno" : "यह फ़ोन नंबर जैसा नहीं लगता",
+    "NameRequired" : "नाम आवश्यक है",
+    "validName" : "कृपया मान्य नाम दर्ज करें",
+    "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए"
 
   },
   "samPark" : {
@@ -127,7 +132,7 @@
     "Dharmik Jankari": "धार्मिक जानकारी",
     "Caste": "गोत्र",
     "Native": "माँ का गोत्र:",
-    "Birthtime": "जन्म का समय",
+    "Birthtime": "hh:mm",
     "Birthplace": "जन्म स्थान",
     "Zodiacsign": "राशी",
     "auspicious": "मांगलिक",

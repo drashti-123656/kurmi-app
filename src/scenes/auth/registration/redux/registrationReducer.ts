@@ -49,6 +49,7 @@ const initialState = {
     state: [],
     city: [],
     gotra: [],
+    land : []
   },
   registerData: {
     emailid: '',
@@ -132,6 +133,12 @@ const registerationSlice = createSlice({
     fetchGotraDropdownSuccess(state, action) {
       state.dropDownsData.gotra = action.payload;
     },
+
+
+    fetchLandDropdownSuccess(state, action) {
+      state.dropDownsData.land = action.payload;
+    },
+
 
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
@@ -221,5 +228,6 @@ export const {
   fetchCityDropdownSuccess,
   personalInfo,
   fetchDisabilityDropdownSuccess,
+  fetchLandDropdownSuccess
 } = actions;
 export default reducer;

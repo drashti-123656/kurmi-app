@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
   errorStyle: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
-    marginLeft: '75%',
+    textAlign: 'right',
   },
 });

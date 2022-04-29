@@ -74,12 +74,12 @@ const Personalinformation = ({navigation}) => {
       <Formik
         initialValues={{
           height: personalinfoData.height,
-          maritalstatus: '',
-          education: '',
-          job: '',
-          colour: '',
+          maritalstatus: personalinfoData.maritalstatus,
+          education: personalinfoData.education,
+          job: personalinfoData.job,
+          colour: personalinfoData.colour,
           disability: personalinfoData.disability,
-          bloodgroup: '',
+          bloodgroup: personalinfoData.bloodgroup,
         }}
         validationSchema={PersonalinformationSchema}
         onSubmit={values => handleSampark(values)}>

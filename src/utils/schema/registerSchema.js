@@ -29,9 +29,15 @@ export const samparkSchema = Yup.object().shape({
 });
 
 export const parivarikSchema = Yup.object().shape({
-  fatherName: Yup.string().required(translate('ParivarikParichay.Required')),
+  fatherName: Yup.string()
+  .required(translate('ParivarikParichay.NameRequired'))
+  .matches(/^[A-Za-z ]*$/, translate('ParivarikParichay.validName'))
+  .min(3, translate('ParivarikParichay.nameMustbe3')),
   fatherOccupation: Yup.string().required(translate('ParivarikParichay.Required')),
-  motherName: Yup.string().required(translate('ParivarikParichay.Required')),
+  motherName: Yup.string()
+  .required(translate('ParivarikParichay.NameRequired'))
+  .matches(/^[A-Za-z ]*$/, translate('ParivarikParichay.validName'))
+  .min(3, translate('ParivarikParichay.nameMustbe3')),
   motherMayaka: Yup.string().required(translate('ParivarikParichay.Required')),
   brother: Yup.string().required(translate('ParivarikParichay.Required')),
   sister: Yup.string().required(translate('ParivarikParichay.Required')),

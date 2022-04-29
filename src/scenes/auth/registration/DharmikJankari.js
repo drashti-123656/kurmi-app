@@ -72,12 +72,12 @@ const DharmikJankari = ({navigation}) => {
     <RootScreen scrollable={true}>
       <Formik
         initialValues={{
-          gotra: '',
-          native: '',
-          birthtime: '',
-          birthplace: '',
-          zodiacsign: '',
-          auspicious: '',
+          gotra: dharmikJankariData.gotra,
+          native: dharmikJankariData.native,
+          birthtime: dharmikJankariData.birthtime,
+          birthplace: dharmikJankariData.birthplace,
+          zodiacsign: dharmikJankariData.zodiacsign,
+          auspicious: dharmikJankariData.auspicious,
         }}
         validationSchema={ReligiousinformationvalidationSchema}
         onSubmit={values => handleDharmikJankari(values)}>
@@ -125,6 +125,7 @@ const DharmikJankari = ({navigation}) => {
                 onChangeText={handleChange('birthtime')}
                 onBlur={handleBlur('birthtime')}
                 value={values.birthtime}
+    
                 placeholder={translate('Dharmikjankari.Birthtime')}
                 placeholderTextColor={'#666666'}
               />

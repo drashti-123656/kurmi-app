@@ -29,7 +29,7 @@ const ParivarikParichay = () => {
   const {
     parivarikData,
     samparkData,
-    dharmikJankariData,
+    dharmikJankariData : {land},
     dropDownsData,
     registerData,
     personalinfoData,
@@ -114,7 +114,7 @@ const ParivarikParichay = () => {
             motherMayaka: parivarikData.motherMayaka,
             brother: parivarikData.brother,
             sister: parivarikData.sister,
-            land: parivarikData.land,
+            land: '',
           }}
           validationSchema={parivarikSchema}
           onSubmit={values => handleParivarik(values)}>
@@ -217,7 +217,7 @@ const ParivarikParichay = () => {
                 style={styles.inputMargin}
                 uniqueKey={'land'}
                 displayKey={'land'}
-                // items={land}
+                 items={land}
                 selectText={translate('ParivarikParichay.land')}
                 selectedItems={values.land}
                 onSelectedItemsChange={value => setFieldValue('land', value)}

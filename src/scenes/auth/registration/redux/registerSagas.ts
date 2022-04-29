@@ -9,6 +9,7 @@ import {
   fetchEducationDropdownSuccess,
   fetchGotraDropdownSuccess,
   fetchJobDropdownSuccess,
+  fetchLandDropdownSuccess,
   fetchMaritalstatusDropdownSuccess,
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
@@ -202,5 +203,20 @@ export function* cityDropdown(action) {
 
   if (response.ok) {
     yield put(fetchCityDropdownSuccess(response.data.data));
+  }
+}
+
+
+export function* landDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchLandDropdownSuccess(response.data.data));
   }
 }

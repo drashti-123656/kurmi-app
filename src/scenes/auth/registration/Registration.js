@@ -117,17 +117,17 @@ const Registration = () => {
       <Formik
         initialValues={{
           gender: 'male',
-          profilemaker: '',
-          firstname: '',
-          lastname: '',
-          emailid: '',
-          mobilenumber: '',
-          birthdate: '',
+          profilemaker: registerData.profilemaker,
+          firstname: registerData.firstname,
+          lastname: registerData.lastname,
+          emailid: registerData.emailid,
+          mobilenumber: registerData.mobilenumber,
+          birthdate: registerData.birthdate,
          
-          country: '',
-          state: '',
-          city: '',
-          password: '',
+          country: registerData.country,
+          state: registerData.state,
+          city: registerData.city,
+          password: registerData.password,
         }}
         validationSchema={RegistrationvalidationSchema}
         onSubmit={values => handleregisterUser(values)}>
