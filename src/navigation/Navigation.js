@@ -10,6 +10,7 @@ import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
 import DrawerContent from './DrawerNavigation';
 import DrawerNavigation from './DrawerNavigation';
+import Registration from '../scenes/auth/registration/Registration';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -28,7 +29,7 @@ const Navigation = () => {
             />  
         <Stack.Screen
           name="DrawerNavigation"
-          component={DrawerNavigation}
+          component={Registration}
           options={{headerShown: false}}
         />
         <Stack.Screen
