@@ -20,11 +20,8 @@ import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-<<<<<<< HEAD
 import {showMessage} from 'react-native-flash-message';
-=======
 import CalendarPicker from '../../../components/atoms/picker/datePicker';
->>>>>>> 55f6717d6dda8067e84ec90c095564305bbec26a
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
@@ -264,24 +261,12 @@ const Registration = () => {
               ) : null}
             </View>
 
-<<<<<<< HEAD
-            <View style={styles.birthdayInput}>
-              <Dropdown
-                style={styles.dropdownStyle}
-                autoFocus={true}
-                items={dropDownList}
-                selectText={translate('register.birthdate')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
-=======
             <View style={styles.input_calendar}>
                   <CalendarPicker
                     onSelect={value => setFieldValue('birthdate', value)}
                     value={values.birthdate}
                     placeholder={translate('register.birthdate')}
                   />
->>>>>>> 55f6717d6dda8067e84ec90c095564305bbec26a
             </View>
             {errors.birthdate && touched.birthdate ? (
               <Text style={styles.dropboxError}>{errors.birthdate}</Text>
