@@ -20,6 +20,7 @@ import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
+import CalendarPicker from '../../../components/atoms/picker/datePicker';
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
@@ -213,14 +214,12 @@ const Registration = () => {
               ) : null}
             </View>
 
-            <View style={styles.birthdayInput}>
-              <Dropdown
-              style={styles.dropdownStyle}
-                items={dropDownList}
-                selectText={translate('register.birthdate')}
-                selectedItems={values.name}
-                onSelectedItemsChange={value => setFieldValue('name', value)}
-              />
+            <View style={styles.input_calendar}>
+                  <CalendarPicker
+                    onSelect={value => setFieldValue('birthdate', value)}
+                    value={values.birthdate}
+                    placeholder={translate('register.birthdate')}
+                  />
             </View>
             {errors.birthdate && touched.birthdate ? (
               <Text style={styles.error}>{errors.birthdate}</Text>
@@ -328,6 +327,10 @@ const styles = StyleSheet.create({
   backArrow_img: {
     width: 30,
     height: 25,
+  },
+  input_calendar: {
+    marginHorizontal: 20,
+    marginTop: 10,
   },
   errorText: {
     flexDirection: 'row',
