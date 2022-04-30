@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+
+import React, { useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

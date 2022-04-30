@@ -1,11 +1,12 @@
 import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
 import React from 'react';
+import translate from '../../../translations/configTranslations'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType,maxLength}) => {
+const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType,maxLength,secureTextEntry}) => {
   return (
     <View style={styles.textinput}>
       <TextInput
@@ -15,6 +16,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardTyp
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
         placeholderTextColor={'#666666'}
         keyboardType={keyboardType}
       />

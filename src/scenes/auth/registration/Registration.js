@@ -354,6 +354,7 @@ const Registration = () => {
               autoFocus={true}
               value={values.password}
               style={styles.commonInput}
+              secureTextEntry={true}
               placeholder={translate('register.enterpassword')}
               placeholderTextColor={'#666666'}
             />
