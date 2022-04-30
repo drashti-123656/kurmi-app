@@ -6,7 +6,7 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -24,6 +24,7 @@ import {CONTACT_USER} from './redux/contactAction';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleContactUser = values => {
     const payload = {
       name : values.name,
@@ -34,6 +35,7 @@ const ContactUs = () => {
       type: CONTACT_USER,
       payload,
     });
+    setLoading(true);
   };
 
   return (
@@ -90,6 +92,7 @@ const ContactUs = () => {
             <LoginButton
               title={translate('ContactUs.Submit')}
               onPress={handleSubmit}
+              loading={loading}
             />
           </View>
         )}
