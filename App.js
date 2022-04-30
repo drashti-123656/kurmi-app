@@ -3,10 +3,13 @@ import React, {useEffect} from 'react';
 import Navigation from './src/navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
+import {store, persistedStore} from './src/store/index';
 import Login from './src/scenes/auth/Login';
 import store from './src/store/index';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
+import NewsFeed from './src/scenes/home/NewsFeed';
 
 Appearance.getColorScheme(
   EStyleSheet.build({
@@ -29,8 +32,13 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Login />
+      <PersistGate
+      persistor={persistedStore}
+      onBeforeLift={() => new Promise(resolve => setTimeout(resolve, 3000))} 
+      >
+      <NewsFeed />
       <FlashMessage position="top" />
+      </PersistGate>
     </Provider>
   );
 };
