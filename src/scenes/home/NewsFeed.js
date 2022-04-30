@@ -94,7 +94,7 @@ const NewsFeed = ({navigation}) => {
             <TextInput
               onChangeText={FromAge => setfromAge(FromAge)}
               value={fromAge}
-              style={styles.textinput}
+              style={styles.textInput}
               placeholder={translate('NewsFeed.ageFrom')}
               keyboardType="numeric"
               placeholderTextColor={'#666666'}
@@ -104,7 +104,7 @@ const NewsFeed = ({navigation}) => {
               onChangeText={ToAge => SettoAge(ToAge)}
               value={toAge}
               keyboardType="numeric"
-              style={styles.textinput}
+              style={styles.textInput}
               placeholder={translate('NewsFeed.ageTo')}
               placeholderTextColor={'#666666'}
             />
@@ -120,7 +120,7 @@ const NewsFeed = ({navigation}) => {
               <Text style={styles.titleText}>
                 {translate('NewsFeed.newIntro')}
               </Text>
-              <Text style={styles.titleTextnext}>
+              <Text style={styles.titleTextNext}>
                 {translate('NewsFeed.recentlyJoint')}
               </Text>
             </View>
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   ageContainer: {
     flexDirection: 'row',
   },
-  textinput: {
+  textInput: {
     backgroundColor: 'white',
     marginLeft: 30,
     marginVertical: 10, 
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 10,
   },
-  titleTextnext: {
+  titleTextNext: {
     color: '#666666',
   },
   profileContainer: {
