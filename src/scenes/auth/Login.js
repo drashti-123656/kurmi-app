@@ -17,7 +17,7 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {login} from './redux/authReducer';
 import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
@@ -26,6 +26,7 @@ import {LOG_IN} from './redux/authActions';
 
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogin = values => {
     const payload = {

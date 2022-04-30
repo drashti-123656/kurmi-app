@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
 import React from 'react';
+import translate from '../../../translations/configTranslations'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,6 +15,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder}) => {
         onBlur={onBlur}
         value={value}
         placeholder={placeholder}
+        secureTextEntry={placeholder === translate('login.Password') ? true : null }
         placeholderTextColor={'#666666'}
       />
 

@@ -43,15 +43,15 @@ const NewsFeed = ({navigation}) => {
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={() => navigation.openDrawer()}>
               <Image
-                style={styles.vector_img}
+                style={styles.vectorImg}
                 source={require('../../assets/Vector6.png')}
               />
               <Image
-                style={styles.vector_img}
+                style={styles.vectorImg_1}
                 source={require('../../assets/Vector7.png')}
               />
               <Image
-                style={styles.vector_img}
+                style={styles.vectorImg_1}
                 source={require('../../assets/Vector8.png')}
               />
             </TouchableOpacity>
@@ -60,7 +60,7 @@ const NewsFeed = ({navigation}) => {
           <View style={styles.pinClipart}>
             <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
               <Image
-                style={styles.PinClipart_img}
+                style={styles.PinClipartImg}
                 source={require('../../assets/contact.png')}
               />
             </TouchableOpacity>
@@ -94,7 +94,7 @@ const NewsFeed = ({navigation}) => {
             <TextInput
               onChangeText={FromAge => setfromAge(FromAge)}
               value={fromAge}
-              style={styles.textinput}
+              style={styles.textInput}
               placeholder={translate('NewsFeed.ageFrom')}
               keyboardType="numeric"
               placeholderTextColor={'#666666'}
@@ -104,30 +104,30 @@ const NewsFeed = ({navigation}) => {
               onChangeText={ToAge => SettoAge(ToAge)}
               value={toAge}
               keyboardType="numeric"
-              style={styles.textinput}
+              style={styles.textInput}
               placeholder={translate('NewsFeed.ageTo')}
               placeholderTextColor={'#666666'}
             />
           </View>
           <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.text_btn}>{translate('NewsFeed.Search')}</Text>
+            <Text style={styles.textButton}>{translate('NewsFeed.Search')}</Text>
           </TouchableOpacity>
         </>
         <View>
           <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
           <ScrollView style={styles.footerContainer}>
-            <View>
+            <View style={styles.footerTitle}>
               <Text style={styles.titleText}>
                 {translate('NewsFeed.newIntro')}
               </Text>
-              <Text style={styles.titleTextnext}>
+              <Text style={styles.titleTextNext}>
                 {translate('NewsFeed.recentlyJoint')}
               </Text>
             </View>
             <View style={styles.profileContainer}>
               <View style={styles.profileImageContainer}>
                 <Image
-                  style={styles.profile_img}
+                  style={styles.profileImg}
                   source={require('../../assets/profile.png')}
                 />
                 <View style={styles.footerTextContainer}>
@@ -141,7 +141,7 @@ const NewsFeed = ({navigation}) => {
               </View>
               <View style={styles.profileImageContainer}>
                 <Image
-                  style={styles.profile_img}
+                  style={styles.profileImg}
                   source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
@@ -175,16 +175,20 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 18,
   },
-  vector_img: {
+  vectorImg: {
     width: 20,
+    height: 5,
+  },
+  vectorImg_1: {
+    width: 15,
     height: 5,
   },
   pinClipart: {
     position: 'absolute',
-    left: 325,
     top: 15,
+    right: 15,
   },
-  PinClipart_img: {
+  PinClipartImg: {
     width: 25,
     height: 25,
   },
@@ -244,16 +248,16 @@ const styles = StyleSheet.create({
   ageContainer: {
     flexDirection: 'row',
   },
-  textinput: {
+  textInput: {
     backgroundColor: 'white',
-    marginHorizontal: 30,
-    marginVertical: 10,
-    flex: 1,
+    marginLeft: 30,
+    marginVertical: 10, 
+    flex: 0.44,
+    fontSize: 17,
     borderRadius: 10,
     padding: 10,
     height: hp(8),
     color: 'black',
-    width: 160,
   },
   submitButton: {
     backgroundColor: '#DC1C28',
@@ -261,7 +265,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderRadius: 10,
   },
-  text_btn: {
+  textButton: {
     textAlign: 'center',
     fontWeight: '400',
     marginTop: 15,
@@ -277,11 +281,10 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     backgroundColor: '#EDEDED',
-    height: 380,
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal:10,
     marginTop: 20,
+    paddingBottom: 40,
   },
   titleText: {
     fontWeight: 'bold',
@@ -289,29 +292,26 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 10,
   },
-  titleTextnext: {
+  titleTextNext: {
     color: '#666666',
   },
   profileContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   profileImageContainer: {
-    // flex: 1,
-
     height: hp('30'),
     width: wp('50'),
     marginTop: 30,
-    marginRight: 10,
-    // marginBottom: 20,
   },
-  Image: {},
-  profile_img: {
-    width: wp('50'),
+  profileImg: {
+    width: wp('44'),
     height: hp('23'),
   },
   footerTextContainer: {
     backgroundColor: 'white',
     height: hp('10'),
+    width: wp('44'),
   },
   profileText: {
     fontWeight: 'bold',
@@ -326,4 +326,3 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 });
-
