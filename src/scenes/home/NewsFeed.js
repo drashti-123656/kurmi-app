@@ -43,15 +43,15 @@ const NewsFeed = ({navigation}) => {
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={() => navigation.openDrawer()}>
               <Image
-                style={styles.vector_img}
+                style={styles.vectorImg}
                 source={require('../../assets/Vector6.png')}
               />
               <Image
-                style={styles.vector_img_1}
+                style={styles.vectorImg_1}
                 source={require('../../assets/Vector7.png')}
               />
               <Image
-                style={styles.vector_img_1}
+                style={styles.vectorImg_1}
                 source={require('../../assets/Vector8.png')}
               />
             </TouchableOpacity>
@@ -60,7 +60,7 @@ const NewsFeed = ({navigation}) => {
           <View style={styles.pinClipart}>
             <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
               <Image
-                style={styles.PinClipart_img}
+                style={styles.PinClipartImg}
                 source={require('../../assets/contact.png')}
               />
             </TouchableOpacity>
@@ -110,13 +110,13 @@ const NewsFeed = ({navigation}) => {
             />
           </View>
           <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.text_btn}>{translate('NewsFeed.Search')}</Text>
+            <Text style={styles.textButton}>{translate('NewsFeed.Search')}</Text>
           </TouchableOpacity>
         </>
         <View>
           <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
           <ScrollView style={styles.footerContainer}>
-            <View style={styles.footer_title}>
+            <View style={styles.footerTitle}>
               <Text style={styles.titleText}>
                 {translate('NewsFeed.newIntro')}
               </Text>
@@ -127,7 +127,7 @@ const NewsFeed = ({navigation}) => {
             <View style={styles.profileContainer}>
               <View style={styles.profileImageContainer}>
                 <Image
-                  style={styles.profile_img}
+                  style={styles.profileImg}
                   source={require('../../assets/profile.png')}
                 />
                 <View style={styles.footerTextContainer}>
@@ -141,7 +141,7 @@ const NewsFeed = ({navigation}) => {
               </View>
               <View style={styles.profileImageContainer}>
                 <Image
-                  style={styles.profile_img}
+                  style={styles.profileImg}
                   source={require('../../assets/profile1.png')}
                 />
                 <View style={styles.footerTextContainer}>
@@ -175,11 +175,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 18,
   },
-  vector_img: {
+  vectorImg: {
     width: 20,
     height: 5,
   },
-  vector_img_1: {
+  vectorImg_1: {
     width: 15,
     height: 5,
   },
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     top: 15,
     right: 15,
   },
-  PinClipart_img: {
+  PinClipartImg: {
     width: 25,
     height: 25,
   },
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderRadius: 10,
   },
-  text_btn: {
+  textButton: {
     textAlign: 'center',
     fontWeight: '400',
     marginTop: 15,
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     width: wp('50'),
     marginTop: 30,
   },
-  profile_img: {
+  profileImg: {
     width: wp('44'),
     height: hp('23'),
   },
