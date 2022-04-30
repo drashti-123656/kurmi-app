@@ -32,7 +32,7 @@ const Sampark = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log('samparkData', samparkData);
+   
   }, [samparkData]);
 
   const handleSampark = values => {
@@ -73,6 +73,7 @@ const Sampark = ({navigation}) => {
                 onChangeText={handleChange('mobileNo')}
                 onBlur={handleBlur('mobileNo')}
                 value={values.mobileNo}
+                maxLength={10}
                 keyboardType = 'numeric'
                 placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
@@ -85,6 +86,7 @@ const Sampark = ({navigation}) => {
                 onChangeText={handleChange('whatsAppNo')}
                 onBlur={handleBlur('whatsAppNo')}
                 value={values.whatsAppNo}
+                maxLength={10}
                 keyboardType = 'numeric'
                 placeholder={translate('samPark.whatsAppNo')}
                 placeholderTextColor={'#666666'}

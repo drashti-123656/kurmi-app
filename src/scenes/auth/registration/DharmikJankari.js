@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Button,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
@@ -27,10 +28,14 @@ import {
   FETCH_ZODIC_SIGN,
 } from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
+import DatePicker from 'react-native-date-picker';
+
+import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 
 const DharmikJankari = ({navigation}) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
   const {
     dharmikJankariData,
     dropDownsData: {zodiacSign, auspicious, gotra},
@@ -74,7 +79,7 @@ const DharmikJankari = ({navigation}) => {
         initialValues={{
           gotra: dharmikJankariData.gotra,
           native: dharmikJankariData.native,
-          birthtime: dharmikJankariData.birthtime,
+          birthtime: new Date(),
           birthplace: dharmikJankariData.birthplace,
           zodiacsign: dharmikJankariData.zodiacsign,
           auspicious: dharmikJankariData.auspicious,
@@ -120,7 +125,14 @@ const DharmikJankari = ({navigation}) => {
                 <Text style={styles.error}>{errors.native}</Text>
               ) : null}
 
-              <TextInput
+              <DateTimePicker
+                style={styles.dateTimeInputStyle}
+                value={values.birthtime}
+                onSelect={value => setFieldValue('birthtime', value)}
+                mode="time"
+              />
+
+              {/* <TextInput
                style={styles.commonInput}
                 onChangeText={handleChange('birthtime')}
                 onBlur={handleBlur('birthtime')}
@@ -128,13 +140,13 @@ const DharmikJankari = ({navigation}) => {
     
                 placeholder={translate('Dharmikjankari.Birthtime')}
                 placeholderTextColor={'#666666'}
-              />
+              /> */}
 
               {errors.birthtime && touched.birthtime ? (
                 <Text style={styles.error}>{errors.birthtime}</Text>
               ) : null}
               <TextInput
-               style={styles.commonInput}
+                style={styles.commonInput}
                 onChangeText={handleChange('birthplace')}
                 onBlur={handleBlur('birthplace')}
                 value={values.birthplace}
@@ -153,7 +165,9 @@ const DharmikJankari = ({navigation}) => {
                 items={zodiacSign}
                 selectText={translate('Dharmikjankari.Zodiacsign')}
                 selectedItems={values.zodiacsign}
-                onSelectedItemsChange={value => setFieldValue('zodiacsign', value)}
+                onSelectedItemsChange={value =>
+                  setFieldValue('zodiacsign', value)
+                }
               />
               {errors.zodiacsign && touched.zodiacsign ? (
                 <Text style={styles.error}>{errors.zodiacsign}</Text>
@@ -166,7 +180,9 @@ const DharmikJankari = ({navigation}) => {
                 items={auspicious}
                 selectText={translate('Dharmikjankari.auspicious')}
                 selectedItems={values.auspicious}
-                onSelectedItemsChange={value => setFieldValue('auspicious', value)}
+                onSelectedItemsChange={value =>
+                  setFieldValue('auspicious', value)
+                }
               />
               {errors.auspicious && touched.auspicious ? (
                 <Text style={styles.error}>{errors.auspicious}</Text>
@@ -196,7 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   inputMargin: {
-   marginBottom: 25
+    marginBottom: 25,
   },
   // dropdownMargin: {
   //   marginTop: 5,
@@ -220,6 +236,9 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     resizeMode: 'contain',
+  },
+  dateTimeInputStyle : {
+  marginBottom : 25,
   },
   profileContainer: {
     justifyContent: 'center',
@@ -347,7 +366,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     marginHorizontal: 30,
-   marginBottom : 20,
+    marginBottom: 20,
     paddingLeft: 15,
     height: hp(7),
     color: 'black',
@@ -413,7 +432,7 @@ const styles = StyleSheet.create({
     marginRight: 40,
     position: 'relative',
     //top: 5,
-    marginBottom : 5,
+    marginBottom: 5,
   },
   lastnameerror: {
     fontSize: 12,

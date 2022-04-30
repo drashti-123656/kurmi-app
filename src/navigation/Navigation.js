@@ -29,7 +29,7 @@ const Navigation = () => {
             />  
         <Stack.Screen
           name="DrawerNavigation"
-          component={Registration}
+          component={DrawerNavigation}
           options={{headerShown: false}}
         />
         <Stack.Screen

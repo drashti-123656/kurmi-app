@@ -34,7 +34,7 @@ const NewsFeed = ({navigation}) => {
   };
 
   const submitButton = () => {
-    console.log(fromAge, toAge);
+   
   };
 
   return (

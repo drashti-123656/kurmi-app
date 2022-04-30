@@ -16,6 +16,7 @@ import {
   fetchZodiacDropdownSuccess,
   register,
   registrationsFail,
+  registrationStarted,
   registrationSuccess,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
@@ -23,8 +24,9 @@ import {loginSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
+  registrationStarted({});
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
- console.log('final=====>>>>',payload)
+
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -32,7 +34,6 @@ export function* registerUser(action) {
     });
     yield put(loginSuccess(response.data.User));
     yield put(registrationSuccess({}));
-    yield put(loginSuccess(response.data.User));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
@@ -129,7 +130,7 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-  console.log('payload2222',payload)
+  
   const apiBody = {
     where: {
       userEmail: payload.userEmail,

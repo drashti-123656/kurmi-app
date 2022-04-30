@@ -11,6 +11,7 @@ import {
   educationDropdown,
   gotraDropdown,
   jobDropdown,
+  landDropdown,
   martialstatusDropdown,
   profilemakerDropdown,
   registerUser,
@@ -25,6 +26,7 @@ import {
   FETCH_EDUCATION_DROPDOWN,
   FETCH_GOTRA_DROPDOWN,
   FETCH_JOB_DROPDOWN,
+  FETCH_LAND_DROPDOWN,
   FETCH_MARITALSTATUS_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
   FETCH_STATE_DROPDOWN,
@@ -51,5 +53,6 @@ export default function* sagas() {
     takeLatest(FETCH_STATE_DROPDOWN, stateDropdown),
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
+    takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
   ]);
 }

@@ -5,7 +5,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  ScrollView,
+  Button,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -21,7 +21,7 @@ import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
-import CalendarPicker from '../../../components/atoms/picker/datePicker';
+
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
@@ -34,21 +34,25 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import { number } from 'yup';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {number} from 'yup';
+import EStyleSheet, {value} from 'react-native-extended-stylesheet';
+import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 
 const Registration = () => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+
   const {
     registerData,
+    isRegistering,
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
-    console.log('registerData===>>>', registerData);
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -65,10 +69,9 @@ const Registration = () => {
       showMessage({
         message: 'Please check privacy policy checkbox ',
         type: 'info',
-        backgroundColor: EStyleSheet.value('$WARNING_RED')},
-      );
+        backgroundColor: EStyleSheet.value('$WARNING_RED'),
+      });
       return;
-      
     }
     const payload = {
       userEmail: values.emailid,
@@ -83,7 +86,7 @@ const Registration = () => {
       password: values.password,
     };
 
-    console.log('gender===>>',payload)
+    console.log('dov', values.birthdate);
 
     dispatch({
       type: VERIFY_USER,
@@ -123,8 +126,8 @@ const Registration = () => {
           lastname: registerData.lastname,
           emailid: registerData.emailid,
           mobilenumber: registerData.mobilenumber,
-          birthdate: registerData.birthdate,
-         
+          birthdate: new Date(),
+
           country: registerData.country,
           state: registerData.state,
           city: registerData.city,
@@ -203,7 +206,6 @@ const Registration = () => {
               <TextInput
                 onChangeText={handleChange('firstname')}
                 onBlur={handleBlur('firstname')}
-              
                 value={values.firstname}
                 style={styles.textinput}
                 placeholder={translate('register.FirstName')}
@@ -213,7 +215,6 @@ const Registration = () => {
               <TextInput
                 onChangeText={handleChange('lastname')}
                 onBlur={handleBlur('lastname')}
-               
                 value={values.lastname}
                 style={styles.textinput}
                 placeholder={translate('register.lastName')}
@@ -222,11 +223,15 @@ const Registration = () => {
             </View>
             <View style={styles.errorText}>
               {errors.firstname && touched.firstname ? (
-                <Text style={styles.userFirstnameError}>{errors.firstname}</Text>
+                <Text style={styles.userFirstnameError}>
+                  {errors.firstname}
+                </Text>
               ) : null}
               <View style={styles.lastnameError}>
                 {errors.lastname && touched.lastname ? (
-                  <Text style={styles.userLastnameError}>{errors.lastname}</Text>
+                  <Text style={styles.userLastnameError}>
+                    {errors.lastname}
+                  </Text>
                 ) : null}
               </View>
             </View>
@@ -249,8 +254,9 @@ const Registration = () => {
                 onChangeText={handleChange('mobilenumber')}
                 onBlur={handleBlur('mobilenumber')}
                 value={values.mobilenumber}
+                maxLength={10}
                 autoFocus={true}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 style={styles.commonInput}
                 placeholder={translate('register.MobileNumber')}
                 placeholderTextColor={'#666666'}
@@ -261,16 +267,15 @@ const Registration = () => {
               ) : null}
             </View>
 
-            <View style={styles.input_calendar}>
-                  <CalendarPicker
-                    onSelect={value => setFieldValue('birthdate', value)}
-                    value={values.birthdate}
-                    placeholder={translate('register.birthdate')}
-                  />
-            </View>
+            <DateTimePicker
+              value={values.birthdate}
+              onSelect={value => setFieldValue('birthdate', value)}
+              mode="date"
+            />
             {errors.birthdate && touched.birthdate ? (
               <Text style={styles.dropboxError}>{errors.birthdate}</Text>
             ) : null}
+
             <Text style={styles.text}>
               <Text style={styles.star}>*</Text>
               {translate('register.Note')}
@@ -403,7 +408,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   dropdownStyle: {
     marginBottom: 20,
@@ -710,7 +715,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  dropboxError : {
+  dropboxError: {
     fontSize: 12,
     fontWeight: 'bold',
     marginRight: 30,
@@ -718,7 +723,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginBottom: 5,
   },
-  userLastnameError : {
+  userLastnameError: {
     fontSize: 12,
     fontWeight: 'bold',
     marginRight: 10,
@@ -726,13 +731,12 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginBottom: 5,
     //marginLeft : '20%'
-
-},
-userFirstnameError : {
-  fontSize: 12,
-  fontWeight: 'bold',
-  marginRight: '20%',
-  color: 'red',
- //marginLeft: '20%',
-},
+  },
+  userFirstnameError: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: '20%',
+    color: 'red',
+    //marginLeft: '20%',
+  },
 });

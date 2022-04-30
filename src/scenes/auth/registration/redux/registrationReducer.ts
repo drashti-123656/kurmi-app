@@ -49,7 +49,7 @@ const initialState = {
     state: [],
     city: [],
     gotra: [],
-    land : []
+    land: [],
   },
   registerData: {
     emailid: '',
@@ -58,7 +58,7 @@ const initialState = {
     profilemaker: '',
     firstname: '',
     lastname: '',
-    birthdate: '',
+    birthdate:'',
 
     country: '',
     state: '',
@@ -80,6 +80,19 @@ const registerationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
+    registrationStarted(state, action) {
+      state.registrationData.isRegistering = true;
+    },
+    registrationSuccess(state, action) {
+      state.registrationData.registered = true;
+      state.registrationData.isRegistering = false;
+    },
+    registrationsFail(state, action) {
+      state.registrationData.registered = false;
+      state.registrationData.isRegistering = false;
+      state.registrationData.error = action.payload;
+    },
+
     sampark(state, action) {
       state.samparkData.mobileNo = action.payload.userContactInfoContactNo;
       state.samparkData.whatsAppNo = action.payload.userContactInfoWhatsappNo;
@@ -100,18 +113,10 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoNoOfMarriedBrothers;
       state.parivarikData.sister =
         action.payload.userFamilyInfoNoOfMarriedSisters;
-      state.parivarikData.land = action.payload.fatherName;
+      state.parivarikData.land = action.payload;
     },
 
-    registrationSuccess(state, action) {
-      state.registrationData.registered = true;
-      state.registrationData.isRegistering = false;
-    },
-    registrationsFail(state, action) {
-      state.registrationData.registered = false;
-      state.registrationData.isRegistering = false;
-      state.registrationData.error = action.payload;
-    },
+   
     dharmikJankari(state, action) {
       state.dharmikJankariData.caste = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
@@ -134,11 +139,9 @@ const registerationSlice = createSlice({
       state.dropDownsData.gotra = action.payload;
     },
 
-
     fetchLandDropdownSuccess(state, action) {
       state.dropDownsData.land = action.payload;
     },
-
 
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
@@ -209,6 +212,7 @@ const registerationSlice = createSlice({
 const {actions, reducer} = registerationSlice;
 
 export const {
+  registrationStarted,
   sampark,
   parivarik,
   registrationSuccess,
@@ -228,6 +232,6 @@ export const {
   fetchCityDropdownSuccess,
   personalInfo,
   fetchDisabilityDropdownSuccess,
-  fetchLandDropdownSuccess
+  fetchLandDropdownSuccess,
 } = actions;
 export default reducer;

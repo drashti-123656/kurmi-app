@@ -67,6 +67,7 @@ const Whatsapp = ({navigation}) => {
               onBlur={handleBlur('whatsappno')}
               value={values.whatsappno}
               autoFocus={true}
+              maxLength={10}
               keyboardType = 'numeric'
               placeholder={translate('whatsapp.phoneno')}
               placeholderTextColor={'#666666'}

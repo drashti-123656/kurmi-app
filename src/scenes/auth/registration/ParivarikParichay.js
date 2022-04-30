@@ -19,40 +19,50 @@ import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextIn
 import translate from './../../../translations/configTranslations';
 import {parivarikSchema} from '../../../utils/schema/registerSchema';
 import {useDispatch, useSelector} from 'react-redux';
-import {REGISTER_USER} from './redux/registrationActions';
+import {FETCH_LAND_DROPDOWN, REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
+import moment from 'moment'
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+ 
   const {
     parivarikData,
     samparkData,
-    dharmikJankariData : {land},
-    dropDownsData,
+    dharmikJankariData ,
+    dropDownsData : {land},
     registerData,
     personalinfoData,
+    isRegistering
   } = useSelector(state => state.registration);
 
+  useEffect(() => {
+    dispatch({
+      type: FETCH_LAND_DROPDOWN,
+      payload: {moduleType: 'Land'},
+    });
+
+    
+  }, []);
   
 
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo: '55555',
-      userContactInfoWhatsappNo: '5555',
-      userContactInfoPresentAddress: 'hhhh',
-      userContactInfoPermanentAddress: 'ggg',
+      userContactInfoContactNo: samparkData.mobileNo,
+      userContactInfoWhatsappNo: samparkData.whatsAppNo,
+      userContactInfoPresentAddress: samparkData.presentAdd,
+      userContactInfoPermanentAddress: samparkData.permanentAdd,
 
-      userEducationInfoEducation: '5' ,
-      userEducationInfoOccupation: '2',
+      userEducationInfoEducation: personalinfoData.education[0] ,
+      userEducationInfoOccupation: personalinfoData.job[0],
       userEducationInfoProfession: '1',
       userEducationInfoOccupationDetails: 'asasas',
       userEducationInfoAnnualIncome: 'asasas',
 
-      userFamilyInfoFatherName: 'yyhh',
-      userFamilyInfoFatherOccupation: '7',
-      userFamilyInfoMotherName: 'gfff',
+      userFamilyInfoFatherName:  values.fatherName,
+      userFamilyInfoFatherOccupation:  values.fatherOccupation,
+      userFamilyInfoMotherName:  values.motherName,
       userFamilyInfoMotherOccupation: 2,
       userFamilyInfoNoOfMarriedBrothers: '1',
       userFamilyInfoNoOfUnmarriedBrothers: '2',
@@ -62,45 +72,47 @@ const ParivarikParichay = () => {
       userFamilyInfoMaternalUnclesGotra: '1',
       userFamilyInfoHouse: 'personal',
       userFamilyInfoCar: 'yes',
+      userFamilyInfoLand: '2',
 
-      userPersonalInfoMaritalStatusId: '1',
+      userPersonalInfoMaritalStatusId:  personalinfoData.maritalstatus[0],
       userPersonalInfoComplexion: 'text',
-      userPersonalInfoHeight: '55',
+      userPersonalInfoHeight: personalinfoData.height[0],
       userPersonalInfoWeight: 'asasas',
       userPersonalInfoDiet: 'asasas',
-      userPersonalInfoDisability: 'asasas',
+      userPersonalInfoDisability: personalinfoData.disability[0],
       userPersonalInfoBloodGroup: 'text',
 
-      userReligiousInfoTimeOfBirth: '2019-04-28 14:45:15',
-      userReligiousInfoPlaceOfBirth: 'text',
-      userReligiousInfoGotra: '8',
+      userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format('YYYY-MM-DD HH:mm:ss') ,
+      userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
+      userReligiousInfoGotra: dharmikJankariData.birthplace[0],
       userReligiousInfoSubCaste: '9',
       userReligiousInfoMotherTongue: '3',
-      userReligiousInfoZodiac: '2',
-      userReligiousInfoManglik: 'manglik',
-      userReligiousInfoNakshatra: '1',
+      userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
+      userReligiousInfoManglik: dharmikJankariData.auspicious[0],
+      userReligiousInfoNakshatra: 'hhhu',
 
-      profileCreatedByNameHi: 'KHud',
+      profileCreatedByNameHi: registerData.profilemaker[0],
       profileCreatedByNameEn: 'Self',
 
-      userName: 'adsd',
-      userGender: 'male',
+      userName: registerData.firstname,
+      userGender: registerData.gender,
       userEmail: registerData.emailid,
       userMobileNo: registerData.mobilenumber,
-      userDob: '1988-06-27',
+      userDob: moment(registerData.birthdate).format('YYYY-MM-DD'),
       password: registerData.password,
-      userCountry: registerData.country,
-      userState: 22,
-      userCity: 33,
+      userCountry: registerData.country[0],
+      userState: registerData.state[0],
+      userCity:registerData.city[0],
       userTown: 'test duniya',
       userPartnerPreference: '1',
     };
-
+   
+     console.log('payload===>>',payload)
     dispatch({
       type: REGISTER_USER,
       payload,
     });
-    setLoading(true);
+  
    
   };
   return (
@@ -122,6 +134,7 @@ const ParivarikParichay = () => {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             values,
             errors,
             touched,
@@ -182,6 +195,7 @@ const ParivarikParichay = () => {
                 onChangeText={handleChange('brother')}
                 onBlur={handleBlur('brother')}
                 value={values.brother}
+                keyboardType = 'numeric'
                 style={styles.textinput}
                 placeholder={translate('ParivarikParichay.brother')}
                 placeholderTextColor={'#666666'}
@@ -195,6 +209,7 @@ const ParivarikParichay = () => {
                 onChangeText={handleChange('sister')}
                 onBlur={handleBlur('sister')}
                 value={values.sister}
+                keyboardType = 'numeric'
                 style={styles.textinput}
                 placeholder={translate('ParivarikParichay.sister')}
                 placeholderTextColor={'#666666'}
@@ -215,8 +230,8 @@ const ParivarikParichay = () => {
 
               <Dropdown 
                 style={styles.inputMargin}
-                uniqueKey={'land'}
-                displayKey={'land'}
+                uniqueKey={'landId'}
+                displayKey={'landTitleHi'}
                  items={land}
                 selectText={translate('ParivarikParichay.land')}
                 selectedItems={values.land}
@@ -230,7 +245,7 @@ const ParivarikParichay = () => {
               <LoginButton
                 title={translate('ParivarikParichay.register')}
                 onPress={handleSubmit}
-                loading={loading}
+                loading={isRegistering}
               />
             </View>
           )}
@@ -304,9 +319,8 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
-    //textAlign: 'right',
-    marginLeft: '80%',
+    textAlign: 'right',
   },
 });

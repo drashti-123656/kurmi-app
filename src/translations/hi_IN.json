@@ -111,7 +111,7 @@
     "state": " राज्य ",
     "city": " शहर ",
     "enterpassword": "पासवर्ड  डाले",
-    "Note": "उम्र कम से कम 18 वर्ष होनी चाहिए",
+    "Note": "उम्र कम से कम 21 वर्ष होनी चाहिए",
     "Note@": " पासवर्ड कम से कम करैक्टर के हो",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
     "create Account": "अकाउंट बनाएं ",
@@ -126,7 +126,8 @@
     "passwordhaveLowerCase" : "पासवर्ड में एक लोअर केस होना चाहिए",
     "passwordhaveUpperCase" : "पासवर्ड में एक अपर केस होना चाहिए",
     "passwordhave8Character" : "पासवर्ड कम से कम 8 अक्षर का होना चाहिए",
-    "validPassword" : "कृपया एक मान्य पासवर्ड प्रदान करें"
+    "validPassword" : "कृपया एक मान्य पासवर्ड प्रदान करें",
+    "PleaseChoose21Above" : "कृपिया 21 वर्ष से ऊपर चुने"
   },
   "Dharmikjankari": {
     "Dharmik Jankari": "धार्मिक जानकारी",
@@ -137,7 +138,8 @@
     "Zodiacsign": "राशी",
     "auspicious": "मांगलिक",
     "Next": "आगे",
-    "Required" : "*आवश्यक"
+    "Required" : "*आवश्यक",
+    "validName" : "कृपया मान्य नाम दर्ज करें"
   },
   "Vyaktigatdata": {
     "Personal information": "व्यक्तिगत  डाटा ",

@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType}) => {
+const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType,maxLength}) => {
   return (
     <View style={styles.textinput}>
       <TextInput
@@ -13,6 +13,7 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardTyp
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
+        maxLength={maxLength}
         placeholder={placeholder}
         placeholderTextColor={'#666666'}
         keyboardType={keyboardType}
