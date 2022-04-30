@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import Navigation from './src/navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
+import Login from './src/scenes/auth/Login';
 import store from './src/store/index';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import FlashMessage from 'react-native-flash-message';
@@ -28,7 +29,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Navigation />
+      <Login />
       <FlashMessage position="top" />
     </Provider>
   );
