@@ -47,11 +47,11 @@ const NewsFeed = ({navigation}) => {
                 source={require('../../assets/Vector6.png')}
               />
               <Image
-                style={styles.vector_img}
+                style={styles.vector_img_1}
                 source={require('../../assets/Vector7.png')}
               />
               <Image
-                style={styles.vector_img}
+                style={styles.vector_img_1}
                 source={require('../../assets/Vector8.png')}
               />
             </TouchableOpacity>
@@ -116,7 +116,7 @@ const NewsFeed = ({navigation}) => {
         <View>
           <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
           <ScrollView style={styles.footerContainer}>
-            <View>
+            <View style={styles.footer_title}>
               <Text style={styles.titleText}>
                 {translate('NewsFeed.newIntro')}
               </Text>
@@ -179,10 +179,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 5,
   },
+  vector_img_1: {
+    width: 15,
+    height: 5,
+  },
   pinClipart: {
     position: 'absolute',
-    left: 325,
     top: 15,
+    right: 15,
   },
   PinClipart_img: {
     width: 25,
@@ -246,14 +250,14 @@ const styles = StyleSheet.create({
   },
   textinput: {
     backgroundColor: 'white',
-    marginHorizontal: 30,
-    marginVertical: 10,
-    flex: 1,
+    marginLeft: 30,
+    marginVertical: 10, 
+    flex: 0.44,
+    fontSize: 17,
     borderRadius: 10,
     padding: 10,
     height: hp(8),
     color: 'black',
-    width: 160,
   },
   submitButton: {
     backgroundColor: '#DC1C28',
@@ -277,11 +281,10 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     backgroundColor: '#EDEDED',
-    height: 380,
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal:10,
     marginTop: 20,
+    paddingBottom: 40,
   },
   titleText: {
     fontWeight: 'bold',
@@ -294,24 +297,21 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   profileImageContainer: {
-    // flex: 1,
-
     height: hp('30'),
     width: wp('50'),
     marginTop: 30,
-    marginRight: 10,
-    // marginBottom: 20,
   },
-  Image: {},
   profile_img: {
-    width: wp('50'),
+    width: wp('44'),
     height: hp('23'),
   },
   footerTextContainer: {
     backgroundColor: 'white',
     height: hp('10'),
+    width: wp('44'),
   },
   profileText: {
     fontWeight: 'bold',
@@ -326,4 +326,3 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 });
-
