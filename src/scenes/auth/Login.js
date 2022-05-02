@@ -26,6 +26,7 @@ import {LOG_IN} from './redux/authActions';
 
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleLogin = values => {
@@ -37,6 +38,7 @@ const Login = ({navigation}) => {
       type: LOG_IN,
       payload,
     });
+    setLoading(true);
   };
 
   // const handleLogin = () => {
@@ -84,6 +86,7 @@ const Login = ({navigation}) => {
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
+              secureTextEntry={true}
               placeholder={translate('login.Password')}
               placeholderTextColor={'#666666'}
             />
@@ -127,6 +130,7 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.createAccount')}
               onPress={handleLogin}
+              loading={loading}
             />
 
             <Text

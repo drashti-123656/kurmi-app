@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-
+import translate from '../../../../translations/configTranslations';
+import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
   samparkData: {
     mobileNo: '',
@@ -22,7 +23,7 @@ const initialState = {
     error: '',
   },
   dharmikJankariData: {
-    caste: '',
+    gotra: '',
     native: '',
     birthtime: '',
     birthplace: '',
@@ -32,30 +33,33 @@ const initialState = {
   dropDownsData: {
     zodiacSign: [],
     auspicious: [],
-    height: [
-      {id: 1, name: '5ft 5in'},
-      {id: 2, name: '5ft 9in'},
-    ],
+    height: heightDropdwonList,
     maritalstatus: [],
     education: [],
     job: [],
-    colour: [],
-    disability: [],
-    bloodgroup: [],
+
+    disability: [
+      {id: 1, name: translate('Disability.Yes')},
+      {id: 2, name: translate('Disability.No')},
+    ],
+
     profilemaker: [],
     birthdate: [],
     country: [],
     state: [],
     city: [],
+    gotra: [],
+    land: [],
   },
   registerData: {
     emailid: '',
     mobilenumber: '',
+    gender: '',
     profilemaker: '',
     firstname: '',
     lastname: '',
-    birthdate: '',
-    caste: '',
+    birthdate:'',
+
     country: '',
     state: '',
     city: '',
@@ -76,6 +80,19 @@ const registerationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
+    registrationStarted(state, action) {
+      state.registrationData.isRegistering = true;
+    },
+    registrationSuccess(state, action) {
+      state.registrationData.registered = true;
+      state.registrationData.isRegistering = false;
+    },
+    registrationsFail(state, action) {
+      state.registrationData.registered = false;
+      state.registrationData.isRegistering = false;
+      state.registrationData.error = action.payload;
+    },
+
     sampark(state, action) {
       state.samparkData.mobileNo = action.payload.userContactInfoContactNo;
       state.samparkData.whatsAppNo = action.payload.userContactInfoWhatsappNo;
@@ -96,22 +113,14 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoNoOfMarriedBrothers;
       state.parivarikData.sister =
         action.payload.userFamilyInfoNoOfMarriedSisters;
-      state.parivarikData.land = action.payload.fatherName;
+      state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
-    registrationSuccess(state, action) {
-      state.registrationData.registered = true;
-      state.registrationData.isRegistering = false;
-    },
-    registrationsFail(state, action) {
-      state.registrationData.registered = false;
-      state.registrationData.isRegistering = false;
-      state.registrationData.error = action.payload;
-    },
+   
     dharmikJankari(state, action) {
-      state.dharmikJankariData.caste = action.payload.userReligiousInfoGotra;
+      state.dharmikJankariData.gotra = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
-        action.payload.userReligiousInfoSubCaste;
+        action.payload.userReligiousInfoMotherGotra;
       state.dharmikJankariData.birthtime =
         action.payload.userReligiousInfoTimeOfBirth;
       state.dharmikJankariData.birthplace =
@@ -126,11 +135,22 @@ const registerationSlice = createSlice({
       state.dropDownsData.zodiacSign = action.payload;
     },
 
+    fetchGotraDropdownSuccess(state, action) {
+      state.dropDownsData.gotra = action.payload;
+    },
+
+    fetchLandDropdownSuccess(state, action) {
+      state.dropDownsData.land = action.payload;
+    },
+
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
     },
     fetchHeightDropdownSuccess(state, action) {
       state.dropDownsData.height = action.payload;
+    },
+    fetchDisabilityDropdownSuccess(state, action) {
+      state.dropDownsData.disability = action.payload;
     },
     fetchMaritalstatusDropdownSuccess(state, action) {
       state.dropDownsData.maritalstatus = action.payload;
@@ -145,11 +165,12 @@ const registerationSlice = createSlice({
     register(state, action) {
       state.registerData.emailid = action.payload.userEmail;
       state.registerData.mobilenumber = action.payload.userMobileNo;
-      state.registerData.profilemaker = action.payload.profileCreatedByNameHi;
-      state.registerData.firstname = action.payload.userName;
-      state.registerData.lastname = action.payload;
+      state.registerData.gender = action.payload.userGender;
+      state.registerData.profilemaker = action.payload.userProfileCreatedBy;
+      state.registerData.firstname = action.payload.userFirstName;
+      state.registerData.lastname = action.payload.userLastName;
       state.registerData.birthdate = action.payload.userDob;
-      state.registerData.caste = action.payload.userPersonalInfoHeight;
+
       state.registerData.country = action.payload.userCountry;
       state.registerData.state = action.payload.userState;
       state.registerData.city = action.payload.userCity;
@@ -179,11 +200,10 @@ const registerationSlice = createSlice({
       state.personalinfoData.education =
         action.payload.userEducationInfoEducation;
       state.personalinfoData.job = action.payload.userEducationInfoOccupation;
-      state.personalinfoData.colour = action.payload.userPersonalInfoComplexion;
+      
       state.personalinfoData.disability =
         action.payload.userPersonalInfoDisability;
-      state.personalinfoData.bloodgroup =
-        action.payload.userPersonalInfoBloodGroup;
+     
     },
   },
 });
@@ -191,6 +211,7 @@ const registerationSlice = createSlice({
 const {actions, reducer} = registerationSlice;
 
 export const {
+  registrationStarted,
   sampark,
   parivarik,
   registrationSuccess,
@@ -204,10 +225,12 @@ export const {
   fetchJobDropdownSuccess,
   register,
   fetchProfilemakerDropdownSuccess,
-
+  fetchGotraDropdownSuccess,
   fetchCountryDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchCityDropdownSuccess,
   personalInfo,
+  fetchDisabilityDropdownSuccess,
+  fetchLandDropdownSuccess,
 } = actions;
 export default reducer;

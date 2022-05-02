@@ -7,7 +7,7 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 export function* contactUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.CONTACT_USER, payload);
-  console.log('payload==>', payload);
+  
   if (response.ok) {
     showMessage({
         message: "Successfull",
@@ -15,6 +15,6 @@ export function* contactUser(action) {
         type: "success",
       });
 
-    navigate('DashboardNavigation');
+    navigate('DrawerNavigation');
   }
 }

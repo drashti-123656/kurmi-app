@@ -7,10 +7,9 @@ import {showMessage, hideMessage} from 'react-native-flash-message';
 export function* logUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.LOG_USER, payload);
-  console.log('payload==>>',response)
-  console.log('sad==>>',payload)
+  
   if (response.ok) {
-    navigate('DashboardNavigation');
+    navigate('DrawerNavigation');
   }
 }
 

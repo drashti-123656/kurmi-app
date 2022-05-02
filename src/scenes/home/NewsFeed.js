@@ -15,6 +15,7 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
 
 const NewsFeed = ({navigation}) => {
   const [fromAge, setfromAge] = useState('');
@@ -33,7 +34,7 @@ const NewsFeed = ({navigation}) => {
   };
 
   const submitButton = () => {
-    console.log(fromAge, toAge);
+   
   };
 
   return (
@@ -109,9 +110,11 @@ const NewsFeed = ({navigation}) => {
               placeholderTextColor={'#666666'}
             />
           </View>
-          <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.textButton}>{translate('NewsFeed.Search')}</Text>
-          </TouchableOpacity>
+          <LoginButton 
+             title={translate('NewsFeed.Search')}
+              onPress={submitButton}
+          />
+         
         </>
         <View>
           <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
@@ -191,6 +194,7 @@ const styles = StyleSheet.create({
   PinClipartImg: {
     width: 25,
     height: 25,
+   
   },
   navbarText: {
     color: '#FFFFFF',
@@ -256,7 +260,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     borderRadius: 10,
     padding: 10,
-    height: hp(8),
+    height: hp(7),
     color: 'black',
   },
   submitButton: {

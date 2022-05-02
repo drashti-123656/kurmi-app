@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
+import translate from '../../translations/configTranslations';
 
 export const PersonalinformationSchema = Yup.object({
-  // height: Yup.string().required('*Required'),
-  // maritalstatus: Yup.string().required('*Required'),
-  // knowledge: Yup.string().required('*Required'),
-  // job: Yup.string().required('*Required'),
-  // colour: Yup.string().required('*Required'),
-  // disability: Yup.string().required('*Required'),
-  // bloodgroup: Yup.string().required('*Required'),
-});
+  height: Yup.number().required(translate('Vyaktigatdata.Required')),
+  maritalstatus: Yup.number().required(translate('Vyaktigatdata.Required')),
+  education: Yup.number().required(translate('Vyaktigatdata.Required')),
+  job: Yup.number().required(translate('Vyaktigatdata.Required')),
+ 
+  disability: Yup.number().required(translate('Vyaktigatdata.Required'))
+})
