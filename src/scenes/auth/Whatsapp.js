@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {Formik} from 'formik';
 
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
@@ -16,6 +16,7 @@ import {
 
 const Whatsapp = ({navigation}) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handlelogUser = values => {
     const payload = {
       visitorName: values.name,
@@ -26,6 +27,8 @@ const Whatsapp = ({navigation}) => {
       type: LOG_USER,
       payload,
     });
+    setLoading(true);
+
   };
 
   return (
@@ -51,6 +54,7 @@ const Whatsapp = ({navigation}) => {
             <ExtendedTextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
+              autoFocus={true}
               value={values.name}
               placeholder={translate('whatsapp.name')}
               placeholderTextColor={'#666666'}
@@ -61,7 +65,10 @@ const Whatsapp = ({navigation}) => {
             <ExtendedTextInput
               onChangeText={handleChange('whatsappno')}
               onBlur={handleBlur('whatsappno')}
-              value={values.password}
+              value={values.whatsappno}
+              autoFocus={true}
+              maxLength={10}
+              keyboardType = 'numeric'
               placeholder={translate('whatsapp.phoneno')}
               placeholderTextColor={'#666666'}
             />
@@ -72,6 +79,7 @@ const Whatsapp = ({navigation}) => {
             <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
+              loading={loading}
             />
           </View>
         )}
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 180,
-    marginTop: 40,
+    marginTop: '40%',
     alignSelf: 'center',
   },
   note: {
@@ -116,7 +124,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   footer: {
-    marginTop: heightPercentageToDP('25'),
+    marginTop: heightPercentageToDP('15'),
   },
   footer_text: {
     textAlign: 'center',

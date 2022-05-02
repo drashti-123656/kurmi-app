@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Registration from '../scenes/auth/registration/Registration';
+
 import DashboardNavigation from './DashboardNavigation';
-import Whatsapp from '../scenes/auth/Whatsapp';
-import ContactUs from '../scenes/contact/ContactUs';
+
 import ViewBy from '../DrawerNavigationScreen/viewBy';
 import ShortList from '../DrawerNavigationScreen/shortList';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
@@ -15,7 +14,7 @@ import Termofuse from '../DrawerNavigationScreen/termofUse';
 import Logout from '../DrawerNavigationScreen/Logout';
 const Drawer = createDrawerNavigator();
 
-const DrawerContent = () => {
+const DrawerNavigation = () => {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
@@ -35,4 +34,4 @@ const DrawerContent = () => {
   );
 };
 
-export default DrawerContent;
+export default DrawerNavigation;

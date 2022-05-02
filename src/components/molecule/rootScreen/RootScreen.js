@@ -5,8 +5,8 @@ const RootScreen = ({children, scrollable = false}) => {
   return (
     <ImageBackground
       style={styles.bg_img}
-      source={require('../../../assets/backgroundImage.png')}>
-      <StatusBar animated={true} backgroundColor="#DC1C28" />
+      source={require('./../../../assets/backgroundImage.png')}>
+      <StatusBar animated={true}  />
       <View style={styles.overLay}>
         {scrollable ? <ScrollView>{children}</ScrollView> : children}
       </View>
@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    backgroundColor: 'rgba(	86.3, 11, 15.7,0.8)',
+    // backgroundColor: 'rgba(	86.3, 11, 15.7,0.8)',
   },
 });

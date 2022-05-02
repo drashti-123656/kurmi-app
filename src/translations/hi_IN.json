@@ -25,7 +25,12 @@
     "Submit" : "जमा करें",
     "message" : "संदेश",
     "Required" : "*आवश्यक",
-    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है"
+    "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
+    "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NameRequired" : "नाम आवश्यक है",
+    "validName" : "कृपया मान्य नाम दर्ज करें",
+    "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए"
+    
   },
   "NewsFeed" : {
     "kurmiShadiHeading" : "कुर्मी शादी",
@@ -50,7 +55,12 @@
     "NameRequired" : "नाम आवश्यक है",
     "fieldRequired" : "यह फ़ील्ड आवश्यक है",
     "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए",
-    "phoneNumberNotValid" : "फ़ोन नंबर मान्य नहीं है यह 10 अंकों का होना चाहिए"
+    "phoneNumberNotValid" : "फ़ोन नंबर मान्य नहीं है यह 10 अंकों का होना चाहिए",
+    "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NotLookLikePhnno" : "यह फ़ोन नंबर जैसा नहीं लगता",
+    "numbercantStartMinus" : "फ़ोन नंबर माइनस से शुरू नहीं हो सकता",
+    "numberCantbeDecimal" : "फ़ोन नंबर में दशमलव बिंदु शामिल नहीं हो सकता",
+    "validName" : "कृपया मान्य नाम दर्ज करें"
     
   },
   "advanceSearch": {
@@ -66,7 +76,13 @@
      "sister" : "बहन",
      "land" : "जमीन",
      "register" : "रजिस्टर करें",
-     "Required" : "*आवश्यक"
+     "Required" : "*आवश्यक",
+     "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NotLookLikePhnno" : "यह फ़ोन नंबर जैसा नहीं लगता",
+    "NameRequired" : "नाम आवश्यक है",
+    "validName" : "कृपया मान्य नाम दर्ज करें",
+    "nameMustbe3" : "नाम कम से कम 3 अक्षर का होना चाहिए"
+    
 
   },
   "samPark" : {
@@ -78,15 +94,17 @@
     "Next" : "आगे",
     "Required" : "*आवश्यक",
     "PhoneNumberValid" : "फ़ोन नंबर मान्य नहीं है",
-    "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है"
+    "WhatsappNumberValid" : "Whatsapp नंबर मान्य नहीं है",
+    "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NotLookLikePhnno" : "यह फ़ोन नंबर जैसा नहीं लगता"
   },
   "register": {
     "registration" : "पंजीकरण",
     "Var": "वर",
     "Vadhu": "वधू ",
-    "ProfileName": "प्रोफाइल बनने वाला",
+    "ProfileName": "प्रोफाइल बनाने  वाला",
     "FirstName": "पहला नाम",
-    "EmailId": "ईमेल ID",
+    "EmailId": "ई-मेल ID",
     "MobileNumber": "मोबाइल नंबर",
     "birthdate": "जन्मतिथि",
     "caste": "गोत्र",
@@ -94,20 +112,35 @@
     "state": " राज्य ",
     "city": " शहर ",
     "enterpassword": "पासवर्ड  डाले",
-    "Note": "उम्र काम से काम 18 वर्ष होनी चाहिए",
-    "Note@": " पासवर्ड कम से कम कैरेक्टर नंबर का हो ",
+    "Note": "उम्र कम से कम 21 वर्ष होनी चाहिए",
+    "Note@": " पासवर्ड कम से कम करैक्टर के हो",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
-    "create Account": "अकाउंट बनाएं "
+    "create Account": "अकाउंट बनाएं ",
+    "lastName" : "आखरी नाम",
+    "picUpload" : "फोटो अपलोड करे",
+    "Required" : "*आवश्यक",
+    "InvalidEmail" : "यह ईमेल अमान्य है",
+    "nameMustbe3" : "3 अक्षर होने चाहिए ",
+    "validName" : "कृपया मान्य नाम दर्ज करें",
+    "itMustBe10Digits" : "यह 10 अंकों का होना चाहिए",
+    "NotLookLikePhnno" : "यह फ़ोन नंबर जैसा नहीं लगता",
+    "passwordhaveLowerCase" : "पासवर्ड में एक लोअर केस होना चाहिए",
+    "passwordhaveUpperCase" : "पासवर्ड में एक अपर केस होना चाहिए",
+    "passwordhave8Character" : "पासवर्ड कम से कम 8 अक्षर का होना चाहिए",
+    "validPassword" : "कृपया एक मान्य पासवर्ड प्रदान करें",
+    "PleaseChoose21Above" : "कृपिया 21 वर्ष से ऊपर चुने"
   },
   "Dharmikjankari": {
     "Dharmik Jankari": "धार्मिक जानकारी",
     "Caste": "गोत्र",
     "Native": "माँ का गोत्र:",
-    "Birthtime": "जन्म का समय",
+    "Birthtime": "hh:mm",
     "Birthplace": "जन्म स्थान",
     "Zodiacsign": "राशी",
     "auspicious": "मांगलिक",
-    "Next": "आगे"
+    "Next": "आगे",
+    "Required" : "*आवश्यक",
+    "validName" : "कृपया मान्य नाम दर्ज करें"
   },
   "Vyaktigatdata": {
     "Personal information": "व्यक्तिगत  डाटा ",
@@ -118,7 +151,10 @@
     "Colour": "रंग",
     "Disability": "विकलांगता",
     "BloodGroup": " ब्लड ग्रुप  ",
-    "Next": "आगे"
+    "Next": "आगे",
+    "Gotra" : "गोत्र",
+    "MaaKaGotra" : "माँ का गोत्र",
+    "Required" : "*आवश्यक"
   },
   "profilemaker":{
     "Myself":"स्वयं",

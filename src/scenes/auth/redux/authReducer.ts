@@ -26,7 +26,7 @@ const authSlice = createSlice({
       state.authData.userData = {};
       state.authData.token = '';
       state.authData.error = null;
-      state.authData.loading = false;
+      state.authData.loading = true;
     },
     authError(state, action) {
       state.authData.error = action.payload;

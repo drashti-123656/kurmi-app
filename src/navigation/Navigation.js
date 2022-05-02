@@ -11,6 +11,7 @@ import ContactUs from '../scenes/contact/ContactUs';
 import DrawerContent from './DrawerNavigation';
 import DrawerNavigation from './DrawerNavigation';
 import Registration from '../scenes/auth/registration/Registration';
+import DashboardNavigation from './DashboardNavigation';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -19,19 +20,20 @@ const Navigation = () => {
     <NavigationContainer ref={navigationRef}>
        <Stack.Navigator> 
    
-         {/* <Stack.Screen
+         <Stack.Screen
               name="Whatsapp"
               component={Whatsapp}
               headershow
               options={{
                 headerShown: false,
               }}
-            />   */}
+            />  
         <Stack.Screen
           name="DrawerNavigation"
-          component={Registration}
+          component={DrawerNavigation}
           options={{headerShown: false}}
         />
+        
         <Stack.Screen
           name="ContactUs"
           component={ContactUs}
