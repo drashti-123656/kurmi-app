@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import {store, persistedStore} from './src/store/index';
 import Login from './src/scenes/auth/Login';
-import store from './src/store/index';
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
@@ -36,7 +36,7 @@ const App = () => {
       persistor={persistedStore}
       onBeforeLift={() => new Promise(resolve => setTimeout(resolve, 3000))} 
       >
-      <NewsFeed />
+      <Navigation />
       <FlashMessage position="top" />
       </PersistGate>
     </Provider>

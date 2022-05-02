@@ -214,7 +214,7 @@ const Registration = () => {
               ) : null}
             </View>
 
-            <View style={styles.input_calendar}>
+            {/* <View style={styles.input_calendar}>
                   <CalendarPicker
                     onSelect={value => setFieldValue('birthdate', value)}
                     value={values.birthdate}
@@ -223,7 +223,7 @@ const Registration = () => {
             </View>
             {errors.birthdate && touched.birthdate ? (
               <Text style={styles.error}>{errors.birthdate}</Text>
-            ) : null}
+            ) : null} */}
             <Text style={styles.text}>
               <Text style={styles.star}>*</Text>
               {translate('register.Note')}
