@@ -20,7 +20,7 @@ import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-// import CalendarPicker from '../../../components/atoms/picker/datePicker';
+import CalendarPicker from '../../../components/atoms/picker/datePicker';
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
