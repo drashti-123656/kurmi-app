@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import React from 'react';
 import {useState} from 'react';
@@ -15,6 +16,27 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
+
+const data = [
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+  {
+    id: 3,
+  },
+  {
+    id: 4,
+  },
+  {
+    id: 5,
+  },
+  {
+    id: 6,
+  },
+];
 
 const NewsFeed = ({navigation}) => {
   const [fromAge, setfromAge] = useState('');
@@ -36,127 +58,142 @@ const NewsFeed = ({navigation}) => {
     console.log(fromAge, toAge);
   };
 
-  return (
-    <RootScreen>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Image
-                style={styles.vectorImg}
-                source={require('../../assets/Vector6.png')}
-              />
-              <Image
-                style={styles.vectorImg_1}
-                source={require('../../assets/Vector7.png')}
-              />
-              <Image
-                style={styles.vectorImg_1}
-                source={require('../../assets/Vector8.png')}
-              />
+  const renderHeader = () => (
+    <View>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Image
+              style={styles.vectorImg}
+              source={require('../../assets/Vector6.png')}
+            />
+            <Image
+              style={styles.vectorImg_1}
+              source={require('../../assets/Vector7.png')}
+            />
+            <Image
+              style={styles.vectorImg_1}
+              source={require('../../assets/Vector8.png')}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.pinClipart}>
+          <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
+            <Image
+              style={styles.PinClipartImg}
+              source={require('../../assets/contact.png')}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.navbarText}>
+          {translate('NewsFeed.kurmiShadiHeading')}
+        </Text>
+      </View>
+      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+
+      <Text style={styles.bottomText}>{translate('NewsFeed.choose')}</Text>
+
+      <View style={styles.radioButtonContainer}>
+        {isLiked.map(item => (
+          <View style={styles.ButtonContainer}>
+            <TouchableOpacity
+              onPress={() => onRadioBtnClick(item)}
+              style={styles.radioButton}>
+              {item.selected ? <View style={styles.radioButtonIcon} /> : null}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
+              <Text style={styles.radioButtonText}>{item.name}</Text>
             </TouchableOpacity>
           </View>
+        ))}
+      </View>
 
-          <View style={styles.pinClipart}>
-            <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
-              <Image
-                style={styles.PinClipartImg}
-                source={require('../../assets/contact.png')}
-              />
-            </TouchableOpacity>
-          </View>
+      <>
+        <View style={styles.ageContainer}>
+          <TextInput
+            onChangeText={FromAge => setfromAge(FromAge)}
+            value={fromAge}
+            style={styles.textInput}
+            placeholder={translate('NewsFeed.ageFrom')}
+            keyboardType="numeric"
+            placeholderTextColor={'#666666'}
+          />
 
-          <Text style={styles.navbarText}>
-            {translate('NewsFeed.kurmiShadiHeading')}
+          <TextInput
+            onChangeText={ToAge => SettoAge(ToAge)}
+            value={toAge}
+            keyboardType="numeric"
+            style={styles.textInput}
+            placeholder={translate('NewsFeed.ageTo')}
+            placeholderTextColor={'#666666'}
+          />
+        </View>
+        <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
+          <Text style={styles.textButton}>{translate('NewsFeed.Search')}</Text>
+        </TouchableOpacity>
+      </>
+      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+      <ScrollView style={styles.footerContainer}>
+      <View style={styles.footerTitle}>
+          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
+          <Text style={styles.titleTextNext}>
+            {translate('NewsFeed.recentlyJoint')}
           </Text>
         </View>
-        <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+</ScrollView>
+    </View>
+  );
 
-        <Text style={styles.bottomText}>{translate('NewsFeed.choose')}</Text>
-
-        <View style={styles.radioButtonContainer}>
-          {isLiked.map(item => (
-            <View style={styles.ButtonContainer}>
-              <TouchableOpacity
-                onPress={() => onRadioBtnClick(item)}
-                style={styles.radioButton}>
-                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-                <Text style={styles.radioButtonText}>{item.name}</Text>
-              </TouchableOpacity>
+  const renderItem = () => {
+    return (
+      <ScrollView style={styles.footerContainer}>
+        
+        <View style={styles.profileContainer}>
+          <View style={styles.profileImageContainer}>
+            <Image
+              style={styles.profileImg}
+              source={require('../../assets/profile.png')}
+            />
+            <View style={styles.footerTextContainer}>
+              <Text style={styles.profileText}>
+                {translate('NewsFeed.newProfile')}{' '}
+              </Text>
+              <Text style={styles.profileIntroText}>
+                {translate('NewsFeed.intro')}{' '}
+              </Text>
             </View>
-          ))}
-        </View>
-
-        <>
-          <View style={styles.ageContainer}>
-            <TextInput
-              onChangeText={FromAge => setfromAge(FromAge)}
-              value={fromAge}
-              style={styles.textInput}
-              placeholder={translate('NewsFeed.ageFrom')}
-              keyboardType="numeric"
-              placeholderTextColor={'#666666'}
-            />
-
-            <TextInput
-              onChangeText={ToAge => SettoAge(ToAge)}
-              value={toAge}
-              keyboardType="numeric"
-              style={styles.textInput}
-              placeholder={translate('NewsFeed.ageTo')}
-              placeholderTextColor={'#666666'}
-            />
           </View>
-          <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.textButton}>{translate('NewsFeed.Search')}</Text>
-          </TouchableOpacity>
-        </>
-        <View>
-          <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
-          <ScrollView style={styles.footerContainer}>
-            <View style={styles.footerTitle}>
-              <Text style={styles.titleText}>
-                {translate('NewsFeed.newIntro')}
+          <View style={styles.profileImageContainer}>
+            <Image
+              style={styles.profileImg}
+              source={require('../../assets/profile1.png')}
+            />
+            <View style={styles.footerTextContainer}>
+              <Text style={styles.profileText}>
+                {translate('NewsFeed.newProfile')}{' '}
               </Text>
-              <Text style={styles.titleTextNext}>
-                {translate('NewsFeed.recentlyJoint')}
+              <Text style={styles.profileIntroText}>
+                {translate('NewsFeed.intro')}{' '}
               </Text>
             </View>
-            <View style={styles.profileContainer}>
-              <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImg}
-                  source={require('../../assets/profile.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>
-                    {translate('NewsFeed.newProfile')}{' '}
-                  </Text>
-                  <Text style={styles.profileIntroText}>
-                    {translate('NewsFeed.intro')}{' '}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImg}
-                  source={require('../../assets/profile1.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>
-                    {translate('NewsFeed.newProfile')}{' '}
-                  </Text>
-                  <Text style={styles.profileIntroText}>
-                    {translate('NewsFeed.intro')}{' '}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
+          </View>
         </View>
       </ScrollView>
+    );
+  };
+
+  return (
+    <RootScreen>
+      <FlatList
+        data={data}
+        numColumns={2}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={renderHeader}
+        initialNumToRender={10}
+      />
     </RootScreen>
   );
 };
@@ -251,7 +288,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: 'white',
     marginLeft: 30,
-    marginVertical: 10, 
+    marginVertical: 10,
     flex: 0.44,
     fontSize: 17,
     borderRadius: 10,
@@ -274,6 +311,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
+    marginBottom: 20,
     justifyContent: 'center',
     alignSelf: 'center',
     fontSize: 18,
@@ -282,9 +320,8 @@ const styles = StyleSheet.create({
   footerContainer: {
     backgroundColor: '#EDEDED',
     flexDirection: 'row',
-    paddingHorizontal:10,
-    marginTop: 20,
-    paddingBottom: 40,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
   },
   titleText: {
     fontWeight: 'bold',

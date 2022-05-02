@@ -8,37 +8,48 @@ import Whatsapp from '../scenes/auth/Whatsapp';
 
 import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
-import DrawerContent from './DrawerNavigation';
-import DrawerNavigation from './DrawerNavigation';
-import Registration from '../scenes/auth/registration/Registration';
 import DashboardNavigation from './DashboardNavigation';
+import translate from './../translations/configTranslations';
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-       <Stack.Navigator> 
-   
-         <Stack.Screen
+      <Stack.Navigator>
+        {/* <Stack.Screen
               name="Whatsapp"
               component={Whatsapp}
               headershow
               options={{
                 headerShown: false,
               }}
-            />  
+            />   */}
         <Stack.Screen
           name="DashboardNavigation"
           component={DashboardNavigation}
-          options={{headerShown: false}}
+          options={{
+            headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+            tabBarActiveTintColor: 'red',
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#DC1C28',
+            },
+            headerTitleStyle: {
+              fontSize: 25,
+              fontWeight: 'bold',
+              alignSelf: 'center',
+              marginHorizontal: 20,
+            },
+          }}
         />
         <Stack.Screen
           name="ContactUs"
           component={ContactUs}
           options={{headerShown: false}}
         />
-      </Stack.Navigator> 
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
