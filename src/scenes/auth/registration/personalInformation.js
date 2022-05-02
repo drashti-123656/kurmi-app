@@ -58,9 +58,9 @@ const Personalinformation = ({navigation}) => {
       userPersonalInfoMaritalStatusId: values.maritalstatus,
       userEducationInfoEducation: values.education,
       userEducationInfoOccupation: values.job,
-      userPersonalInfoComplexion: values.colour,
+      
       userPersonalInfoDisability: values.disability,
-      userPersonalInfoBloodGroup: values.bloodgroup,
+     
     };
 
     dispatch(personalInfo(payload));
@@ -77,9 +77,9 @@ const Personalinformation = ({navigation}) => {
           maritalstatus: personalinfoData.maritalstatus,
           education: personalinfoData.education,
           job: personalinfoData.job,
-          colour: personalinfoData.colour,
+         
           disability: personalinfoData.disability,
-          bloodgroup: personalinfoData.bloodgroup,
+         
         }}
         validationSchema={PersonalinformationSchema}
         onSubmit={values => handleSampark(values)}>

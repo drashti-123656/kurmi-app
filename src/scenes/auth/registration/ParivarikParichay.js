@@ -31,7 +31,7 @@ const ParivarikParichay = () => {
     parivarikData,
     samparkData,
     dharmikJankariData ,
-    dropDownsData : {land},
+    dropDownsData : {land,job},
     registerData,
     personalinfoData,
     isRegistering
@@ -56,45 +56,37 @@ const ParivarikParichay = () => {
 
       userEducationInfoEducation: personalinfoData.education[0] ,
       userEducationInfoOccupation: personalinfoData.job[0],
-      userEducationInfoProfession: '1',
-      userEducationInfoOccupationDetails: 'asasas',
-      userEducationInfoAnnualIncome: 'asasas',
+      
 
       userFamilyInfoFatherName:  values.fatherName,
-      userFamilyInfoFatherOccupation:  values.fatherOccupation,
+      userFamilyInfoFatherOccupation:  values.fatherOccupation[0],
       userFamilyInfoMotherName:  values.motherName,
-      userFamilyInfoMotherOccupation: 2,
-      userFamilyInfoNoOfMarriedBrothers: '1',
-      userFamilyInfoNoOfUnmarriedBrothers: '2',
-      userFamilyInfoNoOfMarriedSisters: 3,
-      userFamilyInfoNoOfUnmarriedSisters: '2',
-      userFamilyInfoMaternalUnclesName: 'asasas',
-      userFamilyInfoMaternalUnclesGotra: '1',
-      userFamilyInfoHouse: 'personal',
-      userFamilyInfoCar: 'yes',
-      userFamilyInfoLand: '2',
+      userFamilyInfoMotherMaika : values.motherMayaka,
+      userFamilyInfoNoOfBrother : values.brother,
+      
+      userFamilyInfoNoOfSister : values.sister,
+      userFamilyInfoLand: values.land[0],
 
       userPersonalInfoMaritalStatusId:  personalinfoData.maritalstatus[0],
-      userPersonalInfoComplexion: 'text',
+     
       userPersonalInfoHeight: personalinfoData.height[0],
-      userPersonalInfoWeight: 'asasas',
-      userPersonalInfoDiet: 'asasas',
+      
       userPersonalInfoDisability: personalinfoData.disability[0],
-      userPersonalInfoBloodGroup: 'text',
+     
 
       userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format('YYYY-MM-DD HH:mm:ss') ,
       userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
-      userReligiousInfoGotra: dharmikJankariData.birthplace[0],
-      userReligiousInfoSubCaste: '9',
-      userReligiousInfoMotherTongue: '3',
+      userReligiousInfoGotra: dharmikJankariData.gotra[0],
+     
       userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
       userReligiousInfoManglik: dharmikJankariData.auspicious[0],
-      userReligiousInfoNakshatra: 'hhhu',
+      
+      userReligiousInfoMotherGotra : dharmikJankariData.native[0],
 
-      profileCreatedByNameHi: registerData.profilemaker[0],
-      profileCreatedByNameEn: 'Self',
-
-      userName: registerData.firstname,
+      
+      userProfileCreatedBy :  registerData.profilemaker[0],
+      userFirstName :  registerData.firstname,
+      userLastName :  registerData.lastname,
       userGender: registerData.gender,
       userEmail: registerData.emailid,
       userMobileNo: registerData.mobilenumber,
@@ -103,8 +95,7 @@ const ParivarikParichay = () => {
       userCountry: registerData.country[0],
       userState: registerData.state[0],
       userCity:registerData.city[0],
-      userTown: 'test duniya',
-      userPartnerPreference: '1',
+     
     };
    
      console.log('payload===>>',payload)
@@ -126,7 +117,7 @@ const ParivarikParichay = () => {
             motherMayaka: parivarikData.motherMayaka,
             brother: parivarikData.brother,
             sister: parivarikData.sister,
-            land: '',
+            land: parivarikData.land,
           }}
           validationSchema={parivarikSchema}
           onSubmit={values => handleParivarik(values)}>
@@ -152,14 +143,17 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.fatherName}</Text>
               ) : null}
 
-              <ExtendedTextInput
-                onChangeText={handleChange('fatherOccupation')}
-                onBlur={handleBlur('fatherOccupation')}
-                value={values.fatherOccupation}
-                style={styles.textinput}
-                placeholder={translate('ParivarikParichay.fatherOccupation')}
-                placeholderTextColor={'#666666'}
-              />
+             <Dropdown
+              style={styles.inputMargin}
+              uniqueKey={'occupationId'}
+              displayKey={'occupationTitleHi'}
+              items={job}
+              selectText={translate('ParivarikParichay.fatherOccupation')}
+              selectedItems={values.fatherOccupation}
+              onSelectedItemsChange={value => setFieldValue('fatherOccupation', value)}
+            />
+
+              
 
               {errors.fatherOccupation && touched.fatherOccupation ? (
                 <Text style={styles.error}>{errors.fatherOccupation}</Text>

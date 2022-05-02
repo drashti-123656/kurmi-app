@@ -32,7 +32,7 @@ export const parivarikSchema = Yup.object().shape({
     .required(translate('ParivarikParichay.NameRequired'))
     .matches(/^[A-Za-z ]*$/, translate('ParivarikParichay.validName'))
     .min(3, translate('ParivarikParichay.nameMustbe3')),
-  fatherOccupation: Yup.string().required(
+  fatherOccupation: Yup.number().required(
     translate('ParivarikParichay.Required'),
   ),
   motherName: Yup.string()

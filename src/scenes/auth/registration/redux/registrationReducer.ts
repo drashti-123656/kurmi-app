@@ -113,14 +113,14 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoNoOfMarriedBrothers;
       state.parivarikData.sister =
         action.payload.userFamilyInfoNoOfMarriedSisters;
-      state.parivarikData.land = action.payload;
+      state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
    
     dharmikJankari(state, action) {
-      state.dharmikJankariData.caste = action.payload.userReligiousInfoGotra;
+      state.dharmikJankariData.gotra = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
-        action.payload.userReligiousInfoSubCaste;
+        action.payload.userReligiousInfoMotherGotra;
       state.dharmikJankariData.birthtime =
         action.payload.userReligiousInfoTimeOfBirth;
       state.dharmikJankariData.birthplace =
@@ -166,9 +166,9 @@ const registerationSlice = createSlice({
       state.registerData.emailid = action.payload.userEmail;
       state.registerData.mobilenumber = action.payload.userMobileNo;
       state.registerData.gender = action.payload.userGender;
-      state.registerData.profilemaker = action.payload.profileCreatedByNameHi;
-      state.registerData.firstname = action.payload.userName;
-      state.registerData.lastname = action.payload;
+      state.registerData.profilemaker = action.payload.userProfileCreatedBy;
+      state.registerData.firstname = action.payload.userFirstName;
+      state.registerData.lastname = action.payload.userLastName;
       state.registerData.birthdate = action.payload.userDob;
 
       state.registerData.country = action.payload.userCountry;
@@ -200,11 +200,10 @@ const registerationSlice = createSlice({
       state.personalinfoData.education =
         action.payload.userEducationInfoEducation;
       state.personalinfoData.job = action.payload.userEducationInfoOccupation;
-      state.personalinfoData.colour = action.payload.userPersonalInfoComplexion;
+      
       state.personalinfoData.disability =
         action.payload.userPersonalInfoDisability;
-      state.personalinfoData.bloodgroup =
-        action.payload.userPersonalInfoBloodGroup;
+     
     },
   },
 });

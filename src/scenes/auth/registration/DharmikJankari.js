@@ -65,6 +65,7 @@ const DharmikJankari = ({navigation}) => {
       userReligiousInfoPlaceOfBirth: values.birthplace,
       userReligiousInfoZodiac: values.zodiacsign,
       userReligiousInfoManglik: values.auspicious,
+      userReligiousInfoMotherGotra : values.native
     };
 
     navigation.navigate('Sampark');
