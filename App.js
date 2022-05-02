@@ -5,7 +5,10 @@ import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import {store, persistedStore} from './src/store/index';
 import Login from './src/scenes/auth/Login';
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac17781cb29027d7f8305e88d56cc52b9b2cea80
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';

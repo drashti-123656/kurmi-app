@@ -20,8 +20,12 @@ import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
+<<<<<<< HEAD
 import {showMessage} from 'react-native-flash-message';
 
+=======
+import CalendarPicker from '../../../components/atoms/picker/datePicker';
+>>>>>>> ac17781cb29027d7f8305e88d56cc52b9b2cea80
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
