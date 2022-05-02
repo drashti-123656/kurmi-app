@@ -29,13 +29,8 @@ const Navigation = () => {
               }}
             />  
         <Stack.Screen
-<<<<<<< HEAD
           name="DrawerNavigation"
           component={DrawerNavigation}
-=======
-          name="DashboardNavigation"
-          component={DashboardNavigation}
->>>>>>> ac17781cb29027d7f8305e88d56cc52b9b2cea80
           options={{headerShown: false}}
         />
         
