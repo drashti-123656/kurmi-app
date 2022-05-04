@@ -3,8 +3,7 @@ import {navigate} from '../../../navigation/RootNavigation';
 import apiClient from './../../../services/httpServices';
 import {API_URL} from './../../../services/webConstants';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-import { login } from '../login/redux/loginReducer';
-
+import { login } from '../login/loginReducer';
 export function* logUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.LOG_USER, payload);

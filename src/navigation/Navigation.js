@@ -19,13 +19,13 @@ const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-      {isAuthenticated ?  <DrawerNavigation/>:<AuthNavigation/>}
+      {/* {isAuthenticated ?  <DrawerNavigation/>:<AuthNavigation/>} */}
      
-       {/* <Stack.Navigator> 
+       <Stack.Navigator> 
    
          <Stack.Screen
               name="Whatsapp"
-              component={Login}
+              component={Whatsapp}
               headershow
               options={{
                 headerShown: false,
@@ -42,7 +42,7 @@ const Navigation = () => {
           component={ContactUs}
           options={{headerShown: false}}
         />
-      </Stack.Navigator>  */}
+      </Stack.Navigator> 
     </NavigationContainer>
   );
 };
