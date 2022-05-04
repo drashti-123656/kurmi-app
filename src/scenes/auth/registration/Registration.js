@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -21,6 +22,7 @@ import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import {
   FETCH_CITY_DROPDOWN,
@@ -42,6 +44,7 @@ const Registration = () => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [ProfilePic, setProfilePic] = useState(null);
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -117,6 +120,15 @@ const Registration = () => {
     setIsLiked(updatedState);
   };
 
+  const handleChooseProfilePic = () => {
+    launchImageLibrary({noData: true, includeBase64: true}, response => {
+      console.log(response);
+      if (response) {
+        setProfilePic(response);
+      }
+    });
+  };
+
   return (
     <RootScreen scrollable={true}>
       <Formik
@@ -156,6 +168,25 @@ const Registration = () => {
                 {translate('register.picUpload')}{' '}
               </Text>
             </View>
+
+            {/* <TouchableOpacity
+                  onPress={handleChooseProfilePic}
+                  style={{
+                    position: 'absolute',
+                    width: 100,
+                    height: 100,
+                    backgroundColor: '#333',
+                    opacity: 0.5,
+                    borderRadius: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    zIndex: 1,
+                  }}>
+                  <Image
+                    source={require('./../../../assets/camera.png')}
+                    style={{width: 40, height: 40, tintColor: '#fff'}}
+                  />
+                </TouchableOpacity> */}
 
             <View style={styles.radioButtonContainer}>
               <TouchableOpacity
@@ -414,6 +445,8 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
+   flex :1,
+   
   },
   inputMargin: {
     marginTop: 20,
