@@ -12,17 +12,20 @@ import DrawerContent from './DrawerNavigation';
 import DrawerNavigation from './DrawerNavigation';
 import Registration from '../scenes/auth/registration/Registration';
 import DashboardNavigation from './DashboardNavigation';
+import Login from '../scenes/auth/Login';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-       <Stack.Navigator> 
+      {isAuthenticated ?  <DrawerNavigation/>:<AuthNavigation/>}
+     
+       {/* <Stack.Navigator> 
    
          <Stack.Screen
               name="Whatsapp"
-              component={Whatsapp}
+              component={Login}
               headershow
               options={{
                 headerShown: false,
@@ -39,7 +42,7 @@ const Navigation = () => {
           component={ContactUs}
           options={{headerShown: false}}
         />
-      </Stack.Navigator> 
+      </Stack.Navigator>  */}
     </NavigationContainer>
   );
 };
