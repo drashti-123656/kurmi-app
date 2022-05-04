@@ -22,7 +22,7 @@ import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
-import { login } from './login/redux/loginReducer';
+import { login } from './login/loginReducer';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [loading, setLoading] = useState(false);
