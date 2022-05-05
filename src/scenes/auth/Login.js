@@ -17,26 +17,28 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {login} from './redux/authReducer';
+import {useDispatch, useSelector} from 'react-redux';
 import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
-import { LOG_IN } from './redux/authActions';
-
-const Login = () => {
-  const dispatch = useDispatch();
+import {LOG_IN} from './redux/authActions';
+import { login } from './login/loginReducer';
+const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const loginData= useSelector(state => state.login);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
       userPassword: values.password,
     };
     dispatch({
-      type:LOG_IN,
+      type: LOG_IN,
       payload,
     });
+    dispatch(login(payload));
+    // setLoading(true);
   };
 
   // const handleLogin = () => {
@@ -56,8 +58,8 @@ const Login = () => {
       <Image source={require('../../assets/logo.png')} style={styles.image} />
       <Formik
         initialValues={{
-          login: '',
-          password: '',
+          login: loginData.login,
+          password:loginData.password,
         }}
         validationSchema={LoginSchema}
         onSubmit={values => handleLogin(values)}>
@@ -84,6 +86,7 @@ const Login = () => {
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
+              secureTextEntry={true}
               placeholder={translate('login.Password')}
               placeholderTextColor={'#666666'}
             />
@@ -127,6 +130,7 @@ const Login = () => {
             <LoginButton
               title={translate('login.createAccount')}
               onPress={handleLogin}
+              loading={loading}
             />
 
             <Text
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7a4c4c',
   },
-  formContainer:{
+  formContainer: {
     flex: 1,
   },
   alignedRowContainer: {

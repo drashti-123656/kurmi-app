@@ -7,13 +7,16 @@ import {
   fetchCityDropdownSuccess,
   fetchCountryDropdownSuccess,
   fetchEducationDropdownSuccess,
+  fetchGotraDropdownSuccess,
   fetchJobDropdownSuccess,
+  fetchLandDropdownSuccess,
   fetchMaritalstatusDropdownSuccess,
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
   register,
   registrationsFail,
+  registrationStarted,
   registrationSuccess,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
@@ -21,8 +24,9 @@ import {loginSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
+  registrationStarted({});
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
-  console.log('response=>>', response.data);
+
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -30,7 +34,6 @@ export function* registerUser(action) {
     });
     yield put(loginSuccess(response.data.User));
     yield put(registrationSuccess({}));
-    yield put(loginSuccess(response.data.User));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
@@ -66,6 +69,20 @@ export function* auspiciousDropdown(action) {
 
   if (response.ok) {
     yield put(fetchAuspiciousDropdownSuccess(response.data.data));
+  }
+}
+
+export function* gotraDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchGotraDropdownSuccess(response.data.data));
   }
 }
 
@@ -113,6 +130,7 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
+  
   const apiBody = {
     where: {
       userEmail: payload.userEmail,
@@ -120,13 +138,14 @@ export function* registerUserVerification(action) {
     },
   };
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
+  
   if (response.ok) {
+   
     yield put(register(payload));
-    console.log(payload)
     navigate('Personalinformation');
   } else {
     showMessage({
-      message: response.problem,
+      message: 'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
   }
@@ -140,7 +159,7 @@ export function* profilemakerDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  console.log('response=>', response);
+  
   if (response.ok) {
     yield put(fetchProfilemakerDropdownSuccess(response.data.data));
   }
@@ -154,7 +173,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  console.log('response111 =>', response.data.data);
+  
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
@@ -185,5 +204,20 @@ export function* cityDropdown(action) {
 
   if (response.ok) {
     yield put(fetchCityDropdownSuccess(response.data.data));
+  }
+}
+
+
+export function* landDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchLandDropdownSuccess(response.data.data));
   }
 }

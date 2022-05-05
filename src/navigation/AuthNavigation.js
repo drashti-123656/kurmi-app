@@ -8,13 +8,14 @@ import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 import Personalinformation from '../scenes/auth/registration/personalInformation';
+import DrawerNavigation from './DrawerNavigation';
 const Stack = createNativeStackNavigator();
 
 
 
 const AuthNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='login'>
       <Stack.Screen
         name="login"
         component={Login}
@@ -25,7 +26,13 @@ const AuthNavigation = () => {
         component={Registration}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+        <Stack.Screen
+          name="DrawerNavigation"
+          component={DrawerNavigation}
+          options={{headerShown: false}}
+        />
+
+      {/* <Stack.Screen
         name="Personalinformation"
         component={Personalinformation}
         options={{headerShown: false}}
@@ -44,7 +51,7 @@ const AuthNavigation = () => {
         name="ParivarikParichay"
         component={ParivarikParichay}
         options={{headerShown: false}}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

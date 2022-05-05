@@ -1,35 +1,53 @@
-import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
 import React from 'react';
-import translate from '../../../translations/configTranslations'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType,maxLength,secureTextEntry}) => {
+
+
+
+const CustomInput = ({onChangeText,value,placeholder,editable,keyboardType,multiline}) => {
   return (
-    <View style={styles.textinput}>
+    <View style={styles.container}>
+     
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
-        onBlur={onBlur}
         value={value}
-        maxLength={maxLength}
         placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
-        placeholderTextColor={'#666666'}
+        editable={editable}
         keyboardType={keyboardType}
+        multiline={multiline}
+        placeholderTextColor="#666666"
       />
-
-      
     </View>
   );
 };
 
-export default ExtendedTextInput;
+
+
+export default CustomInput;
 
 const styles = StyleSheet.create({
-  textinput: {
+ 
+  input: {
+    // height: 50,
+    // margin: 12,
+    // borderWidth: 1,
+    // padding: 10,
+    // borderRadius: 10,
+   
+    // textAlignVertical : 'top'
+  },
+  container : {
     backgroundColor: 'white',
    
     marginHorizontal: 30,
@@ -39,17 +57,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between',
-    height: hp(7),
+    height: hp(15),
     color: 'black',
-  },
-  input_img: {
-    height: hp('7'),
-    paddingRight: 30,
-    resizeMode: 'center',
-    width: wp('7'),
   },
   input : {
     flex: 1,
     color: 'black',
+    textAlignVertical : 'top'
   }
 });
+

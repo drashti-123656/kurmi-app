@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import React from 'react';
+
+import React, { useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -20,20 +21,22 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {contactUsValidationSchema} from '../../utils/schema/contactUsSchema';
 import {useDispatch} from 'react-redux';
 import {CONTACT_USER} from './redux/contactAction';
-
+import CustomInput from '../../components/atoms/inputs/CustomInput';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleContactUser = values => {
     const payload = {
-      name : values.name,
-      mobileNumber : values.mobileNo,
-      message : values.message,
+      name: values.name,
+      mobileNumber: values.mobileNo,
+      message: values.message,
     };
     dispatch({
       type: CONTACT_USER,
       payload,
     });
+    setLoading(true);
   };
 
   return (
@@ -67,6 +70,7 @@ const ContactUs = () => {
               onChangeText={handleChange('mobileNo')}
               onBlur={handleBlur('mobileNo')}
               value={values.mobileNo}
+              keyboardType="numeric"
               style={styles.textinput}
               placeholder={translate('ContactUs.MobileNo')}
               placeholderTextColor={'#666666'}
@@ -74,7 +78,7 @@ const ContactUs = () => {
             {errors.mobileNo && touched.mobileNo ? (
               <Text style={styles.error}>{errors.mobileNo}</Text>
             ) : null}
-            <TextInput
+            {/* <TextInput
               onChangeText={handleChange('message')}
               onBlur={handleBlur('message')}
               value={values.message}
@@ -82,7 +86,17 @@ const ContactUs = () => {
               numberOfLines={7}
               placeholder={translate('ContactUs.message')}
               placeholderTextColor={'#666666'}
+            /> */}
+
+            <CustomInput
+              onChangeText={handleChange('message')}
+              value={values.message}
+              placeholder={translate('ContactUs.message')}
+              editable={true}
+              multiline={true}
+              height={150}
             />
+
             {errors.message && touched.message ? (
               <Text style={styles.error}>{errors.message}</Text>
             ) : null}
@@ -90,6 +104,7 @@ const ContactUs = () => {
             <LoginButton
               title={translate('ContactUs.Submit')}
               onPress={handleSubmit}
+              loading={loading}
             />
           </View>
         )}
@@ -175,7 +190,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   footer: {
-    backgroundColor: '#DC1C28',
+    backgroundColor: '#c3773b',
     marginTop: 60,
     marginHorizontal: 30,
     borderRadius: 10,
