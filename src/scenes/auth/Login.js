@@ -18,17 +18,16 @@ import {
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import {login} from './redux/authReducer';
 import {LoginSchema} from './../../utils/schema/login';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
-
+import { login } from './login/loginReducer';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
+  const loginData= useSelector(state => state.login);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -38,7 +37,8 @@ const Login = ({navigation}) => {
       type: LOG_IN,
       payload,
     });
-    setLoading(true);
+    dispatch(login(payload));
+    // setLoading(true);
   };
 
   // const handleLogin = () => {
@@ -58,8 +58,8 @@ const Login = ({navigation}) => {
       <Image source={require('../../assets/logo.png')} style={styles.image} />
       <Formik
         initialValues={{
-          login: '',
-          password: '',
+          login: loginData.login,
+          password:loginData.password,
         }}
         validationSchema={LoginSchema}
         onSubmit={values => handleLogin(values)}>
