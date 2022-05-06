@@ -1,10 +1,10 @@
 import {ImageBackground, StatusBar, StyleSheet, ScrollView, View,Dimensions} from 'react-native';
 import React from 'react';
 
-const RootScreen = ({children, scrollable = false,style}) => {
+const RootScreen = ({children, scrollable = false}) => {
   return (
     <ImageBackground
-      style={[styles.bg_img,style]}
+      style={[styles.bg_img]}
       source={require('./../../../assets/backgroundImage.png')}>
       <StatusBar animated={true}  />
       <View style={styles.overLay}>
