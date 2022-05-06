@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const ViewBy = () => {
+const Sharebiodata = () => {
   return (
     <View>
-      <Text>View By</Text>
+      <Text>privacyPolicy</Text>
     </View>
   )
 }
 
-export default ViewBy
+export default Sharebiodata

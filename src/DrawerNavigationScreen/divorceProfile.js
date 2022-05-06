@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Privacypolicy = () => {
+const Divorceprofile = () => {
   return (
     <View>
-      <Text>privacyPolicy</Text>
+      <Text>Term of use</Text>
     </View>
   )
 }
 
-export default Privacypolicy
+export default Divorceprofile

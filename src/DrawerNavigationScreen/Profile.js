@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Termofuse = () => {
+const Profile = () => {
   return (
     <View>
-      <Text>Term of use</Text>
+      <Text>Setting</Text>
     </View>
   )
 }
 
-export default Termofuse
+export default Profile
