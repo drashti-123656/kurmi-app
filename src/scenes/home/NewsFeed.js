@@ -47,12 +47,15 @@ const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
 
   const {
-    NewsFeedSearch
+    newsFeedData
   } = useSelector(state => state.newsfeed);
 
  
-    console.log('NewsFeedSearch==>>',NewsFeedSearch)
+   
   
+  useEffect(() => {
+    console.log('newsFeedData==>>',newsFeedData)
+  }, [])
   
   
 
@@ -67,7 +70,7 @@ const NewsFeed = ({navigation}) => {
         gender: values.gender,
       },
       page: 1,
-      pageSIze: 2,
+      pageSIze: 10,
       order: {
         column: "id",
         type: "desc",
@@ -177,12 +180,7 @@ const NewsFeed = ({navigation}) => {
                 style={styles.textInput}
                 placeholder={translate('NewsFeed.ageFrom')}
                 placeholderTextColor={'#666666'}
-                // onChangeText={FromAge => setfromAge(FromAge)}
-                // value={values.ageFrom}
-                // style={styles.textInput}
-                // placeholder={translate('NewsFeed.ageFrom')}
-                // keyboardType="numeric"
-                // placeholderTextColor={'#666666'}
+               
               />
 
               <TextInput
@@ -193,12 +191,7 @@ const NewsFeed = ({navigation}) => {
                 style={styles.textInput}
                 placeholder={translate('NewsFeed.ageTo')}
                 placeholderTextColor={'#666666'}
-                // onChangeText={ToAge => SettoAge(ToAge)}
-                // value={values.ageTo}
-                // keyboardType="numeric"
-                // style={styles.textInput}
-                // placeholder={translate('NewsFeed.ageTo')}
-                // placeholderTextColor={'#666666'}
+               
               />
             </View>
 
@@ -209,48 +202,7 @@ const NewsFeed = ({navigation}) => {
           </View>
         )}
 
-        {/* <Text style={styles.bottomText}>{translate('NewsFeed.choose')}</Text>
-
-      <View style={styles.radioButtonContainer}>
-        {isLiked.map(item => (
-          <View style={styles.ButtonContainer}>
-            <TouchableOpacity
-              onPress={() => onRadioBtnClick(item)}
-              style={styles.radioButton}>
-              {item.selected ? <View style={styles.radioButtonIcon} /> : null}
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-              <Text style={styles.radioButtonText}>{item.name}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-
       
-        <View style={styles.ageContainer}>
-          <TextInput
-            onChangeText={FromAge => setfromAge(FromAge)}
-            value={fromAge}
-            style={styles.textInput}
-            placeholder={translate('NewsFeed.ageFrom')}
-            keyboardType="numeric"
-            placeholderTextColor={'#666666'}
-          />
-
-          <TextInput
-            onChangeText={ToAge => SettoAge(ToAge)}
-            value={toAge}
-            keyboardType="numeric"
-            style={styles.textInput}
-            placeholder={translate('NewsFeed.ageTo')}
-            placeholderTextColor={'#666666'}
-          />
-        </View>
-
-        <LoginButton 
-          title={translate('NewsFeed.Search')}
-              onPress={submitButton}
-        />  */}
       </Formik>
 
       <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
@@ -269,6 +221,7 @@ const NewsFeed = ({navigation}) => {
     return (
       <ScrollView style={styles.footerContainer}>
         <View style={styles.profileContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('OthersProfile')}>
           <View style={styles.profileImageContainer}>
             <Image
               style={styles.profileImg}
@@ -276,38 +229,28 @@ const NewsFeed = ({navigation}) => {
             />
             <View style={styles.footerTextContainer}>
               <Text style={styles.profileText}>
-              {item.firstname} 
-                {/* {translate('NewsFeed.newProfile')}{' '} */}
+              {item.userFirstName} {item.userLastName}
+                
+                 {/* {translate('NewsFeed.newProfile')} */}
               </Text>
               <Text style={styles.profileIntroText}>
-              {item.city}
-                {/* {translate('NewsFeed.intro')}{' '} */}
+                {item.userCity.cityName}, {item.userState.name} 
+                 {/* {translate('NewsFeed.intro')} */}
               </Text>
             </View>
           </View>
-          <View style={styles.profileImageContainer}>
-            <Image
-              style={styles.profileImg}
-              source={require('../../assets/profile1.png')}
-            />
-            <View style={styles.footerTextContainer}>
-              <Text style={styles.profileText}>
-                {translate('NewsFeed.newProfile')}{' '}
-              </Text>
-              <Text style={styles.profileIntroText}>
-                {translate('NewsFeed.intro')}{' '}
-              </Text>
-            </View>
-          </View>
+          </TouchableOpacity>
+          
+         
         </View>
       </ScrollView>
     );
   };
 
   return (
-    <RootScreen>
+    <RootScreen scrollable={true}>
       <FlatList
-        data={NewsFeedSearch}
+        data={newsFeedData}
         numColumns={2}
         renderItem={renderItem}
          keyExtractor={item => item.id}

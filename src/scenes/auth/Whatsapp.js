@@ -54,7 +54,7 @@ const Whatsapp = ({navigation}) => {
             <ExtendedTextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
-              autoFocus={true}
+              
               value={values.name}
               placeholder={translate('whatsapp.name')}
               placeholderTextColor={'#666666'}
@@ -66,7 +66,7 @@ const Whatsapp = ({navigation}) => {
               onChangeText={handleChange('whatsappno')}
               onBlur={handleBlur('whatsappno')}
               value={values.whatsappno}
-              autoFocus={true}
+            
               maxLength={10}
               keyboardType = 'numeric'
               placeholder={translate('whatsapp.phoneno')}

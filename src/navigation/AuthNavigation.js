@@ -7,8 +7,9 @@ import Registration from '../scenes/auth/registration/Registration';
 import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
-import Personalinformation from '../scenes/auth/registration/personalInformation';
+
 import DrawerNavigation from './DrawerNavigation';
+import OthersProfile from '../scenes/home/OthersProfile';
 const Stack = createNativeStackNavigator();
 
 
@@ -29,6 +30,12 @@ const AuthNavigation = () => {
         <Stack.Screen
           name="DrawerNavigation"
           component={DrawerNavigation}
+          options={{headerShown: false}}
+        />
+        
+        <Stack.Screen
+          name="OthersProfile"
+          component={OthersProfile}
           options={{headerShown: false}}
         />
 

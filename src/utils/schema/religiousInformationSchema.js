@@ -8,6 +8,6 @@ export const ReligiousinformationvalidationSchema = Yup.object({
     birthplace: Yup.string().required(translate('Dharmikjankari.Required'))
     .matches(/^[A-Za-z ]*$/, translate('Dharmikjankari.validName')),
     zodiacsign: Yup.number().required(translate('Dharmikjankari.Required')),
-    // auspicious: Yup.number().required(translate('Dharmikjankari.Required')),
+     auspicious: Yup.number().required(translate('Dharmikjankari.Required')),
    
   })

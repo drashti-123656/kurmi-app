@@ -8,9 +8,16 @@ import Whatsapp from '../scenes/auth/Whatsapp';
 
 import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
+import DrawerContent from './DrawerNavigation';
+
+import PasswordChange from '../scenes/passwordChange';
+
+import DrawerNavigation from './DrawerNavigation';
+import Registration from '../scenes/auth/registration/Registration';
 import DashboardNavigation from './DashboardNavigation';
 import Login from '../scenes/auth/Login';
-import translate from './../translations/configTranslations';
+import OthersProfile from '../scenes/home/OthersProfile';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,17 +26,9 @@ const Navigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        {/* <Stack.Screen
-              name="Whatsapp"
-              component={Login}
-              headershow
-              options={{
-                headerShown: false,
-              }}
-            />   */}
         <Stack.Screen
-          name="DashboardNavigation"
-          component={DashboardNavigation}
+          name="DrawerContent"
+          component={DrawerContent}
           options={{headerShown: false}}
           // options={{
           //   headerTitle: translate('NewsFeed.kurmiShadiHeading'),
@@ -46,12 +45,50 @@ const Navigation = () => {
           //   },
           // }}
         />
-        
+        <Stack.Screen
+          name="Password Change"
+          component={PasswordChange}
+          options={{
+            headerShown: true,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color: 'white',
+            },
+            headerTintColor: '#ffff',
+            headerStyle: {
+              backgroundColor: '#DC1C28',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Whatsapp"
+          component={Whatsapp}
+          headershow
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="ContactUs"
           component={ContactUs}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="OthersProfile"
+          component={OthersProfile}
+          options={{
+            headerShown: true,
+            headerTitle:'Profile',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color: 'white',
+            },
+            headerTintColor: '#ffff',
+            headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          }}
+        
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

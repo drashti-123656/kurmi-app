@@ -7,7 +7,7 @@ import Registration from '../scenes/auth/registration/Registration';
 import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
-import Personalinformation from '../scenes/auth/registration/personalInformation';
+import Personalinformation from '../scenes/auth/registration/PersonalInformation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from './../translations/configTranslations';
 const Stack = createNativeStackNavigator();
