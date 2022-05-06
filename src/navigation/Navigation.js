@@ -23,7 +23,6 @@ const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-
       <Stack.Navigator>
         <Stack.Screen
           name="DrawerContent"
@@ -37,56 +36,28 @@ const Navigation = () => {
             headerShown: true,
             headerTitleStyle: {
               fontWeight: 'bold',
-              color:'white',
-            
+              color: 'white',
             },
             headerTintColor: '#ffff',
             headerStyle: {
-              backgroundColor: '#DC1C28'
-          }}}
+              backgroundColor: '#DC1C28',
+            },
+          }}
         />
-        {/* <Stack.Screen
-
-      {/* {isAuthenticated ?  <DrawerNavigation/>:<AuthNavigation/>} */}
-     
-       <Stack.Navigator> 
-   
-         <Stack.Screen
-
-              name="Whatsapp"
-              component={Whatsapp}
-              headershow
-              options={{
-                headerShown: false,
-              }}
-            />  
         <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
-          options={{headerShown: false}}
-
-        /> */}
-        {/* <Stack.Screen
+          name="Whatsapp"
+          component={Whatsapp}
+          headershow
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="ContactUs"
           component={ContactUs}
           options={{headerShown: false}}
-        /> */}
-        {/* <Stack.Screen
-          name="Password Change"
-          component={PasswordChange}
-          options={{headerShown: false}}
-        /> */}
+        />
       </Stack.Navigator>
-
-        />
-        
-        <Stack.Screen
-          name="ContactUs"
-          component={ContactUs}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator> 
-
     </NavigationContainer>
   );
 };
