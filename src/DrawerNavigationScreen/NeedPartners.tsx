@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Termofuse = () => {
+const Needpartners = () => {
   return (
     <View>
-      <Text>Term of use</Text>
+      <Text>Logout</Text>
     </View>
   )
 }
 
-export default Termofuse
+export default Needpartners

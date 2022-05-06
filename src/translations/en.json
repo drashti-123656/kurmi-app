@@ -77,5 +77,19 @@
     "AB+":"AB+",
     "AB-":"AB-"
 
+  },
+  "drawerScreen": {
+    "Home": "Home",
+    "View By": "View By",
+    "shortlist": "shortlist",
+    "Membership": "Membership",
+    "biodata share": "biodata share",
+    "advanced search-property,goverment job,business,place,kurmiraj": "advanced search-property,goverment job,business,place,kurmiraj",
+    "divorced profile": "divorced profile",
+    "widowed profile": "widowed profile",
+    "Disabled profile": "Disabled profile",
+    "Need partner":"Need partner",
+    "30+ profile":"30+ profile",
+    "settings":"Settings"
   }
 }
