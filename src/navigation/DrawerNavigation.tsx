@@ -3,22 +3,23 @@ import * as React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
-import ViewedBy from '../DrawerNavigationScreen/viewedBy';
-import Likes from '../DrawerNavigationScreen/Likes';
 import CustomDrawer from './customDrawer';
-import ShortList from '../DrawerNavigationScreen/shortList';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Sharebiodata from '../DrawerNavigationScreen/shareBiodata';
-import Membershipplans from '../DrawerNavigationScreen/membershipPlans';
-import Profile from '../DrawerNavigationScreen/Profile';
-import Divorceprofile from '../DrawerNavigationScreen/divorceProfile';
-import DisabilityProfile from '../DrawerNavigationScreen/disabilityProfile';
-import Needpartner from '../DrawerNavigationScreen/needPartner';
-import Widowedprofiles from '../DrawerNavigationScreen/widowedProfiles';
+import Likes from '../DrawerNavigationScreen/likes'
+import ViewedBy from '../DrawerNavigationScreen/viewedBy'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Setting from '../DrawerNavigationScreen/Setting';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import ShortList from '../DrawerNavigationScreen/shortList'
+import Sharebiodata from '../DrawerNavigationScreen/shareBiodata'
+import Membershipplans from '../DrawerNavigationScreen/membershipPlans'
+import Profile from '../DrawerNavigationScreen/Profile'
+import Divorceprofile from '../DrawerNavigationScreen/divorceProfile';
+import DisabilityProfile from '../DrawerNavigationScreen/disabilityProfile'
+import Needpartner from '../DrawerNavigationScreen/needPartner'
+import Widowedprofiles from '../DrawerNavigationScreen/widowedProfiles'
+import Setting from '../DrawerNavigationScreen/setting';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -30,7 +31,7 @@ const DrawerNavigation = () => {
         name={translate('drawerScreen.Home')}
 
         options={{headerShown: false, drawerIcon:()=>(
-          <Ionicons name="home"size={22} color='#DC1C28'/>
+          <Ionicons name="home"size={22} color={styles.color}/>
         )
         }}
         component={DashboardNavigation}
@@ -38,8 +39,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.Likes')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="heart" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="heart" size={22} color={styles.color} />
           ),
         }}
         component={Likes}
@@ -47,8 +48,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.View By')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="eye" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="eye" size={22} color={styles.color} />
           ),
         }}
         component={ViewedBy}
@@ -56,8 +57,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.shortlist')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="star" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="star" size={22} color={styles.color} />
           ),
         }}
         component={ShortList}
@@ -68,8 +69,8 @@ const DrawerNavigation = () => {
           'drawerScreen.advanced search-property,goverment job,business,place,kurmiraj',
         )}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="search" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="search" size={22} color={styles.color} />
           ),
         }}
         component={AdvanceSearch}
@@ -77,8 +78,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.biodata share')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="document-text" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="document-text" size={22} color={styles.color} />
           ),
         }}
         component={Sharebiodata}
@@ -86,12 +87,12 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.Membership')}
         options={{
-          drawerIcon: ({color}) => (
+          drawerIcon: () => (
             <FontAwesome
               style={{marginHorizontal: 5}}
               name="rupee"
               size={22}
-              color="#DC1C28"
+              color={styles.color}
             />
           ),
         }}
@@ -101,8 +102,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.30+ profile')}
         options={{
-          drawerIcon: ({color}) => (
-            <FontAwesome name="calendar-o" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <FontAwesome name="calendar-o" size={22}color={styles.color} />
           ),
         }}
         component={Profile}
@@ -110,8 +111,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.divorced profile')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="person" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="person" size={22}color={styles.color} />
           ),
         }}
         component={Divorceprofile}
@@ -119,8 +120,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.Disabled profile')}
         options={{
-          drawerIcon: ({color}) => (
-            <Fontisto name="paralysis-disability" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Fontisto name="paralysis-disability" size={22} color={styles.color} />
           ),
         }}
         component={DisabilityProfile}
@@ -128,8 +129,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.Need partner')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="person" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="person" size={22} color={styles.color} />
           ),
         }}
         component={Needpartner}
@@ -137,8 +138,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.widowed profile')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="person" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="person" size={22} color={styles.color} />
           ),
         }}
         component={Widowedprofiles}
@@ -146,8 +147,8 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.settings')}
         options={{
-          drawerIcon: ({color}) => (
-            <Ionicons name="settings" size={22} color="#DC1C28" />
+          drawerIcon: () => (
+            <Ionicons name="settings" size={22} color={styles.color} />
           ),
         }}
         component={Setting}
@@ -157,3 +158,7 @@ const DrawerNavigation = () => {
 };
 
 export default DrawerNavigation;
+const styles = EStyleSheet.create({
+  color:'#DC1C28'
+});
+
