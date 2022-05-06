@@ -22,7 +22,7 @@ import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import {
   FETCH_CITY_DROPDOWN,
