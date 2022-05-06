@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const DisabilityProfile = () => {
+const WidowedProfile = () => {
   return (
     <View>
-      <Text>DisabilityProfile</Text>
+      <Text>widowedProfiles</Text>
     </View>
   )
 }
 
-export default DisabilityProfile
+export default WidowedProfile

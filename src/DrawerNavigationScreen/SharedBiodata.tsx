@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Sharebiodata = () => {
+const Sharedbiodata = () => {
   return (
     <View>
       <Text>privacyPolicy</Text>
@@ -9,4 +9,4 @@ const Sharebiodata = () => {
   )
 }
 
-export default Sharebiodata
+export default Sharedbiodata

@@ -6,20 +6,21 @@ import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import Likes from '../DrawerNavigationScreen/Likes'
-import ViewedBy from '../DrawerNavigationScreen/ViewedBy'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import ShortList from '../DrawerNavigationScreen/ShortList'
-import Sharebiodata from '../DrawerNavigationScreen/ShareBiodata'
-import Membershipplans from '../DrawerNavigationScreen/MembershipPlans'
 import Profile from '../DrawerNavigationScreen/Profile'
-import Divorceprofile from '../DrawerNavigationScreen/DivorceProfile';
-import DisabilityProfile from '../DrawerNavigationScreen/DisabilityProfile'
-import Needpartner from '../DrawerNavigationScreen/NeedPartner'
-import Widowedprofiles from '../DrawerNavigationScreen/WidowedProfiles'
+import Widowedprofiles from '../DrawerNavigationScreen/WidowedProfile'
 import Setting from '../DrawerNavigationScreen/Setting';
+import ViewBy from '../DrawerNavigationScreen/ViewBy';
+import ShortLists from '../DrawerNavigationScreen/ShortLists';
+import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
+import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
+import Divorcedprofile from '../DrawerNavigationScreen/DivorcedProfile';
+import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
+import Needpartners from '../DrawerNavigationScreen/NeedPartners';
+import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -52,7 +53,7 @@ const DrawerNavigation = () => {
             <Ionicons name="eye" size={22} color={styles.color} />
           ),
         }}
-        component={ViewedBy}
+        component={ViewBy}
       />
       <Drawer.Screen
         name={translate('drawerScreen.shortlist')}
@@ -61,7 +62,7 @@ const DrawerNavigation = () => {
             <Ionicons name="star" size={22} color={styles.color} />
           ),
         }}
-        component={ShortList}
+        component={ShortLists}
       />
        
       <Drawer.Screen
@@ -82,7 +83,7 @@ const DrawerNavigation = () => {
             <Ionicons name="document-text" size={22} color={styles.color} />
           ),
         }}
-        component={Sharebiodata}
+        component={Sharedbiodata}
       />
       <Drawer.Screen
         name={translate('drawerScreen.Membership')}
@@ -96,7 +97,7 @@ const DrawerNavigation = () => {
             />
           ),
         }}
-        component={Membershipplans}
+        component={Membershipplan}
       />
 
       <Drawer.Screen
@@ -115,7 +116,7 @@ const DrawerNavigation = () => {
             <Ionicons name="person" size={22}color={styles.color} />
           ),
         }}
-        component={Divorceprofile}
+        component={Divorcedprofile}
       />
       <Drawer.Screen
         name={translate('drawerScreen.Disabled profile')}
@@ -124,7 +125,7 @@ const DrawerNavigation = () => {
             <Fontisto name="paralysis-disability" size={22} color={styles.color} />
           ),
         }}
-        component={DisabilityProfile}
+        component={DisabilityProfiles}
       />
       <Drawer.Screen
         name={translate('drawerScreen.Need partner')}
@@ -133,7 +134,7 @@ const DrawerNavigation = () => {
             <Ionicons name="person" size={22} color={styles.color} />
           ),
         }}
-        component={Needpartner}
+        component={Needpartners}
       />
       <Drawer.Screen
         name={translate('drawerScreen.widowed profile')}
@@ -142,7 +143,7 @@ const DrawerNavigation = () => {
             <Ionicons name="person" size={22} color={styles.color} />
           ),
         }}
-        component={Widowedprofiles}
+        component={WidowedProfile}
       />
       <Drawer.Screen
         name={translate('drawerScreen.settings')}

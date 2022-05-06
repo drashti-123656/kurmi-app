@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Needpartner = () => {
+const ViewBy = () => {
   return (
     <View>
-      <Text>Logout</Text>
+      <Text>View By</Text>
     </View>
   )
 }
 
-export default Needpartner
+export default ViewBy

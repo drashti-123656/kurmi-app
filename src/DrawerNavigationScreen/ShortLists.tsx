@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Membershipplans = () => {
+const ShortLists = () => {
   return (
     <View>
-      <Text>membershipPlans</Text>
+      <Text>shortList</Text>
     </View>
   )
 }
 
-export default Membershipplans
+export default ShortLists
