@@ -5,21 +5,21 @@ import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Likes from '../DrawerNavigationScreen/likes'
-import ViewedBy from '../DrawerNavigationScreen/viewedBy'
+import Likes from '../DrawerNavigationScreen/Likes'
+import ViewedBy from '../DrawerNavigationScreen/ViewedBy'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import ShortList from '../DrawerNavigationScreen/shortList'
-import Sharebiodata from '../DrawerNavigationScreen/shareBiodata'
-import Membershipplans from '../DrawerNavigationScreen/membershipPlans'
+import ShortList from '../DrawerNavigationScreen/ShortList'
+import Sharebiodata from '../DrawerNavigationScreen/ShareBiodata'
+import Membershipplans from '../DrawerNavigationScreen/MembershipPlans'
 import Profile from '../DrawerNavigationScreen/Profile'
-import Divorceprofile from '../DrawerNavigationScreen/divorceProfile';
-import DisabilityProfile from '../DrawerNavigationScreen/disabilityProfile'
-import Needpartner from '../DrawerNavigationScreen/needPartner'
-import Widowedprofiles from '../DrawerNavigationScreen/widowedProfiles'
-import Setting from '../DrawerNavigationScreen/setting';
+import Divorceprofile from '../DrawerNavigationScreen/DivorceProfile';
+import DisabilityProfile from '../DrawerNavigationScreen/DisabilityProfile'
+import Needpartner from '../DrawerNavigationScreen/NeedPartner'
+import Widowedprofiles from '../DrawerNavigationScreen/WidowedProfiles'
+import Setting from '../DrawerNavigationScreen/Setting';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
