@@ -132,7 +132,7 @@ const Sampark = ({navigation}) => {
             <LoginButton 
                  title={translate('samPark.Next')}
               onPress={handleSubmit}
-              loading={loading}
+              // loading={loading}
 
             />
              

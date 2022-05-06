@@ -42,7 +42,7 @@ export const parivarikSchema = Yup.object().shape({
   motherMayaka: Yup.string().required(translate('ParivarikParichay.Required')),
   brother: Yup.string().required(translate('ParivarikParichay.Required')),
   sister: Yup.string().required(translate('ParivarikParichay.Required')),
-  // land: Yup.number().required(translate('ParivarikParichay.Required')),
+   land: Yup.number().required(translate('ParivarikParichay.Required')),
 });
 export const RegistrationvalidationSchema = Yup.object({
   profilemaker: Yup.number().required(translate('register.Required')),

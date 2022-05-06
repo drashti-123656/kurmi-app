@@ -166,7 +166,7 @@ const Personalinformation = ({navigation}) => {
             <LoginButton 
                  title={translate('Vyaktigatdata.Next')}
               onPress={handleSubmit}
-              loading={loading}
+              // loading={loading}
             />
            
            </View>
