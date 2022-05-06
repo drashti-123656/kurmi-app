@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Logout = () => {
+const Sharedbiodata = () => {
   return (
     <View>
-      <Text>Logout</Text>
+      <Text>privacyPolicy</Text>
     </View>
   )
 }
 
-export default Logout
+export default Sharedbiodata
