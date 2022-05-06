@@ -8,33 +8,43 @@ import Whatsapp from '../scenes/auth/Whatsapp';
 
 import {navigationRef} from './RootNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
-import DrawerContent from './DrawerNavigation';
-import DrawerNavigation from './DrawerNavigation';
-import Registration from '../scenes/auth/registration/Registration';
 import DashboardNavigation from './DashboardNavigation';
 import Login from '../scenes/auth/Login';
+import translate from './../translations/configTranslations';
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userData: isAuthenticated} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
-      {isAuthenticated ?  <DrawerNavigation/>:<AuthNavigation/>}
-     
-       {/* <Stack.Navigator> 
-   
-         <Stack.Screen
+      <Stack.Navigator>
+        {/* <Stack.Screen
               name="Whatsapp"
               component={Login}
               headershow
               options={{
                 headerShown: false,
               }}
-            />  
+            />   */}
         <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
+          name="DashboardNavigation"
+          component={DashboardNavigation}
           options={{headerShown: false}}
+          // options={{
+          //   headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+          //   tabBarActiveTintColor: 'red',
+          //   headerTintColor: 'white',
+          //   headerStyle: {
+          //     backgroundColor: '#DC1C28',
+          //   },
+          //   headerTitleStyle: {
+          //     fontSize: 25,
+          //     fontWeight: 'bold',
+          //     alignSelf: 'center',
+          //     marginHorizontal: 20,
+          //   },
+          // }}
         />
         
         <Stack.Screen
@@ -42,7 +52,7 @@ const Navigation = () => {
           component={ContactUs}
           options={{headerShown: false}}
         />
-      </Stack.Navigator>  */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

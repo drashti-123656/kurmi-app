@@ -16,16 +16,16 @@ const Stack = createNativeStackNavigator();
 const AuthNavigation = () => {
   return (
     <Stack.Navigator initialRouteName='login'>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="login"
         component={Login}
         options={{headerShown: false}}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="Registration"
         component={Registration}
         options={{headerShown: false}}
-      />
+      /> */}
         <Stack.Screen
           name="DrawerNavigation"
           component={DrawerNavigation}
