@@ -15,13 +15,13 @@ const OthersProfile = ({route, navigation}) => {
   const {id} = route.params;
   const dispatch = useDispatch();
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   dispatch({
-  //     type: OTHERS_PROFILE_DETAILS,
-  //     id,
-  //   });
-  // }, []);
+    dispatch({
+      type: OTHERS_PROFILE_DETAILS,
+      id,
+    });
+  }, []);
 
 
   return (

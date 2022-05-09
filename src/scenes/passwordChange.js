@@ -3,7 +3,25 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import {passwordChangeValidationSchema} from '../utils/schema/passwordChangeValidationSchema';
+import CHANGE_PASSWORD from './passwordChange/redux/passwordAction';
+import {useDispatch, useSelector} from 'react-redux';
+
 const PasswordChange = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const handleChangePassword = values => {
+    const payload = {
+      userOldPassword: values.currentPassword,
+      userPassword: values.NewPassword,
+      userConfrimPassword: values.Retypenewpassword,
+    };
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload,
+    });
+    setLoading(true);
+  };
   return (
     <>
       <Formik
@@ -13,13 +31,16 @@ const PasswordChange = () => {
           Retypenewpassword: '',
         }}
         validationSchema={passwordChangeValidationSchema}
-        onSubmit={values => console.log(values)}>
-        {({handleSubmit, setFieldValue, values, errors, touched}) => (
+        onSubmit={values => {
+          handleChangePassword(values);
+        }}>
+        {({handleSubmit, handleChange, values, errors, touched, resetForm}) => (
           <View style={styles.passwordContainer}>
             <PasswordInputText
+              getRef={input => (input = input)}
               value={values.currentPassword}
               label={'Current Password'}
-              onChangeText={currentPassword => setFieldValue({currentPassword})}
+              onChangeText={handleChange('currentPassword')}
             />
             {errors.currentPassword && touched.currentPassword ? (
               <Text style={styles.error}>{errors.currentPassword}</Text>
@@ -27,7 +48,7 @@ const PasswordChange = () => {
             <PasswordInputText
               value={values.NewPassword}
               label={'New Password'}
-              onChangeText={NewPassword => setFieldValue({NewPassword})}
+              onChangeText={handleChange('NewPassword')}
             />
             {errors.NewPassword && touched.NewPassword ? (
               <Text style={styles.error}>{errors.NewPassword}</Text>
@@ -35,9 +56,7 @@ const PasswordChange = () => {
             <PasswordInputText
               value={values.Retypenewpassword}
               label={'Retype New Password'}
-              onChangeText={Retypenewpassword =>
-                setFieldValue({Retypenewpassword})
-              }
+              onChangeText={handleChange('Retypenewpassword')}
             />
             {errors.Retypenewpassword && touched.Retypenewpassword ? (
               <Text style={styles.error}>{errors.Retypenewpassword}</Text>
