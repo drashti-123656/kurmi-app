@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 120,
     height: 40,
-    backgroundColor: '#DC1C28',
+    backgroundColor: '#c3773b',
     borderColor: '#DC1C28',
   },
   error: {

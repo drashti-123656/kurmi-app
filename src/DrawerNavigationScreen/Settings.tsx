@@ -51,9 +51,9 @@ import {
                 borderColor: 'white',
                 flexDirection: 'row',
               }}>
-              <Text style={{color: 'white', fontSize: 28}}>Hide Profile</Text>
+              <Text style={styles.textStyle}>Hide Profile</Text>
               <Switch
-                style={{marginHorizontal: 145}}
+                style={styles.switch}
                 trackColor={{false: 'gray'}}
                 value={isEnabled}
                 onValueChange={value => setIsEnabled(value)}
@@ -63,7 +63,7 @@ import {
               <TouchableOpacity
                 style={{borderBottomWidth: 1, borderColor: 'white'}}
                 onPress={() => navigation.navigate('Password Change')}>
-                <Text style={{color: 'white', fontSize: 28}}>
+                <Text style={styles.textStyle}>
                   Change Password
                 </Text>
               </TouchableOpacity>
@@ -71,25 +71,25 @@ import {
             <View style={{marginTop: 50}}>
               <TouchableOpacity
                 style={{borderBottomWidth: 1, borderColor: 'white'}}>
-                <Text style={{color: 'white', fontSize: 28}}>Share App</Text>
+                <Text style={styles.textStyle}>Share App</Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 50}}>
               <TouchableOpacity
                 style={{borderBottomWidth: 1, borderColor: 'white'}}>
-                <Text style={{color: 'white', fontSize: 28}}>Privacy Policy</Text>
+                <Text style={styles.textStyle}>Privacy Policy</Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 50}}>
               <TouchableOpacity
                 style={{borderBottomWidth: 1, borderColor: 'white'}}>
-                <Text style={{color: 'white', fontSize: 28}}>Term Of Use</Text>
+                <Text style={styles.textStyle}>Term Of Use</Text>
               </TouchableOpacity>
             </View>
             <View style={{marginVertical: 40}}>
               <TouchableOpacity
                 style={{borderBottomWidth: 1, borderColor: 'white'}}>
-                <Text style={{color: 'white', fontSize: 28}}>Logout</Text>
+                <Text style={styles.textStyle}>Logout</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -139,6 +139,12 @@ import {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    textStyle:{
+      color: 'white', fontSize: 22
+    },
+    switch:{
+      marginHorizontal:180
+    }
   });
   
   
