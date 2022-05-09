@@ -8,7 +8,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {
   widthPercentageToDP as wp,
@@ -19,49 +19,20 @@ import translate from './../../translations/configTranslations';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {Formik} from 'formik';
 import {value} from 'react-native-extended-stylesheet';
-import { useDispatch, useSelector } from 'react-redux';
-import { FETCH_SEARCH_PROFILE } from './redux/NewsfeedAction';
-
-const data = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-  {
-    id: 3,
-  },
-  {
-    id: 4,
-  },
-  {
-    id: 5,
-  },
-  {
-    id: 6,
-  },
-];
+import {useDispatch, useSelector} from 'react-redux';
+import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const {
-    newsFeedData
-  } = useSelector(state => state.newsfeed);
+  const {newsFeedData} = useSelector(state => state.newsfeed);
 
- 
-   
-  
   useEffect(() => {
-    console.log('newsFeedData==>>',newsFeedData)
-  }, [])
-  
-  
+    console.log('newsFeedData==>>', newsFeedData);
+  }, []);
 
   const handleSearchProfile = values => {
     const payload = {
-      
       filter: {
         age: {
           min: values.ageFrom,
@@ -72,20 +43,16 @@ const NewsFeed = ({navigation}) => {
       page: 1,
       pageSIze: 10,
       order: {
-        column: "id",
-        type: "desc",
-      }
+        column: 'id',
+        type: 'desc',
+      },
+    };
 
-    }
-   
-
-      dispatch({
-        type: FETCH_SEARCH_PROFILE,
-        payload,
-
-      });
-      dispatch(NewsFeed(payload));
-    
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
+    dispatch(NewsFeed(payload));
   };
 
   const renderHeader = () => (
@@ -180,7 +147,6 @@ const NewsFeed = ({navigation}) => {
                 style={styles.textInput}
                 placeholder={translate('NewsFeed.ageFrom')}
                 placeholderTextColor={'#666666'}
-               
               />
 
               <TextInput
@@ -191,7 +157,6 @@ const NewsFeed = ({navigation}) => {
                 style={styles.textInput}
                 placeholder={translate('NewsFeed.ageTo')}
                 placeholderTextColor={'#666666'}
-               
               />
             </View>
 
@@ -201,8 +166,6 @@ const NewsFeed = ({navigation}) => {
             />
           </View>
         )}
-
-      
       </Formik>
 
       <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
@@ -221,31 +184,44 @@ const NewsFeed = ({navigation}) => {
     return (
       <ScrollView style={styles.footerContainer}>
         <View style={styles.profileContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('OthersProfile')}>
-          <View style={styles.profileImageContainer}>
-            <Image
-              style={styles.profileImg}
-              source={require('../../assets/profile.png')}
-            />
-            <View style={styles.footerTextContainer}>
-              <Text style={styles.profileText}>
-              {item.userFirstName} {item.userLastName}
-                
-                 {/* {translate('NewsFeed.newProfile')} */}
-              </Text>
-              <Text style={styles.profileIntroText}>
-                {item.userCity.cityName}, {item.userState.name} 
-                 {/* {translate('NewsFeed.intro')} */}
-              </Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('OthersProfile', {
+                id: item.id,
+              })
+            }>
+            <View style={styles.profileImageContainer}>
+              <Image
+                style={styles.profileImg}
+                source={require('../../assets/profile.png')}
+              />
+              <View style={styles.footerTextContainer}>
+                <Text style={styles.profileText}>
+                  {item.userFirstName} {item.userLastName}
+                </Text>
+                <Text style={styles.profileIntroText}>
+                  {item.userCity.cityName}, {item.userState.name},
+                  {item.userCountry.countryName}
+                </Text>
+              </View>
             </View>
-          </View>
           </TouchableOpacity>
           
-         
         </View>
       </ScrollView>
     );
   };
+
+
+  const _renderFooter = () => (
+                <TouchableOpacity 
+                onPress={() => navigation.navigate('SeeAllProfile')}
+                style={styles.footerContainer}>
+           <Text style={styles.footerTextseeAll}> See All </Text>
+                 </TouchableOpacity>
+
+  );
+
 
   return (
     <RootScreen scrollable={true}>
@@ -253,9 +229,10 @@ const NewsFeed = ({navigation}) => {
         data={newsFeedData}
         numColumns={2}
         renderItem={renderItem}
-         keyExtractor={item => item.id}
+        keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
+        ListFooterComponent={_renderFooter}
       />
     </RootScreen>
   );
@@ -403,6 +380,7 @@ const styles = StyleSheet.create({
     height: hp('30'),
     width: wp('50'),
     marginTop: 30,
+    paddingLeft : 10
   },
   profileImg: {
     width: wp('44'),
@@ -425,4 +403,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 13,
   },
+  footerContainer : {
+    backgroundColor : 'white',
+   
+    
+  },
+  footerTextseeAll : {
+    color : 'red',
+    fontSize : 20,
+    marginBottom : 20,
+    alignSelf : 'center'
+  }
 });

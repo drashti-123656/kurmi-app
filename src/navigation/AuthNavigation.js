@@ -33,12 +33,7 @@ const AuthNavigation = () => {
           options={{headerShown: false}}
         />
         
-        <Stack.Screen
-          name="OthersProfile"
-          component={OthersProfile}
-          options={{headerShown: false}}
-        />
-
+        
       {/* <Stack.Screen
         name="Personalinformation"
         component={Personalinformation}

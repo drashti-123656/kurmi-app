@@ -10,12 +10,11 @@ const searchProfileSlice = createSlice({
   name: 'NewsfeedReducer',
   initialState,
   reducers: {
-    fetchNewsFeed(state,action) {
+    fetchNewsFeed(state, action) {
       state.newsFeedData.isfatching = true;
     },
 
     newsFeedSuccess(state, action) {
-      
       state.newsFeedData = action.payload;
     },
     newsFeedFail(state, action) {
@@ -27,8 +26,5 @@ const searchProfileSlice = createSlice({
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {
-  fetchNewsFeed,
-  newsFeedSuccess,
-  newsFeedFail} = actions;
+export const {fetchNewsFeed, newsFeedSuccess, newsFeedFail} = actions;
 export default reducer;

@@ -5,14 +5,14 @@ import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Likes from '../DrawerNavigationScreen/Likes'
+import Likes from './../DrawerNavigationScreen/likes';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Profile from '../DrawerNavigationScreen/Profile'
 import Widowedprofiles from '../DrawerNavigationScreen/WidowedProfile'
-import Setting from '../DrawerNavigationScreen/Setting';
+import Setting from './../DrawerNavigationScreen/setting';
 import ViewBy from '../DrawerNavigationScreen/ViewBy';
 import ShortLists from '../DrawerNavigationScreen/ShortLists';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';

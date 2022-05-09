@@ -100,6 +100,7 @@
   },
   "register": {
     "registration" : "पंजीकरण",
+    "Name" : "नाम",
     "Var": "वर",
     "Vadhu": "वधू ",
     "ProfileName": "प्रोफाइल बनाने  वाला",
@@ -196,5 +197,23 @@
     "Need partner":"साथी चाहिए",
     "30+ profile":"30+ प्रोफ़ाइल",
     "settings":"सेटिंग"
+  },
+  "OthersProfile" : {
+
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Disability": "विकलांगता",
+    "Dharmik Jankari": "धार्मिक जानकारी",
+    "Caste": "गोत्र",
+    "Native": "माँ का गोत्र:",
+    "Birthtime": "hh:mm",
+    "Birthplace": "जन्म स्थान",
+    "Zodiacsign": "राशी",
+    "auspicious": "मांगलिक"
+
   }
+  
 }
