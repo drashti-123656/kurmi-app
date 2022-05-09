@@ -6,5 +6,6 @@ export const API_URL = {
   FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
   VERIFY_USER:'api/check-user-exist',
   SEARCH_PROFILE : 'api/search-profiles',
+  OTHER_PROFILE_DETAILS : 'api/get-user-details/1'
 
 };

@@ -5,15 +5,24 @@ import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from './../../translations/configTranslations';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
+import { fetchothersProfileData } from './redux/NewsfeedReducer';
+import { OTHERS_PROFILE_DETAILS } from './redux/NewsfeedAction';
 
-const OthersProfile = () => {
-  const newsFeedData = useSelector(state => state.registration);
+const OthersProfile = ({route, navigation}) => {
+  const othersProfileData = useSelector(state => state.newsfeed);
+  const {id} = route.params;
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('newsFeedData==>', newsFeedData);
-  }, []);
+  // useEffect(() => {
+    
+  //   dispatch({
+  //     type: OTHERS_PROFILE_DETAILS,
+  //     id,
+  //   });
+  // }, []);
+
 
   return (
     <View style={{flex: 1}}>
@@ -54,7 +63,7 @@ const OthersProfile = () => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {newsFeedData.userFirstName}{' '}
+              {othersProfileData.userFirstName}{' '}
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('register.birthdate')}{' '}

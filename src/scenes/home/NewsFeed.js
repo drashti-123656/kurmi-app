@@ -22,14 +22,12 @@ import {value} from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 
-const NewsFeed = ({navigation}) => {
+const NewsFeed = ({navigation,item}) => {
   const dispatch = useDispatch();
 
   const {newsFeedData} = useSelector(state => state.newsfeed);
 
-  useEffect(() => {
-    console.log('newsFeedData==>>', newsFeedData);
-  }, []);
+  
 
   const handleSearchProfile = values => {
     const payload = {

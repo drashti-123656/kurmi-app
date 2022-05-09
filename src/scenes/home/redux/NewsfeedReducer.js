@@ -4,6 +4,8 @@ const initialState = {
   newsFeedData: [],
   error: '',
   isfatching: false,
+
+  othersProfileData : [],
 };
 
 const searchProfileSlice = createSlice({
@@ -21,10 +23,15 @@ const searchProfileSlice = createSlice({
       state.newsFeedData.isfatching = false;
       state.newsFeedData.error = action.payload;
     },
+    fetchothersProfileData(state,action) {
+      
+      state.othersProfileData = action.payload;
+
+    }
   },
 });
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {fetchNewsFeed, newsFeedSuccess, newsFeedFail} = actions;
+export const {fetchNewsFeed, newsFeedSuccess, newsFeedFail,fetchothersProfileData} = actions;
 export default reducer;

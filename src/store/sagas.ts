@@ -34,8 +34,9 @@ import {
   REGISTER_USER,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
-import { FETCH_SEARCH_PROFILE } from '../scenes/home/redux/NewsfeedAction';
-import { searchProfile } from '../scenes/home/redux/NewsfeedSaga';
+import { FETCH_SEARCH_PROFILE, OTHERS_PROFILE_DETAILS } from '../scenes/home/redux/NewsfeedAction';
+import { otherProfileDetails, searchProfile } from '../scenes/home/redux/NewsfeedSaga';
+import { fetchothersProfileData } from '../scenes/home/redux/NewsfeedReducer';
 
 export default function* sagas() {
   yield all([
@@ -57,5 +58,6 @@ export default function* sagas() {
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
+    takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
   ]);
 }
