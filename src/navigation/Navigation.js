@@ -66,7 +66,7 @@ const Navigation = () => {
             },
             headerTintColor: '#ffff',
             headerStyle: {
-              backgroundColor: '#DC1C28',
+              backgroundColor: '#c3773b',
             },
           }}
         />
