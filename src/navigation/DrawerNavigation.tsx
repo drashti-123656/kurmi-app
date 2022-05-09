@@ -5,14 +5,13 @@ import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Likes from './../DrawerNavigationScreen/likes';
+import Like from '../DrawerNavigationScreen/Like';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Profile from '../DrawerNavigationScreen/Profile'
 import Widowedprofiles from '../DrawerNavigationScreen/WidowedProfile'
-import Setting from './../DrawerNavigationScreen/setting';
 import ViewBy from '../DrawerNavigationScreen/ViewBy';
 import ShortLists from '../DrawerNavigationScreen/ShortLists';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
@@ -21,6 +20,7 @@ import Divorcedprofile from '../DrawerNavigationScreen/DivorcedProfile';
 import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
 import Needpartners from '../DrawerNavigationScreen/NeedPartners';
 import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
+import Settings from '../DrawerNavigationScreen/Settings';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -44,7 +44,7 @@ const DrawerNavigation = () => {
             <Ionicons name="heart" size={22} color={styles.color} />
           ),
         }}
-        component={Likes}
+        component={Like}
       />
       <Drawer.Screen
         name={translate('drawerScreen.View By')}
@@ -152,7 +152,7 @@ const DrawerNavigation = () => {
             <Ionicons name="settings" size={22} color={styles.color} />
           ),
         }}
-        component={Setting}
+        component={Settings}
       />
     </Drawer.Navigator>
   );

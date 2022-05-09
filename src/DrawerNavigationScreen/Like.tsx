@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Likes = () => {
+const Like = () => {
   return (
     <View>
       <Text>Likes</Text>
@@ -9,4 +9,4 @@ const Likes = () => {
   )
 }
 
-export default Likes
+export default Like
