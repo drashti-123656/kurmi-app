@@ -12,7 +12,7 @@ import {
   import React, {useState} from 'react';
   import RootScreen from '../components/molecule/rootScreen/RootScreen';
   import AuthNavigation from '../navigation/AuthNavigation';
-  const Setting = ({navigation}) => {
+  const Settings = ({navigation}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     return (
       <RootScreen scrollable={true}>
@@ -98,7 +98,7 @@ import {
     );
   };
   
-  export default Setting;
+  export default Settings;
   
   const styles = StyleSheet.create({
     container: {
