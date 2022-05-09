@@ -37,10 +37,13 @@ import {
 import { FETCH_SEARCH_PROFILE } from '../scenes/home/redux/NewsfeedAction';
 import { searchProfile } from '../scenes/home/redux/NewsfeedSaga';
 
+import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
+import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
     takeLatest(CONTACT_USER, contactUser),
+    takeLatest(CHANGE_PASSWORD, changePassword),
     takeLatest(LOG_IN, loginUser),
     takeLatest(REGISTER_USER, registerUser),
     takeLatest(FETCH_ZODIC_SIGN, zodiacDropDowns),
