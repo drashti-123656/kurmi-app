@@ -8,7 +8,7 @@ import loginReducer from '../scenes/auth/login/loginReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
-  login: loginReducer,
+  // login: loginReducer,
   newsfeed : NewsfeedReducer,
 
 

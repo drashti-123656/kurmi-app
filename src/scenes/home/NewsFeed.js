@@ -27,9 +27,7 @@ const NewsFeed = ({navigation}) => {
 
   const {newsFeedData} = useSelector(state => state.newsfeed);
 
-  useEffect(() => {
-    console.log('newsFeedData==>>', newsFeedData);
-  }, []);
+ 
 
   const handleSearchProfile = values => {
     const payload = {
@@ -57,37 +55,7 @@ const NewsFeed = ({navigation}) => {
 
   const renderHeader = () => (
     <View>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Image
-              style={styles.vectorImg}
-              source={require('../../assets/Vector6.png')}
-            />
-            <Image
-              style={styles.vectorImg_1}
-              source={require('../../assets/Vector7.png')}
-            />
-            <Image
-              style={styles.vectorImg_1}
-              source={require('../../assets/Vector8.png')}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.pinClipart}>
-          <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
-            <Image
-              style={styles.PinClipartImg}
-              source={require('../../assets/contact.png')}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.navbarText}>
-          {translate('NewsFeed.kurmiShadiHeading')}
-        </Text>
-      </View>
+      
       <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
 
       <Formik

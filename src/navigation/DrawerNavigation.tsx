@@ -154,6 +154,7 @@ const DrawerNavigation = () => {
         }}
         component={Settings}
       />
+      
     </Drawer.Navigator>
   );
 };
