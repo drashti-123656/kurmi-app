@@ -100,6 +100,7 @@
   },
   "register": {
     "registration" : "पंजीकरण",
+    "Name" : "नाम",
     "Var": "वर",
     "Vadhu": "वधू ",
     "ProfileName": "प्रोफाइल बनाने  वाला",
@@ -189,6 +190,31 @@
     "shortlist": "शॉर्टलिस्ट",
     "Membership": "सदस्यता",
     "biodata share": "बायोडाटा शेयर",
+    "advanced search-property,goverment job,business,place,kurmiraj": "एडवांस्ड सर्च -जमीन,सरकारी नौकरी,बिज़नेस,जगह,कुर्मीराज",
+    "divorced profile": "तलाकशुदा प्रोफ़ाइल",
+    "widowed profile": "विधवा प्रोफ़ाइल",
+    "Disabled profile": "विकलांग प्रोफ़ाइल",
+    "Need partner":"साथी चाहिए",
+    "30+ profile":"30+ प्रोफ़ाइल",
+    "settings":"सेटिंग"
+  },
+  "OthersProfile" : {
+
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Disability": "विकलांगता",
+    "Dharmik Jankari": "धार्मिक जानकारी",
+    "Caste": "गोत्र",
+    "Native": "माँ का गोत्र:",
+    "Birthtime": "hh:mm",
+    "Birthplace": "जन्म स्थान",
+    "Zodiacsign": "राशी",
+    "auspicious": "मांगलिक"
+  },
+
     "advanced search": "एडवांस्ड सर्च",
     "divorced": "तलाकशुदा",
     "widowed ": "विधवा",
@@ -198,4 +224,5 @@
     "settings":"सेटिंग",
     "All Kurmi Samaj":"सर्व कुर्मि समाज"
   }
-}
+  
+

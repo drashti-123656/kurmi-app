@@ -14,7 +14,7 @@ import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
 import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
 import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
-import Widower from '../DrawerNavigationScreen/widower';
+import Widower from '../DrawerNavigationScreen/Widower';
 import Helpline from '../DrawerNavigationScreen/Helpline';
 import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';

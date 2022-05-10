@@ -34,8 +34,13 @@ import {
   REGISTER_USER,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
+import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
+
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
+import { OTHERS_PROFILE_DETAILS } from '../scenes/othersProfile/redux/OthersDetailAction';
+import { otherProfileDetails } from '../scenes/othersProfile/redux/OthersDetailSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -56,5 +61,7 @@ export default function* sagas() {
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
+    takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
+    takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
   ]);
 }
