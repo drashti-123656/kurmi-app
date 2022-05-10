@@ -179,13 +179,14 @@ const NewsFeed = ({navigation,item}) => {
   );
 
   const renderItem = ({item}) => {
+  
     return (
       <ScrollView style={styles.footerContainer}>
         <View style={styles.profileContainer}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('OthersProfile', {
-                id: item.id,
+                id: item.userId,
               })
             }>
             <View style={styles.profileImageContainer}>

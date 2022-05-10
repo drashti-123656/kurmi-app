@@ -7,7 +7,7 @@ export const API_URL = {
   VERIFY_USER:'api/check-user-exist',
 
   SEARCH_PROFILE : 'api/search-profiles',
-  OTHER_PROFILE_DETAILS : 'api/get-user-details/1',
+  OTHER_PROFILE_DETAILS : 'api/get-user-details',
 
   CHANGE_PASSWORD:'api/user-profile-update'
 

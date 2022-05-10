@@ -9,7 +9,7 @@ import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 
 import DrawerNavigation from './DrawerNavigation';
-import OthersProfile from '../scenes/home/OthersProfile';
+
 const Stack = createNativeStackNavigator();
 
 

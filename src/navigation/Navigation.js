@@ -16,7 +16,7 @@ import DrawerNavigation from './DrawerNavigation';
 import Registration from '../scenes/auth/registration/Registration';
 import DashboardNavigation from './DashboardNavigation';
 import Login from '../scenes/auth/Login';
-import OthersProfile from '../scenes/home/OthersProfile';
+import OthersProfile from '../scenes/othersProfile/OthersProfile';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import SeeAllProfile from '../scenes/home/SeeAllProfile';
 
