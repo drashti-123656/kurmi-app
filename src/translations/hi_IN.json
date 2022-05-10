@@ -185,7 +185,7 @@
   },
   "drawerScreen": {
     "Home": "होम",
-    "Likes":"पसंद",
+    "Helpline-":"हेल्पलाइन -",
     "View By": "प्रोफाइल देखा",
     "shortlist": "शॉर्टलिस्ट",
     "Membership": "सदस्यता",
@@ -213,7 +213,16 @@
     "Birthplace": "जन्म स्थान",
     "Zodiacsign": "राशी",
     "auspicious": "मांगलिक"
+  },
 
+    "advanced search": "एडवांस्ड सर्च",
+    "divorced": "तलाकशुदा",
+    "widowed ": "विधवा",
+    "disabled": "विकलांग",
+    "Widower":"विधुर",
+    "Share":"शेयर",
+    "settings":"सेटिंग",
+    "All Kurmi Samaj":"सर्व कुर्मि समाज"
   }
   
-}
+
