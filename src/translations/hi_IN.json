@@ -184,17 +184,18 @@
   },
   "drawerScreen": {
     "Home": "होम",
-    "Likes":"पसंद",
+    "Helpline-":"हेल्पलाइन -",
     "View By": "प्रोफाइल देखा",
     "shortlist": "शॉर्टलिस्ट",
     "Membership": "सदस्यता",
     "biodata share": "बायोडाटा शेयर",
-    "advanced search-property,goverment job,business,place,kurmiraj": "एडवांस्ड सर्च -जमीन,सरकारी नौकरी,बिज़नेस,जगह,कुर्मीराज",
-    "divorced profile": "तलाकशुदा प्रोफ़ाइल",
-    "widowed profile": "विधवा प्रोफ़ाइल",
-    "Disabled profile": "विकलांग प्रोफ़ाइल",
-    "Need partner":"साथी चाहिए",
-    "30+ profile":"30+ प्रोफ़ाइल",
-    "settings":"सेटिंग"
+    "advanced search": "एडवांस्ड सर्च",
+    "divorced": "तलाकशुदा",
+    "widowed ": "विधवा",
+    "disabled": "विकलांग",
+    "Widower":"विधुर",
+    "Share":"शेयर",
+    "settings":"सेटिंग",
+    "All Kurmi Samaj":"सर्व कुर्मि समाज"
   }
 }
