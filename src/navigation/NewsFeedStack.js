@@ -11,9 +11,11 @@ import PasswordChange from '../scenes/passwordChange';
 import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 const newsFeedStack = createNativeStackNavigator();
 
-const NewsFeedStack = ({navigation}) => {
+const NewsFeedStack = () => {
+  const navigation  = useNavigation();
   return (
     <newsFeedStack.Navigator
        initialRouteName="NewsFeed"
