@@ -5,17 +5,21 @@ import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import Like from '../DrawerNavigationScreen/Like';
-import Profile from '../DrawerNavigationScreen/Profile';
 import ViewBy from '../DrawerNavigationScreen/ViewBy';
 import ShortLists from '../DrawerNavigationScreen/ShortLists';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
 import Divorcedprofile from '../DrawerNavigationScreen/DivorcedProfile';
 import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
-import Needpartners from '../DrawerNavigationScreen/NeedPartners';
 import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
+import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
+import Widower from '../DrawerNavigationScreen/widower';
+import Helpline from '../DrawerNavigationScreen/Helpline';
+import Share from '../DrawerNavigationScreen/Share';
+import RateUs from '../DrawerNavigationScreen/RateUs';
+import Blog from '../DrawerNavigationScreen/Blog';
+import Logout from '../DrawerNavigationScreen/Logout';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -28,7 +32,7 @@ const DrawerNavigation = () => {
         options={{headerShown: false}}
         component={DashboardNavigation}
       />
-      <Drawer.Screen name={translate('drawerScreen.Likes')} component={Like} />
+      <Drawer.Screen name="Helpline -" component={Helpline} />
       <Drawer.Screen
         name={translate('drawerScreen.View By')}
         component={ViewBy}
@@ -40,9 +44,13 @@ const DrawerNavigation = () => {
 
       <Drawer.Screen
         name={translate(
-          'drawerScreen.advanced search-property,goverment job,business,place,kurmiraj',
+          'drawerScreen.advanced search',
         )}
         component={AdvanceSearch}
+      />
+       <Drawer.Screen
+        name={translate('drawerScreen.All Kurmi Samaj')}
+        component={AllkurmiSamaj}
       />
       <Drawer.Screen
         name={translate('drawerScreen.biodata share')}
@@ -54,23 +62,35 @@ const DrawerNavigation = () => {
       />
 
       <Drawer.Screen
-        name={translate('drawerScreen.30+ profile')}
-        component={Profile}
+        name="Share"
+        component={Share}
+      />
+        <Drawer.Screen
+        name="Rate Us"
+        component={RateUs}
       />
       <Drawer.Screen
-        name={translate('drawerScreen.divorced profile')}
+        name="Blog"
+        component={Blog}
+      />
+         <Drawer.Screen
+        name="Log Out"
+        component={Logout}
+      />
+      <Drawer.Screen
+        name={translate('drawerScreen.divorced')}
         component={Divorcedprofile}
       />
       <Drawer.Screen
-        name={translate('drawerScreen.Disabled profile')}
+        name={translate('drawerScreen.disabled')}
         component={DisabilityProfiles}
       />
       <Drawer.Screen
-        name={translate('drawerScreen.Need partner')}
-        component={Needpartners}
+        name={translate('drawerScreen.Widower')}
+        component={Widower}
       />
       <Drawer.Screen
-        name={translate('drawerScreen.widowed profile')}
+        name={translate('drawerScreen.widowed ')}
         component={WidowedProfile}
       />
       <Drawer.Screen

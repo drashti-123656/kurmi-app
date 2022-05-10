@@ -84,12 +84,14 @@
     "shortlist": "shortlist",
     "Membership": "Membership",
     "biodata share": "biodata share",
-    "advanced search-property,goverment job,business,place,kurmiraj": "advanced search-property,goverment job,business,place,kurmiraj",
-    "divorced profile": "divorced profile",
-    "widowed profile": "widowed profile",
-    "Disabled profile": "Disabled profile",
-    "Need partner":"Need partner",
-    "30+ profile":"30+ profile",
-    "settings":"Settings"
+    "advanced search": "advanced search",
+    "divorced ": "divorced ",
+    "widowed ": "widowed",
+    "disabled ": "disabled ",
+    "Widower":"Widower",
+    "Share":"Share",
+    "settings":"Settings",
+    "All Kurmi Samaj":"All Kurmi Samaj",
+    "Helpline-":"Helpline-"
   }
 }

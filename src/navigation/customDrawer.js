@@ -8,7 +8,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EStyleSheet from 'react-native-extended-stylesheet';
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const CustomDrawer = props => {
   return (
     <View style={styles.container}>
@@ -20,21 +21,15 @@ const CustomDrawer = props => {
             source={require('../assets/user.png')}
             resizeMode="cover">
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.logintext}>Login</Text>
+              <Text style={styles.logintext}>Edit</Text>
             </TouchableOpacity>
 
             <Image
               source={require('../assets/draweruser.png')}
               style={styles.drawerimage}
             />
-            <Text style={styles.text}>Welcome to Kurmi Rishtey</Text>
-            <Text
-              style={styles.link}
-              onPress={() => {
-                Linking.openURL('https://www.kurmirishtey.com/');
-              }}>
-              www.kurmiRishtey.com
-            </Text>
+            <Text style={styles.text}>welcome, Test User</Text>
+            <Text style={styles.link}>testuser@test.com</Text>
           </ImageBackground>
         </View>
 
@@ -46,15 +41,7 @@ const CustomDrawer = props => {
               props.navigation.navigate(translate('drawerScreen.Home'));
             }}
           />
-          <Drawer.Item
-            icon={() => (
-              <Ionicons name="heart" size={22} color={styles.color} />
-            )}
-            label={translate('drawerScreen.Likes')}
-            onPress={() => {
-              props.navigation.navigate(translate('drawerScreen.Likes'));
-            }}
-          />
+
           <Drawer.Item
             icon={() => <Ionicons name="eye" size={22} color={styles.color} />}
             label={translate('drawerScreen.View By')}
@@ -62,9 +49,6 @@ const CustomDrawer = props => {
               props.navigation.navigate(translate('drawerScreen.View By'));
             }}
           />
-        </Drawer.Section>
-
-        <Drawer.Section style={styles.drawer}>
           <Drawer.Item
             icon={() => <Ionicons name="star" size={22} color={styles.color} />}
             label={translate('drawerScreen.shortlist')}
@@ -72,19 +56,16 @@ const CustomDrawer = props => {
               props.navigation.navigate(translate('drawerScreen.shortlist'));
             }}
           />
+        </Drawer.Section>
+
+        <Drawer.Section style={styles.drawer}>
           <Drawer.Item
             icon={() => (
-              <Ionicons name="search" size={22} color={styles.color} />
+              <Ionicons name="people" size={22} color={styles.color} />
             )}
-            label={translate(
-              'drawerScreen.advanced search-property,goverment job,business,place,kurmiraj',
-            )}
+            label={translate('drawerScreen.Membership')}
             onPress={() => {
-              props.navigation.navigate(
-                translate(
-                  'drawerScreen.advanced search-property,goverment job,business,place,kurmiraj',
-                ),
-              );
+              props.navigation.navigate(translate('drawerScreen.Membership'));
             }}
           />
           <Drawer.Item
@@ -98,46 +79,62 @@ const CustomDrawer = props => {
               );
             }}
           />
-        </Drawer.Section>
-
-        <Drawer.Section style={styles.drawer}>
           <Drawer.Item
             icon={() => (
-              <FontAwesome
-                style={styles.fontawesome}
-                name="rupee"
-                size={22}
-                color={styles.color}
-              />
+              <Ionicons name="search" size={22} color={styles.color} />
             )}
-            label={translate('drawerScreen.Membership')}
-            onPress={() => {
-              props.navigation.navigate(translate('drawerScreen.Membership'));
-            }}
-          />
-          <Drawer.Item
-            icon={() => (
-              <FontAwesome name="calendar-o" size={22} color={styles.color} />
-            )}
-            label={translate('drawerScreen.30+ profile')}
-            onPress={() => {
-              props.navigation.navigate(translate('drawerScreen.30+ profile'));
-            }}
-          />
-          <Drawer.Item
-            icon={() => (
-              <Ionicons name="person" size={22} color={styles.color} />
-            )}
-            label={translate('drawerScreen.divorced profile')}
+            label={translate('drawerScreen.advanced search')}
             onPress={() => {
               props.navigation.navigate(
-                translate('drawerScreen.divorced profile'),
+                translate('drawerScreen.advanced search'),
+              );
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <MaterialIcons name="people" size={22} color={styles.color} />
+            )}
+            label={translate('drawerScreen.All Kurmi Samaj')}
+            onPress={() => {
+              props.navigation.navigate(
+                translate('drawerScreen.All Kurmi Samaj'),
               );
             }}
           />
         </Drawer.Section>
 
         <Drawer.Section style={styles.drawer}>
+          <Drawer.Item
+            icon={() => (
+              <Ionicons name="person" size={22} color={styles.color} />
+            )}
+            label={translate('drawerScreen.divorced')}
+            onPress={() => {
+              props.navigation.navigate(translate('drawerScreen.divorced'));
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <MaterialCommunityIcons
+                name="face-woman"
+                size={22}
+                color={styles.color}
+              />
+            )}
+            label={translate('drawerScreen.widowed ')}
+            onPress={() => {
+              props.navigation.navigate(translate('drawerScreen.widowed '));
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <Ionicons name="person" size={22} color={styles.color} />
+            )}
+            label={translate('drawerScreen.Widower')}
+            onPress={() => {
+              props.navigation.navigate(translate('drawerScreen.Widower'));
+            }}
+          />
           <Drawer.Item
             icon={() => (
               <Fontisto
@@ -146,34 +143,11 @@ const CustomDrawer = props => {
                 color={styles.color}
               />
             )}
-            label={translate('drawerScreen.Disabled profile')}
+            label={translate('drawerScreen.disabled')}
             onPress={() => {
-              props.navigation.navigate(
-                translate('drawerScreen.Disabled profile'),
-              );
+              props.navigation.navigate(translate('drawerScreen.disabled'));
             }}
           />
-          <Drawer.Item
-            icon={() => (
-              <Ionicons name="person" size={22} color={styles.color} />
-            )}
-            label={translate('drawerScreen.Need partner')}
-            onPress={() => {
-              props.navigation.navigate(translate('drawerScreen.Need partner'));
-            }}
-          />
-          <Drawer.Item
-            icon={() => (
-              <Ionicons name="person" size={22} color={styles.color} />
-            )}
-            label={translate('drawerScreen.widowed profile')}
-            onPress={() => {
-              props.navigation.navigate(
-                translate('drawerScreen.widowed profile'),
-              );
-            }}
-          />
-
           <Drawer.Item
             icon={() => (
               <Ionicons name="settings" size={22} color={styles.color} />
@@ -181,6 +155,63 @@ const CustomDrawer = props => {
             label={translate('drawerScreen.settings')}
             onPress={() => {
               props.navigation.navigate(translate('drawerScreen.settings'));
+            }}
+          />
+        </Drawer.Section>
+
+        <Drawer.Section style={styles.drawer}>
+          <Drawer.Item
+            icon={() => (
+              <MaterialIcons
+                name="headset-mic"
+                size={22}
+                color={styles.color}
+              />
+            )}
+            label="Helpline -"
+            onPress={() => {
+              props.navigation.navigate('Helpline -');
+            }}
+          />
+
+          <Drawer.Item
+            icon={() => (
+              <MaterialIcons name="share" size={22} color={styles.color} />
+            )}
+            label="Share"
+            onPress={() => {
+              props.navigation.navigate('Share');
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <MaterialIcons name="star" size={22} color={styles.color} />
+            )}
+            label="Rate Us"
+            onPress={() => {
+              props.navigation.navigate('Rate Us');
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <Fontisto name="blogger" size={22} color={styles.color} />
+            )}
+            label="Blog"
+            onPress={() => {
+              props.navigation.navigate('Blog');
+            }}
+          />
+          <Drawer.Item
+            icon={() => (
+              <MaterialCommunityIcons
+                name="logout"
+                size={22}
+                color={styles.color}
+              />
+            )}
+            label="Log Out"
+            onPress={() => {
+              props.navigation.navigate('Log Out');
             }}
           />
         </Drawer.Section>
@@ -203,7 +234,7 @@ const styles = EStyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#DC1C28',
+    backgroundColor: '#C3773B',
     width: 90,
     height: 50,
     marginHorizontal: 150,
@@ -223,12 +254,14 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     top: 170,
     left: 20,
+    color: '#666666',
   },
 
   text: {
     fontWeight: 'bold',
     marginTop: 80,
     marginLeft: 20,
+    color: '#000000',
   },
   drawerContainer: {
     paddingTop: 50,
@@ -238,13 +271,13 @@ const styles = EStyleSheet.create({
     width: 80,
     marginBottom: 10,
     borderWidth: 3,
-    borderColor: '#DC1C28',
+    borderColor: '#C3773B',
     borderRadius: 150 / 2,
     position: 'absolute',
     top: 50,
     left: 10,
   },
-  color: '#DC1C28',
+  color: '#C3773B',
   drawerSection: {
     marginTop: 40,
   },
