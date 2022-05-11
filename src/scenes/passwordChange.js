@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import {passwordChangeValidationSchema} from '../utils/schema/passwordChangeValidationSchema';
-import {CHANGE_PASSWORD} from './passwordChange/redux/passwordAction';
+import CHANGE_PASSWORD from './passwordChange/redux/passwordAction';
 import {useDispatch, useSelector} from 'react-redux';
 
 const PasswordChange = () => {

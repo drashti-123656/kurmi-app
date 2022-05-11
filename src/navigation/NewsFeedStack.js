@@ -1,24 +1,30 @@
-import {StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import NewsFeed from '../scenes/home/NewsFeed';
 import DrawerNavigation from './DrawerNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
-import OthersProfile from '../scenes/home/OthersProfile';
+import OthersProfile from '../scenes/othersProfile/OthersProfile';
 import SeeAllProfile from '../scenes/home/SeeAllProfile';
 import PasswordChange from '../scenes/passwordChange';
 import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
+
 const newsFeedStack = createNativeStackNavigator();
 
-const NewsFeedStack = () => {
-  const navigation  = useNavigation();
+const NewsFeedStack = ({navigation}) => {
   return (
     <newsFeedStack.Navigator
-       initialRouteName="NewsFeed"
+      initialRouteName="NewsFeed"
       screenOptions={{
         headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         headerTintColor: '#fff',
@@ -30,19 +36,26 @@ const NewsFeedStack = () => {
           headerShown: true,
           headerTitle: translate('NewsFeed.kurmiShadiHeading'),
           headerRight: () => (
-            <TouchableOpacity  onPress={() => navigation.navigate('ContactUs')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
               <AntDesign name="user" size={30} color="white" />
-            </TouchableOpacity> 
-            ),
+            </TouchableOpacity>
+          ),
 
-            headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Entypo name="menu" size={30} color="white" style={{paddingRight : 10}} />
-            </TouchableOpacity> 
-            ),
-
+          headerLeft: () => (
+            <TouchableHighlight
+              onPress={() => navigation.openDrawer()}>
+              <Entypo
+                name="menu"
+                size={30}
+                color="white"
+                style={{paddingRight: 10}}
+              />
+            </TouchableHighlight>
+          ),
         }}
       />
+
+     
 
       <newsFeedStack.Screen
         name="DrawerNavigation"
@@ -66,8 +79,8 @@ const NewsFeedStack = () => {
             fontWeight: 'bold',
             color: 'white',
           },
-         // headerTintColor: '#ffff',
-         // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          // headerTintColor: '#ffff',
+          // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
           headerRight: () => (
             <TouchableOpacity>
               <Entypo name="share" size={30} color="white" />
@@ -86,8 +99,8 @@ const NewsFeedStack = () => {
             fontWeight: 'bold',
             color: 'white',
           },
-         // headerTintColor: '#ffff',
-         // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          // headerTintColor: '#ffff',
+          // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         }}
       />
 
