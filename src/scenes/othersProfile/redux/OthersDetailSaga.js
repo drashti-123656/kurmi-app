@@ -13,6 +13,6 @@ export function* otherProfileDetails(action) {
  
   console.log('response====>>',response.data.data)
   if (response.ok) {
-    yield put(fetchothersProfileData(response.data.data));
+   yield put(fetchothersProfileData(response.data.data));
   }
 }

@@ -34,13 +34,14 @@ import {
   REGISTER_USER,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
-import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
-import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
-import { OTHERS_PROFILE_DETAILS } from '../scenes/othersProfile/redux/OthersDetailAction';
-import { otherProfileDetails } from '../scenes/othersProfile/redux/OthersDetailSaga';
+import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetailAction';
+import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
+import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
+import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -55,7 +56,6 @@ export default function* sagas() {
     takeLatest(FETCH_JOB_DROPDOWN, jobDropdown),
     takeLatest(VERIFY_USER, registerUserVerification),
     takeLatest(FETCH_PROFILECREATER_DROPDOWN, profilemakerDropdown),
-
     takeLatest(FETCH_COUNTRY_DROPDOWN, countryDropdown),
     takeLatest(FETCH_STATE_DROPDOWN, stateDropdown),
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),

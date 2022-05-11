@@ -30,7 +30,7 @@ const OthersProfile = ({route, navigation}) => {
       payload: id,
     });
 
-    // dispatch(fetchothersProfileData(id));
+   
   }, []);
 
   return (
@@ -40,6 +40,7 @@ const OthersProfile = ({route, navigation}) => {
           style={styles.profileImg}
           source={require('./../../assets/profile.png')}
         />
+
         <View style={styles.transparentText}>
           <Text style={styles.subNames}>
             {' '}
@@ -53,6 +54,8 @@ const OthersProfile = ({route, navigation}) => {
             {othersProfileData.userCountry.countryName}
           </Text>
         </View>
+
+
 
         <View style={styles.contactContainer}>
           <TouchableOpacity style={{flexDirection: 'row'}}>
@@ -100,13 +103,17 @@ const OthersProfile = ({route, navigation}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {othersProfileData.userCity.cityName}{' '}
+
+             
+             {othersProfileData.userCity.cityName}{' '} 
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('register.state')}{' '}
             </Text>
             <Text style={styles.detailsText}>
               {' '}
+
               {othersProfileData.userState.name}{' '}
             </Text>
             <Text style={styles.subHeadingText}>
@@ -115,17 +122,19 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.detailsText}>
               {' '}
               {othersProfileData.userCountry.countryName}{' '}
+
+             
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Marital Status')}{' '}
             </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userPersonalInfo
-                  .userPersonalInfoMaritalStatusId.maritalStatusTitleHi
-              }{' '}
-            </Text>
+
+            
+
+             {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
+            
+
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('Vyaktigatdata.Height')}{' '}
@@ -143,7 +152,11 @@ const OthersProfile = ({route, navigation}) => {
               {
                 othersProfileData.userEducationInfo.userEducationInfoEducation
                   .educationTitleHi
-              }{' '}
+
+              }
+
+             
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Job')}{' '}
@@ -182,11 +195,14 @@ const OthersProfile = ({route, navigation}) => {
               {translate('Dharmikjankari.Caste')}
             </Text>
             <Text style={styles.detailsText}>
-              {' '}
-              {
+
+             
+
+              {/* {
                 othersProfileData.userReligiousInfo.userReligiousInfoGotra
                   .gotraTitleHi
-              }{' '}
+              } */}
+
             </Text>
             <Text style={styles.subHeadingText}>
               {' '}
@@ -263,13 +279,25 @@ const OthersProfile = ({route, navigation}) => {
               {' '}
               {translate('ParivarikParichay.fatherOccupation')}
             </Text>
+
+           
+
+           
             <Text style={styles.detailsText}>
+      
               {' '}
-              {
+              {/* {
                 othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
                   .occupationTitleHi
-              }{' '}
-            </Text>
+              }{' '} */}
+
+            </Text> 
+
+           
+            
+            
+            
+
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('ParivarikParichay.motherName')}
