@@ -30,7 +30,7 @@ const OthersProfile = ({route, navigation}) => {
       payload : id,
     });
 
-    // dispatch(fetchothersProfileData(id));
+   dispatch(fetchothersProfileData(id));
   }, []);
 
   return (
@@ -90,7 +90,7 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Marital Status')}{' '}
             </Text>
-            <Text style={styles.detailsText}>  {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text>
+             {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text>  */}
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('Vyaktigatdata.Height')}{' '}
@@ -126,7 +126,7 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.subHeadingText}>
               {translate('Dharmikjankari.Caste')}
             </Text>
-            <Text style={styles.detailsText}> {othersProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi} </Text>
+             <Text style={styles.detailsText}>{othersProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi}</Text> 
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('Dharmikjankari.Native')}
@@ -172,7 +172,11 @@ const OthersProfile = ({route, navigation}) => {
               {' '}
               {translate('ParivarikParichay.fatherOccupation')}
             </Text>
+             <Text style={styles.detailsText}> {othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation.occupationTitleHi} </Text> 
             <Text style={styles.detailsText}> {othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation.occupationTitleHi} </Text>
+             <Text style={styles.detailsText}> {othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation.occupationTitleHi} </Text> 
+            <Text style={styles.detailsText}> {othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation.occupationTitleHi} </Text>
+             <Text style={styles.detailsText}> {othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation.occupationTitleHi} </Text> 
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('ParivarikParichay.motherName')}
