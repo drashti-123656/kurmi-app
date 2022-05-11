@@ -140,7 +140,7 @@ const initialState = {
         maritalStatusStatus: '',
         maritalStatusId: 0,
         maritalStatusCreatedAt: null,
-        maritalStatusUpdatedAt: null,
+       maritalStatusUpdatedAt: null,
       },
       userPersonalInfoComplexion: null,
       userPersonalInfoHeight: 0,
