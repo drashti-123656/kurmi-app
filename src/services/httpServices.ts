@@ -1,8 +1,8 @@
-import { create } from 'apisauce'
+import {create} from 'apisauce';
 
-const api = create({
+const apiClient = create({
   baseURL: 'https://kurmishadi.managesmm.club/public/',
-  headers: { Accept: 'application/vnd.github.v3+json' },
-})
+  headers: {Accept: 'application/vnd.github.v3+json'},
+});
 
-export default api
+export default apiClient;

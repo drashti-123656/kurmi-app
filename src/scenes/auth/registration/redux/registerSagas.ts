@@ -181,7 +181,7 @@ export function* countryDropdown(action) {
 
 export function* stateDropdown(action) {
   const payload = action.payload;
-
+  console.log('state_payload',payload)
   const response = yield call(
     apiClient.post,
     API_URL.FETCH_SIGN_DROPDWON,

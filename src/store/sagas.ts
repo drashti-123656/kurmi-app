@@ -36,6 +36,8 @@ import {
 } from '../scenes/auth/registration/redux/registrationActions';
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
+import { DIVORCED_PROFILE } from '../scenes/divorcedProfile/redux/divorcedAction';
+import { divorcedStatus } from '../scenes/divorcedProfile/redux/divorcedSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -50,11 +52,11 @@ export default function* sagas() {
     takeLatest(FETCH_JOB_DROPDOWN, jobDropdown),
     takeLatest(VERIFY_USER, registerUserVerification),
     takeLatest(FETCH_PROFILECREATER_DROPDOWN, profilemakerDropdown),
-
     takeLatest(FETCH_COUNTRY_DROPDOWN, countryDropdown),
     takeLatest(FETCH_STATE_DROPDOWN, stateDropdown),
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
+    takeLatest(DIVORCED_PROFILE, divorcedStatus )
   ]);
 }
