@@ -191,15 +191,18 @@ const NewsFeed = ({navigation, item}) => {
               style={styles.profileImg}
               source={require('../../assets/profile.png')}
             />
-            <View style={styles.footerTextContainer}>
+            {/* <View style={styles.footerTextContainer}> */}
               <Text style={styles.profileText}>
                 {item.userFirstName} {item.userLastName}
               </Text>
               <Text style={styles.profileIntroText}>
-                {item.userCity.cityName}, {item.userState.name},
+              Age - {item.userAge},  {item.userCity.cityName},
+              </Text>
+              <Text style={styles.profileIntroText}>
+                {item.userState.name},
                 {item.userCountry.countryName}
               </Text>
-            </View>
+            {/* </View> */}
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -375,11 +378,27 @@ const styles = StyleSheet.create({
     
   },
   profileImageContainer: {
-    height: hp('30'),
-    width: wp('50'),
-    marginTop: 30,
-    paddingLeft: 10,
+     height: hp('32'),
+     width: wp('50'),
+     marginTop: 30,
+     paddingLeft: 10,
+     borderRadius : 10,
+     backgroundColor: 'white',
+     flex : 1,
+   
+     shadowOffset: {
+       width: 0,
+       height: 2,
+     },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
     borderRadius : 10,
+    marginHorizontal : 5,
+    justifyContent : 'center',
+    //alignItems :'center'
+    
+
     
   },
   profileImg: {
@@ -396,6 +415,7 @@ const styles = StyleSheet.create({
   },
   footerTextContainer: {
     backgroundColor: 'white',
+    flex : 1,
     height: hp('10'),
     width: wp('44'),
     shadowOffset: {
@@ -422,6 +442,7 @@ const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     fontSize: 13,
+    
   },
   footerContainer: {
     backgroundColor: '#EDEDED',
