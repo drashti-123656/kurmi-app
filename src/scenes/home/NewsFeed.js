@@ -22,12 +22,10 @@ import {value} from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 
-const NewsFeed = ({navigation,item}) => {
+const NewsFeed = ({navigation, item}) => {
   const dispatch = useDispatch();
 
   const {newsFeedData} = useSelector(state => state.newsfeed);
-
-  
 
   const handleSearchProfile = values => {
     const payload = {
@@ -179,48 +177,45 @@ const NewsFeed = ({navigation,item}) => {
   );
 
   const renderItem = ({item}) => {
-  
     return (
-      <ScrollView style={styles.footerContainer}>
+      <ScrollView style={styles.SubfooterContainer}>
         <View style={styles.profileContainer}>
           <TouchableOpacity
+            style={styles.profileImageContainer}
             onPress={() =>
               navigation.navigate('OthersProfile', {
                 id: item.userId,
               })
             }>
-            <View style={styles.profileImageContainer}>
-              <Image
-                style={styles.profileImg}
-                source={require('../../assets/profile.png')}
-              />
-              <View style={styles.footerTextContainer}>
-                <Text style={styles.profileText}>
-                  {item.userFirstName} {item.userLastName}
-                </Text>
-                <Text style={styles.profileIntroText}>
-                  {item.userCity.cityName}, {item.userState.name},
-                  {item.userCountry.countryName}
-                </Text>
-              </View>
-            </View>
+            <Image
+              style={styles.profileImg}
+              source={require('../../assets/profile.png')}
+            />
+            {/* <View style={styles.footerTextContainer}> */}
+              <Text style={styles.profileText}>
+                {item.userFirstName} {item.userLastName}
+              </Text>
+              <Text style={styles.profileIntroText}>
+              Age - {item.userAge},  {item.userCity.cityName},
+              </Text>
+              <Text style={styles.profileIntroText}>
+                {item.userState.name},
+                {item.userCountry.countryName}
+              </Text>
+            {/* </View> */}
           </TouchableOpacity>
-          
         </View>
       </ScrollView>
     );
   };
 
-
   const _renderFooter = () => (
-                <TouchableOpacity 
-                onPress={() => navigation.navigate('SeeAllProfile')}
-                style={styles.footerContainer}>
-           <Text style={styles.footerTextseeAll}> See All </Text>
-                 </TouchableOpacity>
-
+    <TouchableOpacity
+      onPress={() => navigation.navigate('SeeAllProfile')}
+      style={styles.footerContainer}>
+      <Text style={styles.footerTextseeAll}> See All </Text>
+    </TouchableOpacity>
   );
-
 
   return (
     <RootScreen scrollable={true}>
@@ -244,7 +239,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 52,
     flexDirection: 'row',
-    backgroundColor: '#DC1C28',
+    // backgroundColor: '#DC1C28',
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -356,39 +351,85 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
   },
-  footerContainer: {
+  SubfooterContainer: {
     backgroundColor: '#EDEDED',
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingBottom: 10,
+    
   },
   titleText: {
     fontWeight: 'bold',
     color: 'black',
     fontSize: 22,
     marginTop: 10,
+    paddingLeft : 5
   },
   titleTextNext: {
     color: '#666666',
+    paddingLeft : 5
   },
   profileContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+   // flexDirection: 'row',
+    //justifyContent: 'space-between',
+   backgroundColor: '#EDEDED',
+    //borderRadius: 10,
+   
+    
   },
   profileImageContainer: {
-    height: hp('30'),
-    width: wp('50'),
-    marginTop: 30,
-    paddingLeft : 10
+     height: hp('32'),
+     width: wp('50'),
+     marginTop: 30,
+     paddingLeft: 10,
+     borderRadius : 10,
+     backgroundColor: 'white',
+     flex : 1,
+   
+     shadowOffset: {
+       width: 0,
+       height: 2,
+     },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius : 10,
+    marginHorizontal : 5,
+    justifyContent : 'center',
+    //alignItems :'center'
+    
+
+    
   },
   profileImg: {
     width: wp('44'),
     height: hp('23'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 10,
+    borderRadius : 5
   },
   footerTextContainer: {
     backgroundColor: 'white',
+    flex : 1,
     height: hp('10'),
     width: wp('44'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius : 3
+    
+  },
+  SubfooterContainer : {
+    backgroundColor: 'white',
   },
   profileText: {
     fontWeight: 'bold',
@@ -401,16 +442,17 @@ const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     fontSize: 13,
-  },
-  footerContainer : {
-    backgroundColor : 'white',
-   
     
   },
-  footerTextseeAll : {
-    color : 'red',
-    fontSize : 20,
-    marginBottom : 20,
-    alignSelf : 'center'
-  }
+  footerContainer: {
+    backgroundColor: '#EDEDED',
+    paddingTop : 10
+  },
+  footerTextseeAll: {
+    color: 'red',
+    fontSize: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
+    
+  },
 });

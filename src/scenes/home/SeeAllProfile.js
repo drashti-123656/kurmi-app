@@ -25,9 +25,10 @@ const SeeAllProfile = ({navigation}) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('OthersProfile', {
-              id: item.id,
+              id: item.userid,
             })
           }>
+          <View style={styles.mainContainer}>
           <View style={styles.profileImageContainer}>
             <Image
               style={styles.profileImg}
@@ -37,6 +38,9 @@ const SeeAllProfile = ({navigation}) => {
               <Text style={styles.profileText}>
                 {item.userFirstName} {item.userLastName}
               </Text>
+              <Text style={styles.profileIntroText}>
+                Age - {item.userAge}, 
+              </Text>
 
               <Text style={styles.profileIntroText}>
                 {item.userCity.cityName}, {item.userState.name},
@@ -44,27 +48,23 @@ const SeeAllProfile = ({navigation}) => {
               <Text style={styles.profileIntroText}>
                 {item.userCountry.countryName}
               </Text>
-              <View
+            </View>
+            
+          </View>
+          <View
               style={{
                 borderBottomColor: 'black',
                 borderBottomWidth: 1,
-                paddingTop : 35,
+                paddingTop: 5,
               }}
-            /> 
+            />
+
             <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.bottmIcons}>
-          <Icon name="star-o" size={30} color="black" style={{paddingLeft:15}}/>
-          <Text style={styles.bottomText}> Shortlist </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bottmIcons}>
-          <Icon name="heart-o" size={30} color="black" style={{paddingLeft:25}} />
-          <Text style={styles.bottomText}> Send Interest </Text>
-        </TouchableOpacity>
-       
-      </View>
-            
+              <TouchableOpacity style={styles.bottmIcons}>
+                <Icon name="star-o" size={25} color="#499A30" style={{paddingBottom : 5}}  />
+                <Text style={styles.bottomText}> Shortlist </Text>
+              </TouchableOpacity>
             </View>
-           
           </View>
         </TouchableOpacity>
       </View>
@@ -72,12 +72,14 @@ const SeeAllProfile = ({navigation}) => {
   };
   return (
     <RootScreen scrollable={true}>
+    <View style={styles.container}>
       <FlatList
         data={newsFeedData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         initialNumToRender={10}
       />
+      </View>
     </RootScreen>
   );
 };
@@ -92,14 +94,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 20,
   },
-  container: {
-    alignSelf: 'stretch',
-    height: 52,
-    flexDirection: 'row',
-    backgroundColor: '#DC1C28',
-    paddingLeft: 10,
-    paddingRight: 10,
+  container : {
+   marginBottom : 20,
+   justifyContent : 'center',
+   marginTop : 20
+
+   
   },
+ 
   imageContainer: {
     marginTop: 18,
   },
@@ -137,8 +139,9 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     marginHorizontal: 30,
-    fontSize: 18,
+    fontSize: 20,
     color: '#FFFFFF',
+    
   },
   radioButtonContainer: {
     flexDirection: 'row',
@@ -224,18 +227,11 @@ const styles = StyleSheet.create({
     color: '#666666',
   },
   profileContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+   marginHorizontal : 2,
   },
   profileImageContainer: {
-    height: hp('20'),
-    width: wp('90'),
-    marginTop: 30,
-    paddingLeft: 10,
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-    borderRadius: 15,
-    flexDirection: 'row',
+    
+     flexDirection: 'row',
   },
   profileImg: {
     width: wp('25'),
@@ -276,17 +272,30 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     //alignSelf : 'flex-start'
   },
-  bottomContainer : {
-    flexDirection : 'row',
-    paddingTop : 10,
-    alignSelf : 'flex-start'
+  bottomContainer: {
+    flexDirection: 'row',
+    paddingTop: 10,
+    alignSelf : 'center',
+    marginBottom : 5
   },
-  bottmIcons : {
-    flexDirection : 'row',
-    alignSelf : 'flex-start',
-   
+  bottmIcons: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
   },
-  bottomText : {
-    color: 'black'
+  bottomText: {
+    color: 'black',
+  },
+  mainContainer : {
+    flexDirection : 'column',
+    height: hp('20'),
+    width: wp('90'),
+    //marginTop: 30,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+   marginHorizontal: 20,
+    justifyContent : 'center',
+    marginVertical : 5,
+    borderRadius: 15,
+   // flexDirection: 'row',
   }
 });

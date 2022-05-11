@@ -41,6 +41,22 @@ const OthersProfile = ({route, navigation}) => {
           source={require('./../../assets/profile.png')}
         />
 
+        <View style={styles.transparentText}>
+          <Text style={styles.subNames}>
+            {' '}
+            {othersProfileData.userFirstName} {othersProfileData.userLastName}{' '}
+          </Text>
+          <Text style={styles.subNamesDetails}>
+            {' '}
+            Age - {othersProfileData.userAge},{' '}{' '}
+            {othersProfileData.userCity.cityName},{' '}{' '}
+            {othersProfileData.userState.name},{' '}{' '}
+            {othersProfileData.userCountry.countryName}
+          </Text>
+        </View>
+
+
+
         <View style={styles.contactContainer}>
           <TouchableOpacity style={{flexDirection: 'row'}}>
             <Icon
@@ -87,20 +103,38 @@ const OthersProfile = ({route, navigation}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-               {othersProfileData.userCity.cityName}{' '} 
+
+             
+             {othersProfileData.userCity.cityName}{' '} 
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('register.state')}{' '}
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-               {othersProfileData.userState.name}
+
+              {othersProfileData.userState.name}{' '}
+            </Text>
+            <Text style={styles.subHeadingText}>
+              {translate('register.country')}{' '}
+            </Text>
+            <Text style={styles.detailsText}>
+              {' '}
+              {othersProfileData.userCountry.countryName}{' '}
+
+             
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Marital Status')}{' '}
             </Text>
+
+            
+
              {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
             
+
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('Vyaktigatdata.Height')}{' '}
@@ -118,7 +152,11 @@ const OthersProfile = ({route, navigation}) => {
               {
                 othersProfileData.userEducationInfo.userEducationInfoEducation
                   .educationTitleHi
-              }{' '} 
+
+              }
+
+             
+
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Job')}{' '}
@@ -157,10 +195,14 @@ const OthersProfile = ({route, navigation}) => {
               {translate('Dharmikjankari.Caste')}
             </Text>
             <Text style={styles.detailsText}>
+
+             
+
               {/* {
                 othersProfileData.userReligiousInfo.userReligiousInfoGotra
                   .gotraTitleHi
               } */}
+
             </Text>
             <Text style={styles.subHeadingText}>
               {' '}
@@ -237,17 +279,25 @@ const OthersProfile = ({route, navigation}) => {
               {' '}
               {translate('ParivarikParichay.fatherOccupation')}
             </Text>
+
            
-            {/* <Text style={styles.detailsText}>
+
+           
+            <Text style={styles.detailsText}>
+      
               {' '}
-              {
+              {/* {
                 othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
                   .occupationTitleHi
-              }{' '}
-            </Text> */}
+              }{' '} */}
+
+            </Text> 
+
+           
             
             
             
+
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('ParivarikParichay.motherName')}
@@ -382,6 +432,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  subNames: {
+    fontSize: 25,
+    color: 'white',
+    fontWeight: '600',
+  },
   contactText: {
     fontSize: 20,
     fontWeight: '000',
@@ -452,5 +507,15 @@ const styles = StyleSheet.create({
     //justifyContent : 'center',
     //  position: 'relative',
     paddingBottom: 5,
+  },
+  transparentText: {
+    backgroundColor: 'black',
+    opacity: 0.7,
+    paddingLeft: 20,
+    paddingTop: 5,
+    height: '3.5%',
+  },
+  subNamesDetails: {
+    color: 'white',
   },
 });

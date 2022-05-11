@@ -161,6 +161,7 @@ const initialState = {
     userUpdatedAt: '',
     userAge: '',
   },
+  
 };
 
 const searchProfileSlice = createSlice({
