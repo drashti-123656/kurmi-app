@@ -99,7 +99,8 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Marital Status')}{' '}
             </Text>
-             {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text>   */}
+             {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
+            
             <Text style={styles.subHeadingText}>
               {' '}
               {translate('Vyaktigatdata.Height')}{' '}
@@ -371,7 +372,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     shadowColor: '#000',
-    height: '3%',
+    height: '3.5%',
     justifyContent: 'space-evenly',
     shadowOffset: {
       width: 0,
