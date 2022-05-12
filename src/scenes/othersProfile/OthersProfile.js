@@ -17,6 +17,7 @@ import Entypo from 'react-native-vector-icons/dist/Entypo';
 import {fetchothersProfileData} from './redux/OthersDetailReducer';
 import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
+import { SHORT_LIST_PROFILE } from '../shortList/redux/ShortListAction';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData} = useSelector(state => state.othersDetail);
@@ -29,9 +30,27 @@ const OthersProfile = ({route, navigation}) => {
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
     });
-
+   
    
   }, []);
+
+  const handleShortList = () => {
+    const payload = {
+    page: 1,
+    pageSIze: 2,
+    order: {
+       column:"id",
+       type:"desc"
+    }
+    };
+
+    dispatch({
+      type : SHORT_LIST_PROFILE,
+      payload,
+     });
+
+
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -397,7 +416,10 @@ const OthersProfile = ({route, navigation}) => {
       </ScrollView>
 
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.shortlist}>
+        <TouchableOpacity 
+         onPress={handleShortList}
+        
+        style={styles.shortlist} >
           <Icon
             name="star-o"
             size={40}

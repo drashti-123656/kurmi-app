@@ -1,0 +1,1 @@
+export const SHORT_LIST_PROFILE= 'SHORT_LIST_PROFILE';

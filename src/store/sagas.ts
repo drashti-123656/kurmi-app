@@ -41,6 +41,8 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
+import {shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
 
 export default function* sagas() {
   yield all([
@@ -63,5 +65,6 @@ export default function* sagas() {
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
+    takeLatest(SHORT_LIST_PROFILE, shortListProfile),
   ]);
 }

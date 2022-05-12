@@ -6,6 +6,7 @@ import NewsfeedReducer from '../scenes/home/redux/NewsfeedReducer';
 import loginReducer from '../scenes/auth/login/loginReducer';
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
+import ShortListReducer from '../scenes/shortList/redux/ShortListReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   login: loginReducer,
   newsfeed: NewsfeedReducer,
   changepassword: changePasswordReducer,
-  othersDetail : OthersDetailReducer,
+  othersDetail: OthersDetailReducer,
+  shortListProfiles: ShortListReducer,
 });
 
 export default rootReducer;
