@@ -3,7 +3,7 @@ const initialState = {
   divorcedData: [],
 };
 
-const drawerSlice = createSlice({
+const divorcedSlice = createSlice({
   name: 'divorcedProfile',
   initialState,
   reducers: {
@@ -13,7 +13,7 @@ const drawerSlice = createSlice({
   },
 });
 
-const {actions, reducer} = drawerSlice;
+const {actions, reducer} = divorcedSlice;
 
 export const {divorce} = actions;
 export default reducer;
