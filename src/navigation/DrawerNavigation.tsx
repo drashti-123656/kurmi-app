@@ -9,9 +9,9 @@ import ViewBy from '../DrawerNavigationScreen/ViewBy';
 import ShortLists from '../DrawerNavigationScreen/ShortLists';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
-import Divorcedprofile from '../DrawerNavigationScreen/DivorcedProfile';
+import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';
 import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
-import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
+import WidowedProfile from '../scenes/widowedProfile/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
 import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
 import Widower from '../DrawerNavigationScreen/Widower';
@@ -20,6 +20,7 @@ import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
 import Blog from '../DrawerNavigationScreen/Blog';
 import Logout from '../DrawerNavigationScreen/Logout';
+import EStyleSheet from 'react-native-extended-stylesheet';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -70,16 +71,21 @@ const DrawerNavigation = () => {
         component={RateUs}
       />
       <Drawer.Screen
-        name="Blog"
-        component={Blog}
-      />
-         <Drawer.Screen
-        name="Log Out"
-        component={Logout}
-      />
-      <Drawer.Screen
         name={translate('drawerScreen.divorced')}
-        component={Divorcedprofile}
+        options={{
+          headerTintColor: 'white',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: EStyleSheet.value('$PRIMARY'),
+          },
+          headerTitleStyle: {
+            fontSize: 22,
+          },
+          drawerIcon: () => (
+            <Ionicons name="person" size={22} color={styles.color} />
+          ),
+        }}
+        component={DivorcedProfile}
       />
       <Drawer.Screen
         name={translate('drawerScreen.disabled')}

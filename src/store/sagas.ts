@@ -1,4 +1,4 @@
-import {all, takeLatest} from 'redux-saga/effects';
+import {all, take, takeLatest} from 'redux-saga/effects';
 import {LOG_IN, LOG_USER} from '../scenes/auth/redux/authActions';
 import {logUser} from '../scenes/auth/redux/authSagas';
 import {CONTACT_USER} from '../scenes/contact/redux/contactAction';
@@ -37,10 +37,14 @@ import {
 
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
+import { DIVORCED_PROFILE } from '../scenes/divorcedProfile/redux/divorcedAction';
+import { divorcedStatus } from '../scenes/divorcedProfile/redux/divorcedSaga';
 import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetailAction';
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import { WIDOWED_PROFILE } from '../scenes/widowedProfile/redux/widowedAction';
+import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
 
 export default function* sagas() {
   yield all([
@@ -61,7 +65,9 @@ export default function* sagas() {
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
+    takeLatest(DIVORCED_PROFILE, divorcedStatus ),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
+    takeLatest(WIDOWED_PROFILE, widowedStatus),
   ]);
 }
