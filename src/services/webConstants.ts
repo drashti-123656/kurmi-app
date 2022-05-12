@@ -9,4 +9,5 @@ export const API_URL = {
   DIVORCED_DATA: 'api/divorced-profiles',
   SEARCH_PROFILE: 'api/search-profiles',
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
+  WIDOWED_DATA: 'api/widowed-profiles',
 };

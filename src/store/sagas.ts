@@ -1,4 +1,4 @@
-import {all, takeLatest} from 'redux-saga/effects';
+import {all, take, takeLatest} from 'redux-saga/effects';
 import {LOG_IN, LOG_USER} from '../scenes/auth/redux/authActions';
 import {logUser} from '../scenes/auth/redux/authSagas';
 import {CONTACT_USER} from '../scenes/contact/redux/contactAction';
@@ -43,6 +43,8 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import { WIDOWED_PROFILE } from '../scenes/widowedProfile/redux/widowedAction';
+import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
 
 export default function* sagas() {
   yield all([
@@ -66,5 +68,6 @@ export default function* sagas() {
     takeLatest(DIVORCED_PROFILE, divorcedStatus ),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
+    takeLatest(WIDOWED_PROFILE, widowedStatus),
   ]);
 }
