@@ -15,4 +15,5 @@ export const API_URL = {
   DIVORCED_DATA: 'api/divorced-profiles',
 
   WIDOWED_DATA: 'api/widowed-profiles',
+  DISABILITY_DATA: 'api/disability-profiles',
 };
