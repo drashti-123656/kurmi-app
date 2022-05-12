@@ -9,6 +9,7 @@ import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 
 import DrawerNavigation from './DrawerNavigation';
+
 const Stack = createNativeStackNavigator();
 
 
@@ -16,22 +17,23 @@ const Stack = createNativeStackNavigator();
 const AuthNavigation = () => {
   return (
     <Stack.Navigator initialRouteName='login'>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="login"
         component={Login}
         options={{headerShown: false}}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="Registration"
         component={Registration}
         options={{headerShown: false}}
-      />
+      /> */}
         <Stack.Screen
           name="DrawerNavigation"
           component={DrawerNavigation}
           options={{headerShown: false}}
         />
-
+        
+        
       {/* <Stack.Screen
         name="Personalinformation"
         component={Personalinformation}

@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Needpartners = () => {
+const Helpline = () => {
   return (
     <View>
-      <Text>Logout</Text>
+      <Text>Helpline</Text>
     </View>
   )
 }
 
-export default Needpartners
+export default Helpline

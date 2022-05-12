@@ -16,7 +16,7 @@ const authSlice = createSlice({
   reducers: {
     loginSuccess(state, action) {
       state.authData.isAuthenticated = true;
-      state.authData.userData = action.payload;
+    //  state.authData.userData = action.payload;
       state.authData.token = 'randomToken';
       state.authData.error = null;
       state.authData.loading = false;

@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Like = () => {
+const Divorcedprofile = () => {
   return (
     <View>
-      <Text>Likes</Text>
+      <Text>Divorcedprofile</Text>
     </View>
   )
 }
 
-export default Like
+export default Divorcedprofile
