@@ -12,4 +12,8 @@ export const API_URL = {
   CHANGE_PASSWORD: 'api/user-profile-update',
 
   DIVORCED_DATA: 'api/divorced-profiles',
+
+  LOG_OUT_USER: 'api/logout',
+
+  WIDOWED_DATA: 'api/widowed-profiles',
 };

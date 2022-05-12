@@ -11,7 +11,7 @@ import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
 import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';
 import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
-import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
+import WidowedProfile from '../scenes/widowedProfile/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
 import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
 import Widower from '../DrawerNavigationScreen/Widower';

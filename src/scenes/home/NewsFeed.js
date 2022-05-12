@@ -27,6 +27,8 @@ const NewsFeed = ({navigation, item}) => {
 
   const {newsFeedData} = useSelector(state => state.newsfeed);
 
+  useEffect(() => {}, []);
+
   const handleSearchProfile = values => {
     const payload = {
       filter: {
@@ -43,47 +45,16 @@ const NewsFeed = ({navigation, item}) => {
         type: 'desc',
       },
     };
-
     dispatch({
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
+
     dispatch(NewsFeed(payload));
   };
 
   const renderHeader = () => (
     <View>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Image
-              style={styles.vectorImg}
-              source={require('../../assets/Vector6.png')}
-            />
-            <Image
-              style={styles.vectorImg_1}
-              source={require('../../assets/Vector7.png')}
-            />
-            <Image
-              style={styles.vectorImg_1}
-              source={require('../../assets/Vector8.png')}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.pinClipart}>
-          <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
-            <Image
-              style={styles.PinClipartImg}
-              source={require('../../assets/contact.png')}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.navbarText}>
-          {translate('NewsFeed.kurmiShadiHeading')}
-        </Text>
-      </View>
       <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
 
       <Formik
@@ -192,16 +163,15 @@ const NewsFeed = ({navigation, item}) => {
               source={require('../../assets/profile.png')}
             />
             {/* <View style={styles.footerTextContainer}> */}
-              <Text style={styles.profileText}>
-                {item.userFirstName} {item.userLastName}
-              </Text>
-              <Text style={styles.profileIntroText}>
-              Age - {item.userAge},  {item.userCity.cityName},
-              </Text>
-              <Text style={styles.profileIntroText}>
-                {item.userState.name},
-                {item.userCountry.countryName}
-              </Text>
+            <Text style={styles.profileText}>
+              {item.userFirstName} {item.userLastName}
+            </Text>
+            <Text style={styles.profileIntroText}>
+              Age - {item.userAge}, {item.userCity.cityName},
+            </Text>
+            <Text style={styles.profileIntroText}>
+              {item.userState.name},{item.userCountry.countryName}
+            </Text>
             {/* </View> */}
           </TouchableOpacity>
         </View>
@@ -356,50 +326,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingBottom: 10,
-    
   },
   titleText: {
     fontWeight: 'bold',
     color: 'black',
     fontSize: 22,
     marginTop: 10,
-    paddingLeft : 5
+    paddingLeft: 5,
   },
   titleTextNext: {
     color: '#666666',
-    paddingLeft : 5
+    paddingLeft: 5,
   },
   profileContainer: {
-   // flexDirection: 'row',
+    // flexDirection: 'row',
     //justifyContent: 'space-between',
-   backgroundColor: '#EDEDED',
+    backgroundColor: '#EDEDED',
     //borderRadius: 10,
-   
-    
   },
   profileImageContainer: {
-     height: hp('32'),
-     width: wp('50'),
-     marginTop: 30,
-     paddingLeft: 10,
-     borderRadius : 10,
-     backgroundColor: 'white',
-     flex : 1,
-   
-     shadowOffset: {
-       width: 0,
-       height: 2,
-     },
+    height: hp('32'),
+    width: wp('50'),
+    marginTop: 30,
+    paddingLeft: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    flex: 1,
+
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius : 10,
-    marginHorizontal : 5,
-    justifyContent : 'center',
+    borderRadius: 10,
+    justifyContent : 'space-evenly',
+   // marginHorizontal: 10,
+    justifyContent: 'center',
     //alignItems :'center'
-    
-
-    
   },
   profileImg: {
     width: wp('44'),
@@ -411,11 +376,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 10,
-    borderRadius : 5
+    borderRadius: 5,
   },
   footerTextContainer: {
     backgroundColor: 'white',
-    flex : 1,
+    flex: 1,
     height: hp('10'),
     width: wp('44'),
     shadowOffset: {
@@ -425,10 +390,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius : 3
-    
+    borderRadius: 3,
   },
-  SubfooterContainer : {
+  SubfooterContainer: {
     backgroundColor: 'white',
   },
   profileText: {
@@ -442,17 +406,15 @@ const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     fontSize: 13,
-    
   },
   footerContainer: {
     backgroundColor: '#EDEDED',
-    paddingTop : 10
+    paddingTop: 10,
   },
   footerTextseeAll: {
     color: 'red',
     fontSize: 20,
     marginBottom: 20,
     alignSelf: 'center',
-    
   },
 });
