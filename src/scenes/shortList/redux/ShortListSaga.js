@@ -13,6 +13,7 @@ export function* shortListProfile(action) {
     API_URL.SHORT_LIST_PROFILES,
     payload,
   );
+  console.log('shortlist',response.data.data)
 
   if (response.ok) {
     yield put(shortListSuccess(response.data.data));

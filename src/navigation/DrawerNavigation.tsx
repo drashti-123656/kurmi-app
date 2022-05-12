@@ -9,7 +9,7 @@ import ViewBy from '../DrawerNavigationScreen/ViewBy';
 import ShortLists from '../scenes/shortList/ShortList';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
-import Divorcedprofile from '../DrawerNavigationScreen/DivorcedProfile';
+import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';
 import DisabilityProfiles from '../DrawerNavigationScreen/DisabalityProfiles';
 import WidowedProfile from '../DrawerNavigationScreen/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
@@ -72,16 +72,21 @@ const DrawerNavigation = () => {
         component={RateUs}
       />
       <Drawer.Screen
-        name="Blog"
-        component={Blog}
-      />
-         <Drawer.Screen
-        name="Log Out"
-        component={Logout}
-      />
-      <Drawer.Screen
         name={translate('drawerScreen.divorced')}
-        component={Divorcedprofile}
+        options={{
+          headerTintColor: 'white',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: EStyleSheet.value('$PRIMARY'),
+          },
+          headerTitleStyle: {
+            fontSize: 22,
+          },
+          drawerIcon: () => (
+            <Ionicons name="person" size={22} color={styles.color} />
+          ),
+        }}
+        component={DivorcedProfile}
       />
       <Drawer.Screen
         name={translate('drawerScreen.disabled')}
