@@ -29,6 +29,25 @@ const NewsFeed = ({navigation, item}) => {
   
 
   useEffect(() => {
+    const payload = {
+      filter: {
+        age: {
+          min: 18,
+          max: 40,
+        },
+        gender: 'male',
+      },
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
    
   }, [])
   
@@ -55,7 +74,6 @@ const NewsFeed = ({navigation, item}) => {
       payload,
     });
     
-    dispatch(NewsFeed(payload));
   };
 
   const renderHeader = () => (
