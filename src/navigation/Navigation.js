@@ -40,8 +40,8 @@ const Navigation = () => {
           />
         ) : (
           <Stack.Screen
-            name="DashboardNavigation"
-            component={DashboardNavigation}
+            name="DrawerNavigation"
+            component={DrawerNavigation}
             options={{headerShown: false}}
           />
         )}
