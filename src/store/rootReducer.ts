@@ -4,6 +4,7 @@ import {combineReducers} from '@reduxjs/toolkit';
 
 import NewsfeedReducer from '../scenes/home/redux/NewsfeedReducer';
 import loginReducer from '../scenes/auth/login/loginReducer';
+import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer'
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 
@@ -11,8 +12,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
   login: loginReducer,
-  newsfeed: NewsfeedReducer,
   changepassword: changePasswordReducer,
+  divorcedProfile: divorcedReducer,
+  newsfeed: NewsfeedReducer,
   othersDetail : OthersDetailReducer,
 });
 
