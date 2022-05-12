@@ -5,7 +5,8 @@ import {API_URL} from './../../../services/webConstants';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {login} from '../login/loginReducer';
 import {loginSuccess} from './authReducer';
-import { registrationSuccess } from '../registration/redux/registrationReducer';
+import {registrationSuccess} from '../registration/redux/registrationReducer';
+
 export function* logUser(action) {
   const payload = action.payload;
   const response = yield call(apiClient.post, API_URL.LOG_USER, payload);
@@ -24,6 +25,7 @@ export function* loginUser(action) {
       message: 'successfully Logged In',
       type: 'success',
     });
+
     yield put(loginSuccess(response.data.User));
   } else {
     showMessage({
@@ -32,5 +34,3 @@ export function* loginUser(action) {
     });
   }
 }
-
-

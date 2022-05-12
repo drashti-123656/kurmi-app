@@ -1,4 +1,4 @@
-import {StyleSheet, Text,TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -21,99 +21,30 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import SeeAllProfile from '../scenes/home/SeeAllProfile';
 import OthersProfile from '../scenes/othersProfile/OthersProfile';
 
-
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const {userData: isAuthenticated} = useSelector(state => state.auth);
+  const {authData: {isAuthenticated}} = useSelector(state => state.auth);
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name="Whatsapp"
-          component={Whatsapp}
-          headershow
-          options={{
-            headerShown: false,
-          }}
-        /> */}
-        <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
-          options={{headerShown: false}}
-          // options={{
-          //   headerTitle: translate('NewsFeed.kurmiShadiHeading'),
-          //   tabBarActiveTintColor: 'red',
-          //   headerTintColor: 'white',
-          //   headerStyle: {
-          //     backgroundColor: '#DC1C28',
-          //   },
-          //   headerTitleStyle: {
-          //     fontSize: 25,
-          //     fontWeight: 'bold',
-          //     alignSelf: 'center',
-          //     marginHorizontal: 20,
-          //   },
-          // }}
-        />
-        <Stack.Screen
-          name="Password Change"
-          component={PasswordChange}
-          options={{
-            headerShown: true,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              color: 'white',
-            },
-            headerTintColor: '#ffff',
-            headerStyle: {
-              backgroundColor: '#c3773b',
-            },
-          }}
-        />
-
-        <Stack.Screen
-          name="ContactUs"
-          component={ContactUs}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="OthersProfile"
-          component={OthersProfile}
-          options={{
-            headerShown: true,
-            headerTitle: 'Profile',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              color: 'white',
-            },
-            headerTintColor: '#ffff',
-            headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
-            headerRight: () => (  <TouchableOpacity ><Entypo
-                name="share"
-               size= {30}
-                color="white"
-              />
-              </TouchableOpacity>
-            )
-          }}
-        
-        />
-        <Stack.Screen
-          name="SeeAllProfile"
-          component={SeeAllProfile}
-          options={{headerShown: true,
-            headerTitle: 'नया  प्रोफाइल',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              color: 'white',
-            },
-            headerTintColor: '#ffff',
-            headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
-          
-          }}
-        />
-
+     
+        {!isAuthenticated ? (
+          <Stack.Screen
+            name="AuthNavigation"
+            component={AuthNavigation}
+            headershow
+            options={{
+              headerShown: false,
+            }}
+          />
+        ) : (
+          <Stack.Screen
+            name="DrawerNavigation"
+            component={DrawerNavigation}
+            options={{headerShown: false}}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
