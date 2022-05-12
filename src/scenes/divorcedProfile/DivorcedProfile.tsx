@@ -32,7 +32,6 @@ const DivorcedProfile = ({navigation}) => {
   };
 
   useEffect(() => {
-    console.log('data', divorcedData )
     dispatch({
       type: DIVORCED_PROFILE,
       payload,
