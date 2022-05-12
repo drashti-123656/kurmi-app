@@ -10,4 +10,5 @@ export const API_URL = {
   SEARCH_PROFILE: 'api/search-profiles',
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
   WIDOWED_DATA: 'api/widowed-profiles',
+  WIDOWER_DATA: 'api/widowed-profiles',
 };

@@ -6,6 +6,7 @@ import NewsfeedReducer from '../scenes/home/redux/NewsfeedReducer';
 import loginReducer from '../scenes/auth/login/loginReducer';
 import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer'
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
+import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer'
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   newsfeed: NewsfeedReducer,
   othersDetail : OthersDetailReducer,
   widowedProfile: widowedReducer,
+  widowerProfile: widowerReducer,
 });
 
 export default rootReducer;
