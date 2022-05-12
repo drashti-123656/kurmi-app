@@ -4,21 +4,30 @@ import {combineReducers} from '@reduxjs/toolkit';
 import widowedReducer from '../scenes/widowedProfile/redux/widowedReducer'
 import NewsfeedReducer from '../scenes/home/redux/NewsfeedReducer';
 import loginReducer from '../scenes/auth/login/loginReducer';
-import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer'
+import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer';
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
 import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer'
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
-
+import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer'
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
-  login: loginReducer,
-  changepassword: changePasswordReducer,
-  divorcedProfile: divorcedReducer,
+
   newsfeed: NewsfeedReducer,
-  othersDetail : OthersDetailReducer,
+
+  changepassword: changePasswordReducer,
+
+  login: loginReducer,
+
+  othersDetail: OthersDetailReducer,
+
+  divorcedProfile: divorcedReducer,
+
   widowedProfile: widowedReducer,
+
   widowerProfile: widowerReducer,
+  
+  disabilityProfile: disabilityReducer,
 });
 
 export default rootReducer;

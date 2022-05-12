@@ -47,6 +47,8 @@ import { WIDOWED_PROFILE } from '../scenes/widowedProfile/redux/widowedAction';
 import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
 import { WIDOWER_PROFILE } from '../scenes/widowerProfile/redux/widowerAction';
 import { widowerStatus } from '../scenes/widowerProfile/redux/widowerSaga';
+import { DISABILITY_PROFILE } from '../scenes/disabilityProfile/redux/disabilityAction';
+import { disabilityStatus } from '../scenes/disabilityProfile/redux/disabilitySaga';
 
 export default function* sagas() {
   yield all([
@@ -71,6 +73,7 @@ export default function* sagas() {
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
-    takeLatest(WIDOWER_PROFILE, widowerStatus)
+    takeLatest(WIDOWER_PROFILE, widowerStatus),
+    takeLatest(DISABILITY_PROFILE, disabilityStatus)
   ]);
 }

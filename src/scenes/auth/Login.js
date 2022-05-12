@@ -27,7 +27,7 @@ const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const loginData= useSelector(state => state.login);
+  const loginData= useSelector(state => state.auth);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -37,7 +37,8 @@ const Login = ({navigation}) => {
       type: LOG_IN,
       payload,
     });
-    dispatch(login(payload));
+    
+    dispatch(loginSuccess(payload));
     // setLoading(true);
   };
 

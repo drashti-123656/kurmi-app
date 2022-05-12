@@ -25,7 +25,7 @@ const SeeAllProfile = ({navigation}) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('OthersProfile', {
-              id: item.userid,
+              id: item.userId,
             })
           }>
           <View style={styles.mainContainer}>
