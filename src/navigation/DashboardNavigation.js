@@ -21,9 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const DashboardNavigation = () => {
   const dispatch = useDispatch();
-  const {
-    registrationData: {registered},
-  } = useSelector(({registration}) => registration);
+  const {authData: {isAuthenticated}} = useSelector(state => state.auth);
 
   const handleLogout = async () => {
     dispatch(logout({}));
@@ -53,13 +51,12 @@ const DashboardNavigation = () => {
           headerTitleAlign: 'center',
           tabBarActiveTintColor: 'red',
           headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#DC1C28',
-          },
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerTintColor: '#fff',
           tabBarIcon: () => <Search name="search" color={'black'} size={30} />,
         }}
       />
-      {!registered ? (
+      {!isAuthenticated ? (
         <>
           <Tab.Screen
             name="Registration"
