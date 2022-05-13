@@ -97,8 +97,7 @@ const ParivarikParichay = () => {
       userCity:registerData.city[0],
      
     };
-   
-     console.log('payload===>>',payload)
+  
     dispatch({
       type: REGISTER_USER,
       payload,

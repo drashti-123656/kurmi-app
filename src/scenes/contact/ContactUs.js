@@ -78,15 +78,6 @@ const ContactUs = () => {
             {errors.mobileNo && touched.mobileNo ? (
               <Text style={styles.error}>{errors.mobileNo}</Text>
             ) : null}
-            {/* <TextInput
-              onChangeText={handleChange('message')}
-              onBlur={handleBlur('message')}
-              value={values.message}
-              style={styles.textinput_msg}
-              numberOfLines={7}
-              placeholder={translate('ContactUs.message')}
-              placeholderTextColor={'#666666'}
-            /> */}
 
             <CustomInput
               onChangeText={handleChange('message')}

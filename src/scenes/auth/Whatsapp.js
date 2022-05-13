@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
-import {WhatsappSchema} from '../../utils/schema/login';
+import { WhatsappSchema } from '../../utils/schema/whatsappSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
