@@ -5,7 +5,7 @@ const RootScreen = ({children, scrollable = false}) => {
   return (
     <ImageBackground
       style={[styles.bg_img]}
-      source={require('./../../../assets/backgroundImage.png')}>
+      source={require('./../../../assets/backgroundImage.jpg')}>
       <StatusBar animated={true}  />
       <View style={styles.overLay}>
         {scrollable ? <ScrollView>{children}</ScrollView> : children}

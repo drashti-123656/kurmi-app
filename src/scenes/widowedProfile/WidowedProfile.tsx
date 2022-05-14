@@ -9,9 +9,11 @@ import {
   import {useDispatch, useSelector} from 'react-redux';
   import Card from '../../components/molecule/card/Card';
 import { WIDOWED_PROFILE } from './redux/widowedAction';
+import Loader from '../../components/atoms/buttons/Loader';
+import { fetchWidowedDataStarted } from './redux/widowedReducer';
   
   const WidowedProfile = ({navigation}) => {
-    const {widowedData} = useSelector(state => state.widowedProfile);
+    const {widowedData, isFetching} = useSelector(state => state.widowedProfile);
     
     const dispatch = useDispatch();
   
@@ -25,11 +27,12 @@ import { WIDOWED_PROFILE } from './redux/widowedAction';
     };
   
     useEffect(() => {
+      dispatch(fetchWidowedDataStarted());
       dispatch({
         type: WIDOWED_PROFILE,
         payload,
       });
-    });
+    }, []);
   
   
     const renderItem = ({item}) => {
@@ -38,6 +41,9 @@ import { WIDOWED_PROFILE } from './redux/widowedAction';
       );
     };
     
+    const renderLoader = () => 
+    isFetching ? <Loader /> : null;
+
     return (
       <RootScreen scrollable={true}>
         <View style={styles.container}>
@@ -45,6 +51,7 @@ import { WIDOWED_PROFILE } from './redux/widowedAction';
           data={widowedData}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          ListFooterComponent={renderLoader}
           initialNumToRender={10}
         />
         </View>

@@ -26,7 +26,8 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
-      screenOptions={{drawerLabelStyle: {marginLeft: -10}}}
+      screenOptions={{drawerLabelStyle: {marginLeft: -10}, headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+      headerTintColor: '#fff',}}
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name={translate('drawerScreen.Home')}

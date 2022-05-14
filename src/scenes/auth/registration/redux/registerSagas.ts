@@ -18,6 +18,7 @@ import {
   registrationsFail,
   registrationStarted,
   registrationSuccess,
+  verifyingStarted,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
 import {loginSuccess} from '../../redux/authReducer';
@@ -130,7 +131,7 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-  
+  verifyingStarted({});
   const apiBody = {
     where: {
       userEmail: payload.userEmail,
@@ -142,7 +143,7 @@ export function* registerUserVerification(action) {
   if (response.ok) {
    
     yield put(register(payload));
-    navigate('Personalinformation');
+    navigate('PersonalInformation');
   } else {
     showMessage({
       message: 'Ops, There is already a user with this E-mail and Mobile Number',

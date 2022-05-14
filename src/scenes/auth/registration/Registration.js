@@ -43,7 +43,7 @@ import Navigation from '../../../navigation/Navigation';
 const Registration = ({navigation}) => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [ProfilePic, setProfilePic] = useState(null);
 
   const [date, setDate] = useState(new Date());
@@ -51,7 +51,7 @@ const Registration = ({navigation}) => {
 
   const {
     registerData,
-    isRegistering,
+    isVerifiying,
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -99,7 +99,7 @@ const Registration = ({navigation}) => {
     
     dispatch(register(payload));
     setLoading(true);
-    navigation.navigate('PersonalInformation');
+
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -416,7 +416,8 @@ const Registration = ({navigation}) => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={isRegistering}
+              //loading={isRegistering}
+              loading={isVerifiying}
             />
           </View>
         )}
