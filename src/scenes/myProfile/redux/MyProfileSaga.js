@@ -5,24 +5,22 @@ import {API_URL} from '../../../services/webConstants';
 import {fetchmyProfileDataStarted,fetchmyProfileDataSuccess,fetchloadingDataFail} from './MyProfileReducer';
 
 export function* myProfileDetails(action) {
-
   const payload = action.payload;
   fetchmyProfileDataStarted({});
-  const response = yield call(
+  const {data,ok,problem}= yield call(
     apiClient.get,
-   `${API_URL.MY_PROFILE_DETAILS}/${payload}`,
+   `${API_URL.MY_PROFILE_DETAILS}`,
   );
  
-  console.log('response====>>',response.data.data)
-  if (response.ok) {
-   yield put(fetchmyProfileDataSuccess(response.data.data));
+  if (ok) {
+   yield put(fetchmyProfileDataSuccess(data.data));
   }
   else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchloadingDataFail(response.problem);
+    fetchloadingDataFail(problem);
   }
  
   
