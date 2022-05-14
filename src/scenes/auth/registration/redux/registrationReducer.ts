@@ -2,7 +2,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
 import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
-
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -21,9 +20,8 @@ const initialState = {
   registrationData: {
     registered: false,
     isRegistering: false,
-   
+    
     error: '',
-   
   },
   dharmikJankariData: {
     gotra: '',
@@ -55,16 +53,18 @@ const initialState = {
     land: [],
   },
   registerData: {
-    isVerifiying : false,
-    verifyed : false,
+    isVerifiying: false,
+    verifyed: false,
+    profileUpdateSuccess: false,
+    isUpdating: false,
     emailid: '',
     mobilenumber: '',
     gender: '',
     profilemaker: '',
     firstname: '',
     lastname: '',
-    birthdate:'',
-
+    birthdate: '',
+    userProfileImage :'',
     country: '',
     state: '',
     city: '',
@@ -91,6 +91,7 @@ const registerationSlice = createSlice({
     registrationSuccess(state, action) {
       state.registrationData.registered = true;
       state.registrationData.isRegistering = false;
+      
     },
     registrationsFail(state, action) {
       state.registrationData.registered = false;
@@ -98,9 +99,8 @@ const registerationSlice = createSlice({
       state.registrationData.error = action.payload;
     },
 
-    verifyingStarted(state,action) {
+    verifyingStarted(state, action) {
       state.registerData.isVerifiying = true;
-
     },
     verifyingSuccess(state, action) {
       state.registerData.verifyed = true;
@@ -110,6 +110,27 @@ const registerationSlice = createSlice({
       state.registerData.verifyed = false;
       state.registerData.isVerifiying = false;
       //state.registerData.error = action.payload;
+    },
+
+    updateProfile(state, action) {
+      state.registerData.isUpdating = true;
+    },
+
+    updateProfileSuccess(state,action) { 
+      state.registerData.isUpdating = false;
+      state.registerData.profileUpdateSuccess = true;
+      state.registerData.userProfileImage = action.payload;
+
+    },
+    
+    profileUpdateFailed(state,action) { 
+      state.registerData.isUpdating = false;
+
+    },
+
+    resetProfileUpdate(state, action) { 
+      state.registerData.profileUpdateSuccess = false;
+
     },
 
     sampark(state, action) {
@@ -135,7 +156,6 @@ const registerationSlice = createSlice({
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
-   
     dharmikJankari(state, action) {
       state.dharmikJankariData.gotra = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
@@ -219,10 +239,9 @@ const registerationSlice = createSlice({
       state.personalinfoData.education =
         action.payload.userEducationInfoEducation;
       state.personalinfoData.job = action.payload.userEducationInfoOccupation;
-      
+
       state.personalinfoData.disability =
         action.payload.userPersonalInfoDisability;
-     
     },
   },
 });
@@ -253,6 +272,10 @@ export const {
   fetchLandDropdownSuccess,
   verifyingStarted,
   verifyingSuccess,
-  verifyingFail
+  verifyingFail,
+  updateProfileSuccess,
+  updateProfile,
+  profileUpdateFailed,
+  resetProfileUpdate,
 } = actions;
 export default reducer;

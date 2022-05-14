@@ -14,10 +14,12 @@ import {
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
+  profileUpdateFailed,
   register,
   registrationsFail,
   registrationStarted,
   registrationSuccess,
+  updateProfileSuccess,
   verifyingStarted,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
@@ -44,6 +46,32 @@ export function* registerUser(action) {
   }
 }
 
+export function* profileUpload(action) {
+  const payload = action.payload;
+  const apiBody = {
+    where: {
+      userProfileImage: payload.userProfileImage,
+    },
+  };
+
+  const response = yield call(apiClient.post, API_URL.REGISTER_USER, apiBody);
+  console.log('responseprofile', response);
+
+  if (response.ok) {
+    console.log('responseprofile=====>>>', response);
+    showMessage({
+      message: 'successfully profile uploaded',
+      type: 'success',
+    });
+    yield put(updateProfileSuccess(response.userProfileImage));
+  } else {
+    showMessage({
+      message: 'Ops, something went wrong',
+      type: 'danger',
+    });
+    profileUpdateFailed(response.problem);
+  }
+}
 
 export function* zodiacDropDowns(action) {
   const payload = action.payload;
@@ -139,14 +167,14 @@ export function* registerUserVerification(action) {
     },
   };
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
-  
+
   if (response.ok) {
-   
     yield put(register(payload));
     navigate('Personalinformation');
   } else {
     showMessage({
-      message: 'Ops, There is already a user with this E-mail and Mobile Number',
+      message:
+        'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
   }
@@ -160,7 +188,7 @@ export function* profilemakerDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchProfilemakerDropdownSuccess(response.data.data));
   }
@@ -174,7 +202,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
@@ -206,7 +234,6 @@ export function* cityDropdown(action) {
     yield put(fetchCityDropdownSuccess(response.data.data));
   }
 }
-
 
 export function* landDropdown(action) {
   const payload = action.payload;

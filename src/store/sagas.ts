@@ -14,6 +14,7 @@ import {
   landDropdown,
   martialstatusDropdown,
   profilemakerDropdown,
+  profileUpload,
   registerUser,
   registerUserVerification,
   stateDropdown,
@@ -32,6 +33,7 @@ import {
   FETCH_STATE_DROPDOWN,
   FETCH_ZODIC_SIGN,
   REGISTER_USER,
+  UPDATE_PROFILE,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
 
@@ -71,6 +73,7 @@ export default function* sagas() {
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
-    takeLatest(DISABILITY_PROFILE, disabilityStatus)
+    takeLatest(DISABILITY_PROFILE, disabilityStatus),
+    takeLatest(UPDATE_PROFILE, profileUpload)
   ]);
 }
