@@ -46,6 +46,8 @@ import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
 import { WIDOWED_PROFILE } from '../scenes/widowedProfile/redux/widowedAction';
 import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
 import { DISABILITY_PROFILE } from '../scenes/disabilityProfile/redux/disabilityAction';
+import { MY_PROFILE_DETAILS } from '../scenes/myProfile/redux/MyProfileAction';
+import { myProfileDetails } from '../scenes/myProfile/redux/MyProfileSaga';
 import { disabilityStatus } from '../scenes/disabilityProfile/redux/disabilitySaga';
 
 export default function* sagas() {
@@ -71,6 +73,7 @@ export default function* sagas() {
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
-    takeLatest(DISABILITY_PROFILE, disabilityStatus)
+    takeLatest(DISABILITY_PROFILE, disabilityStatus),
+    takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
   ]);
 }
