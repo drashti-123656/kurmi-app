@@ -10,7 +10,7 @@ export function* myProfileDetails(action) {
   fetchmyProfileDataStarted({});
   const response = yield call(
     apiClient.get,
-   `${API_URL.MY_PROFILE_DETAILS}`,
+   `${API_URL.MY_PROFILE_DETAILS}/${payload}`,
   );
  
   console.log('response====>>',response.data.data)
