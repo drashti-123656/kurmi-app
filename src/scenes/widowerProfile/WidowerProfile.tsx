@@ -11,7 +11,7 @@ import {
 import { WIDOWER_PROFILE } from './redux/widowerAction';
   
   const WidowerProfile = ({navigation}) => {
-    const {widowerData} = useSelector(state => state.widowedProfile);
+    const {widowerData} = useSelector(state => state.widowerProfile);
     
     const dispatch = useDispatch();
   
