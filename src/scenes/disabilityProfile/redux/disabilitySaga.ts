@@ -6,9 +6,9 @@ import { disability } from './disabilityReducer';
 export function* disabilityStatus(action) {
   const payload = action.payload;
 
-  const response = yield call(apiClient.post, API_URL.DISABILITY_DATA, payload);
+  const {data,ok,problem} = yield call(apiClient.post, API_URL.DISABILITY_DATA, payload);
  
-  if (response.ok) {
-    yield put(disability(response.data.data));
+  if (ok) {
+    yield put(disability(data.data));
   }
 }
