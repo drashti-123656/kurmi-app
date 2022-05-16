@@ -216,14 +216,11 @@
     "auspicious": "मांगलिक"
   },
 
-    "advanced search": "एडवांस्ड सर्च",
-    "divorced": "तलाकशुदा",
-    "widowed ": "विधवा",
-    "disabled": "विकलांग",
-    "Widower":"विधुर",
-    "Share":"शेयर",
-    "settings":"सेटिंग",
-    "All Kurmi Samaj":"सर्व कुर्मि समाज"
+  "Myprofile":{
+    "Education And Career":"शिक्षा और करियर",
+    "Gender":"जेंडर",
+    "update membership":"सदस्यता अपडेट करें"
+  }
   }
   
 
