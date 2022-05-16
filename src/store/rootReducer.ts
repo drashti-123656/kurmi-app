@@ -8,7 +8,7 @@ import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer';
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer'
-import MyProfileReducer from '../scenes/myProfile/redux/MyProfileReducer';
+import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
