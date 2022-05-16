@@ -14,12 +14,10 @@ import {
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
-  profileUpdateFailed,
   register,
   registrationsFail,
   registrationStarted,
   registrationSuccess,
-  updateProfileSuccess,
   verifyingStarted,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
@@ -29,7 +27,8 @@ export function* registerUser(action) {
   const payload = action.payload;
   registrationStarted({});
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
-
+  console.log('ProfilePicResponse===>>',response.data.User)
+  console.log('payload===?>pic',payload)
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -43,33 +42,6 @@ export function* registerUser(action) {
       type: 'danger',
     });
     registrationsFail(response.problem);
-  }
-}
-
-export function* profileUpload(action) {
-  const payload = action.payload;
-  const apiBody = {
-    where: {
-      userProfileImage: payload.userProfileImage,
-    },
-  };
-
-  const response = yield call(apiClient.post, API_URL.REGISTER_USER, apiBody);
-  console.log('responseprofile', response);
-
-  if (response.ok) {
-    console.log('responseprofile=====>>>', response);
-    showMessage({
-      message: 'successfully profile uploaded',
-      type: 'success',
-    });
-    yield put(updateProfileSuccess(response.userProfileImage));
-  } else {
-    showMessage({
-      message: 'Ops, something went wrong',
-      type: 'danger',
-    });
-    profileUpdateFailed(response.problem);
   }
 }
 

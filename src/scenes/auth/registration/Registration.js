@@ -54,8 +54,7 @@ const Registration = () => {
   const {
     registerData,
     isVerifiying,
-    profileUpdateSuccess,
-    isUpdating,
+
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -92,7 +91,7 @@ const Registration = () => {
       userState: values.state,
       userCity: values.city,
       password: values.password,
-      userProfileImage : values.ProfilePic
+      userProfileImage: ProfilePic,
     };
 
     console.log('dov', values.birthdate);
@@ -184,45 +183,45 @@ const Registration = () => {
                 onPress={handleChooseProfilePic}
                 style={styles.uploadProfile}>
                 {ProfilePic ? (
-                <Image
-                  style={styles.upload_img}
-                  source={{uri: `${ProfilePic?.assets[0]?.uri}`}}
-                />
-                ) : (
-                <TouchableOpacity
-                  onPress={handleChooseProfilePic}
-                  style={{
-                    position: 'absolute',
-                    width: 150,
-                    height: 150,
-                    backgroundColor: '#333',
-                    opacity: 0.5,
-                    borderRadius: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    zIndex: 1,
-                    // position: 'absolute',
-                    // width: 40,
-                    // flex: 1,
-                    // height: 40,
-                    // //marginHorizontal : '30%',
-
-                    // marginTop: 100,
-                    // marginBottom: 20,
-                    // //resizeMode: 'contain',
-                    // backgroundColor: '#333',
-                    // marginLeft: 110,
-                    // opacity: 1,
-                    // borderRadius: 100,
-                    // justifyContent: 'center',
-                    // alignItems: 'center',
-                    // zIndex: 1,
-                  }}>
                   <Image
-                    source={require('./../../../assets/upload1.png')}
-                    style={{width: 150, height: 150, tintColor: '#fff'}}
+                    style={styles.upload_img}
+                    source={{uri: `${ProfilePic?.assets[0]?.uri}`}}
                   />
-                </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={handleChooseProfilePic}
+                    style={{
+                      // position: 'absolute',
+                      width: 150,
+                      height: 150,
+                      backgroundColor: '#333',
+                      opacity: 0.5,
+                      borderRadius: 100,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      zIndex: 1,
+                      // position: 'absolute',
+                      // width: 40,
+                      // flex: 1,
+                      // height: 40,
+                      // //marginHorizontal : '30%',
+
+                      // marginTop: 100,
+                      // marginBottom: 20,
+                      // //resizeMode: 'contain',
+                      // backgroundColor: '#333',
+                      // marginLeft: 110,
+                      // opacity: 1,
+                      // borderRadius: 100,
+                      // justifyContent: 'center',
+                      // alignItems: 'center',
+                      // zIndex: 1,
+                    }}>
+                    <Image
+                      source={require('./../../../assets/upload1.png')}
+                      style={{width: 150, height: 150, tintColor: '#fff'}}
+                    />
+                  </TouchableOpacity>
                 )}
               </TouchableOpacity>
               <Text style={styles.profileText}>

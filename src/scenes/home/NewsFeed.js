@@ -21,14 +21,15 @@ import {Formik} from 'formik';
 import {value} from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {base_URL} from '../../services/httpServices/';
 
 const NewsFeed = ({navigation, item}) => {
   const dispatch = useDispatch();
 
   const {newsFeedData} = useSelector(state => state.newsfeed);
-  
 
   useEffect(() => {
+    console.log('newsFeedDataProfile===>>>',newsFeedData)
     const payload = {
       filter: {
         age: {
@@ -48,10 +49,7 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
-   
-  }, [])
-  
-  
+  }, []);
 
   const handleSearchProfile = values => {
     const payload = {
@@ -73,7 +71,6 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
-    
   };
 
   const renderHeader = () => (
@@ -181,9 +178,12 @@ const NewsFeed = ({navigation, item}) => {
                 id: item.userId,
               })
             }>
+            {console.log('image===>',{base_URL})}
             <Image
               style={styles.profileImg}
-              source={require('../../assets/profile.png')}
+              resizeMode={'center'}
+              source={{uri:`${base_URL}${item.userProfileImage}`}}
+              // source={require('../../assets/profile.png')}
             />
             {/* <View style={styles.footerTextContainer}> */}
             <Text style={styles.profileText}>
@@ -365,6 +365,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     //justifyContent: 'space-between',
     backgroundColor: '#EDEDED',
+    
     //borderRadius: 10,
   },
   profileImageContainer: {
