@@ -27,7 +27,7 @@ import {
 import {personalInfo} from './redux/registrationReducer';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
-const Personalinformation = ({navigation}) => {
+const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const {
@@ -176,7 +176,7 @@ const Personalinformation = ({navigation}) => {
   );
 };
 
-export default Personalinformation;
+export default PersonalInformation;
 
 const styles = StyleSheet.create({
   container: {

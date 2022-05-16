@@ -142,7 +142,7 @@ export function* registerUserVerification(action) {
 
   if (response.ok) {
     yield put(register(payload));
-    navigate('Personalinformation');
+    navigate('PersonalInformation');
   } else {
     showMessage({
       message:

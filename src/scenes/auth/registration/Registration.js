@@ -37,12 +37,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import {number} from 'yup';
-import EStyleSheet, {value} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
-import baseURL from '../../../services/httpServices';
 
-const Registration = () => {
+const Registration = ({navigation}) => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
 
@@ -80,10 +78,10 @@ const Registration = () => {
 
       if (!ProfilePic) {
         showMessage({
-          message : 'Please upload profile image ',
+          message: 'Please upload profile image ',
           type: 'info',
-        backgroundColor: EStyleSheet.value('$WARNING_RED'),
-        })
+          backgroundColor: EStyleSheet.value('$WARNING_RED'),
+        });
       }
       return;
     }
@@ -109,12 +107,8 @@ const Registration = () => {
       payload,
     });
 
-    dispatch({
-      type: UPDATE_PROFILE,
-      payload,
-    });
-
     dispatch(register(payload));
+    setLoading(true);
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -143,8 +137,6 @@ const Registration = () => {
         setProfilePic(response);
       }
     });
-
-    
   };
 
   return (
@@ -467,6 +459,7 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
+              //loading={isRegistering}
               loading={isVerifiying}
             />
           </View>

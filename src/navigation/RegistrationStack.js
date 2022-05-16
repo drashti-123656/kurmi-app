@@ -7,7 +7,7 @@ import Registration from '../scenes/auth/registration/Registration';
 import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
 import Sampark from '../scenes/auth/registration/Sampark';
 import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
-import Personalinformation from '../scenes/auth/registration/PersonalInformation';
+import PersonalInformation from '../scenes/auth/registration/PersonalInformation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from './../translations/configTranslations';
 const Stack = createNativeStackNavigator();
@@ -24,8 +24,8 @@ const RegistrationStack = () => {
         options={{headerShown: true, headerTitle:translate('register.registration')}}
       />
       <Stack.Screen
-        name="Personalinformation"
-        component={Personalinformation}
+        name="PersonalInformation"
+        component={PersonalInformation}
         options={{headerShown: true, headerTitle:translate('Vyaktigatdata.Personal information')}}
       />
       <Stack.Screen

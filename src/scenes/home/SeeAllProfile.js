@@ -1,13 +1,10 @@
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
-  ScrollView,
-  TouchableOpacity,
-  Image,
+  RefreshControl,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useSelector} from 'react-redux';
 import {
@@ -18,8 +15,19 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {base_URL} from '../../services/httpServices/';
 import Card from '../../components/molecule/card/Card';
 
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const SeeAllProfile = ({navigation}) => {
   const {newsFeedData} = useSelector(state => state.newsfeed);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   const renderItem = ({item}) => {
     return (
@@ -79,6 +87,9 @@ const SeeAllProfile = ({navigation}) => {
       // </View>
     );
   };
+
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+
   return (
     <RootScreen scrollable={true}>
       <View style={styles.container}>
@@ -87,6 +98,10 @@ const SeeAllProfile = ({navigation}) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           initialNumToRender={10}
+          //ListFooterComponent={renderLoader}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       </View>
     </RootScreen>

@@ -192,7 +192,7 @@ const DharmikJankari = ({navigation}) => {
               <LoginButton
                 title={translate('Dharmikjankari.Next')}
                 onPress={handleSubmit}
-                // loading={loading}
+                loading={loading}
               />
             </View>
           </>

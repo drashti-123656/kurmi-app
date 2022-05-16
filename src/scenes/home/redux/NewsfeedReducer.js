@@ -3,35 +3,38 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   newsFeedData: [],
   error: '',
-  isfatching: false,
-
-  othersProfileData : [],
+  isFetching: false,
+  othersProfileData: [],
 };
 
 const searchProfileSlice = createSlice({
   name: 'NewsfeedReducer',
   initialState,
   reducers: {
-    fetchNewsFeed(state, action) {
-      state.newsFeedData.isfatching = true;
+    fetchNewsFeedStarted(state, action) {
+      state.newsFeedData.isFetching = true;
     },
 
-    newsFeedSuccess(state, action) {
+    fetchNewsFeedSuccess(state, action) {
       state.newsFeedData = action.payload;
+      state.isFetching = false;
     },
-    newsFeedFail(state, action) {
-      state.newsFeedData.isfatching = false;
-      state.newsFeedData.error = action.payload;
+    fetchNewsFeedFail(state, action) {
+      state.newsFeedData.isFetching = false;
+      state.error = true;
     },
-    fetchothersProfileData(state,action) {
-      
+    fetchothersProfileData(state, action) {
       state.othersProfileData = action.payload;
-
-    }
+    },
   },
 });
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {fetchNewsFeed, newsFeedSuccess, newsFeedFail,fetchothersProfileData} = actions;
+export const {
+  fetchNewsFeedStarted,
+  fetchNewsFeedSuccess,
+  fetchNewsFeedFail,
+  fetchothersProfileData,
+} = actions;
 export default reducer;
