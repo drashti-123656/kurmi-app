@@ -407,7 +407,7 @@ const styles = EStyleSheet.create({
   detailsText: {
     fontSize: 15,
     marginBottom: 5,
-    color: '#DARK',
+    color: '$DARK',
     marginLeft: 18,
     fontWeight: 'bold',
   },
@@ -483,20 +483,20 @@ const styles = EStyleSheet.create({
     marginTop: 20,
   },
   textStyle: {
-    color: '#DARK',
+    color: '$DARK',
     marginHorizontal: 20,
     marginTop: 30,
     fontSize: 20,
     fontWeight: 'bold',
   },
   textHeading: {
-    color: '#DARK',
+    color: '$DARK',
     marginHorizontal: 20,
     fontSize: 20,
     fontWeight: 'bold',
   },
   headerText: {
-    color: '#DARK',
+    color: '$DARK',
     marginHorizontal: 20,
     fontSize: 20,
     fontWeight: 'bold',
