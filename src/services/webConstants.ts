@@ -15,5 +15,8 @@ export const API_URL = {
 
   LOG_OUT_USER: 'api/logout',
 
+  MY_PROFILE_DETAILS: 'api/get-user-details/8',
+
   WIDOWED_DATA: 'api/widowed-profiles',
+  DISABILITY_DATA: 'api/disability-profiles',
 };

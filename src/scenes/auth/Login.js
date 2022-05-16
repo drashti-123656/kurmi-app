@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Formik
         initialValues={{
           login: loginData.login,

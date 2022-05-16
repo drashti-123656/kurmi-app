@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
 import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
+
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -20,7 +21,9 @@ const initialState = {
   registrationData: {
     registered: false,
     isRegistering: false,
+   
     error: '',
+   
   },
   dharmikJankariData: {
     gotra: '',
@@ -52,6 +55,8 @@ const initialState = {
     land: [],
   },
   registerData: {
+    isVerifiying : false,
+    verifyed : false,
     emailid: '',
     mobilenumber: '',
     gender: '',
@@ -91,6 +96,20 @@ const registerationSlice = createSlice({
       state.registrationData.registered = false;
       state.registrationData.isRegistering = false;
       state.registrationData.error = action.payload;
+    },
+
+    verifyingStarted(state,action) {
+      state.registerData.isVerifiying = true;
+
+    },
+    verifyingSuccess(state, action) {
+      state.registerData.verifyed = true;
+      state.registerData.isVerifiying = false;
+    },
+    verifyingFail(state, action) {
+      state.registerData.verifyed = false;
+      state.registerData.isVerifiying = false;
+      //state.registerData.error = action.payload;
     },
 
     sampark(state, action) {
@@ -232,5 +251,8 @@ export const {
   personalInfo,
   fetchDisabilityDropdownSuccess,
   fetchLandDropdownSuccess,
+  verifyingStarted,
+  verifyingSuccess,
+  verifyingFail
 } = actions;
 export default reducer;
