@@ -48,6 +48,8 @@ import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
 import { WIDOWER_PROFILE } from '../scenes/widowerProfile/redux/widowerAction';
 import { widowerStatus } from '../scenes/widowerProfile/redux/widowerSaga';
 import { DISABILITY_PROFILE } from '../scenes/disabilityProfile/redux/disabilityAction';
+import { MY_PROFILE_DETAILS } from '../scenes/myProfile/redux/MyProfileAction';
+import { myProfileDetails } from '../scenes/myProfile/redux/MyProfileSaga';
 import { disabilityStatus } from '../scenes/disabilityProfile/redux/disabilitySaga';
 
 export default function* sagas() {
@@ -75,5 +77,6 @@ export default function* sagas() {
     takeLatest(WIDOWED_PROFILE, widowedStatus),
     takeLatest(WIDOWER_PROFILE, widowerStatus),
     takeLatest(DISABILITY_PROFILE, disabilityStatus)
+    takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
   ]);
 }

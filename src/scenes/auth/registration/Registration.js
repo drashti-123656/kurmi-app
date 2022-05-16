@@ -43,7 +43,7 @@ import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 const Registration = () => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [ProfilePic, setProfilePic] = useState(null);
 
   const [date, setDate] = useState(new Date());
@@ -51,7 +51,7 @@ const Registration = () => {
 
   const {
     registerData,
-    isRegistering,
+    isVerifiying,
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -98,7 +98,6 @@ const Registration = () => {
     });
 
     dispatch(register(payload));
-    setLoading(true);
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -415,7 +414,7 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={loading}
+              loading={isVerifiying}
             />
           </View>
         )}
@@ -445,8 +444,7 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
-   flex :1,
-   
+    flex: 1,
   },
   inputMargin: {
     marginTop: 20,
