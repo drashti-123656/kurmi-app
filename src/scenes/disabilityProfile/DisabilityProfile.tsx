@@ -1,21 +1,27 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from 'react-native';
-import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, FlatList, RefreshControl} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 import {DISABILITY_PROFILE} from './redux/disabilityAction';
-import { fetchDisabilityDataStarted } from './redux/disabilityReducer';
+import {fetchDisabilityDataStarted} from './redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
 
-const DisabilityProfile = ({navigation}) => {
-  const {disabilityData, isFetching} = useSelector(state => state.disabilityProfile);
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
+const DisabilityProfile = ({navigation}) => {
+  const {disabilityData, isFetching} = useSelector(
+    state => state.disabilityProfile,
+  );
+  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   const payload = {
     page: 1,
@@ -27,7 +33,7 @@ const DisabilityProfile = ({navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(fetchDisabilityDataStarted())
+    dispatch(fetchDisabilityDataStarted());
     dispatch({
       type: DISABILITY_PROFILE,
       payload,
@@ -38,8 +44,7 @@ const DisabilityProfile = ({navigation}) => {
     return <Card navigation={navigation} item={item} />;
   };
 
-  const renderLoader = () => 
-    isFetching ? <Loader /> : null;
+  const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
     <RootScreen scrollable={true}>
@@ -50,6 +55,9 @@ const DisabilityProfile = ({navigation}) => {
           keyExtractor={item => item.id}
           ListFooterComponent={renderLoader}
           initialNumToRender={10}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       </View>
     </RootScreen>

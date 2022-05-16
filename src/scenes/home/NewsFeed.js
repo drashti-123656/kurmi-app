@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -23,10 +24,19 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const NewsFeed = ({navigation, item}) => {
   const dispatch = useDispatch();
-
+  const [refreshing, setRefreshing] = useState(false);
   const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   useEffect(() => {
     dispatch(fetchDisabilityDataStarted());
@@ -198,7 +208,7 @@ const NewsFeed = ({navigation, item}) => {
     );
   };
 
-  const renderLoader = () => (isFetching ? <Loader /> : null);
+  const renderLoader = () => isFetching ? <Loader /> : null;
 
   return (
     <RootScreen scrollable={true}>
@@ -210,6 +220,9 @@ const NewsFeed = ({navigation, item}) => {
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
         ListFooterComponent={renderLoader}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
       <TouchableOpacity
         onPress={() => navigation.navigate('SeeAllProfile')}
