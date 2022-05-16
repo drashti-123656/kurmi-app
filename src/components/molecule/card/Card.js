@@ -6,6 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {base_URL} from '../../../services/httpServices';
 
 const Card = ({navigation, item}) => {
   return (
@@ -20,7 +21,8 @@ const Card = ({navigation, item}) => {
           <View style={styles.profileImageContainer}>
             <Image
               style={styles.profileImg}
-              source={require('../../../assets/profile.png')}
+              resizeMode={'center'}
+              source={{uri:`${base_URL}${item.userProfileImage}`}}
             />
             <View style={styles.footerTextContainer}>
               <Text style={styles.profileText}>

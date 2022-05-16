@@ -27,7 +27,8 @@ export function* registerUser(action) {
   const payload = action.payload;
   registrationStarted({});
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
-
+  console.log('ProfilePicResponse===>>',response.data.User)
+  console.log('payload===?>pic',payload)
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -43,7 +44,6 @@ export function* registerUser(action) {
     registrationsFail(response.problem);
   }
 }
-
 
 export function* zodiacDropDowns(action) {
   const payload = action.payload;
@@ -139,14 +139,14 @@ export function* registerUserVerification(action) {
     },
   };
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
-  
+
   if (response.ok) {
-   
     yield put(register(payload));
     navigate('PersonalInformation');
   } else {
     showMessage({
-      message: 'Ops, There is already a user with this E-mail and Mobile Number',
+      message:
+        'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
   }
@@ -160,7 +160,7 @@ export function* profilemakerDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchProfilemakerDropdownSuccess(response.data.data));
   }
@@ -174,7 +174,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
@@ -206,7 +206,6 @@ export function* cityDropdown(action) {
     yield put(fetchCityDropdownSuccess(response.data.data));
   }
 }
-
 
 export function* landDropdown(action) {
   const payload = action.payload;

@@ -21,6 +21,7 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {base_URL} from '../../services/httpServices/';
 import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
 
@@ -37,6 +38,9 @@ const NewsFeed = ({navigation, item}) => {
     setRefreshing(true);
     wait(1000).then(() => setRefreshing(false));
   }, []);
+
+ 
+
 
   useEffect(() => {
     dispatch(fetchDisabilityDataStarted());
@@ -59,6 +63,8 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
+
+   
   }, []);
 
   const handleSearchProfile = values => {
@@ -188,9 +194,12 @@ const NewsFeed = ({navigation, item}) => {
                 id: item.userId,
               })
             }>
+            {console.log('image===>',{base_URL})}
             <Image
               style={styles.profileImg}
-              source={require('../../assets/profile.png')}
+              resizeMode={'center'}
+              source={{uri:`${base_URL}${item.userProfileImage}`}}
+              // source={require('../../assets/profile.png')}
             />
             {/* <View style={styles.footerTextContainer}> */}
             <Text style={styles.profileText}>
@@ -373,6 +382,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     //justifyContent: 'space-between',
     backgroundColor: '#EDEDED',
+    
     //borderRadius: 10,
   },
   profileImageContainer: {

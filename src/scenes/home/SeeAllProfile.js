@@ -11,7 +11,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import {base_URL} from '../../services/httpServices/';
 import Card from '../../components/molecule/card/Card';
+
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -27,7 +30,62 @@ const SeeAllProfile = ({navigation}) => {
   }, []);
 
   const renderItem = ({item}) => {
-    return <Card navigation={navigation} item={item} />;
+    return (
+      <Card navigation={navigation} item={item} />
+      // <View style={styles.profileContainer}>
+      //   <TouchableOpacity
+      //     onPress={() =>
+      //       navigation.navigate('OthersProfile', {
+      //         id: item.userId,
+      //       })
+      //     }>
+      //     <View style={styles.mainContainer}>
+      //       <View style={styles.profileImageContainer}>
+      //         <Image
+      //           style={styles.profileImg}
+      //           resizeMode={'center'}
+      //           source={{uri: `${base_URL}${item.userProfileImage}`}}
+      //           // source={require('../../assets/profile.png')}
+      //         />
+      //         <View style={styles.footerTextContainer}>
+      //           <Text style={styles.profileText}>
+      //             {item.userFirstName} {item.userLastName}
+      //           </Text>
+      //           <Text style={styles.profileIntroText}>
+      //             Age - {item.userAge},
+      //           </Text>
+
+      //           <Text style={styles.profileIntroText}>
+      //             {item.userCity.cityName}, {item.userState.name},
+      //           </Text>
+      //           <Text style={styles.profileIntroText}>
+      //             {item.userCountry.countryName}
+      //           </Text>
+      //         </View>
+      //       </View>
+      //       <View
+      //         style={{
+      //           borderBottomColor: 'black',
+      //           borderBottomWidth: 1,
+      //           paddingTop: 5,
+      //         }}
+      //       />
+
+      //       <View style={styles.bottomContainer}>
+      //         <TouchableOpacity style={styles.bottmIcons}>
+      //           <Icon
+      //             name="star-o"
+      //             size={25}
+      //             color="#499A30"
+      //             style={{paddingBottom: 5}}
+      //           />
+      //           <Text style={styles.bottomText}> Shortlist </Text>
+      //         </TouchableOpacity>
+      //       </View>
+      //     </View>
+      //   </TouchableOpacity>
+      // </View>
+    );
   };
 
   // const renderLoader = () => (isFetching ? <Loader /> : null);
