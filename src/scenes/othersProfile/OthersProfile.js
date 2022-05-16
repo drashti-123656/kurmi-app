@@ -19,6 +19,7 @@ import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
 import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
 import {base_URL} from '../../services/httpServices/';
+import { showMessage } from 'react-native-flash-message';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData} = useSelector(state => state.othersDetail);
@@ -41,6 +42,11 @@ const OthersProfile = ({route, navigation}) => {
     dispatch({
       type: SHORT_LIST_PROFILE,
       payload,
+    });
+
+    showMessage({
+      message: 'Profile is sortlisted',
+      type: 'info',
     });
   };
 

@@ -41,6 +41,7 @@ const ShortList = ({navigation}) => {
     },
   };
   useEffect(() => {
+    console.log('happyyy===>>',shortListedUsersData)
     dispatch(fetchShortlistedUserDataStarted());
     dispatch({
       type: SHORT_LISTED_USERS,
@@ -74,4 +75,10 @@ const ShortList = ({navigation}) => {
 
 export default ShortList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+});
