@@ -6,9 +6,9 @@ import { divorce } from './divorcedReducer';
 export function* divorcedStatus(action) {
   const payload = action.payload;
 
-  const response = yield call(apiClient.post, API_URL.DIVORCED_DATA, payload);
+  const {data, ok, problem} = yield call(apiClient.post, API_URL.DIVORCED_DATA, payload);
  
-  if (response.ok) {
-    yield put(divorce(response.data.data));
+  if (ok) {
+    yield put(divorce(data.data));
   }
 }

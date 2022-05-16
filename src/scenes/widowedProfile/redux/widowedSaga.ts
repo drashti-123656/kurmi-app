@@ -6,9 +6,9 @@ import { widowed } from './widowedReducer';
 export function* widowedStatus(action) {
   const payload = action.payload;
 
-  const response = yield call(apiClient.post, API_URL.WIDOWED_DATA, payload);
+  const {data, ok, problem} = yield call(apiClient.post, API_URL.WIDOWED_DATA, payload);
  
-  if (response.ok) {
-    yield put(widowed(response.data.data));
+  if (ok) {
+    yield put(widowed(data.data));
   }
 }
