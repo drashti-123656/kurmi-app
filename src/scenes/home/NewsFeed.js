@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -18,17 +19,27 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {Formik} from 'formik';
-import {value} from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
+import Loader from '../../components/atoms/buttons/Loader';
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
 const NewsFeed = ({navigation, item}) => {
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
 
-  const {newsFeedData} = useSelector(state => state.newsfeed);
-  
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   useEffect(() => {
+    dispatch(fetchDisabilityDataStarted());
     const payload = {
       filter: {
         age: {
@@ -48,10 +59,7 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
-   
-  }, [])
-  
-  
+  }, []);
 
   const handleSearchProfile = values => {
     const payload = {
@@ -73,7 +81,6 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
-    
   };
 
   const renderHeader = () => (
@@ -195,20 +202,13 @@ const NewsFeed = ({navigation, item}) => {
             <Text style={styles.profileIntroText}>
               {item.userState.name},{item.userCountry.countryName}
             </Text>
-            {/* </View> */}
           </TouchableOpacity>
         </View>
       </ScrollView>
     );
   };
 
-  const _renderFooter = () => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('SeeAllProfile')}
-      style={styles.footerContainer}>
-      <Text style={styles.footerTextseeAll}> See All </Text>
-    </TouchableOpacity>
-  );
+  const renderLoader = () => isFetching ? <Loader /> : null;
 
   return (
     <RootScreen scrollable={true}>
@@ -219,8 +219,16 @@ const NewsFeed = ({navigation, item}) => {
         keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
-        ListFooterComponent={_renderFooter}
+        ListFooterComponent={renderLoader}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SeeAllProfile')}
+        style={styles.footerContainer}>
+        <Text style={styles.footerTextseeAll}> See All </Text>
+      </TouchableOpacity>
     </RootScreen>
   );
 };

@@ -28,6 +28,7 @@ const Dropdown = ({
         selectText={selectText}
         selectedItems={selectedItems}
         searchInputPlaceholderText="Search"
+        
         onChangeInput={text => console.log(text)}
         tagRemoveIconColor={'black'}
         tagBorderColor={'black'}
@@ -36,8 +37,8 @@ const Dropdown = ({
         selectedItemIconColor={'white'}
         itemTextColor={'black'}
         searchInputStyle={styles.brandSearchInputStyle}
-        //submitButtonText="Submit"
-        //submitButtonColor={'transparent'}
+        submitButtonText="Submit"
+        submitButtonColor={'black'}
         styleListContainer={styles.listContainer}
         styleDropdownMenuSubsection={styles.dropdownSubSection}
         styleInputGroup={styles.inputGroup}
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginTop: 10,
     borderRadius: 10,
+    
   },
   itemContainer: {
     // backgroundColor: '$PRIMARY',

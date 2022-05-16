@@ -36,11 +36,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import {number} from 'yup';
-import EStyleSheet, {value} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
+import Navigation from '../../../navigation/Navigation';
 
-const Registration = () => {
+const Registration = ({navigation}) => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
 
@@ -96,8 +96,10 @@ const Registration = () => {
       type: VERIFY_USER,
       payload,
     });
-
+    
     dispatch(register(payload));
+    setLoading(true);
+
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -414,6 +416,7 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
+              //loading={isRegistering}
               loading={isVerifiying}
             />
           </View>

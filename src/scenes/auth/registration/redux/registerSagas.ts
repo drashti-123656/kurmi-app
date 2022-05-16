@@ -143,7 +143,7 @@ export function* registerUserVerification(action) {
   if (response.ok) {
    
     yield put(register(payload));
-    navigate('Personalinformation');
+    navigate('PersonalInformation');
   } else {
     showMessage({
       message: 'Ops, There is already a user with this E-mail and Mobile Number',
