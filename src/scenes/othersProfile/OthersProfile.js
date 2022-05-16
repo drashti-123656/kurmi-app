@@ -18,6 +18,7 @@ import {fetchothersProfileData} from './redux/OthersDetailReducer';
 import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
 import { SHORT_LIST_PROFILE } from '../shortList/redux/ShortListAction';
+import {base_URL} from '../../services/httpServices/';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData} = useSelector(state => state.othersDetail);
@@ -57,7 +58,8 @@ const OthersProfile = ({route, navigation}) => {
       <ScrollView>
         <Image
           style={styles.profileImg}
-          source={require('./../../assets/profile.png')}
+          resizeMode={'contain'}
+          source={{uri:`${base_URL}${othersProfileData.userProfileImage}`}}
         />
 
         <View style={styles.transparentText}>
@@ -439,6 +441,7 @@ const styles = StyleSheet.create({
   profileImg: {
     height: '20%',
     width: '100%',
+    backgroundColor : 'black',
   },
   contactContainer: {
     flexDirection: 'row',

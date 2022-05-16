@@ -37,20 +37,22 @@ import {
 
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
-import { DIVORCED_PROFILE } from '../scenes/divorcedProfile/redux/divorcedAction';
-import { divorcedStatus } from '../scenes/divorcedProfile/redux/divorcedSaga';
+import {DIVORCED_PROFILE} from '../scenes/divorcedProfile/redux/divorcedAction';
+import {divorcedStatus} from '../scenes/divorcedProfile/redux/divorcedSaga';
 import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetailAction';
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
 import {SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
 import {shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
-import { WIDOWED_PROFILE } from '../scenes/widowedProfile/redux/widowedAction';
-import { widowedStatus } from '../scenes/widowedProfile/redux/widowedSaga';
-import { DISABILITY_PROFILE } from '../scenes/disabilityProfile/redux/disabilityAction';
-import { MY_PROFILE_DETAILS } from '../scenes/myProfile/redux/MyProfileAction';
-import { myProfileDetails } from '../scenes/myProfile/redux/MyProfileSaga';
-import { disabilityStatus } from '../scenes/disabilityProfile/redux/disabilitySaga';
+
+import {WIDOWED_PROFILE} from '../scenes/widowedProfile/redux/widowedAction';
+import {widowedStatus} from '../scenes/widowedProfile/redux/widowedSaga';
+import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAction';
+import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
+
+import {MY_PROFILE_DETAILS} from '../scenes/myProfile/redux/MyProfileAction';
+import {myProfileDetails} from '../scenes/myProfile/redux/MyProfileSaga';
 
 export default function* sagas() {
   yield all([
@@ -71,7 +73,7 @@ export default function* sagas() {
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
-    takeLatest(DIVORCED_PROFILE, divorcedStatus ),
+    takeLatest(DIVORCED_PROFILE, divorcedStatus),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(SHORT_LIST_PROFILE, shortListProfile),

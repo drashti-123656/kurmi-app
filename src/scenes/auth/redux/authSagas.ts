@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import {navigate} from '../../../navigation/RootNavigation';
-import apiClient from './../../../services/httpServices';
+import apiClient, { setToken } from './../../../services/httpServices';
 import {API_URL} from './../../../services/webConstants';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {login} from '../login/loginReducer';
@@ -31,6 +31,8 @@ export function* loginUser(action) {
     });
 
       yield put(loginSuccess(data.token));
+    setToken(data.token);
+
   } else {
     showMessage({
       message: 'Please Register Your Account!!',

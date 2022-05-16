@@ -95,10 +95,11 @@ const ParivarikParichay = () => {
       userCountry: registerData.country[0],
       userState: registerData.state[0],
       userCity:registerData.city[0],
-     
+      userProfileImage :`data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
+
     };
    
-     console.log('payload===>>',payload)
+     console.log('parivarik===>>',registerData.ProfilePic.assets[0].base64)
     dispatch({
       type: REGISTER_USER,
       payload,

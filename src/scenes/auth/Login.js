@@ -6,11 +6,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Formik} from 'formik';
 import CheckBox from '@react-native-community/checkbox';
-import * as Yup from 'yup';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {
   heightPercentageToDP,
@@ -18,16 +18,15 @@ import {
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import {LoginSchema} from './../../utils/schema/login';
+import { LoginSchema } from '../../utils/schema/loginSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
-import { login } from './login/loginReducer';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const loginData= useSelector(state => state.auth);
+  const loginData = useSelector(state => state.auth);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -38,21 +37,10 @@ const Login = ({navigation}) => {
       payload,
     });
     
-    dispatch(loginSuccess(payload));
-    // setLoading(true);
+    //dispatch(loginSuccess(payload));
+    setLoading(true);
+    navigation.navigate('NewsFeedStack')
   };
-
-  // const handleLogin = () => {
-  //   dispatch(
-  //     login({
-  //       isAuthenticated: true,
-  //       user: {},
-  //       token: '',
-  //       error: null,
-  //       loading: false,
-  //     }),
-  //   );
-  // };
 
   return (
     <RootScreen scrollable={true}>
@@ -60,7 +48,7 @@ const Login = ({navigation}) => {
       <Formik
         initialValues={{
           login: loginData.login,
-          password:loginData.password,
+          password: loginData.password,
         }}
         validationSchema={LoginSchema}
         onSubmit={values => handleLogin(values)}>
@@ -98,6 +86,7 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.Log-in')}
               onPress={handleSubmit}
+              loading={loading}
             />
 
             <View style={styles.alignedRowContainer}>
@@ -128,11 +117,13 @@ const Login = ({navigation}) => {
               {translate('login.createAccountPrefix')}
             </Text>
 
-            <LoginButton
-              title={translate('login.createAccount')}
-              onPress={handleLogin}
-              loading={loading}
-            />
+            <Pressable
+              onPress={() => navigation.navigate('Registration')}
+              style={styles.btnContainer}>
+              <Text style={styles.title}>
+                {translate('login.createAccount')}
+              </Text>
+            </Pressable>
 
             <Text
               style={{
@@ -160,6 +151,23 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+  },
+  btnContainer: {
+    backgroundColor: '#c3773b',
+    height: 50,
+    borderRadius: 10,
+    marginTop: heightPercentageToDP('2'),
+    marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('8'),
+    justifyContent: 'center',
+    alignItems : 'center'
+  },
+  title: {
+    textAlign: 'center',
+    fontWeight: '400',
+   
+    fontSize: 20,
+    color: 'white',
   },
   alignedRowContainer: {
     flexDirection: 'row',
@@ -220,7 +228,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
     textAlign: 'right',
   },

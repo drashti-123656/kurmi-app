@@ -13,7 +13,7 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 
-const ShortList = () => {
+const ShortList = ({navigation}) => {
 
     const {shortListData} = useSelector(state => state.shortListProfiles);
 
