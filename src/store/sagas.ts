@@ -48,8 +48,9 @@ import {widowedStatus} from '../scenes/widowedProfile/redux/widowedSaga';
 import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAction';
 import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
 
-import {MY_PROFILE_DETAILS} from '../scenes/myProfile/redux/MyProfileAction';
-import {myProfileDetails} from '../scenes/myProfile/redux/MyProfileSaga';
+import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
+import { myProfileDetails } from '../scenes/profile/redux/MyProfileSaga';
+
 
 export default function* sagas() {
   yield all([
