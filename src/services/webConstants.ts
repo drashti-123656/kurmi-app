@@ -5,7 +5,7 @@ export const API_URL = {
   REGISTER_USER: 'api/user-registration',
   FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
   VERIFY_USER: 'api/check-user-exist',
-  SHORT_LIST_PROFILES: 'api/sorted-user-list',
+  SHORTED_USER: 'api/sorted-user',
   SEARCH_PROFILE: 'api/search-profiles',
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
 

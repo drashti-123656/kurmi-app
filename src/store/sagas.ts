@@ -43,16 +43,17 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
-import {SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
-import {shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
+import {SHORT_LISTED_USERS, SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
+import {shortlistedUsers, shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
 
 import {WIDOWED_PROFILE} from '../scenes/widowedProfile/redux/widowedAction';
 import {widowedStatus} from '../scenes/widowedProfile/redux/widowedSaga';
 import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAction';
 import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
 
-import {MY_PROFILE_DETAILS} from '../scenes/myProfile/redux/MyProfileAction';
-import {myProfileDetails} from '../scenes/myProfile/redux/MyProfileSaga';
+import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
+import { myProfileDetails } from '../scenes/profile/redux/MyProfileSaga';
+
 
 export default function* sagas() {
   yield all([
@@ -80,5 +81,6 @@ export default function* sagas() {
     takeLatest(WIDOWED_PROFILE, widowedStatus),
     takeLatest(DISABILITY_PROFILE, disabilityStatus),
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
+    takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
   ]);
 }
