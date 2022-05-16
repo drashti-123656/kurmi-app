@@ -77,6 +77,14 @@ const Registration = () => {
         type: 'info',
         backgroundColor: EStyleSheet.value('$WARNING_RED'),
       });
+
+      if (!ProfilePic) {
+        showMessage({
+          message : 'Please upload profile image ',
+          type: 'info',
+        backgroundColor: EStyleSheet.value('$WARNING_RED'),
+        })
+      }
       return;
     }
     const payload = {
@@ -135,6 +143,8 @@ const Registration = () => {
         setProfilePic(response);
       }
     });
+
+    
   };
 
   return (
