@@ -99,7 +99,7 @@ const ParivarikParichay = () => {
 
     };
    
-     console.log('parivarikweedfffffffffff===>>',payload)
+     
     dispatch({
       type: REGISTER_USER,
       payload,
