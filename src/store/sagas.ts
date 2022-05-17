@@ -43,6 +43,9 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {SHORT_LISTED_USERS, SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
+import {shortlistedUsers, shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
+
 import {WIDOWER_PROFILE} from '../scenes/widowerProfile/redux/widowerAction';
 import {widowerStatus} from '../scenes/widowerProfile/redux/widowerSaga';
 import {WIDOWED_PROFILE} from '../scenes/widowedProfile/redux/widowedAction';
@@ -74,9 +77,11 @@ export default function* sagas() {
     takeLatest(DIVORCED_PROFILE, divorcedStatus),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
+    takeLatest(SHORT_LIST_PROFILE, shortListProfile),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
     takeLatest(WIDOWER_PROFILE, widowerStatus),
     takeLatest(DISABILITY_PROFILE, disabilityStatus),
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
+    takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
   ]);
 }

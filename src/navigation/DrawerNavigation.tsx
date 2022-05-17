@@ -6,7 +6,7 @@ import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import ViewBy from '../DrawerNavigationScreen/ViewBy';
-import ShortLists from '../DrawerNavigationScreen/ShortLists';
+import ShortLists from '../scenes/shortList/ShortList';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
 import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';
@@ -26,7 +26,7 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
       screenOptions={{drawerLabelStyle: {marginLeft: -10}, headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
-      headerTintColor: '#fff',}}
+      headerTintColor: '#fff'}}
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name={translate('drawerScreen.Home')}

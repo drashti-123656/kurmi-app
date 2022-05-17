@@ -6,7 +6,7 @@ import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import ViewBy from '../DrawerNavigationScreen/ViewBy';
-import ShortLists from '../DrawerNavigationScreen/ShortLists';
+import ShortLists from '../scenes/shortList/ShortList';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
 import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';

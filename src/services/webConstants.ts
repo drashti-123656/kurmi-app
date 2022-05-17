@@ -5,13 +5,13 @@ export const API_URL = {
   REGISTER_USER: 'api/user-registration',
   FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
   VERIFY_USER: 'api/check-user-exist',
-
-  LOG_OUT_USER: 'api/logout',
-  CHANGE_PASSWORD: 'api/user-profile-update',
-
+  SHORTED_USER: 'api/sorted-user',
+  SHORT_LISTEDD_USERS : 'api/sorted-user-list',
   SEARCH_PROFILE: 'api/search-profiles',
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
-  MY_PROFILE_DETAILS:'api/get-user-details/8',
+
+  CHANGE_PASSWORD: 'api/user-profile-update',
+
   DIVORCED_DATA: 'api/divorced-profiles',
   WIDOWED_DATA: 'api/widowed-profiles',
   WIDOWER_DATA: 'api/widower-profiles',

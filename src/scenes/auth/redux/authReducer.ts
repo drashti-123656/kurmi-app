@@ -21,7 +21,7 @@ const authSlice = createSlice({
     fetchLoginDataSuccess(state, action) {
       state.authData.isAuthenticated = true;
       state.authData.userData = {};
-      state.authData.token = 'randomToken';
+      state.authData.token = action.payload;
       state.authData.error = null;
       state.isFetching = false;
     },

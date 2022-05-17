@@ -17,7 +17,9 @@ import Entypo from 'react-native-vector-icons/dist/Entypo';
 import {fetchothersProfileData} from './redux/OthersDetailReducer';
 import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
+import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
 import {base_URL} from '../../services/httpServices/';
+import { showMessage } from 'react-native-flash-message';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData} = useSelector(state => state.othersDetail);
@@ -30,9 +32,20 @@ const OthersProfile = ({route, navigation}) => {
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
     });
+  }, []);
+
+  const handleShortList = () => {
+    const payload = {
+      profileId: id,
+    };
+
+    dispatch({
+      type: SHORT_LIST_PROFILE,
+      payload,
+    });
 
    
-  }, []);
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -40,7 +53,7 @@ const OthersProfile = ({route, navigation}) => {
         <Image
           style={styles.profileImg}
           resizeMode={'contain'}
-          source={{uri:`${base_URL}${othersProfileData.userProfileImage}`}}
+          source={{uri: `${base_URL}${othersProfileData.userProfileImage}`}}
         />
 
         <View style={styles.transparentText}>
@@ -50,14 +63,12 @@ const OthersProfile = ({route, navigation}) => {
           </Text>
           <Text style={styles.subNamesDetails}>
             {' '}
-            Age - {othersProfileData.userAge},{' '}{' '}
-            {othersProfileData.userCity.cityName},{' '}{' '}
-            {othersProfileData.userState.name},{' '}{' '}
+            Age - {othersProfileData.userAge},{' '}
+            {othersProfileData.userCity.cityName},{' '}
+            {othersProfileData.userState.name},{' '}
             {othersProfileData.userCountry.countryName}
           </Text>
         </View>
-
-
 
         <View style={styles.contactContainer}>
           <TouchableOpacity style={{flexDirection: 'row'}}>
@@ -105,17 +116,13 @@ const OthersProfile = ({route, navigation}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-
-             
-             {othersProfileData.userCity.cityName}{' '} 
-
+              {othersProfileData.userCity.cityName}{' '}
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('register.state')}{' '}
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-
               {othersProfileData.userState.name}{' '}
             </Text>
             <Text style={styles.subHeadingText}>
@@ -124,18 +131,12 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.detailsText}>
               {' '}
               {othersProfileData.userCountry.countryName}{' '}
-
-             
-
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Marital Status')}{' '}
             </Text>
 
-            
-
-             {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
-            
+            {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
 
             <Text style={styles.subHeadingText}>
               {' '}
@@ -154,11 +155,7 @@ const OthersProfile = ({route, navigation}) => {
               {
                 othersProfileData.userEducationInfo.userEducationInfoEducation
                   .educationTitleHi
-
               }
-
-             
-
             </Text>
             <Text style={styles.subHeadingText}>
               {translate('Vyaktigatdata.Job')}{' '}
@@ -197,14 +194,10 @@ const OthersProfile = ({route, navigation}) => {
               {translate('Dharmikjankari.Caste')}
             </Text>
             <Text style={styles.detailsText}>
-
-             
-
               {/* {
                 othersProfileData.userReligiousInfo.userReligiousInfoGotra
                   .gotraTitleHi
               } */}
-
             </Text>
             <Text style={styles.subHeadingText}>
               {' '}
@@ -282,23 +275,13 @@ const OthersProfile = ({route, navigation}) => {
               {translate('ParivarikParichay.fatherOccupation')}
             </Text>
 
-           
-
-           
             <Text style={styles.detailsText}>
-      
               {' '}
               {/* {
                 othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
                   .occupationTitleHi
               }{' '} */}
-
-            </Text> 
-
-           
-            
-            
-            
+            </Text>
 
             <Text style={styles.subHeadingText}>
               {' '}
@@ -399,7 +382,7 @@ const OthersProfile = ({route, navigation}) => {
       </ScrollView>
 
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.shortlist}>
+        <TouchableOpacity onPress={handleShortList} style={styles.shortlist}>
           <Icon
             name="star-o"
             size={40}
@@ -419,7 +402,7 @@ const styles = StyleSheet.create({
   profileImg: {
     height: '20%',
     width: '100%',
-    backgroundColor : 'black',
+    backgroundColor: 'black',
   },
   contactContainer: {
     flexDirection: 'row',

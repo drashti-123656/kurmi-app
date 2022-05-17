@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import {navigate} from '../../../navigation/RootNavigation';
-import apiClient from './../../../services/httpServices';
+import apiClient, {setToken} from './../../../services/httpServices';
 import {API_URL} from './../../../services/webConstants';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {
@@ -32,7 +32,6 @@ export function* loginUser(action) {
     API_URL.LOG_IN,
     payload,
   );
-
   if (ok) {
     showMessage({
       message: 'successfully Logged In',
@@ -40,6 +39,7 @@ export function* loginUser(action) {
     });
 
     yield put(fetchLoginDataSuccess(data.User));
+    setToken(data.token);
   } else {
     showMessage({
       message: 'Please Register Your Account!!',

@@ -7,8 +7,30 @@ import {
 } from 'react-native-responsive-screen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {base_URL} from '../../../services/httpServices';
+import { useDispatch } from 'react-redux';
+import { SHORT_LIST_PROFILE } from '../../../scenes/shortList/redux/ShortListAction';
+import { showMessage } from 'react-native-flash-message';
 
-const Card = ({navigation, item}) => {
+const Card = ({navigation,item}) => {
+
+  const dispatch = useDispatch();
+
+  const handleShortList = () => {
+    const payload = {
+      profileId: id,
+    };
+
+    dispatch({
+      type: SHORT_LIST_PROFILE,
+      payload,
+    });
+
+    showMessage({
+      message: 'Profile is sortlisted',
+      type: 'info',
+    });
+  };
+
   return (
     <View style={styles.profileContainer}>
         <TouchableOpacity
@@ -46,7 +68,7 @@ const Card = ({navigation, item}) => {
             />
 
             <View style={styles.bottomContainer}>
-              <TouchableOpacity style={styles.bottmIcons}>
+              <TouchableOpacity onPress={handleShortList} style={styles.bottmIcons}>
                 <Icon name="star-o" size={22} color="#499A30" style={styles.icon}  />
                 <Text style={styles.bottomText}> Shortlist </Text>
               </TouchableOpacity>
