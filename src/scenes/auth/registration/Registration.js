@@ -69,16 +69,16 @@ const Registration = ({navigation}) => {
   }, []);
 
   const handleregisterUser = values => {
-    if (!termsCondition) {
+    if (!ProfilePic) {
       showMessage({
-        message: 'Please check privacy policy checkbox ',
+        message: 'Please upload profile image ',
         type: 'info',
         backgroundColor: EStyleSheet.value('$WARNING_RED'),
       });
 
-      if (!ProfilePic) {
+      if (!termsCondition) {
         showMessage({
-          message: 'Please upload profile image ',
+          message: 'Please check privacy policy checkbox ',
           type: 'info',
           backgroundColor: EStyleSheet.value('$WARNING_RED'),
         });
@@ -86,8 +86,8 @@ const Registration = ({navigation}) => {
       return;
     }
     const payload = {
-      userEmail: values.emailid,
-      userMobileNo: values.mobilenumber,
+      where: {userEmail: values.emailid, userMobileNo: values.mobilenumber},
+      queryType: 'whereor',
       userGender: values.gender,
       userProfileCreatedBy: values.profilemaker,
       userFirstName: values.firstname,
@@ -99,7 +99,7 @@ const Registration = ({navigation}) => {
       password: values.password,
       userProfileImage: ProfilePic,
     };
-
+    console.log('payload==============================>', payload);
     console.log('dov', values.birthdate);
 
     dispatch({
@@ -108,7 +108,7 @@ const Registration = ({navigation}) => {
     });
 
     dispatch(register(payload));
-    setLoading(true);
+    //setLoading(true);
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -460,7 +460,7 @@ const Registration = ({navigation}) => {
               title={translate('register.create Account')}
               onPress={handleSubmit}
               //loading={isRegistering}
-              loading={isVerifiying}
+              //loading={isVerifiying}
             />
           </View>
         )}

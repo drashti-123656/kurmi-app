@@ -194,7 +194,7 @@ const NewsFeed = ({navigation, item}) => {
                 id: item.userId,
               })
             }>
-            {console.log('image===>',{base_URL})}
+            
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
