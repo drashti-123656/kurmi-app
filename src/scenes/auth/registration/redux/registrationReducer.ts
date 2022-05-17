@@ -20,6 +20,7 @@ const initialState = {
   registrationData: {
     registered: false,
     isRegistering: false,
+
     error: '',
   },
   dharmikJankariData: {
@@ -52,14 +53,17 @@ const initialState = {
     land: [],
   },
   registerData: {
+    isVerifiying: false,
+    verifyed: false,
+
     emailid: '',
     mobilenumber: '',
     gender: '',
     profilemaker: '',
     firstname: '',
     lastname: '',
-    birthdate:'',
-
+    birthdate: '',
+    ProfilePic: {},
     country: '',
     state: '',
     city: '',
@@ -93,6 +97,19 @@ const registerationSlice = createSlice({
       state.registrationData.error = action.payload;
     },
 
+    verifyingStarted(state, action) {
+      state.registerData.isVerifiying = true;
+    },
+    verifyingSuccess(state, action) {
+      state.registerData.verifyed = true;
+      state.registerData.isVerifiying = false;
+    },
+    verifyingFail(state, action) {
+      state.registerData.verifyed = false;
+      state.registerData.isVerifiying = false;
+      //state.registerData.error = action.payload;
+    },
+
     sampark(state, action) {
       state.samparkData.mobileNo = action.payload.userContactInfoContactNo;
       state.samparkData.whatsAppNo = action.payload.userContactInfoWhatsappNo;
@@ -116,7 +133,6 @@ const registerationSlice = createSlice({
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
-   
     dharmikJankari(state, action) {
       state.dharmikJankariData.gotra = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
@@ -170,6 +186,7 @@ const registerationSlice = createSlice({
       state.registerData.firstname = action.payload.userFirstName;
       state.registerData.lastname = action.payload.userLastName;
       state.registerData.birthdate = action.payload.userDob;
+      state.registerData.ProfilePic = action.payload.userProfileImage;
 
       state.registerData.country = action.payload.userCountry;
       state.registerData.state = action.payload.userState;
@@ -200,10 +217,9 @@ const registerationSlice = createSlice({
       state.personalinfoData.education =
         action.payload.userEducationInfoEducation;
       state.personalinfoData.job = action.payload.userEducationInfoOccupation;
-      
+
       state.personalinfoData.disability =
         action.payload.userPersonalInfoDisability;
-     
     },
   },
 });
@@ -232,5 +248,8 @@ export const {
   personalInfo,
   fetchDisabilityDropdownSuccess,
   fetchLandDropdownSuccess,
+  verifyingStarted,
+  verifyingSuccess,
+  verifyingFail,
 } = actions;
 export default reducer;

@@ -22,13 +22,14 @@ import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
-// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
   FETCH_STATE_DROPDOWN,
+  UPDATE_PROFILE,
   VERIFY_USER,
 } from './redux/registrationActions';
 
@@ -36,14 +37,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register} from './redux/registrationReducer';
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import {number} from 'yup';
-import EStyleSheet, {value} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 
-const Registration = () => {
+const Registration = ({navigation}) => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [ProfilePic, setProfilePic] = useState(null);
 
   const [date, setDate] = useState(new Date());
@@ -51,7 +51,8 @@ const Registration = () => {
 
   const {
     registerData,
-    isRegistering,
+    isVerifiying,
+
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -74,6 +75,14 @@ const Registration = () => {
         type: 'info',
         backgroundColor: EStyleSheet.value('$WARNING_RED'),
       });
+
+      if (!ProfilePic) {
+        showMessage({
+          message: 'Please upload profile image ',
+          type: 'info',
+          backgroundColor: EStyleSheet.value('$WARNING_RED'),
+        });
+      }
       return;
     }
     const payload = {
@@ -88,6 +97,7 @@ const Registration = () => {
       userState: values.state,
       userCity: values.city,
       password: values.password,
+      userProfileImage: ProfilePic,
     };
 
     console.log('dov', values.birthdate);
@@ -159,34 +169,68 @@ const Registration = () => {
         }) => (
           <View style={styles.formContainer}>
             <View style={styles.profileContainer}>
-              <Image
-                style={styles.upload_img}
-                source={require('../../../assets/upload1.png')}
-              />
+              {/* {console.log('sads===>', ProfilePic)}
+              {ProfilePic ? (
+                <Image
+                  source={require('../../../assets/upload1.png')}
+                  style={{...styles.profilePic, marginRight: 20}}
+                />
+              ) : (
+                <Image
+                  source={{uri:`${ProfilePic?.assets[0]?.uri}`}}
+                  style={{...styles.profilePic, marginRight: 20}}
+                />
+              )} */}
+              <TouchableOpacity
+                onPress={handleChooseProfilePic}
+                style={styles.uploadProfile}>
+                {ProfilePic ? (
+                  <Image
+                    style={styles.upload_img}
+                    source={{uri: `${ProfilePic?.assets[0]?.uri}`}}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    onPress={handleChooseProfilePic}
+                    style={{
+                      // position: 'absolute',
+                      width: 150,
+                      height: 150,
+                      backgroundColor: '#333',
+                      opacity: 0.5,
+                      borderRadius: 100,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      zIndex: 1,
+                      // position: 'absolute',
+                      // width: 40,
+                      // flex: 1,
+                      // height: 40,
+                      // //marginHorizontal : '30%',
+
+                      // marginTop: 100,
+                      // marginBottom: 20,
+                      // //resizeMode: 'contain',
+                      // backgroundColor: '#333',
+                      // marginLeft: 110,
+                      // opacity: 1,
+                      // borderRadius: 100,
+                      // justifyContent: 'center',
+                      // alignItems: 'center',
+                      // zIndex: 1,
+                    }}>
+                    <Image
+                      source={require('./../../../assets/upload1.png')}
+                      style={{width: 150, height: 150, tintColor: '#fff'}}
+                    />
+                  </TouchableOpacity>
+                )}
+              </TouchableOpacity>
               <Text style={styles.profileText}>
                 {' '}
                 {translate('register.picUpload')}{' '}
               </Text>
             </View>
-
-            {/* <TouchableOpacity
-                  onPress={handleChooseProfilePic}
-                  style={{
-                    position: 'absolute',
-                    width: 100,
-                    height: 100,
-                    backgroundColor: '#333',
-                    opacity: 0.5,
-                    borderRadius: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    zIndex: 1,
-                  }}>
-                  <Image
-                    source={require('./../../../assets/camera.png')}
-                    style={{width: 40, height: 40, tintColor: '#fff'}}
-                  />
-                </TouchableOpacity> */}
 
             <View style={styles.radioButtonContainer}>
               <TouchableOpacity
@@ -415,11 +459,17 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={loading}
+              //loading={isRegistering}
+              loading={isVerifiying}
             />
           </View>
         )}
       </Formik>
+      {/* <SuccessAlert
+        visible={profileUpdateSuccess}
+        message={'profile successfully updated'}
+        onPressOkay={handleSuccessOkayButton}
+      /> */}
     </RootScreen>
   );
 };
@@ -435,6 +485,9 @@ const styles = StyleSheet.create({
     width: 30,
     height: 25,
   },
+  uploadProfile: {
+    flex: 1,
+  },
   input_calendar: {
     marginHorizontal: 20,
     marginTop: 10,
@@ -445,8 +498,7 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
-   flex :1,
-   
+    flex: 1,
   },
   inputMargin: {
     marginTop: 20,
@@ -480,11 +532,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   upload_img: {
-    flex: 1,
+    //flex: 1,
     width: 150,
     height: 150,
     resizeMode: 'contain',
     marginBottom: 10,
+
+    borderRadius: 100,
   },
   profileContainer: {
     justifyContent: 'center',

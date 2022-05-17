@@ -1,13 +1,10 @@
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
-  ScrollView,
-  TouchableOpacity,
-  Image,
+  RefreshControl,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useSelector} from 'react-redux';
 import {
@@ -15,70 +12,97 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import {base_URL} from '../../services/httpServices/';
+import Card from '../../components/molecule/card/Card';
+
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
 const SeeAllProfile = ({navigation}) => {
   const {newsFeedData} = useSelector(state => state.newsfeed);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   const renderItem = ({item}) => {
     return (
-      <View style={styles.profileContainer}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('OthersProfile', {
-              id: item.userId,
-            })
-          }>
-          <View style={styles.mainContainer}>
-          <View style={styles.profileImageContainer}>
-            <Image
-              style={styles.profileImg}
-              source={require('../../assets/profile.png')}
-            />
-            <View style={styles.footerTextContainer}>
-              <Text style={styles.profileText}>
-                {item.userFirstName} {item.userLastName}
-              </Text>
-              <Text style={styles.profileIntroText}>
-                Age - {item.userAge}, 
-              </Text>
+      <Card navigation={navigation} item={item} />
+      // <View style={styles.profileContainer}>
+      //   <TouchableOpacity
+      //     onPress={() =>
+      //       navigation.navigate('OthersProfile', {
+      //         id: item.userId,
+      //       })
+      //     }>
+      //     <View style={styles.mainContainer}>
+      //       <View style={styles.profileImageContainer}>
+      //         <Image
+      //           style={styles.profileImg}
+      //           resizeMode={'center'}
+      //           source={{uri: `${base_URL}${item.userProfileImage}`}}
+      //           // source={require('../../assets/profile.png')}
+      //         />
+      //         <View style={styles.footerTextContainer}>
+      //           <Text style={styles.profileText}>
+      //             {item.userFirstName} {item.userLastName}
+      //           </Text>
+      //           <Text style={styles.profileIntroText}>
+      //             Age - {item.userAge},
+      //           </Text>
 
-              <Text style={styles.profileIntroText}>
-                {item.userCity.cityName}, {item.userState.name},
-              </Text>
-              <Text style={styles.profileIntroText}>
-                {item.userCountry.countryName}
-              </Text>
-            </View>
-            
-          </View>
-          <View
-              style={{
-                borderBottomColor: 'black',
-                borderBottomWidth: 1,
-                paddingTop: 5,
-              }}
-            />
+      //           <Text style={styles.profileIntroText}>
+      //             {item.userCity.cityName}, {item.userState.name},
+      //           </Text>
+      //           <Text style={styles.profileIntroText}>
+      //             {item.userCountry.countryName}
+      //           </Text>
+      //         </View>
+      //       </View>
+      //       <View
+      //         style={{
+      //           borderBottomColor: 'black',
+      //           borderBottomWidth: 1,
+      //           paddingTop: 5,
+      //         }}
+      //       />
 
-            <View style={styles.bottomContainer}>
-              <TouchableOpacity style={styles.bottmIcons}>
-                <Icon name="star-o" size={25} color="#499A30" style={{paddingBottom : 5}}  />
-                <Text style={styles.bottomText}> Shortlist </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
+      //       <View style={styles.bottomContainer}>
+      //         <TouchableOpacity style={styles.bottmIcons}>
+      //           <Icon
+      //             name="star-o"
+      //             size={25}
+      //             color="#499A30"
+      //             style={{paddingBottom: 5}}
+      //           />
+      //           <Text style={styles.bottomText}> Shortlist </Text>
+      //         </TouchableOpacity>
+      //       </View>
+      //     </View>
+      //   </TouchableOpacity>
+      // </View>
     );
   };
+
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+
   return (
     <RootScreen scrollable={true}>
-    <View style={styles.container}>
-      <FlatList
-        data={newsFeedData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        initialNumToRender={10}
-      />
+      <View style={styles.container}>
+        <FlatList
+          data={newsFeedData}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          initialNumToRender={10}
+          //ListFooterComponent={renderLoader}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        />
       </View>
     </RootScreen>
   );
@@ -94,14 +118,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 20,
   },
-  container : {
-   marginBottom : 20,
-   justifyContent : 'center',
-   marginTop : 20
-
-   
+  container: {
+    marginBottom: 20,
+    justifyContent: 'center',
+    marginTop: 20,
   },
- 
+
   imageContainer: {
     marginTop: 18,
   },
@@ -141,7 +163,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     fontSize: 20,
     color: '#FFFFFF',
-    
   },
   radioButtonContainer: {
     flexDirection: 'row',
@@ -227,11 +248,10 @@ const styles = StyleSheet.create({
     color: '#666666',
   },
   profileContainer: {
-   marginHorizontal : 2,
+    marginHorizontal: 2,
   },
   profileImageContainer: {
-    
-     flexDirection: 'row',
+    flexDirection: 'row',
   },
   profileImg: {
     width: wp('25'),
@@ -275,8 +295,8 @@ const styles = StyleSheet.create({
   bottomContainer: {
     flexDirection: 'row',
     paddingTop: 10,
-    alignSelf : 'center',
-    marginBottom : 5
+    alignSelf: 'center',
+    marginBottom: 5,
   },
   bottmIcons: {
     flexDirection: 'row',
@@ -285,17 +305,17 @@ const styles = StyleSheet.create({
   bottomText: {
     color: 'black',
   },
-  mainContainer : {
-    flexDirection : 'column',
+  mainContainer: {
+    flexDirection: 'column',
     height: hp('20'),
     width: wp('90'),
     //marginTop: 30,
     paddingLeft: 10,
     backgroundColor: 'white',
-   marginHorizontal: 20,
-    justifyContent : 'center',
-    marginVertical : 5,
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    marginVertical: 5,
     borderRadius: 15,
-   // flexDirection: 'row',
-  }
+    // flexDirection: 'row',
+  },
 });

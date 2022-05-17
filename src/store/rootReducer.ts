@@ -9,6 +9,7 @@ import changePasswordReducer from '../scenes/passwordChange/redux/changepassword
 import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer'
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer'
+import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   widowerProfile: widowerReducer,
   
   disabilityProfile: disabilityReducer,
+  myProfileDetail: MyProfileReducer
 });
 
 export default rootReducer;
