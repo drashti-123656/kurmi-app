@@ -33,7 +33,6 @@ const DisabilityProfile = ({navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(fetchDisabilityDataStarted());
     dispatch({
       type: DISABILITY_PROFILE,
       payload,

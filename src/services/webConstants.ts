@@ -13,11 +13,6 @@ export const API_URL = {
   CHANGE_PASSWORD: 'api/user-profile-update',
 
   DIVORCED_DATA: 'api/divorced-profiles',
-
-  LOG_OUT_USER: 'api/logout',
-
-  MY_PROFILE_DETAILS: 'api/get-user-details/8',
-
   WIDOWED_DATA: 'api/widowed-profiles',
   WIDOWER_DATA: 'api/widower-profiles',
   DISABILITY_DATA: 'api/disability-profiles',

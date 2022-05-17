@@ -23,14 +23,7 @@ const wait = timeout => {
 };
 const ShortList = ({navigation}) => {
   const {shortListedUsersData, isfatching} = useSelector(state => state.shortListProfiles);
-  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
-  }, []);
-
 
   const payload = {
     page: 1,
@@ -57,16 +50,14 @@ const ShortList = ({navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
+    {console.log('shortListedUsersData', shortListedUsersData)}
       <View style={styles.container}>
         <FlatList
-          data={shortListedUsersData}
+          data={[]}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListFooterComponent={renderLoader}
           initialNumToRender={10}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
         />
       </View>
     </RootScreen>

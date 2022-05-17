@@ -24,6 +24,7 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
+import { fetchNewsFeedStarted } from './redux/NewsfeedReducer';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -39,11 +40,7 @@ const NewsFeed = ({navigation, item}) => {
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
- 
-
-
   useEffect(() => {
-    dispatch(fetchDisabilityDataStarted());
     const payload = {
       filter: {
         age: {
@@ -63,8 +60,6 @@ const NewsFeed = ({navigation, item}) => {
       type: FETCH_SEARCH_PROFILE,
       payload,
     });
-
-   
   }, []);
 
   const handleSearchProfile = values => {
@@ -92,7 +87,6 @@ const NewsFeed = ({navigation, item}) => {
   const renderHeader = () => (
     <View>
       <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
-
       <Formik
         initialValues={{
           gender: 'male',
@@ -166,6 +160,7 @@ const NewsFeed = ({navigation, item}) => {
             <LoginButton
               title={translate('NewsFeed.Search')}
               onPress={handleSubmit}
+              loading={isFetching}
             />
           </View>
         )}
@@ -198,7 +193,7 @@ const NewsFeed = ({navigation, item}) => {
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
-              source={{uri:`${base_URL}${item.userProfileImage}`}}
+              source={{uri: `${base_URL}${item.userProfileImage}`}}
               // source={require('../../assets/profile.png')}
             />
             {/* <View style={styles.footerTextContainer}> */}
@@ -217,7 +212,7 @@ const NewsFeed = ({navigation, item}) => {
     );
   };
 
-  const renderLoader = () => isFetching ? <Loader /> : null;
+  const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
     <RootScreen scrollable={true}>
@@ -229,9 +224,9 @@ const NewsFeed = ({navigation, item}) => {
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
         ListFooterComponent={renderLoader}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
       />
       <TouchableOpacity
         onPress={() => navigation.navigate('SeeAllProfile')}
@@ -382,7 +377,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     //justifyContent: 'space-between',
     backgroundColor: '#EDEDED',
-    
+
     //borderRadius: 10,
   },
   profileImageContainer: {

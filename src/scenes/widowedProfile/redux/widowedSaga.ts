@@ -11,7 +11,7 @@ import {
 export function* widowedStatus(action) {
   const payload = action.payload;
 
-  fetchWidowedDataStarted({});
+  yield put(fetchWidowedDataStarted({}));
 
   const {data, ok, problem} = yield call(
     apiClient.post,

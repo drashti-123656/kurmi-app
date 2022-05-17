@@ -31,7 +31,6 @@ const WidowedProfile = ({navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(fetchWidowedDataStarted());
     dispatch({
       type: WIDOWED_PROFILE,
       payload,

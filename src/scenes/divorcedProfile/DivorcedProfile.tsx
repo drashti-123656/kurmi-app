@@ -33,7 +33,6 @@ const DivorcedProfile = ({navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(fetchDivorcedDataStarted());
     dispatch({
       type: DIVORCED_PROFILE,
       payload,

@@ -11,7 +11,7 @@ import {
 export function* disabilityStatus(action) {
   const payload = action.payload;
 
-  fetchDisabilityDataStarted({});
+  yield put(fetchDisabilityDataStarted({}));
 
   const {data, ok, problem} = yield call(
     apiClient.post,
