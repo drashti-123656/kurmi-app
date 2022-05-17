@@ -19,6 +19,7 @@ import Helpline from '../DrawerNavigationScreen/Helpline';
 import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
 import Blog from '../DrawerNavigationScreen/Blog';
+import EStyleSheet from 'react-native-extended-stylesheet';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
