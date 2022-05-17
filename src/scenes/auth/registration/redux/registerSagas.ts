@@ -25,10 +25,12 @@ import {loginSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
+  console.log('payload===?>pic',payload)
   registrationStarted({});
   const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
   console.log('ProfilePicResponse===>>',response.data.User)
   console.log('payload===?>pic',payload)
+ 
   if (response.ok) {
     showMessage({
       message: 'successfully registered',
@@ -131,13 +133,16 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
+  console.log(payload)
   verifyingStarted({});
   const apiBody = {
     where: {
-      userEmail: payload.userEmail,
-      userMobileNo: payload.userMobileNo,
+      userEmail: payload.where.userEmail,
+      userMobileNo: payload.where.userMobileNo,
     },
+    "queryType": payload.queryType
   };
+  console.log('body===========',apiBody)
   const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
 
   if (response.ok) {
