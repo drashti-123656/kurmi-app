@@ -1,15 +1,22 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {Formik} from 'formik';
+
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
-import {WhatsappSchema} from '../../utils/schema/login';
+import { WhatsappSchema } from '../../utils/schema/whatsappSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
-const Whatsapp = () => {
+const Whatsapp = ({navigation}) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handlelogUser = values => {
     const payload = {
       visitorName: values.name,
@@ -20,11 +27,13 @@ const Whatsapp = () => {
       type: LOG_USER,
       payload,
     });
+    setLoading(true);
+
   };
 
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Text style={styles.note}>{translate('whatsapp.Note')}</Text>
       <Formik
         initialValues={{
@@ -45,6 +54,7 @@ const Whatsapp = () => {
             <ExtendedTextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
+              
               value={values.name}
               placeholder={translate('whatsapp.name')}
               placeholderTextColor={'#666666'}
@@ -55,24 +65,22 @@ const Whatsapp = () => {
             <ExtendedTextInput
               onChangeText={handleChange('whatsappno')}
               onBlur={handleBlur('whatsappno')}
-              value={values.password}
+              value={values.whatsappno}
+            
+              maxLength={10}
+              keyboardType = 'numeric'
               placeholder={translate('whatsapp.phoneno')}
               placeholderTextColor={'#666666'}
             />
             {errors.whatsappno && touched.whatsappno ? (
               <Text style={styles.error}>{errors.whatsappno}</Text>
             ) : null}
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text
-                style={styles.text_btn}
-                onPress={() => navigation.navigate('DashboardNavigation')}>
-                {translate('whatsapp.Continue')}
-              </Text>
-            </TouchableOpacity>
-            {/* <LoginButton
+
+            <LoginButton
               title={translate('whatsapp.Continue')}
               onPress={handleSubmit}
-            /> */}
+              loading={loading}
+            />
           </View>
         )}
       </Formik>
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 180,
-    marginTop: 40,
+    marginTop: '40%',
     alignSelf: 'center',
   },
   note: {
@@ -116,7 +124,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   footer: {
-    marginTop: heightPercentageToDP('25'),
+    marginTop: heightPercentageToDP('15'),
   },
   footer_text: {
     textAlign: 'center',

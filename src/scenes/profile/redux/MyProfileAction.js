@@ -1,0 +1,1 @@
+export const MY_PROFILE_DETAILS = 'MY_PROFILE_DETAILS';

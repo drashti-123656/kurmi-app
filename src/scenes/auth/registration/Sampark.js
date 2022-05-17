@@ -8,30 +8,58 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+import RootScreen from './../../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
-import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import translate from './../../translations/configTranslations';
-import {samparkSchema} from '../../utils/schema/registerSchema';
+import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextInput';
+import translate from './../../../translations/configTranslations';
+import {samparkSchema} from './../../../utils/schema/registerSchema';
 
-const Sampark = () => {
+import {sampark} from './redux/registrationReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {navigationRef} from '../../../navigation/RootNavigation';
+import CustomInput from '../../../components/atoms/inputs/CustomInput';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
+
+const Sampark = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {samparkData} = useSelector(state => state.registration);
+  const [notes, setNotes] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+   
+  }, [samparkData]);
+
+  const handleSampark = values => {
+    const payload = {
+      userContactInfoContactNo: values.mobileNo,
+      userContactInfoWhatsappNo: values.whatsAppNo,
+      userContactInfoPresentAddress: values.presentAdd,
+      userContactInfoPermanentAddress: values.permanentAdd,
+    };
+
+    dispatch(sampark(payload));
+    setLoading(true);
+    navigation.navigate('ParivarikParichay');
+  };
+
   return (
     <RootScreen>
       <ScrollView style={styles.container}>
         <Formik
           initialValues={{
-            mobileNo: '',
-            whatsAppNo: '',
-            presentAdd: '',
-            permanentAdd: '',
+            mobileNo: samparkData.mobileNo,
+            whatsAppNo: samparkData.whatsAppNo,
+            presentAdd: samparkData.permanentAdd,
+            permanentAdd: samparkData.presentAdd,
           }}
           validationSchema={samparkSchema}
-          onSubmit={values => console.log(values)}>
+          onSubmit={values => handleSampark(values)}>
           {({
             handleChange,
             handleBlur,
@@ -40,12 +68,13 @@ const Sampark = () => {
             errors,
             touched,
           }) => (
-            <View>
+            <View >
               <ExtendedTextInput
                 onChangeText={handleChange('mobileNo')}
                 onBlur={handleBlur('mobileNo')}
                 value={values.mobileNo}
-                style={styles.textInput}
+                maxLength={10}
+                keyboardType = 'numeric'
                 placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -57,7 +86,8 @@ const Sampark = () => {
                 onChangeText={handleChange('whatsAppNo')}
                 onBlur={handleBlur('whatsAppNo')}
                 value={values.whatsAppNo}
-                style={styles.textInput}
+                maxLength={10}
+                keyboardType = 'numeric'
                 placeholder={translate('samPark.whatsAppNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -65,34 +95,47 @@ const Sampark = () => {
               {errors.whatsAppNo && touched.whatsAppNo ? (
                 <Text style={styles.errorStyle}>{errors.whatsAppNo}</Text>
               ) : null}
-              <ExtendedTextInput
+              {/* <ExtendedTextInput
                 onChangeText={handleChange('presentAdd')}
                 onBlur={handleBlur('presentAdd')}
                 value={values.presentAdd}
                 style={styles.textInput}
                 placeholder={translate('samPark.presentAdd')}
                 placeholderTextColor={'#666666'}
+              /> */}
+              <CustomInput
+                onChangeText={handleChange('presentAdd')}
+                value={values.presentAdd}
+                placeholder={translate('samPark.presentAdd')}
+                editable={true}
+                multiline={true}
+                height={150}
               />
 
               {errors.presentAdd && touched.presentAdd ? (
                 <Text style={styles.errorStyle}>{errors.presentAdd}</Text>
               ) : null}
 
-              <ExtendedTextInput
+              <CustomInput
                 onChangeText={handleChange('permanentAdd')}
-                onBlur={handleBlur('permanentAdd')}
                 value={values.permanentAdd}
-                style={styles.textInput}
                 placeholder={translate('samPark.permanentAdd')}
-                placeholderTextColor={'#666666'}
+                editable={true}
+                multiline={true}
+                height={150}
               />
 
               {errors.permanentAdd && touched.permanentAdd ? (
                 <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.text_btn}>{translate('samPark.Next')}</Text>
-              </TouchableOpacity>
+
+            <LoginButton 
+                 title={translate('samPark.Next')}
+              onPress={handleSubmit}
+              // loading={loading}
+
+            />
+             
             </View>
           )}
         </Formik>
@@ -117,6 +160,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 20,
     height: hp(8),
+    color: 'black',
+  },
+  richTextbox: {
+    backgroundColor: 'white',
+    marginHorizontal: 30,
+    marginVertical: 10,
+    borderRadius: 10,
+    paddingLeft: 20,
+    height: hp(20),
     color: 'black',
   },
   button: {
@@ -162,8 +214,8 @@ const styles = StyleSheet.create({
   errorStyle: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
-    marginLeft: '75%',
+    textAlign: 'right',
   },
 });

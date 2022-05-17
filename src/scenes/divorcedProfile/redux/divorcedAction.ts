@@ -1,0 +1,1 @@
+export const DIVORCED_PROFILE = 'DIVORCED_PROFILE';

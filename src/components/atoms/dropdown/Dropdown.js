@@ -6,20 +6,29 @@ import {
 } from 'react-native-responsive-screen';
 import MultiSelect from 'react-native-multiple-select';
 
-const Dropdown = ({items, selectText, selectedItems, onSelectedItemsChange,style}) => {
+const Dropdown = ({
+  items,
+  uniqueKey,
+  displayKey,
+  selectText,
+  selectedItems,
+  onSelectedItemsChange,
+  style,
+}) => {
   return (
     <View style={style}>
       <MultiSelect
         hideTags
         items={items}
-        uniqueKey="id"
-        displayKey="name"
+        uniqueKey={uniqueKey}
+        displayKey={displayKey}
         single
         style={styles.dropdownMargin}
         onSelectedItemsChange={onSelectedItemsChange}
         selectText={selectText}
         selectedItems={selectedItems}
         searchInputPlaceholderText="Search"
+        
         onChangeInput={text => console.log(text)}
         tagRemoveIconColor={'black'}
         tagBorderColor={'black'}
@@ -28,8 +37,8 @@ const Dropdown = ({items, selectText, selectedItems, onSelectedItemsChange,style
         selectedItemIconColor={'white'}
         itemTextColor={'black'}
         searchInputStyle={styles.brandSearchInputStyle}
-        //submitButtonText="Submit"
-        //submitButtonColor={'transparent'}
+        submitButtonText="Submit"
+        submitButtonColor={'black'}
         styleListContainer={styles.listContainer}
         styleDropdownMenuSubsection={styles.dropdownSubSection}
         styleInputGroup={styles.inputGroup}
@@ -66,6 +75,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginTop: 10,
     borderRadius: 10,
+    
   },
   itemContainer: {
     // backgroundColor: '$PRIMARY',
@@ -81,7 +91,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
-  dropdownMargin:{
-      marginTop:40
-  }
+  dropdownMargin: {
+    marginTop: 40,
+  },
 });

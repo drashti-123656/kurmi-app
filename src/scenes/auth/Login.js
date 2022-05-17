@@ -6,49 +6,48 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Formik} from 'formik';
 import CheckBox from '@react-native-community/checkbox';
-import * as Yup from 'yup';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {login} from './redux/authReducer';
-import {LoginSchema} from './../../utils/schema/login';
+import {useDispatch, useSelector} from 'react-redux';
+import { LoginSchema } from '../../utils/schema/loginSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
-
-const Login = () => {
-  const dispatch = useDispatch();
+import {LOG_IN} from './redux/authActions';
+const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-
-  const handleLogin = () => {
-    dispatch(
-      login({
-        isAuthenticated: true,
-        user: {},
-        token: '',
-        error: null,
-        loading: false,
-      }),
-    );
+  const dispatch = useDispatch();
+  const loginData = useSelector(state => state.auth);
+  const {isFetching} = useSelector(state => state.auth);
+  const handleLogin = values => {
+    const payload = {
+      userLoginId: values.login,
+      userPassword: values.password,
+    };
+    dispatch({
+      type: LOG_IN,
+      payload,
+    });
   };
 
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Formik
         initialValues={{
-          login: '',
-          password: '',
+          login: loginData.login,
+          password: loginData.password,
         }}
         validationSchema={LoginSchema}
-        onSubmit={values => navigation.navigate('NewsFeed')}>
+        onSubmit={values => handleLogin(values)}>
         {({
           handleChange,
           handleBlur,
@@ -72,6 +71,7 @@ const Login = () => {
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
+              secureTextEntry={true}
               placeholder={translate('login.Password')}
               placeholderTextColor={'#666666'}
             />
@@ -82,6 +82,7 @@ const Login = () => {
             <LoginButton
               title={translate('login.Log-in')}
               onPress={handleSubmit}
+              loading={isFetching}
             />
 
             <View style={styles.alignedRowContainer}>
@@ -112,10 +113,13 @@ const Login = () => {
               {translate('login.createAccountPrefix')}
             </Text>
 
-            <LoginButton
-              title={translate('login.createAccount')}
-              onPress={handleLogin}
-            />
+            <Pressable
+              onPress={() => navigation.navigate('Registration')}
+              style={styles.btnContainer}>
+              <Text style={styles.title}>
+                {translate('login.createAccount')}
+              </Text>
+            </Pressable>
 
             <Text
               style={{
@@ -141,8 +145,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7a4c4c',
   },
-  formContainer:{
+  formContainer: {
     flex: 1,
+  },
+  btnContainer: {
+    backgroundColor: '#c3773b',
+    height: 50,
+    borderRadius: 10,
+    marginTop: heightPercentageToDP('2'),
+    marginBottom: heightPercentageToDP('2'),
+    marginHorizontal: widthPercentageToDP('8'),
+    justifyContent: 'center',
+    alignItems : 'center'
+  },
+  title: {
+    textAlign: 'center',
+    fontWeight: '400',
+   
+    fontSize: 20,
+    color: 'white',
   },
   alignedRowContainer: {
     flexDirection: 'row',
@@ -203,7 +224,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 30,
     color: 'red',
     textAlign: 'right',
   },
