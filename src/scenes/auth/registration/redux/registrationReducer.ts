@@ -69,6 +69,7 @@ const initialState = {
     city: '',
     password: '',
   },
+
   personalinfoData: {
     height: '',
     maritalstatus: '',
@@ -103,6 +104,8 @@ const registerationSlice = createSlice({
     verifyingSuccess(state, action) {
       state.registerData.verifyed = true;
       state.registerData.isVerifiying = false;
+      // state.registerData.emailid = action.payload.userEmail;
+      // state.registerData.mobilenumber = action.payload.userMobileNo;
     },
     verifyingFail(state, action) {
       state.registerData.verifyed = false;
@@ -179,8 +182,8 @@ const registerationSlice = createSlice({
     },
 
     register(state, action) {
-      state.registerData.emailid = action.payload.userEmail;
-      state.registerData.mobilenumber = action.payload.userMobileNo;
+      state.registerData.emailid = action.payload.where.userEmail;
+      state.registerData.mobilenumber = action.payload.where.userMobileNo;
       state.registerData.gender = action.payload.userGender;
       state.registerData.profilemaker = action.payload.userProfileCreatedBy;
       state.registerData.firstname = action.payload.userFirstName;
