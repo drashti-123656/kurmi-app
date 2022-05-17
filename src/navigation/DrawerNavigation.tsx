@@ -14,12 +14,11 @@ import DisabilityProfile from '../scenes/disabilityProfile/DisabilityProfile';
 import WidowedProfile from '../scenes/widowedProfile/WidowedProfile';
 import Settings from '../DrawerNavigationScreen/Settings';
 import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
-import Widower from '../DrawerNavigationScreen/Widower';
+import WidowerProfile from '../scenes/widowerProfile/WidowerProfile';
 import Helpline from '../DrawerNavigationScreen/Helpline';
 import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
 import Blog from '../DrawerNavigationScreen/Blog';
-import Logout from '../DrawerNavigationScreen/Logout';
 import EStyleSheet from 'react-native-extended-stylesheet';
 const Drawer = createDrawerNavigator();
 
@@ -81,7 +80,7 @@ const DrawerNavigation = () => {
       />
       <Drawer.Screen
         name={translate('drawerScreen.Widower')}
-        component={Widower}
+        component={WidowerProfile}
       />
       <Drawer.Screen
         name={translate('drawerScreen.widowed ')}

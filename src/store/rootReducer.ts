@@ -6,6 +6,7 @@ import NewsfeedReducer from '../scenes/home/redux/NewsfeedReducer';
 import loginReducer from '../scenes/auth/login/loginReducer';
 import divorcedReducer from '../scenes/divorcedProfile/redux/divorcedReducer';
 import changePasswordReducer from '../scenes/passwordChange/redux/changepasswordReducer';
+import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer'
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer'
 import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
@@ -24,6 +25,9 @@ const rootReducer = combineReducers({
   divorcedProfile: divorcedReducer,
 
   widowedProfile: widowedReducer,
+
+  widowerProfile: widowerReducer,
+  
   disabilityProfile: disabilityReducer,
   myProfileDetail: MyProfileReducer
 });

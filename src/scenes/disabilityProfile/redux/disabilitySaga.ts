@@ -12,16 +12,20 @@ export function* disabilityStatus(action) {
   const payload = action.payload;
 
   fetchDisabilityDataStarted({});
-  
-  const response = yield call(apiClient.post, API_URL.DISABILITY_DATA, payload);
 
-  if (response.ok) {
-    yield put(fetchDisabilityDataSuccess(response.data.data));
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.DISABILITY_DATA,
+    payload,
+  );
+
+  if (ok) {
+    yield put(fetchDisabilityDataSuccess(data.data));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchDisabilityDataFail(response.problem);
+    fetchDisabilityDataFail(problem);
   }
 }

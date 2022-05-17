@@ -12,16 +12,20 @@ export function* widowedStatus(action) {
   const payload = action.payload;
 
   fetchWidowedDataStarted({});
-  
-  const response = yield call(apiClient.post, API_URL.WIDOWED_DATA, payload);
 
-  if (response.ok) {
-    yield put(fetchWidowedDataSuccess(response.data.data));
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.WIDOWED_DATA,
+    payload,
+  );
+
+  if (ok) {
+    yield put(fetchWidowedDataSuccess(data.data));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchWidowedDataFail(response.problem);
+    fetchWidowedDataFail(problem);
   }
 }
