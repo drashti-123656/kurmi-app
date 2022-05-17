@@ -108,7 +108,7 @@ const Registration = ({navigation}) => {
     });
 
     dispatch(register(payload));
-    setLoading(true);
+    //setLoading(true);
   };
 
   const [isLiked, setIsLiked] = useState([

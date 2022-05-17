@@ -21,7 +21,7 @@ const wait = timeout => {
 };
 
 const SeeAllProfile = ({navigation}) => {
-  const {newsFeedData} = useSelector(state => state.newsfeed);
+  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -30,65 +30,10 @@ const SeeAllProfile = ({navigation}) => {
   }, []);
 
   const renderItem = ({item}) => {
-    return (
-      <Card navigation={navigation} item={item} />
-      // <View style={styles.profileContainer}>
-      //   <TouchableOpacity
-      //     onPress={() =>
-      //       navigation.navigate('OthersProfile', {
-      //         id: item.userId,
-      //       })
-      //     }>
-      //     <View style={styles.mainContainer}>
-      //       <View style={styles.profileImageContainer}>
-      //         <Image
-      //           style={styles.profileImg}
-      //           resizeMode={'center'}
-      //           source={{uri: `${base_URL}${item.userProfileImage}`}}
-      //           // source={require('../../assets/profile.png')}
-      //         />
-      //         <View style={styles.footerTextContainer}>
-      //           <Text style={styles.profileText}>
-      //             {item.userFirstName} {item.userLastName}
-      //           </Text>
-      //           <Text style={styles.profileIntroText}>
-      //             Age - {item.userAge},
-      //           </Text>
-
-      //           <Text style={styles.profileIntroText}>
-      //             {item.userCity.cityName}, {item.userState.name},
-      //           </Text>
-      //           <Text style={styles.profileIntroText}>
-      //             {item.userCountry.countryName}
-      //           </Text>
-      //         </View>
-      //       </View>
-      //       <View
-      //         style={{
-      //           borderBottomColor: 'black',
-      //           borderBottomWidth: 1,
-      //           paddingTop: 5,
-      //         }}
-      //       />
-
-      //       <View style={styles.bottomContainer}>
-      //         <TouchableOpacity style={styles.bottmIcons}>
-      //           <Icon
-      //             name="star-o"
-      //             size={25}
-      //             color="#499A30"
-      //             style={{paddingBottom: 5}}
-      //           />
-      //           <Text style={styles.bottomText}> Shortlist </Text>
-      //         </TouchableOpacity>
-      //       </View>
-      //     </View>
-      //   </TouchableOpacity>
-      // </View>
-    );
+    return <Card navigation={navigation} item={item} />
   };
 
-  // const renderLoader = () => (isFetching ? <Loader /> : null);
+  const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
     <RootScreen scrollable={true}>
@@ -98,7 +43,7 @@ const SeeAllProfile = ({navigation}) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           initialNumToRender={10}
-          //ListFooterComponent={renderLoader}
+          ListFooterComponent={renderLoader}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
