@@ -13,7 +13,6 @@ export const API_URL = {
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
   MY_PROFILE_DETAILS:'api/get-user-details/8',
   DIVORCED_DATA: 'api/divorced-profiles',
-  MY_PROFILE_DETAILS:'api/get-user-details/8',
   WIDOWED_DATA: 'api/widowed-profiles',
   WIDOWER_DATA: 'api/widower-profiles',
   DISABILITY_DATA: 'api/disability-profiles',

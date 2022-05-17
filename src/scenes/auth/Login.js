@@ -24,9 +24,9 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const loginData = useSelector(state => state.auth);
+  const {isFetching} = useSelector(state => state.auth);
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -36,10 +36,6 @@ const Login = ({navigation}) => {
       type: LOG_IN,
       payload,
     });
-    
-    //dispatch(loginSuccess(payload));
-    setLoading(true);
-    navigation.navigate('NewsFeedStack')
   };
 
   return (
@@ -86,7 +82,7 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.Log-in')}
               onPress={handleSubmit}
-              loading={loading}
+              loading={isFetching}
             />
 
             <View style={styles.alignedRowContainer}>

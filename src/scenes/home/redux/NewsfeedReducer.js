@@ -4,7 +4,6 @@ const initialState = {
   newsFeedData: [],
   error: '',
   isFetching: false,
-  othersProfileData: [],
 };
 
 const searchProfileSlice = createSlice({
@@ -12,7 +11,7 @@ const searchProfileSlice = createSlice({
   initialState,
   reducers: {
     fetchNewsFeedStarted(state, action) {
-      state.newsFeedData.isFetching = true;
+      state.isFetching = true;
     },
 
     fetchNewsFeedSuccess(state, action) {
@@ -20,11 +19,8 @@ const searchProfileSlice = createSlice({
       state.isFetching = false;
     },
     fetchNewsFeedFail(state, action) {
-      state.newsFeedData.isFetching = false;
+      state.isFetching = false;
       state.error = true;
-    },
-    fetchothersProfileData(state, action) {
-      state.othersProfileData = action.payload;
     },
   },
 });

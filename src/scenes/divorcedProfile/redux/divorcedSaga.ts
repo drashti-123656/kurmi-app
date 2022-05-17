@@ -11,7 +11,7 @@ import {
 export function* divorcedStatus(action) {
   const payload = action.payload;
 
-  fetchDivorcedDataStarted({});
+  yield put(fetchDivorcedDataStarted({}));
 
   const {data, ok, problem} = yield call(
     apiClient.post,

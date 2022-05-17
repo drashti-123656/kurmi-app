@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  isFetching: false,
   authData: {
     isAuthenticated: false,
     userData: {},
@@ -14,12 +15,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loginSuccess(state, action) {
+    fetchLoginDataStarted(state) {
+      state.isFetching = true;
+    },
+    fetchLoginDataSuccess(state, action) {
       state.authData.isAuthenticated = true;
       state.authData.userData = {};
       state.authData.token = 'randomToken';
       state.authData.error = null;
-      state.authData.loading = false;
+      state.isFetching = false;
+    },
+    fetchLoginDataFail(state) {
+      state.isFetching = false;
+      state.authData.error = null;
     },
     logout(state) {
       state.authData.isAuthenticated = false;
@@ -40,5 +48,5 @@ const authSlice = createSlice({
 
 const {actions, reducer} = authSlice;
 
-export const {loginSuccess, logout, authError, authLoading} = actions;
+export const {fetchLoginDataStarted, fetchLoginDataSuccess, fetchLoginDataFail, logout, authError, authLoading} = actions;
 export default reducer;

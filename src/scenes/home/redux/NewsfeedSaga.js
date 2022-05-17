@@ -12,17 +12,19 @@ import {
 export function* searchProfile(action) {
   const payload = action.payload;
 
-  fetchNewsFeedStarted({});
-
-  const response = yield call(apiClient.post, API_URL.SEARCH_PROFILE, payload);
-
-  if (response.ok) {
-    yield put(fetchNewsFeedSuccess(response.data.data));
+  yield put(fetchNewsFeedStarted({}));
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.SEARCH_PROFILE,
+    payload,
+  );
+  if (ok) {
+    yield put(fetchNewsFeedSuccess(data.data));
   } else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchNewsFeedFail(response.problem);
+    fetchNewsFeedFail(problem);
   }
 }
