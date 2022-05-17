@@ -194,7 +194,7 @@ const NewsFeed = ({navigation, item}) => {
                 id: item.userId,
               })
             }>
-            {console.log('image===>',{base_URL})}
+            
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
@@ -389,9 +389,10 @@ const styles = StyleSheet.create({
     height: hp('32'),
     width: wp('50'),
     marginTop: 30,
-    paddingLeft: 10,
+    paddingLeft: 6,
     borderRadius: 10,
     backgroundColor: 'white',
+    
     flex: 1,
 
     shadowOffset: {
@@ -401,9 +402,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius: 10,
+    borderRadius: 15,
     justifyContent : 'space-evenly',
-   // marginHorizontal: 10,
+    marginHorizontal: 10,
     justifyContent: 'center',
     //alignItems :'center'
   },
@@ -435,6 +436,7 @@ const styles = StyleSheet.create({
   },
   SubfooterContainer: {
     backgroundColor: 'white',
+    
   },
   profileText: {
     fontWeight: 'bold',

@@ -44,10 +44,7 @@ const OthersProfile = ({route, navigation}) => {
       payload,
     });
 
-    showMessage({
-      message: 'Profile is sortlisted',
-      type: 'info',
-    });
+   
   };
 
   return (

@@ -16,6 +16,10 @@ export function* shortListProfile(action) {
   console.log('shortlist',data)
 
   if (ok) {
+    showMessage({
+      message: 'Profile is sortlisted',
+      type: 'info',
+    });
     yield put(shortListSuccess(data));
   }
 }

@@ -99,7 +99,7 @@ const ParivarikParichay = () => {
 
     };
    
-     console.log('parivarik===>>',registerData.ProfilePic.assets[0].base64)
+     
     dispatch({
       type: REGISTER_USER,
       payload,
@@ -232,6 +232,7 @@ const ParivarikParichay = () => {
                 selectedItems={values.land}
                 onSelectedItemsChange={value => setFieldValue('land', value)}
               />
+              {console.log('land size===>',values)}
 
               {errors.land && touched.land ? (
                 <Text style={styles.error}>{errors.land}</Text>

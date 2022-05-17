@@ -1,0 +1,1 @@
+export const WIDOWER_PROFILE = 'WIDOWER_PROFILE';

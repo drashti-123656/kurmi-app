@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   shortListData: [],
-  shortListedUsersData : [],
+  shortListedUsersData :[],
   error: '',
   isfatching: false,
 

@@ -46,14 +46,14 @@ import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
 import {SHORT_LISTED_USERS, SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
 import {shortlistedUsers, shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
 
+import {WIDOWER_PROFILE} from '../scenes/widowerProfile/redux/widowerAction';
+import {widowerStatus} from '../scenes/widowerProfile/redux/widowerSaga';
 import {WIDOWED_PROFILE} from '../scenes/widowedProfile/redux/widowedAction';
 import {widowedStatus} from '../scenes/widowedProfile/redux/widowedSaga';
 import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAction';
 import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
-
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
-import { myProfileDetails } from '../scenes/profile/redux/MyProfileSaga';
-
+import {myProfileDetails} from '../scenes/profile/redux/MyProfileSaga';
 
 export default function* sagas() {
   yield all([
@@ -79,6 +79,7 @@ export default function* sagas() {
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(SHORT_LIST_PROFILE, shortListProfile),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
+    takeLatest(WIDOWER_PROFILE, widowerStatus),
     takeLatest(DISABILITY_PROFILE, disabilityStatus),
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
     takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
