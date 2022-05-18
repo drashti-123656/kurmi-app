@@ -2,6 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
 import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
+  registered: false,
+  isRegistering: false,
+  isVerifiying: false,
+  verifyed: false,
+  error: '',
+
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -17,11 +23,7 @@ const initialState = {
     sister: '',
     land: '',
   },
-  registrationData: {
-    registered: false,
-    isRegistering: false,
-    
-  },
+
   dharmikJankariData: {
     gotra: '',
     native: '',
@@ -51,12 +53,8 @@ const initialState = {
     gotra: [],
     land: [],
   },
-  isVerifiying: false,
-  verifyed: false,
-  error: '',
-  registerData: {
-    
 
+  registerData: {
     emailid: '',
     mobilenumber: '',
     gender: '',
@@ -87,15 +85,15 @@ const registerationSlice = createSlice({
   initialState,
   reducers: {
     registrationStarted(state, action) {
-      state.registrationData.isRegistering = true;
+      state.isRegistering = true;
     },
     registrationSuccess(state, action) {
-      state.registrationData.registered = true;
-      state.registrationData.isRegistering = false;
+      state.registered = true;
+      state.isRegistering = false;
     },
     registrationsFail(state, action) {
-      state.registrationData.registered = false;
-      state.registrationData.isRegistering = false;
+      state.registered = false;
+      state.isRegistering = false;
       state.error = action.payload;
     },
 
@@ -170,15 +168,11 @@ const registerationSlice = createSlice({
     verifyingStarted(state, action) {
       state.isVerifiying = true;
     },
-    // verifyingSuccess(state, action) {
-    //   //state.registerData.verifyed = true;
-      
-    // },
+
     verifyingFail(state, action) {
-      //state.registerData.verifyed = false;
       state.verifyed = false;
       state.isVerifiying = false;
-      state.error = action.payload;
+     // state.error = action.payload;
     },
 
     registerSuccess(state, action) {

@@ -57,6 +57,7 @@ const Registration = ({navigation}) => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
+   console.log('loaderee=====>>>',isVerifiying)
     dispatch({
       type: FETCH_PROFILECREATER_DROPDOWN,
       payload: {moduleType: 'ProfileCreatedBy'},
@@ -428,7 +429,10 @@ const Registration = ({navigation}) => {
               title={translate('register.create Account')}
               onPress={handleSubmit}
               loading={isVerifiying}
+              
             />
+
+          {  console.log('jajskhshg=====>>>',isVerifiying)}
           </View>
         )}
       </Formik>

@@ -43,8 +43,8 @@ const Login = ({navigation}) => {
       <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Formik
         initialValues={{
-          login: loginData.login,
-          password: loginData.password,
+          login: '',
+          password: '',
         }}
         validationSchema={LoginSchema}
         onSubmit={values => handleLogin(values)}>
