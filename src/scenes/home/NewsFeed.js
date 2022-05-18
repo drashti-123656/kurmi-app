@@ -22,9 +22,8 @@ import {Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
-import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
-import { fetchNewsFeedStarted } from './redux/NewsfeedReducer';
+
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));

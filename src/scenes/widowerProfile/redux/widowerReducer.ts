@@ -25,5 +25,9 @@ const widowerSlice = createSlice({
 
 const {actions, reducer} = widowerSlice;
 
-export const {fetchWidowerDataStarted, fetchWidowerDataSuccess, fetchWidowerDataFail} = actions;
+export const {
+  fetchWidowerDataStarted,
+  fetchWidowerDataSuccess,
+  fetchWidowerDataFail,
+} = actions;
 export default reducer;

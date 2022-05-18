@@ -34,7 +34,6 @@ import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 
 const DharmikJankari = ({navigation}) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
 
   const {
     dharmikJankariData,
@@ -71,7 +70,6 @@ const DharmikJankari = ({navigation}) => {
     navigation.navigate('Sampark');
 
     dispatch(dharmikJankari(payload));
-    setLoading(true);
   };
 
   return (
@@ -133,16 +131,6 @@ const DharmikJankari = ({navigation}) => {
                 mode="time"
               />
 
-              {/* <TextInput
-               style={styles.commonInput}
-                onChangeText={handleChange('birthtime')}
-                onBlur={handleBlur('birthtime')}
-                value={values.birthtime}
-    
-                placeholder={translate('Dharmikjankari.Birthtime')}
-                placeholderTextColor={'#666666'}
-              /> */}
-
               {errors.birthtime && touched.birthtime ? (
                 <Text style={styles.error}>{errors.birthtime}</Text>
               ) : null}
@@ -192,7 +180,6 @@ const DharmikJankari = ({navigation}) => {
               <LoginButton
                 title={translate('Dharmikjankari.Next')}
                 onPress={handleSubmit}
-                loading={loading}
               />
             </View>
           </>

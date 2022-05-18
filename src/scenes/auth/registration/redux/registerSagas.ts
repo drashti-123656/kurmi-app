@@ -14,34 +14,38 @@ import {
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
-  register,
+  
+  registerSuccess,
+  
   registrationsFail,
   registrationStarted,
   registrationSuccess,
+  verifyingFail,
   verifyingStarted,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
-import {loginSuccess} from '../../redux/authReducer';
+import {fetchLoginDataSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
 
-  registrationStarted({});
-  const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
+  yield put(registrationStarted({}));
+  const {data, ok, problem} = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
 
-  if (response.ok) {
+  if (ok) {
     showMessage({
       message: 'successfully registered',
       type: 'success',
     });
-    yield put(loginSuccess(response.data.User));
+    yield put(fetchLoginDataSuccess(data.User));
     yield put(registrationSuccess({}));
+    navigate('DashboardNavigation');
   } else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    registrationsFail(response.problem);
+    registrationsFail(problem);
   }
 }
 
@@ -132,7 +136,7 @@ export function* jobDropdown(action) {
 export function* registerUserVerification(action) {
   const payload = action.payload;
 
-  verifyingStarted({});
+  yield put(verifyingStarted({}));
   const apiBody = {
     where: {
       userEmail: payload.where.userEmail,
@@ -141,10 +145,15 @@ export function* registerUserVerification(action) {
     queryType: payload.queryType,
   };
 
-  const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.VERIFY_USER,
+    apiBody,
+  );
 
-  if (response.ok) {
-    yield put(register(payload));
+  if (ok) {
+    yield put(registerSuccess(payload));
+    //yield put(verifyingSuccess({}));
     navigate('PersonalInformation');
   } else {
     showMessage({
@@ -152,6 +161,7 @@ export function* registerUserVerification(action) {
         'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
+    verifyingFail(problem);
   }
 }
 

@@ -4,8 +4,8 @@ import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 import {WIDOWED_PROFILE} from './redux/widowedAction';
-import Loader from '../../components/atoms/buttons/Loader';
 import {fetchWidowedDataStarted} from './redux/widowedReducer';
+import Loader from '../../components/atoms/buttons/Loader';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
