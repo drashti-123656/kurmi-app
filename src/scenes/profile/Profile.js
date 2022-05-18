@@ -7,11 +7,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction'
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
+import {base_URL} from '../../services/httpServices/';
 const Profile = ({route}) => {
   const {myProfileData, isFetching} = useSelector(
     state => state.myProfileDetail,
   );
-  const id = route.params;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const Profile = ({route}) => {
     console.log('myprofileDataaa====>>', isFetching);
     dispatch({
       type: MY_PROFILE_DETAILS,
-      payload: id,
     });
   }, []);
 
@@ -33,7 +32,7 @@ const Profile = ({route}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={require('../../assets/profile1.png')}
+              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}

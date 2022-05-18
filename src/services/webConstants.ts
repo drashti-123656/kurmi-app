@@ -9,7 +9,7 @@ export const API_URL = {
   SHORT_LISTEDD_USERS : 'api/sorted-user-list',
   SEARCH_PROFILE: 'api/search-profiles',
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
-
+  MY_PROFILE_DETAILS: 'api/get-user',
   CHANGE_PASSWORD: 'api/user-profile-update',
 
   DIVORCED_DATA: 'api/divorced-profiles',
