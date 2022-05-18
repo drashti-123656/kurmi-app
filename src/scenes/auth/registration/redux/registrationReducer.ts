@@ -20,8 +20,7 @@ const initialState = {
   registrationData: {
     registered: false,
     isRegistering: false,
-
-    error: '',
+    
   },
   dharmikJankariData: {
     gotra: '',
@@ -52,9 +51,11 @@ const initialState = {
     gotra: [],
     land: [],
   },
+  isVerifiying: false,
+  verifyed: false,
+  error: '',
   registerData: {
-    isVerifiying: false,
-    verifyed: false,
+    
 
     emailid: '',
     mobilenumber: '',
@@ -95,22 +96,7 @@ const registerationSlice = createSlice({
     registrationsFail(state, action) {
       state.registrationData.registered = false;
       state.registrationData.isRegistering = false;
-      state.registrationData.error = action.payload;
-    },
-
-    verifyingStarted(state, action) {
-      state.registerData.isVerifiying = true;
-    },
-    verifyingSuccess(state, action) {
-      state.registerData.verifyed = true;
-      state.registerData.isVerifiying = false;
-      // state.registerData.emailid = action.payload.userEmail;
-      // state.registerData.mobilenumber = action.payload.userMobileNo;
-    },
-    verifyingFail(state, action) {
-      state.registerData.verifyed = false;
-      state.registerData.isVerifiying = false;
-      //state.registerData.error = action.payload;
+      state.error = action.payload;
     },
 
     sampark(state, action) {
@@ -181,7 +167,21 @@ const registerationSlice = createSlice({
       state.dropDownsData.job = action.payload;
     },
 
-    register(state, action) {
+    verifyingStarted(state, action) {
+      state.isVerifiying = true;
+    },
+    // verifyingSuccess(state, action) {
+    //   //state.registerData.verifyed = true;
+      
+    // },
+    verifyingFail(state, action) {
+      //state.registerData.verifyed = false;
+      state.verifyed = false;
+      state.isVerifiying = false;
+      state.error = action.payload;
+    },
+
+    registerSuccess(state, action) {
       state.registerData.emailid = action.payload.where.userEmail;
       state.registerData.mobilenumber = action.payload.where.userMobileNo;
       state.registerData.gender = action.payload.userGender;
@@ -195,6 +195,9 @@ const registerationSlice = createSlice({
       state.registerData.state = action.payload.userState;
       state.registerData.city = action.payload.userCity;
       state.registerData.password = action.payload.password;
+
+      state.verifyed = true;
+      state.isVerifiying = false;
     },
 
     fetchProfilemakerDropdownSuccess(state, action) {
@@ -242,7 +245,7 @@ export const {
   fetchMaritalstatusDropdownSuccess,
   fetchEducationDropdownSuccess,
   fetchJobDropdownSuccess,
-  register,
+  registerSuccess,
   fetchProfilemakerDropdownSuccess,
   fetchGotraDropdownSuccess,
   fetchCountryDropdownSuccess,
@@ -252,7 +255,6 @@ export const {
   fetchDisabilityDropdownSuccess,
   fetchLandDropdownSuccess,
   verifyingStarted,
-  verifyingSuccess,
   verifyingFail,
 } = actions;
 export default reducer;

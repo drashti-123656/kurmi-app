@@ -20,9 +20,10 @@ import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
 import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
 import {base_URL} from '../../services/httpServices/';
 import { showMessage } from 'react-native-flash-message';
+import Loader from '../../components/atoms/buttons/Loader';
 
 const OthersProfile = ({route, navigation}) => {
-  const {othersProfileData} = useSelector(state => state.othersDetail);
+  const {othersProfileData, isFetching} = useSelector(state => state.othersDetail);
   const {id} = route.params;
   const dispatch = useDispatch();
 
@@ -47,9 +48,12 @@ const OthersProfile = ({route, navigation}) => {
    
   };
 
+  const renderLoader = () => (isFetching ? <Loader /> : null);
+
   return (
     <View style={{flex: 1}}>
       <ScrollView>
+        {renderLoader()}
         <Image
           style={styles.profileImg}
           resizeMode={'contain'}
@@ -91,7 +95,7 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.contactText}> Email </Text>
           </TouchableOpacity>
         </View>
-
+        {renderLoader()}
         <View style={styles.detailContainer}>
           <Text style={styles.headingText}>
             {translate('Vyaktigatdata.Personal information')}
