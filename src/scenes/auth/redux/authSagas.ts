@@ -33,13 +33,14 @@ export function* loginUser(action) {
     payload,
   );
   if (ok) {
+    yield put(fetchLoginDataSuccess(data.User));
+    setToken(data.token);
     showMessage({
       message: 'successfully Logged In',
       type: 'success',
     });
 
-    yield put(fetchLoginDataSuccess(data.User));
-    setToken(data.token);
+   
   } else {
     showMessage({
       message: 'Please Register Your Account!!',
