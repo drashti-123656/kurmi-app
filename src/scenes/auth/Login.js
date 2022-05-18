@@ -18,15 +18,15 @@ import {
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import { LoginSchema } from '../../utils/schema/loginSchema';
+import {LoginSchema} from '../../utils/schema/loginSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const dispatch = useDispatch();
-  const loginData = useSelector(state => state.auth);
-  const {isFetching} = useSelector(state => state.auth);
+  const {loginData, isFetching} = useSelector(state => state.auth);
+
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('8'),
     justifyContent: 'center',
-    alignItems : 'center'
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
     fontWeight: '400',
-   
+
     fontSize: 20,
     color: 'white',
   },
