@@ -8,7 +8,17 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {base_URL} from '../services/httpServices';
+import { logout } from '../scenes/auth/redux/authReducer';
 const CustomDrawer = props => {
+  const dispatch = useDispatch();
+  const {myProfileData} = useSelector(state => state.myProfileDetail);
+
+  const handleLogout = async () => {
+    dispatch(logout({}));
+  };
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -18,16 +28,20 @@ const CustomDrawer = props => {
           <ImageBackground
             source={require('../assets/user.png')}
             resizeMode="cover">
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+            onPress={() => {
+            props.navigation.navigate(translate('drawerScreen.Profile'));
+             }}
+             style={styles.button}>
               <Text style={styles.edittext}>Edit</Text>
             </TouchableOpacity>
 
             <Image
-              source={require('../assets/draweruser.png')}
+              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
             />
-            <Text style={styles.text}>welcome, Test User</Text>
-            <Text style={styles.link}>testuser@test.com</Text>
+            <Text style={styles.text}>welcome,  {myProfileData.userFirstName} {myProfileData.userLastName}</Text>
+            <Text style={styles.link}> {myProfileData.userEmail}</Text>
           </ImageBackground>
         </View>
         <View style={styles.sectionView}>
@@ -184,9 +198,7 @@ const CustomDrawer = props => {
             <Fontisto name="blogger" size={22} color={styles.color} />
           )}
           label="Blog"
-          onPress={() => {
-            props.navigation.navigate('Blog');
-          }}
+          onPress={ ()=>{ Linking.openURL('https://kurmishadi.com/')}}
         />
         <DrawerItem
           icon={() => (
@@ -197,9 +209,7 @@ const CustomDrawer = props => {
             />
           )}
           label="Log Out"
-          onPress={() => {
-            props.navigation.navigate('Log Out');
-          }}
+          onPress={() => handleLogout()}
         />
       </DrawerContentScrollView>
     </View>

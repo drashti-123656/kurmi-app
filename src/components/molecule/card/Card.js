@@ -15,21 +15,21 @@ const Card = ({navigation,item}) => {
 
   const dispatch = useDispatch();
 
-  const handleShortList = () => {
-    const payload = {
-      profileId: id,
-    };
+  // const handleShortList = () => {
+  //   const payload = {
+  //     profileId: id,
+  //   };
 
-    dispatch({
-      type: SHORT_LIST_PROFILE,
-      payload,
-    });
+  //   dispatch({
+  //     type: SHORT_LIST_PROFILE,
+  //     payload,
+  //   });
 
-    showMessage({
-      message: 'Profile is sortlisted',
-      type: 'info',
-    });
-  };
+  //   showMessage({
+  //     message: 'Profile is sortlisted',
+  //     type: 'info',
+  //   });
+  // };
 
   return (
     <View style={styles.profileContainer}>
@@ -68,7 +68,7 @@ const Card = ({navigation,item}) => {
             />
 
             <View style={styles.bottomContainer}>
-              <TouchableOpacity onPress={handleShortList} style={styles.bottmIcons}>
+              <TouchableOpacity  style={styles.bottmIcons}>
                 <Icon name="star-o" size={22} color="#499A30" style={styles.icon}  />
                 <Text style={styles.bottomText}> Shortlist </Text>
               </TouchableOpacity>
