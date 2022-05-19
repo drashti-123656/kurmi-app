@@ -28,7 +28,11 @@ const CustomDrawer = props => {
           <ImageBackground
             source={require('../assets/user.png')}
             resizeMode="cover">
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+            onPress={() => {
+            props.navigation.navigate(translate('drawerScreen.Profile'));
+             }}
+             style={styles.button}>
               <Text style={styles.edittext}>Edit</Text>
             </TouchableOpacity>
 

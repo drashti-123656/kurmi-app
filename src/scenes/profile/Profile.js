@@ -46,7 +46,7 @@ const Profile = ({route}) => {
               </Text>
             </TouchableOpacity>
 
-            <View style={styles.whatsappIcon}>
+            {/* <View style={styles.whatsappIcon}>
               <TouchableOpacity>
                 <Image
                   source={require('../../assets/whatsappicon.png')}
@@ -61,7 +61,7 @@ const Profile = ({route}) => {
                   style={styles.imageStyle}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
           <View>
             <View style={styles.separatorLine} />
@@ -425,9 +425,10 @@ const styles = EStyleSheet.create({
     backgroundColor: '$PRIMARY',
     padding: 10,
     width: 200,
-    height: 40,
+    height: 60,
     marginTop: 20,
     marginHorizontal: 20,
+    justifyContent : 'center',
     borderRadius: 100,
   },
   pencilIcon: {
@@ -452,6 +453,7 @@ const styles = EStyleSheet.create({
   },
   textIIndex: {
     color: '$WHITE',
+    fontSize : 20,
   },
   bottomContainer: {
     flex: 3,
