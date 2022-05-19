@@ -27,7 +27,7 @@ const ShortList = ({navigation}) => {
 
   const payload = {
     page: 1,
-    pageSIze: 2,
+    pageSIze: 10,
     order: {
       column: 'id',
       type: 'desc',
@@ -53,7 +53,7 @@ const ShortList = ({navigation}) => {
     {console.log('shortListedUsersData', shortListedUsersData)}
       <View style={styles.container}>
         <FlatList
-          data={[]}
+          data={shortListedUsersData.data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListFooterComponent={renderLoader}
