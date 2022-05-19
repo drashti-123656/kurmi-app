@@ -42,7 +42,7 @@ const ParivarikParichay = () => {
       type: FETCH_LAND_DROPDOWN,
       payload: {moduleType: 'Land'},
     });
-
+console.log('isregisteringfalse=====>>',isRegistering)
     
   }, []);
   
@@ -243,6 +243,7 @@ const ParivarikParichay = () => {
                 onPress={handleSubmit}
                 loading={isRegistering}
               />
+             { console.log('isregisteringtrue=====>>',isRegistering)}
             </View>
           )}
         </Formik>

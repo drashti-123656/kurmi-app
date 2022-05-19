@@ -39,7 +39,7 @@ import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInpu
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
-import { registerSuccess } from './redux/registrationReducer';
+import {registerSuccess} from './redux/registrationReducer';
 
 const Registration = ({navigation}) => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const Registration = ({navigation}) => {
 
   const {
     registerData,
-    isVerifiying,
+
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -75,16 +75,17 @@ const Registration = ({navigation}) => {
         type: 'info',
         backgroundColor: EStyleSheet.value('$WARNING_RED'),
       });
-
-      if (!termsCondition) {
-        showMessage({
-          message: 'Please check privacy policy checkbox ',
-          type: 'info',
-          backgroundColor: EStyleSheet.value('$WARNING_RED'),
-        });
-      }
       return;
     }
+    if (!termsCondition) {
+      showMessage({
+        message: 'Please check privacy policy checkbox ',
+        type: 'info',
+        backgroundColor: EStyleSheet.value('$WARNING_RED'),
+      });
+      return;
+    }
+
     const payload = {
       where: {userEmail: values.emailid, userMobileNo: values.mobilenumber},
       queryType: 'whereor',
@@ -427,8 +428,10 @@ const Registration = ({navigation}) => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={isVerifiying}
+              loading={registerData.isVerifiying}
             />
+
+            {console.log('jajskhshg=====>>>', registerData.isVerifiying)}
           </View>
         )}
       </Formik>

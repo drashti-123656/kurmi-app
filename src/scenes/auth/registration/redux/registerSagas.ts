@@ -135,8 +135,9 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-
+console.log('seeeeeee=======>>>',payload)
   yield put(verifyingStarted({}));
+  
   const apiBody = {
     where: {
       userEmail: payload.where.userEmail,
@@ -153,15 +154,17 @@ export function* registerUserVerification(action) {
 
   if (ok) {
     yield put(registerSuccess(payload));
-    //yield put(verifyingSuccess({}));
     navigate('PersonalInformation');
+    //yield put(verifyingSuccess({}));
+   
   } else {
     showMessage({
       message:
         'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
-    verifyingFail(problem);
+    
+    yield put(verifyingFail({}));
   }
 }
 
