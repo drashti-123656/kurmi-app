@@ -12,6 +12,7 @@ const PasswordChange = () => {
 
   const handleChangePassword = values => {
     const payload = {
+      userUpdateType:"chnagePassword",
       userOldPassword: values.currentPassword,
       userPassword: values.NewPassword,
       userConfrimPassword: values.Retypenewpassword,
