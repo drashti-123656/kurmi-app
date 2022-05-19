@@ -8,10 +8,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {base_URL} from '../services/httpServices';
+import { logout } from '../scenes/auth/redux/authReducer';
 const CustomDrawer = props => {
+  const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
+
+  const handleLogout = async () => {
+    dispatch(logout({}));
+  };
 
   return (
     <View style={styles.container}>
@@ -188,9 +194,7 @@ const CustomDrawer = props => {
             <Fontisto name="blogger" size={22} color={styles.color} />
           )}
           label="Blog"
-          onPress={() => {
-            props.navigation.navigate('Blog');
-          }}
+          onPress={ ()=>{ Linking.openURL('https://kurmishadi.com/')}}
         />
         <DrawerItem
           icon={() => (
@@ -201,9 +205,7 @@ const CustomDrawer = props => {
             />
           )}
           label="Log Out"
-          onPress={() => {
-            props.navigation.navigate('Log Out');
-          }}
+          onPress={() => handleLogout()}
         />
       </DrawerContentScrollView>
     </View>

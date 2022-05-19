@@ -292,10 +292,10 @@ const Profile = ({route}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {
+              {/* {
                 myProfileData.userEducationInfo.userEducationInfoEducation
                   .educationTitleHi
-              }
+              } */}
             </Text>
             <Text style={styles.textStyle}>
               {translate('Vyaktigatdata.Job')}
