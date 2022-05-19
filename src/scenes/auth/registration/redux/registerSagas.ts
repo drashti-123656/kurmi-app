@@ -163,7 +163,8 @@ console.log('seeeeeee=======>>>',payload)
         'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
-    verifyingFail(problem);
+    
+    yield put(verifyingFail({}));
   }
 }
 

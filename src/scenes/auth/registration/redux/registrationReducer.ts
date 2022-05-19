@@ -4,8 +4,8 @@ import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
   registered: false,
   isRegistering: false,
-  isVerifiying: false,
-  verifyed: false,
+  
+ 
   error: '',
 
   samparkData: {
@@ -55,6 +55,10 @@ const initialState = {
   },
 
   registerData: {
+
+    isVerifiying: false,
+    verifyed: false,
+    error: null,
     emailid: '',
     mobilenumber: '',
     gender: '',
@@ -166,13 +170,13 @@ const registerationSlice = createSlice({
     },
 
     verifyingStarted(state, action) {
-      state.isVerifiying = true;
+      state.registerData.isVerifiying = true;
     },
 
     verifyingFail(state, action) {
-      state.verifyed = false;
-      state.isVerifiying = false;
-     // state.error = action.payload;
+      state.registerData.verifyed = false;
+      state.registerData.isVerifiying = false;
+      state.registerData.error = null;
     },
 
     registerSuccess(state, action) {
@@ -190,8 +194,8 @@ const registerationSlice = createSlice({
       state.registerData.city = action.payload.userCity;
       state.registerData.password = action.payload.password;
 
-      state.verifyed = true;
-      state.isVerifiying = false;
+      state.registerData.verifyed = true;
+      state.registerData.isVerifiying = false;
     },
 
     fetchProfilemakerDropdownSuccess(state, action) {

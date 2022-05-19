@@ -15,18 +15,18 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    fetchLoginDataStarted(state) {
-      state.isFetching = true;
+    fetchLoginDataStarted(state,action) {
+      state.authData.loading = true;
     },
-    fetchLoginDataSuccess(state, action) {
+    fetchLoginDataSuccess(state,action) {
       state.authData.isAuthenticated = true;
       state.authData.userData = {};
       state.authData.token = action.payload;
       state.authData.error = null;
-      state.isFetching = false;
+      state.authData.loading = false;
     },
-    fetchLoginDataFail(state) {
-      state.isFetching = false;
+    fetchLoginDataFail(state,action) {
+      state.authData.loading = false;
       state.authData.error = null;
     },
     logout(state) {

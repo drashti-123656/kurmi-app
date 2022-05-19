@@ -42,10 +42,14 @@ export function* loginUser(action) {
 
    
   } else {
+    console.log('worngPassword===>>',data.User)
+    yield put(fetchLoginDataFail({}));
     showMessage({
       message: 'Please Register Your Account!!',
       type: 'danger',
     });
-    fetchLoginDataFail(problem);
+    
+
+   // fetchLoginDataFail(problem);
   }
 }
