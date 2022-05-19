@@ -8,7 +8,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
+import {base_URL} from '../services/httpServices';
 const CustomDrawer = props => {
+  const {myProfileData} = useSelector(state => state.myProfileDetail);
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -23,11 +27,11 @@ const CustomDrawer = props => {
             </TouchableOpacity>
 
             <Image
-              source={require('../assets/draweruser.png')}
+              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
             />
-            <Text style={styles.text}>welcome, Test User</Text>
-            <Text style={styles.link}>testuser@test.com</Text>
+            <Text style={styles.text}>welcome,  {myProfileData.userFirstName} {myProfileData.userLastName}</Text>
+            <Text style={styles.link}> {myProfileData.userEmail}</Text>
           </ImageBackground>
         </View>
         <View style={styles.sectionView}>
