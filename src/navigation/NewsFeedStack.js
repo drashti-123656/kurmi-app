@@ -114,9 +114,7 @@ const NewsFeedStack = ({navigation}) => {
             color: 'white',
           },
           headerTintColor: '#ffff',
-          headerStyle: {
-            backgroundColor: '#DC1C28',
-          },
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         }}
       />
     </newsFeedStack.Navigator>
