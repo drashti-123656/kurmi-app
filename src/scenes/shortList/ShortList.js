@@ -27,7 +27,7 @@ const ShortList = ({navigation}) => {
 
   const payload = {
     page: 1,
-    pageSIze: 10,
+    pageSIze: 30,
     order: {
       column: 'id',
       type: 'desc',
