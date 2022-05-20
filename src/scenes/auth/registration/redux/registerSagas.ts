@@ -1,5 +1,5 @@
 import {call, put} from 'redux-saga/effects';
-import apiClient from './../../../../services/httpServices';
+import apiClient, {setToken} from './../../../../services/httpServices';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../../services/webConstants';
 import {
@@ -14,9 +14,7 @@ import {
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
-  
   registerSuccess,
-  
   registrationsFail,
   registrationStarted,
   registrationSuccess,
@@ -30,7 +28,11 @@ export function* registerUser(action) {
   const payload = action.payload;
 
   yield put(registrationStarted({}));
-  const {data, ok, problem} = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.REGISTER_USER,
+    payload,
+  );
 
   if (ok) {
     showMessage({
@@ -38,7 +40,10 @@ export function* registerUser(action) {
       type: 'success',
     });
     yield put(fetchLoginDataSuccess(data.User));
+    setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
+
+    console.log('99988=============>>>',data.Token.original.token);
     navigate('DashboardNavigation');
   } else {
     showMessage({
@@ -135,9 +140,9 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-console.log('seeeeeee=======>>>',payload)
+  console.log('seeeeeee=======>>>', payload);
   yield put(verifyingStarted({}));
-  
+
   const apiBody = {
     where: {
       userEmail: payload.where.userEmail,
@@ -156,14 +161,13 @@ console.log('seeeeeee=======>>>',payload)
     yield put(registerSuccess(payload));
     navigate('PersonalInformation');
     //yield put(verifyingSuccess({}));
-   
   } else {
     showMessage({
       message:
         'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
-    
+
     yield put(verifyingFail({}));
   }
 }
