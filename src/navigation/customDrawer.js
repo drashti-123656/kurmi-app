@@ -1,5 +1,5 @@
 import {View, Text, ImageBackground, Image, Linking} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import translate from '../translations/configTranslations';
@@ -11,9 +11,19 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useDispatch, useSelector} from 'react-redux';
 import {base_URL} from '../services/httpServices';
 import { logout } from '../scenes/auth/redux/authReducer';
+import { fetchmyProfileDataStarted } from '../scenes/profile/redux/MyProfileReducer';
+import { MY_PROFILE_DETAILS } from '../scenes/profile/redux/MyProfileAction';
 const CustomDrawer = props => {
   const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
+
+  useEffect(() => {
+    dispatch(fetchmyProfileDataStarted());
+    dispatch({
+      type: MY_PROFILE_DETAILS,
+    });
+  }, [])
+  
 
   const handleLogout = async () => {
     dispatch(logout({}));

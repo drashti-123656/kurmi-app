@@ -16,12 +16,13 @@ export function* myProfileDetails(action) {
    yield put(fetchmyProfileDataSuccess(data.data));
   }
   else {
-    showMessage({
-      message: 'Ops, something went wrong',
-      type: 'danger',
-    });
-  
     yield put(fetchloadingDataFail({}));
+    // showMessage({
+    //   message: 'Ops, something went wrong',
+    //   type: 'danger',
+    // });
+  
+   
   }
  
   

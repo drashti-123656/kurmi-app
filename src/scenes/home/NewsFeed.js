@@ -211,8 +211,10 @@ const NewsFeed = ({navigation, item}) => {
     );
   };
 
-  const renderLoader = () => (isFetching ? <Loader /> : null);
-
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+  if (isFetching) {
+    return <Loader />;
+  } else {
   return (
     <RootScreen scrollable={true}>
       <FlatList
@@ -222,7 +224,7 @@ const NewsFeed = ({navigation, item}) => {
         keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
-        ListFooterComponent={renderLoader}
+        //ListFooterComponent={renderLoader}
         // refreshControl={
         //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         // }
@@ -234,6 +236,7 @@ const NewsFeed = ({navigation, item}) => {
       </TouchableOpacity>
     </RootScreen>
   );
+  }
 };
 
 export default NewsFeed;
