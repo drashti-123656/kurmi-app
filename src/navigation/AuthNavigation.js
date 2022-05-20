@@ -21,19 +21,24 @@ import Blog from '../DrawerNavigationScreen/Blog';
 import Logout from '../DrawerNavigationScreen/Logout';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import WidowerProfile from '../scenes/widowerProfile/WidowerProfile';
+import { useSelector } from 'react-redux';
 const Drawer = createDrawerNavigator();
 
 const AuthNavigation = () => {
+  const {authData: {isAuthenticated}} = useSelector(state => state.auth);
   return (
     <Drawer.Navigator
     screenOptions={{drawerLabelStyle: {marginLeft: -10}, headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
       headerTintColor: '#fff',}}
     drawerContent={props => <CustomDrawer {...props} />}>
+    
     <Drawer.Screen
       name={translate('drawerScreen.Home')}
       options={{headerShown: false}}
-      component={DashboardNavigation}
+       component={DashboardNavigation}
     />
+    
+   <>
     <Drawer.Screen name="Helpline -" component={Helpline} />
     <Drawer.Screen
       name={translate('drawerScreen.View By')}
@@ -91,6 +96,8 @@ const AuthNavigation = () => {
       name={translate('drawerScreen.settings')}
       component={Settings}
     />
+    </>
+    
   </Drawer.Navigator>
   );
 };

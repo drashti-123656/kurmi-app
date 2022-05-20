@@ -21,10 +21,12 @@ export function* searchProfile(action) {
   if (ok) {
     yield put(fetchNewsFeedSuccess(data.data));
   } else {
+    yield put(fetchNewsFeedFail({}));
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchNewsFeedFail(problem);
+
+   
   }
 }

@@ -18,10 +18,14 @@ import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 const newsFeedStack = createNativeStackNavigator();
 
 const NewsFeedStack = ({navigation}) => {
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
   return (
     <newsFeedStack.Navigator
       initialRouteName="NewsFeed"
@@ -29,12 +33,26 @@ const NewsFeedStack = ({navigation}) => {
         headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         headerTintColor: '#fff',
       }}>
+
+     {!isAuthenticated ? (
       <newsFeedStack.Screen
         name={translate('NewsFeed.kurmiShadiHeading')}
         component={NewsFeed}
         options={{
           headerShown: true,
           headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+        }}
+      />
+
+     ) : (
+
+      <newsFeedStack.Screen
+        name={translate('NewsFeed.kurmiShadiHeading')}
+        component={NewsFeed}
+        options={{
+          headerShown: true,
+          headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
               <AntDesign name="user" size={30} color="white" />
@@ -42,8 +60,7 @@ const NewsFeedStack = ({navigation}) => {
           ),
 
           headerLeft: () => (
-            <TouchableHighlight
-              onPress={() => navigation.openDrawer()}>
+            <TouchableHighlight onPress={() => navigation.openDrawer()}>
               <Entypo
                 name="menu"
                 size={30}
@@ -53,9 +70,7 @@ const NewsFeedStack = ({navigation}) => {
             </TouchableHighlight>
           ),
         }}
-      />
-
-     
+      /> )}
 
       <newsFeedStack.Screen
         name="DrawerNavigation"

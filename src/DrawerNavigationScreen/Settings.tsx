@@ -22,7 +22,7 @@ const Settings = ({navigation}) => {
     <RootScreen scrollable={true}>
       <View style={styles.container}>
         <View style={styles.bottomContainer}>
-          <View style = {styles.userdetailContainer}>
+          <View style={styles.userdetailContainer}>
             <TouchableOpacity style={styles.input}>
               <Text style={styles.textColor}> New</Text>
             </TouchableOpacity>
@@ -32,17 +32,27 @@ const Settings = ({navigation}) => {
                 source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               />
               <View style={styles.text}>
-                <Text>
+                <Text
+                  style={{
+                    paddingLeft: 3,
+                    fontWeight: 'bold',
+                    color: 'black',
+                    fontSize: 18,
+                  }}>
                   {' '}
                   {myProfileData.userFirstName} {myProfileData.userLastName}
                 </Text>
-                <Text>{myProfileData.userEmail}</Text>
-                <Text>{myProfileData.userMobileNo}</Text>
+                <Text style={{paddingLeft: 10}}>{myProfileData.userEmail}</Text>
+                <Text style={{paddingLeft: 10}}>
+                  {myProfileData.userMobileNo}
+                </Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.bottomInput}>
-              <Text style={styles.textColor}> No active membership plan</Text>
-            </TouchableOpacity>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <TouchableOpacity style={styles.bottomInput}>
+                <Text style={styles.textColor}> No active membership plan</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={styles.bottomtextContainer}>
@@ -97,10 +107,9 @@ const styles = EStyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
-  
   },
-  userdetailContainer : {
-  flex : 1,
+  userdetailContainer: {
+    flex: 1,
   },
   bottomText: {
     borderBottomWidth: 1,
@@ -133,7 +142,7 @@ const styles = EStyleSheet.create({
     height: 35,
     marginTop: 20,
     marginLeft: '70%',
-   // marginHorizontal: 260,
+    // marginHorizontal: 260,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -142,21 +151,19 @@ const styles = EStyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 50,
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     //marginTop: 10,
-    
-    
   },
-  text : {
-  marginTop : 10,
+  text: {
+    marginTop: 10,
   },
   bottomInput: {
     borderWidth: 1,
-    width: 330,
+    width: 250,
     height: 50,
     marginTop: 10,
     borderRadius: 10,
-    marginHorizontal: 20,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
