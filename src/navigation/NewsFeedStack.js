@@ -19,6 +19,7 @@ import Entypo from 'react-native-vector-icons/dist/Entypo';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
+import AdvanceSearchProfile from '../scenes/search/AdvanceSearchProfile';
 
 const newsFeedStack = createNativeStackNavigator();
 
@@ -122,6 +123,19 @@ const NewsFeedStack = ({navigation}) => {
       <newsFeedStack.Screen
         name="Password Change"
         component={PasswordChange}
+        options={{
+          headerShown: true,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+          headerTintColor: '#ffff',
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+        }}
+      />
+      <newsFeedStack.Screen
+        name="AdvanceSearchProfile"
+        component={AdvanceSearchProfile}
         options={{
           headerShown: true,
           headerTitleStyle: {

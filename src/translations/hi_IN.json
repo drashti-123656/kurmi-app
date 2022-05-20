@@ -64,8 +64,14 @@
     
   },
   "advanceSearch": {
-    "Profile": "प्रोफाइल बनने वाला"
+    "Gender":"जेंडर",
+    "Marital Status": "वैवाहिक स्थिति",
+    "height From":"ऊंचाई से",
+    "height To" :"ऊंचाई तक",
+    "married":"विवाहित",
+    "unmarried":"अविवाहित"
   },
+
   "ParivarikParichay": {
     "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",

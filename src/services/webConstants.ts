@@ -11,7 +11,7 @@ export const API_URL = {
   OTHER_PROFILE_DETAILS: 'api/get-user-details',
   MY_PROFILE_DETAILS: 'api/get-user',
   CHANGE_PASSWORD: 'api/user-profile-update',
-
+ADVANCE_SEARCH_DATA:'api/search-profiles',
   DIVORCED_DATA: 'api/divorced-profiles',
   WIDOWED_DATA: 'api/widowed-profiles',
   WIDOWER_DATA: 'api/widower-profiles',
