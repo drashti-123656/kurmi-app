@@ -24,6 +24,7 @@ export function* otherProfileDetails(action) {
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchOthersProfileDataFail(problem);
+    
+    yield put(fetchOthersProfileDataFail({}));
   }
 }

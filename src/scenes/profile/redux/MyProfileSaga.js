@@ -6,7 +6,7 @@ import {fetchmyProfileDataStarted,fetchmyProfileDataSuccess,fetchloadingDataFail
 
 export function* myProfileDetails(action) {
   const payload = action.payload;
-  fetchmyProfileDataStarted({});
+  yield put(fetchmyProfileDataStarted({}));
   const {data,ok,problem}= yield call(
     apiClient.get,
    `${API_URL.MY_PROFILE_DETAILS}`,
@@ -20,7 +20,8 @@ export function* myProfileDetails(action) {
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    fetchloadingDataFail(problem);
+  
+    yield put(fetchloadingDataFail({}));
   }
  
   

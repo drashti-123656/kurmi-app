@@ -180,8 +180,8 @@ const searchProfileSlice = createSlice({
     fetchOthersProfileDataFail(state){
       state.isFetching = false;
       state.error = true;
-    }
-  }
+    },
+  },
 });
 
 const {actions, reducer} = searchProfileSlice;
