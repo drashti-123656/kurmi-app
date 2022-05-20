@@ -9,7 +9,7 @@ import changePasswordReducer from '../scenes/passwordChange/redux/changepassword
 import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer';
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 import ShortListReducer from '../scenes/shortList/redux/ShortListReducer';
-
+import AdvanceSearchReducer from '../scenes/search/redux/AdvanceSearchReducer';
 import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer';
 import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
 const rootReducer = combineReducers({
@@ -33,6 +33,7 @@ const rootReducer = combineReducers({
 
   disabilityProfile: disabilityReducer,
   myProfileDetail: MyProfileReducer,
+  advanceSerach: AdvanceSearchReducer,
 });
 
 export default rootReducer;

@@ -34,7 +34,8 @@ import {
   REGISTER_USER,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
-
+import {ADVANCED_SEARCH_USER} from '../scenes/search/redux/AdvanceSearchAction';
+import {advancesearchStatus} from '../scenes/search/redux/AdvancedSearchSaga';
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
 import {DIVORCED_PROFILE} from '../scenes/divorcedProfile/redux/divorcedAction';
@@ -83,5 +84,6 @@ export default function* sagas() {
     takeLatest(DISABILITY_PROFILE, disabilityStatus),
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
     takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
+    takeLatest(ADVANCED_SEARCH_USER, advancesearchStatus),
   ]);
 }
