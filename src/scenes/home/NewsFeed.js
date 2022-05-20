@@ -6,136 +6,237 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  RefreshControl,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-const NewsFeed = () => {
-  const [fromAge, setfromAge] = useState('');
-  const [toAge, SettoAge] = useState('');
-  const [isLiked, setIsLiked] = useState([
-    {id: 1, value: true, name: 'वर', selected: true},
-    {id: 2, value: false, name: 'वधू', selected: false},
-  ]);
-  const onRadioBtnClick = item => {
-    let updatedState = isLiked.map(isLikedItem =>
-      isLikedItem.id === item.id
-        ? {...isLikedItem, selected: true}
-        : {...isLikedItem, selected: false},
-    );
-    setIsLiked(updatedState);
+import translate from './../../translations/configTranslations';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {Formik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {base_URL} from '../../services/httpServices/';
+import Loader from '../../components/atoms/buttons/Loader';
+
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
+const NewsFeed = ({navigation, item}) => {
+  const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
+  useEffect(() => {
+    const payload = {
+      filter: {
+        age: {
+          min: 18,
+          max: 40,
+        },
+        gender: 'male',
+      },
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
+  }, []);
+
+  const handleSearchProfile = values => {
+    const payload = {
+      filter: {
+        age: {
+          min: values.ageFrom,
+          max: values.ageTo,
+        },
+        gender: values.gender,
+      },
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
   };
 
-  const submitButton = () => {
-    console.log(fromAge, toAge);
-  };
-
-  return (
-    <RootScreen>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.vector_img}
-              source={require('../../assets/Vector.png')}
-            />
-          </View>
-          <View style={styles.pinClipart}>
-            <Image
-              style={styles.PinClipart_img}
-              source={require('../../assets/PinClipart.png')}
-            />
-          </View>
-
-          <Text style={styles.navbarText}>कुर्मी शादी</Text>
-        </View>
-        <Text style={styles.title}>मैं देख रहा हूं</Text>
-
-        <Text style={styles.bottomText}>वर या वधू चुनिए</Text>
-
-        <View style={styles.radioButtonContainer}>
-          {isLiked.map(item => (
-            <View style={styles.ButtonContainer}>
+  const renderHeader = () => (
+    <View>
+      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+      <Formik
+        initialValues={{
+          gender: 'male',
+          ageFrom: '',
+          ageTo: '',
+        }}
+        onSubmit={values => handleSearchProfile(values)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View>
+            <Text style={styles.bottomText}>
+              {translate('NewsFeed.choose')}
+            </Text>
+            <View style={styles.radioButtonContainer}>
               <TouchableOpacity
-                onPress={() => onRadioBtnClick(item)}
-                style={styles.radioButton}>
-                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'male')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'male' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Var')}
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-                <Text style={styles.radioButtonText}>{item.name}</Text>
+
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'female')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'female' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Vadhu')}
+                </Text>
               </TouchableOpacity>
             </View>
-          ))}
-        </View>
 
-        <>
-          <View style={styles.ageContainer}>
-            <TextInput
-              onChangeText={FromAge => setfromAge(FromAge)}
-              value={fromAge}
-              style={styles.textinput}
-              placeholder="आयु सेम"
-              keyboardType="numeric"
-              placeholderTextColor={'#666666'}
-            />
+            <View style={styles.ageContainer}>
+              <TextInput
+                onChangeText={handleChange('ageFrom')}
+                onBlur={handleBlur('ageFrom')}
+                value={values.ageFrom}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageFrom')}
+                placeholderTextColor={'#666666'}
+              />
 
-            <TextInput
-              onChangeText={ToAge => SettoAge(ToAge)}
-              value={toAge}
-              keyboardType="numeric"
-              style={styles.input}
-              placeholder="आयु तक"
-              placeholderTextColor={'#666666'}
+              <TextInput
+                onChangeText={handleChange('ageTo')}
+                onBlur={handleBlur('ageTo')}
+                value={values.ageTo}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageTo')}
+                placeholderTextColor={'#666666'}
+              />
+            </View>
+
+            <LoginButton
+              title={translate('NewsFeed.Search')}
+              onPress={handleSubmit}
+              loading={isFetching}
             />
           </View>
-          <TouchableOpacity style={styles.submitButton} onPress={submitButton}>
-            <Text style={styles.text_btn}>खोजे</Text>
-          </TouchableOpacity>
-        </>
-        <View>
-          <Text style={styles.text}>
-            प्रोफाइल ID से खोजें / फिल्टर लगाना है
+        )}
+      </Formik>
+
+      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+      <ScrollView style={styles.footerContainer}>
+        <View style={styles.footerTitle}>
+          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
+          <Text style={styles.titleTextNext}>
+            {translate('NewsFeed.recentlyJoint')}
           </Text>
-          <View style={styles.footeContainer}>
-            <View>
-              <Text style={styles.titleText}>नया वैवाहिक परिचय</Text>
-              <Text style={styles.titleTextnext}>
-                जो लोग अभी अभी नए जुड़े हैं
-              </Text>
-            </View>
-            <View style={styles.profileImageContainer}>
-              <View style={styles.firstImage}>
-                <Image
-                  style={styles.profile_img}
-                  source={require('../../assets/profile.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>नया प्रोफाइल </Text>
-                  <Text>28 वर्ष रायपुर छत्तीसगढ़ </Text>
-                </View>
-              </View>
-
-              <View style={styles.SecondImage}>
-                <Image
-                  style={styles.profile_img}
-                  source={require('../../assets/profile1.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>नया प्रोफाइल </Text>
-                  <Text>28 वर्ष रायपुर छत्तीसगढ़ </Text>
-                </View>
-                <View></View>
-              </View>
-            </View>
-          </View>
         </View>
       </ScrollView>
+    </View>
+  );
+
+  const renderItem = ({item}) => {
+    return (
+      <ScrollView style={styles.SubfooterContainer}>
+        <View style={styles.profileContainer}>
+          <TouchableOpacity
+            style={styles.profileImageContainer}
+            onPress={() =>
+              navigation.navigate('OthersProfile', {
+                id: item.userId,
+              })
+            }>
+            
+            <Image
+              style={styles.profileImg}
+              resizeMode={'center'}
+              source={{uri: `${base_URL}${item.userProfileImage}`}}
+              // source={require('../../assets/profile.png')}
+            />
+            {/* <View style={styles.footerTextContainer}> */}
+            <Text style={styles.profileText}>
+              {item.userFirstName} {item.userLastName}
+            </Text>
+            <Text style={styles.profileIntroText}>
+              Age - {item.userAge}, {item.userCity.cityName},
+            </Text>
+            <Text style={styles.profileIntroText}>
+              {item.userState.name},{item.userCountry.countryName}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    );
+  };
+
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+  if (isFetching) {
+    return <Loader />;
+  } else {
+  return (
+    <RootScreen scrollable={true}>
+      <FlatList
+        data={newsFeedData}
+        numColumns={2}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={renderHeader}
+        initialNumToRender={10}
+        //ListFooterComponent={renderLoader}
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
+      />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SeeAllProfile')}
+        style={styles.footerContainer}>
+        <Text style={styles.footerTextseeAll}> See All </Text>
+      </TouchableOpacity>
     </RootScreen>
   );
+  }
 };
 
 export default NewsFeed;
@@ -145,65 +246,27 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 52,
     flexDirection: 'row',
-    backgroundColor: '#DC1C28',
+    // backgroundColor: '#DC1C28',
     paddingLeft: 10,
     paddingRight: 10,
   },
-  vector_img: {
+  imageContainer: {
+    marginTop: 18,
+  },
+  vectorImg: {
+    width: 20,
+    height: 5,
+  },
+  vectorImg_1: {
     width: 15,
-    height: 15,
-  },
-  ageContainer: {
-    flexDirection: 'row',
-  },
-  firstImage: {
-    marginHorizontal: 10,
-  },
-  SecondImage: {
-    marginHorizontal: 170,
-  },
-  footeContainer: {
-    backgroundColor: '#EDEDED',
-    height: 380,
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 40,
-  },
-  profile_img: {
-    width: 180,
-    height: 180,
-    marginTop: 50,
-    marginLeft: -160,
-  },
-  footerTextContainer: {
-    marginHorizontal: -160,
-    height: 50,
-    width: 180,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 5,
   },
   pinClipart: {
     position: 'absolute',
-    left: 340,
     top: 15,
+    right: 15,
   },
-  titleText: {
-    fontWeight: 'bold',
-    marginTop: 15,
-  },
-  titleTextnext: {
-    marginTop: 3,
-    color: '#8A8787',
-  },
-  bottomText: {
-    marginHorizontal: 20,
-    fontSize: 20,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-  PinClipart_img: {
+  PinClipartImg: {
     width: 25,
     height: 25,
   },
@@ -214,172 +277,184 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 20,
   },
-  profileText: {
-    fontWeight: 'bold',
-  },
-  profileImageContainer: {
-    flexDirection: 'row',
-    marginTop: 40,
-  },
-
-  imageContainer: {
-    marginTop: 18,
-  },
-  bg_img: {
-    flex: 1,
-  },
   title: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 10,
+    marginBottom: 10,
     textAlign: 'center',
-    fontWeight: '700',
-    fontSize: 20,
+    fontWeight: '500',
+    fontSize: 22,
     color: '#ffffff',
   },
-  input_view: {
-    flex: 1,
-  },
-  textinput: {
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 10,
-    height: hp(8),
-    color: 'black',
-    width: 160,
-  },
-  input: {
-    backgroundColor: 'white',
-    // marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 90,
-    height: hp(8),
-    color: 'black',
-    width: 160,
-  },
-  textinput_msg: {
-    backgroundColor: 'white',
+  bottomText: {
     marginHorizontal: 30,
-    marginVertical: 10,
-    borderRadius: 10,
-    paddingLeft: 20,
-    textAlignVertical: 'top',
-    color: 'black',
-  },
-  submitButton: {
-    backgroundColor: '#DC1C28',
-    height: hp(7),
-    marginHorizontal: 30,
-    marginTop: 10,
-    borderRadius: 10,
-  },
-  text_btn: {
-    textAlign: 'center',
-    fontWeight: '400',
-    marginTop: 10,
-    fontSize: 20,
-    color: 'white',
-  },
-  footer: {
-    backgroundColor: '#DC1C28',
-    marginTop: 60,
-    marginHorizontal: 30,
-    borderRadius: 10,
-    height: hp(15),
-  },
-  footer_text: {
-    textAlign: 'center',
-    fontWeight: '400',
-    fontSize: 16,
-    color: 'white',
-    marginVertical: 5,
-  },
-  info: {
-    flexDirection: 'row',
-  },
-  info_img: {
-    marginHorizontal: 20,
-    height: hp(2.5),
-    width: wp(5),
-  },
-  info_text: {
-    color: 'white',
-    fontWeight: '500',
-  },
-  error: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginRight: 10,
-    color: 'red',
-    textAlign: 'right',
+    fontSize: 18,
+    color: '#FFFFFF',
   },
   radioButtonContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 45,
+    marginLeft: 10,
   },
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 115,
+    marginRight: 80,
   },
   radioButton: {
-    height: 20,
-    width: 20,
-    backgroundColor: '#F8F8F8',
-    borderRadius: 10,
+    height: 25,
+    width: 25,
+    backgroundColor: 'transparent',
+    borderRadius: 50,
     borderWidth: 1,
-    borderColor: '#E6E6E6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-  button: {
-    height: 20,
-    width: 20,
-    backgroundColor: '#F8F8F8',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#E6E6E6',
+    borderColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 20,
   },
   radioButtonIcon: {
-    height: 14,
-    width: 14,
+    height: 15,
+    width: 15,
     borderRadius: 9,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
-  buttonIcon: {
-    height: 14,
-    width: 14,
-    borderRadius: 9,
-    backgroundColor: 'black',
-  },
-
   radioButtonText: {
-    fontSize: 25,
+    fontSize: 22,
     color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginTop: 20,
+    fontWeight: '400',
+    marginTop: 15,
   },
-  ButtonText: {
-    fontSize: 25,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginTop: 20,
+  ageContainer: {
+    flexDirection: 'row',
+  },
+  textInput: {
+    backgroundColor: 'white',
+    marginLeft: 30,
+    marginVertical: 10,
+    flex: 0.44,
+    fontSize: 17,
+    borderRadius: 10,
+    padding: 10,
+    height: hp(7),
+    color: 'black',
+  },
+  submitButton: {
+    backgroundColor: '#DC1C28',
+    height: hp(8),
+    marginHorizontal: 30,
+    borderRadius: 10,
+  },
+  textButton: {
+    textAlign: 'center',
+    fontWeight: '400',
+    marginTop: 15,
+    fontSize: 20,
+    color: 'white',
   },
   text: {
-    marginTop: 30,
+    marginTop: 10,
+    marginBottom: 20,
     justifyContent: 'center',
     alignSelf: 'center',
-    fontSize: 15,
+    fontSize: 18,
     color: '#FFFFFF',
+  },
+  SubfooterContainer: {
+    backgroundColor: '#EDEDED',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+  },
+  titleText: {
     fontWeight: 'bold',
+    color: 'black',
+    fontSize: 22,
+    marginTop: 10,
+    paddingLeft: 5,
+  },
+  titleTextNext: {
+    color: '#666666',
+    paddingLeft: 5,
+  },
+  profileContainer: {
+    // flexDirection: 'row',
+    //justifyContent: 'space-between',
+    backgroundColor: '#EDEDED',
+
+    //borderRadius: 10,
+  },
+  profileImageContainer: {
+    height: hp('32'),
+    width: wp('50'),
+    marginTop: 30,
+    paddingLeft: 6,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    
+    flex: 1,
+
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 15,
+    justifyContent : 'space-evenly',
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    //alignItems :'center'
+  },
+  profileImg: {
+    width: wp('44'),
+    height: hp('23'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 10,
+    borderRadius: 5,
+  },
+  footerTextContainer: {
+    backgroundColor: 'white',
+    flex: 1,
+    height: hp('10'),
+    width: wp('44'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 3,
+  },
+  SubfooterContainer: {
+    backgroundColor: 'white',
+    
+  },
+  profileText: {
+    fontWeight: 'bold',
+    color: 'black',
+    marginTop: 5,
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  profileIntroText: {
+    color: '#666666',
+    textAlign: 'center',
+    fontSize: 13,
+  },
+  footerContainer: {
+    backgroundColor: '#EDEDED',
+    paddingTop: 10,
+  },
+  footerTextseeAll: {
+    color: 'red',
+    fontSize: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
   },
 });
