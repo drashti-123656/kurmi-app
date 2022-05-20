@@ -31,8 +31,8 @@ const Navigation = () => {
      
         {!isAuthenticated ? (
           <Stack.Screen
-            name="AuthNavigation"
-            component={AuthNavigation}
+            name="DashboardNavigation"
+            component={DashboardNavigation}
             headershow
             options={{
               headerShown: false,

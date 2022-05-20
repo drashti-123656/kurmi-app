@@ -11,13 +11,13 @@ import { useDispatch } from 'react-redux';
 import { SHORT_LIST_PROFILE } from '../../../scenes/shortList/redux/ShortListAction';
 import { showMessage } from 'react-native-flash-message';
 
-const Card = ({navigation,item}) => {
-
+const Card = ({navigation,item,id}) => {
+  //const {id} = route.params;
   const dispatch = useDispatch();
 
   const handleShortList = () => {
     const payload = {
-      profileId: id,
+      profileId: item.userId,
     };
 
     dispatch({
@@ -25,10 +25,7 @@ const Card = ({navigation,item}) => {
       payload,
     });
 
-    showMessage({
-      message: 'Profile is sortlisted',
-      type: 'info',
-    });
+    
   };
 
   return (
@@ -68,7 +65,7 @@ const Card = ({navigation,item}) => {
             />
 
             <View style={styles.bottomContainer}>
-              <TouchableOpacity onPress={handleShortList} style={styles.bottmIcons}>
+              <TouchableOpacity onPress={handleShortList}  style={styles.bottmIcons}>
                 <Icon name="star-o" size={22} color="#499A30" style={styles.icon}  />
                 <Text style={styles.bottomText}> Shortlist </Text>
               </TouchableOpacity>

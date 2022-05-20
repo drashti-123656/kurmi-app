@@ -23,6 +23,7 @@ const DashboardNavigation = () => {
   const dispatch = useDispatch();
   const {authData: {isAuthenticated}} = useSelector(state => state.auth);
 
+ 
   const handleLogout = async () => {
     dispatch(logout({}));
   };

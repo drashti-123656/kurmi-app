@@ -22,9 +22,8 @@ import {Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
-import {fetchDisabilityDataStarted} from '../disabilityProfile/redux/disabilityReducer';
 import Loader from '../../components/atoms/buttons/Loader';
-import { fetchNewsFeedStarted } from './redux/NewsfeedReducer';
+
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -212,8 +211,10 @@ const NewsFeed = ({navigation, item}) => {
     );
   };
 
-  const renderLoader = () => (isFetching ? <Loader /> : null);
-
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+  if (isFetching) {
+    return <Loader />;
+  } else {
   return (
     <RootScreen scrollable={true}>
       <FlatList
@@ -223,7 +224,7 @@ const NewsFeed = ({navigation, item}) => {
         keyExtractor={item => item.id}
         ListHeaderComponent={renderHeader}
         initialNumToRender={10}
-        ListFooterComponent={renderLoader}
+        //ListFooterComponent={renderLoader}
         // refreshControl={
         //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         // }
@@ -235,6 +236,7 @@ const NewsFeed = ({navigation, item}) => {
       </TouchableOpacity>
     </RootScreen>
   );
+  }
 };
 
 export default NewsFeed;

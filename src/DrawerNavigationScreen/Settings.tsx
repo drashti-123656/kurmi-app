@@ -2,30 +2,57 @@ import {View, Text, Image, TouchableOpacity, Switch} from 'react-native';
 import React, {useState} from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {useDispatch, useSelector} from 'react-redux';
+import {base_URL} from '../services/httpServices';
+
+import {logout} from '../scenes/auth/redux/authReducer';
 const Settings = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {myProfileData, isFetching} = useSelector(
+    state => state.myProfileDetail,
+  );
+
   const [isEnabled, setIsEnabled] = useState(false);
+
+  const handleLogout = async () => {
+    dispatch(logout({}));
+  };
+
   return (
     <RootScreen scrollable={true}>
       <View style={styles.container}>
         <View style={styles.bottomContainer}>
-          <View>
+          <View style={styles.userdetailContainer}>
             <TouchableOpacity style={styles.input}>
               <Text style={styles.textColor}> New</Text>
             </TouchableOpacity>
             <View style={styles.imageContainer}>
               <Image
                 style={styles.profile}
-                source={require('../assets/profile2.png')}
+                source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               />
-              <View>
-                <Text>Test User</Text>
-                <Text>test123@gmail.com</Text>
-                <Text>+91 9991123456</Text>
+              <View style={styles.text}>
+                <Text
+                  style={{
+                    paddingLeft: 3,
+                    fontWeight: 'bold',
+                    color: 'black',
+                    fontSize: 18,
+                  }}>
+                  {' '}
+                  {myProfileData.userFirstName} {myProfileData.userLastName}
+                </Text>
+                <Text style={{paddingLeft: 10}}>{myProfileData.userEmail}</Text>
+                <Text style={{paddingLeft: 10}}>
+                  {myProfileData.userMobileNo}
+                </Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.bottomInput}>
-              <Text style={styles.textColor}> No active membership plan</Text>
-            </TouchableOpacity>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <TouchableOpacity style={styles.bottomInput}>
+                <Text style={styles.textColor}> No active membership plan</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={styles.bottomtextContainer}>
@@ -60,7 +87,7 @@ const Settings = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => handleLogout()}>
               <Text style={styles.textStyle}>Logout</Text>
             </TouchableOpacity>
           </View>
@@ -75,11 +102,14 @@ export default Settings;
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 20,
     marginHorizontal: 10,
   },
   imageContainer: {
     flexDirection: 'row',
+  },
+  userdetailContainer: {
+    flex: 1,
   },
   bottomText: {
     borderBottomWidth: 1,
@@ -108,10 +138,11 @@ const styles = EStyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    width: 90,
-    height: 40,
+    width: 80,
+    height: 35,
     marginTop: 20,
-    marginHorizontal: 260,
+    marginLeft: '70%',
+    // marginHorizontal: 260,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -120,16 +151,19 @@ const styles = EStyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 50,
-    marginHorizontal: 30,
-    marginTop: -10,
+    marginHorizontal: 15,
+    //marginTop: 10,
+  },
+  text: {
+    marginTop: 10,
   },
   bottomInput: {
     borderWidth: 1,
-    width: 330,
-    height: 60,
+    width: 250,
+    height: 50,
     marginTop: 10,
     borderRadius: 10,
-    marginHorizontal: 20,
+
     justifyContent: 'center',
     alignItems: 'center',
   },

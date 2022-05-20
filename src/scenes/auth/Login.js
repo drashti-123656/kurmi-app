@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Formik} from 'formik';
 import CheckBox from '@react-native-community/checkbox';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
@@ -18,15 +18,18 @@ import {
 } from 'react-native-responsive-screen';
 import translate from './../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import { LoginSchema } from '../../utils/schema/loginSchema';
+import {LoginSchema} from '../../utils/schema/loginSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
 const Login = ({navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const dispatch = useDispatch();
-  const loginData = useSelector(state => state.auth);
-  const {isFetching} = useSelector(state => state.auth);
+  const {authData} = useSelector(state => state.auth);
+
+  
+  
+
   const handleLogin = values => {
     const payload = {
       userLoginId: values.login,
@@ -43,8 +46,8 @@ const Login = ({navigation}) => {
       <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Formik
         initialValues={{
-          login: loginData.login,
-          password: loginData.password,
+          login: '',
+          password: '',
         }}
         validationSchema={LoginSchema}
         onSubmit={values => handleLogin(values)}>
@@ -82,8 +85,9 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.Log-in')}
               onPress={handleSubmit}
-              loading={isFetching}
+             loading={authData.loading}
             />
+            {console.log('loader22145462374',authData.loading)}
 
             <View style={styles.alignedRowContainer}>
               <View style={styles.alignedRowContainer1}>
@@ -156,12 +160,12 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('8'),
     justifyContent: 'center',
-    alignItems : 'center'
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
     fontWeight: '400',
-   
+
     fontSize: 20,
     color: 'white',
   },

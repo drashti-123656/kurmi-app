@@ -7,11 +7,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction'
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
+import {base_URL} from '../../services/httpServices/';
 const Profile = ({route}) => {
   const {myProfileData, isFetching} = useSelector(
     state => state.myProfileDetail,
   );
-  const id = route.params;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const Profile = ({route}) => {
     console.log('myprofileDataaa====>>', isFetching);
     dispatch({
       type: MY_PROFILE_DETAILS,
-      payload: id,
     });
   }, []);
 
@@ -33,7 +32,7 @@ const Profile = ({route}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={require('../../assets/profile1.png')}
+              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
@@ -47,7 +46,7 @@ const Profile = ({route}) => {
               </Text>
             </TouchableOpacity>
 
-            <View style={styles.whatsappIcon}>
+            {/* <View style={styles.whatsappIcon}>
               <TouchableOpacity>
                 <Image
                   source={require('../../assets/whatsappicon.png')}
@@ -62,7 +61,7 @@ const Profile = ({route}) => {
                   style={styles.imageStyle}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
           <View>
             <View style={styles.separatorLine} />
@@ -293,10 +292,10 @@ const Profile = ({route}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {
+              {/* {
                 myProfileData.userEducationInfo.userEducationInfoEducation
                   .educationTitleHi
-              }
+              } */}
             </Text>
             <Text style={styles.textStyle}>
               {translate('Vyaktigatdata.Job')}
@@ -426,9 +425,10 @@ const styles = EStyleSheet.create({
     backgroundColor: '$PRIMARY',
     padding: 10,
     width: 200,
-    height: 40,
+    height: 60,
     marginTop: 20,
     marginHorizontal: 20,
+    justifyContent : 'center',
     borderRadius: 100,
   },
   pencilIcon: {
@@ -453,6 +453,7 @@ const styles = EStyleSheet.create({
   },
   textIIndex: {
     color: '$WHITE',
+    fontSize : 20,
   },
   bottomContainer: {
     flex: 3,

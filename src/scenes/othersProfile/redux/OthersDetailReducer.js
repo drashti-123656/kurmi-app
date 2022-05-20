@@ -160,6 +160,8 @@ const initialState = {
     userCreatedAt: '',
     userUpdatedAt: '',
     userAge: '',
+    isFetching: false,
+    error: '',
   },
   
 };
@@ -168,13 +170,21 @@ const searchProfileSlice = createSlice({
   name: 'othersDetail',
   initialState,
   reducers: {
-    fetchothersProfileData(state, action) {
+    fetchOthersProfileDataStarted(state) {
+      state.isFetching = true;
+    },
+    fetchOthersProfileDataSuccess(state, action) {
       state.othersProfileData = action.payload;
+      state.isFetching = false;
+    },
+    fetchOthersProfileDataFail(state){
+      state.isFetching = false;
+      state.error = true;
     },
   },
 });
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {fetchothersProfileData} = actions;
+export const {fetchOthersProfileDataStarted, fetchOthersProfileDataSuccess, fetchOthersProfileDataFail} = actions;
 export default reducer;

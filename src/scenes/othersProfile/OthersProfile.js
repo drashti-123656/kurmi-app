@@ -19,10 +19,13 @@ import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
 import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
 import {base_URL} from '../../services/httpServices/';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
+import Loader from '../../components/atoms/buttons/Loader';
 
 const OthersProfile = ({route, navigation}) => {
-  const {othersProfileData} = useSelector(state => state.othersDetail);
+  const {othersProfileData, isFetching} = useSelector(
+    state => state.othersDetail,
+  );
   const {id} = route.params;
   const dispatch = useDispatch();
 
@@ -43,285 +46,347 @@ const OthersProfile = ({route, navigation}) => {
       type: SHORT_LIST_PROFILE,
       payload,
     });
-
-   
   };
 
-  return (
-    <View style={{flex: 1}}>
-      <ScrollView>
-        <Image
-          style={styles.profileImg}
-          resizeMode={'contain'}
-          source={{uri: `${base_URL}${othersProfileData.userProfileImage}`}}
-        />
+  //  const renderLoader = () => (isFetching ? <Loader /> : null);
+  if (isFetching) {
+    return <Loader />;
+  } else {
+    return (
+      <View style={{flex: 1}}>
+        <ScrollView>
+          
+          <Image
+            style={styles.profileImg}
+            resizeMode={'contain'}
+            source={{uri: `${base_URL}${othersProfileData.userProfileImage}`}}
+          />
 
-        <View style={styles.transparentText}>
-          <Text style={styles.subNames}>
-            {' '}
-            {othersProfileData.userFirstName} {othersProfileData.userLastName}{' '}
-          </Text>
-          <Text style={styles.subNamesDetails}>
-            {' '}
-            Age - {othersProfileData.userAge},{' '}
-            {othersProfileData.userCity.cityName},{' '}
-            {othersProfileData.userState.name},{' '}
-            {othersProfileData.userCountry.countryName}
-          </Text>
-        </View>
-
-        <View style={styles.contactContainer}>
-          <TouchableOpacity style={{flexDirection: 'row'}}>
-            <Icon
-              name="phone"
-              size={30}
-              color={EStyleSheet.value('$PRIMARY')}
-              style={{marginVertical: 20}}
-            />
-            <Text style={styles.contactText}> Call Now </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{flexDirection: 'row'}}>
-            <MaterialIcons
-              name="email"
-              size={30}
-              color={EStyleSheet.value('$PRIMARY')}
-              style={{marginVertical: 20}}
-            />
-            <Text style={styles.contactText}> Email </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.detailContainer}>
-          <Text style={styles.headingText}>
-            {translate('Vyaktigatdata.Personal information')}
-          </Text>
-          <View style={styles.subDetailContainer}>
-            <Text style={styles.subHeadingText}>
-              {translate('register.Name')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
+          <View style={styles.transparentText}>
+            <Text style={styles.subNames}>
               {' '}
               {othersProfileData.userFirstName} {othersProfileData.userLastName}{' '}
             </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('register.birthdate')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
+            <Text style={styles.subNamesDetails}>
               {' '}
-              {othersProfileData.userDob}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('register.city')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userCity.cityName}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('register.state')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userState.name}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('register.country')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userCountry.countryName}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('Vyaktigatdata.Marital Status')}{' '}
-            </Text>
-
-            {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
-
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Vyaktigatdata.Height')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userPersonalInfo.userPersonalInfoHeight}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Vyaktigatdata.Knowledge')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userEducationInfo.userEducationInfoEducation
-                  .educationTitleHi
-              }
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('Vyaktigatdata.Job')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userEducationInfo.userEducationInfoOccupation
-                  .occupationTitleHi
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Vyaktigatdata.Disability')}{' '}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userPersonalInfo.userPersonalInfoDisability
-              }{' '}
+              Age - {othersProfileData.userAge},{' '}
+              {othersProfileData.userCity.cityName},{' '}
+              {othersProfileData.userState.name},{' '}
+              {othersProfileData.userCountry.countryName}
             </Text>
           </View>
 
-          <View
-            style={{
-              borderBottomColor: 'black',
-              borderBottomWidth: 1,
-            }}
-          />
+          <View style={styles.contactContainer}>
+            <TouchableOpacity style={{flexDirection: 'row'}}>
+              <Icon
+                name="phone"
+                size={30}
+                color={EStyleSheet.value('$PRIMARY')}
+                style={{marginVertical: 20}}
+              />
+              <Text style={styles.contactText}> Call Now </Text>
+            </TouchableOpacity>
 
-          <Text style={styles.headingText}>
-            {translate('Dharmikjankari.Dharmik Jankari')}
-          </Text>
-          <View style={styles.subDetailContainer}>
-            <Text style={styles.subHeadingText}>
-              {translate('Dharmikjankari.Caste')}
+            <TouchableOpacity style={{flexDirection: 'row'}}>
+              <MaterialIcons
+                name="email"
+                size={30}
+                color={EStyleSheet.value('$PRIMARY')}
+                style={{marginVertical: 20}}
+              />
+              <Text style={styles.contactText}> Email </Text>
+            </TouchableOpacity>
+          </View>
+          {/* {renderLoader()} */}
+          <View style={styles.detailContainer}>
+            <Text style={styles.headingText}>
+              {translate('Vyaktigatdata.Personal information')}
             </Text>
-            <Text style={styles.detailsText}>
-              {/* {
+            <View style={styles.subDetailContainer}>
+              <Text style={styles.subHeadingText}>
+                {translate('register.Name')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userFirstName}{' '}
+                {othersProfileData.userLastName}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('register.birthdate')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userDob}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('register.city')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userCity.cityName}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('register.state')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userState.name}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('register.country')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userCountry.countryName}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('Vyaktigatdata.Marital Status')}{' '}
+              </Text>
+
+              {/* <Text style={styles.detailsText}> {othersProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId.maritalStatusTitleHi} </Text> */}
+
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Vyaktigatdata.Height')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userPersonalInfo.userPersonalInfoHeight}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Vyaktigatdata.Knowledge')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userEducationInfo.userEducationInfoEducation
+                    .educationTitleHi
+                }
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('Vyaktigatdata.Job')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userEducationInfo
+                    .userEducationInfoOccupation.occupationTitleHi
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Vyaktigatdata.Disability')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userPersonalInfo.userPersonalInfoDisability
+                }{' '}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: 1,
+              }}
+            />
+
+            <Text style={styles.headingText}>
+              {translate('Dharmikjankari.Dharmik Jankari')}
+            </Text>
+            <View style={styles.subDetailContainer}>
+              <Text style={styles.subHeadingText}>
+                {translate('Dharmikjankari.Caste')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {/* {
                 othersProfileData.userReligiousInfo.userReligiousInfoGotra
                   .gotraTitleHi
               } */}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Dharmikjankari.Native')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userReligiousInfo.userReligiousInfoMotherGotra
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Dharmikjankari.Birthtime')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userReligiousInfo.userReligiousInfoTimeOfBirth
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('Dharmikjankari.Birthplace')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userReligiousInfo
-                  .userReligiousInfoPlaceOfBirth
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Dharmikjankari.Zodiacsign')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userReligiousInfo.userReligiousInfoZodiac
-                  .zodiacTitleHi
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('Dharmikjankari.auspicious')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userReligiousInfo.userReligiousInfoManglik
-              }{' '}
-            </Text>
-          </View>
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Dharmikjankari.Native')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userReligiousInfo
+                    .userReligiousInfoMotherGotra
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Dharmikjankari.Birthtime')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userReligiousInfo
+                    .userReligiousInfoTimeOfBirth
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('Dharmikjankari.Birthplace')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userReligiousInfo
+                    .userReligiousInfoPlaceOfBirth
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Dharmikjankari.Zodiacsign')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userReligiousInfo.userReligiousInfoZodiac
+                    .zodiacTitleHi
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('Dharmikjankari.auspicious')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userReligiousInfo.userReligiousInfoManglik
+                }{' '}
+              </Text>
+            </View>
 
-          <View
-            style={{
-              borderBottomColor: 'black',
-              borderBottomWidth: 1,
-            }}
-          />
+            <View
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: 1,
+              }}
+            />
 
-          <Text style={styles.headingText}>
-            {translate('ParivarikParichay.parivarikHeader')}
-          </Text>
-          <View style={styles.subDetailContainer}>
-            <Text style={styles.subHeadingText}>
-              {translate('ParivarikParichay.fatherName')}
+            <Text style={styles.headingText}>
+              {translate('ParivarikParichay.parivarikHeader')}
             </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('ParivarikParichay.fatherOccupation')}
-            </Text>
+            <View style={styles.subDetailContainer}>
+              <Text style={styles.subHeadingText}>
+                {translate('ParivarikParichay.fatherName')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('ParivarikParichay.fatherOccupation')}
+              </Text>
 
-            <Text style={styles.detailsText}>
-              {' '}
-              {/* {
+              <Text style={styles.detailsText}>
+                {' '}
+                {/* {
                 othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
                   .occupationTitleHi
               }{' '} */}
-            </Text>
+              </Text>
 
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('ParivarikParichay.motherName')}
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('ParivarikParichay.motherName')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userFamilyInfo.userFamilyInfoMotherName}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('ParivarikParichay.motherMayaka')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userFamilyInfo.userFamilyInfoMotherMaika
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('ParivarikParichay.brother')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userFamilyInfo.userFamilyInfoNoOfBrother
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('ParivarikParichay.sister')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userFamilyInfo.userFamilyInfoNoOfSister}{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('ParivarikParichay.land')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userFamilyInfo.userFamilyInfoLand}{' '}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: 1,
+              }}
+            />
+
+            <Text style={styles.headingText}>
+              {translate('samPark.samparkheader')}
             </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoMotherName}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('ParivarikParichay.motherMayaka')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoMotherMaika}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('ParivarikParichay.brother')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoNoOfBrother}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('ParivarikParichay.sister')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoNoOfSister}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('ParivarikParichay.land')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userFamilyInfo.userFamilyInfoLand}{' '}
-            </Text>
+            <View style={styles.subDetailContainer}>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.mobileNo')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {othersProfileData.userContactInfo.userContactInfoContactNo}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('samPark.whatsAppNo')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userContactInfo.userContactInfoWhatsappNo
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {' '}
+                {translate('samPark.presentAdd')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userContactInfo
+                    .userContactInfoPresentAddress
+                }{' '}
+              </Text>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.permanentAdd')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  othersProfileData.userContactInfo
+                    .userContactInfoPermanentAddress
+                }{' '}
+              </Text>
+            </View>
           </View>
 
           <View
@@ -330,70 +395,22 @@ const OthersProfile = ({route, navigation}) => {
               borderBottomWidth: 1,
             }}
           />
+        </ScrollView>
 
-          <Text style={styles.headingText}>
-            {translate('samPark.samparkheader')}
-          </Text>
-          <View style={styles.subDetailContainer}>
-            <Text style={styles.subHeadingText}>
-              {translate('samPark.mobileNo')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userContactInfo.userContactInfoContactNo}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('samPark.whatsAppNo')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {othersProfileData.userContactInfo.userContactInfoWhatsappNo}{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {' '}
-              {translate('samPark.presentAdd')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userContactInfo.userContactInfoPresentAddress
-              }{' '}
-            </Text>
-            <Text style={styles.subHeadingText}>
-              {translate('samPark.permanentAdd')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {
-                othersProfileData.userContactInfo
-                  .userContactInfoPermanentAddress
-              }{' '}
-            </Text>
-          </View>
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity onPress={handleShortList} style={styles.shortlist}>
+            <Icon
+              name="star-o"
+              size={40}
+              color="#c3773b"
+              style={{paddingLeft: 6}}
+            />
+            <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
+          </TouchableOpacity>
         </View>
-
-        <View
-          style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: 1,
-          }}
-        />
-      </ScrollView>
-
-      <View style={styles.bottomContainer}>
-        <TouchableOpacity onPress={handleShortList} style={styles.shortlist}>
-          <Icon
-            name="star-o"
-            size={40}
-            color="#c3773b"
-            style={{paddingLeft: 6}}
-          />
-          <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
-        </TouchableOpacity>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 export default OthersProfile;

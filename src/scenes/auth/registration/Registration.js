@@ -34,11 +34,12 @@ import {
 } from './redux/registrationActions';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {register} from './redux/registrationReducer';
+
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
+import {registerSuccess} from './redux/registrationReducer';
 
 const Registration = ({navigation}) => {
   const dispatch = useDispatch();
@@ -51,7 +52,6 @@ const Registration = ({navigation}) => {
 
   const {
     registerData,
-    isVerifiying,
 
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
@@ -75,16 +75,17 @@ const Registration = ({navigation}) => {
         type: 'info',
         backgroundColor: EStyleSheet.value('$WARNING_RED'),
       });
-
-      if (!termsCondition) {
-        showMessage({
-          message: 'Please check privacy policy checkbox ',
-          type: 'info',
-          backgroundColor: EStyleSheet.value('$WARNING_RED'),
-        });
-      }
       return;
     }
+    if (!termsCondition) {
+      showMessage({
+        message: 'Please check privacy policy checkbox ',
+        type: 'info',
+        backgroundColor: EStyleSheet.value('$WARNING_RED'),
+      });
+      return;
+    }
+
     const payload = {
       where: {userEmail: values.emailid, userMobileNo: values.mobilenumber},
       queryType: 'whereor',
@@ -99,16 +100,13 @@ const Registration = ({navigation}) => {
       password: values.password,
       userProfileImage: ProfilePic,
     };
-    console.log('payload==============================>', payload);
-    console.log('dov', values.birthdate);
 
     dispatch({
       type: VERIFY_USER,
       payload,
     });
 
-    dispatch(register(payload));
-    //setLoading(true);
+    dispatch(registerSuccess(payload));
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -169,18 +167,6 @@ const Registration = ({navigation}) => {
         }) => (
           <View style={styles.formContainer}>
             <View style={styles.profileContainer}>
-              {/* {console.log('sads===>', ProfilePic)}
-              {ProfilePic ? (
-                <Image
-                  source={require('../../../assets/upload1.png')}
-                  style={{...styles.profilePic, marginRight: 20}}
-                />
-              ) : (
-                <Image
-                  source={{uri:`${ProfilePic?.assets[0]?.uri}`}}
-                  style={{...styles.profilePic, marginRight: 20}}
-                />
-              )} */}
               <TouchableOpacity
                 onPress={handleChooseProfilePic}
                 style={styles.uploadProfile}>
@@ -193,7 +179,6 @@ const Registration = ({navigation}) => {
                   <TouchableOpacity
                     onPress={handleChooseProfilePic}
                     style={{
-                      // position: 'absolute',
                       width: 150,
                       height: 150,
                       backgroundColor: '#333',
@@ -202,22 +187,6 @@ const Registration = ({navigation}) => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       zIndex: 1,
-                      // position: 'absolute',
-                      // width: 40,
-                      // flex: 1,
-                      // height: 40,
-                      // //marginHorizontal : '30%',
-
-                      // marginTop: 100,
-                      // marginBottom: 20,
-                      // //resizeMode: 'contain',
-                      // backgroundColor: '#333',
-                      // marginLeft: 110,
-                      // opacity: 1,
-                      // borderRadius: 100,
-                      // justifyContent: 'center',
-                      // alignItems: 'center',
-                      // zIndex: 1,
                     }}>
                     <Image
                       source={require('./../../../assets/upload1.png')}
@@ -459,17 +428,13 @@ const Registration = ({navigation}) => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              //loading={isRegistering}
-              //loading={isVerifiying}
+              loading={registerData.isVerifiying}
             />
+
+            {console.log('jajskhshg=====>>>', registerData.isVerifiying)}
           </View>
         )}
       </Formik>
-      {/* <SuccessAlert
-        visible={profileUpdateSuccess}
-        message={'profile successfully updated'}
-        onPressOkay={handleSuccessOkayButton}
-      /> */}
     </RootScreen>
   );
 };
