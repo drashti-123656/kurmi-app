@@ -5,7 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const Loader = () => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator color={EStyleSheet.value('$WHITE')} size={'large'} />
+      <ActivityIndicator color={EStyleSheet.value('$PRIMARY')} size={'large'} />
     </View>
   );
 };
