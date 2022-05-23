@@ -16,4 +16,5 @@ ADVANCE_SEARCH_DATA:'api/search-profiles',
   WIDOWED_DATA: 'api/widowed-profiles',
   WIDOWER_DATA: 'api/widower-profiles',
   DISABILITY_DATA: 'api/disability-profiles',
+  TOGGLE_SWITCH_ACTIVE:'api/user-profile-update'
 };

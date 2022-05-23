@@ -55,6 +55,8 @@ import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAc
 import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
 import {myProfileDetails} from '../scenes/profile/redux/MyProfileSaga';
+import { hideprofileStatus } from '../scenes/hideProfile/redux/HideProfileSaga';
+import { TOGGLE_SWITCH_ACTIVE } from '../scenes/hideProfile/redux/HideProfileAction';
 
 export default function* sagas() {
   yield all([
@@ -85,5 +87,6 @@ export default function* sagas() {
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
     takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
     takeLatest(ADVANCED_SEARCH_USER, advancesearchStatus),
+    takeLatest(TOGGLE_SWITCH_ACTIVE, hideprofileStatus),
   ]);
 }
