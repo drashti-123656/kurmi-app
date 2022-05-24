@@ -5,7 +5,7 @@ import DashboardNavigation from './DashboardNavigation';
 import translate from '../translations/configTranslations';
 import CustomDrawer from './customDrawer';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
-import ViewBy from '../DrawerNavigationScreen/ViewBy';
+import ViewBy from '../scenes/viewBy/ViewBy';
 import ShortLists from '../scenes/shortList/ShortList';
 import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
 import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
@@ -25,8 +25,11 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
-      screenOptions={{drawerLabelStyle: {marginLeft: -10}, headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
-      headerTintColor: '#fff'}}
+      screenOptions={{
+        drawerLabelStyle: {marginLeft: -10},
+        headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+        headerTintColor: '#fff',
+      }}
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name={translate('drawerScreen.Home')}
@@ -44,12 +47,10 @@ const DrawerNavigation = () => {
       />
 
       <Drawer.Screen
-        name={translate(
-          'drawerScreen.advanced search',
-        )}
+        name={translate('drawerScreen.advanced search')}
         component={AdvanceSearch}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name={translate('drawerScreen.All Kurmi Samaj')}
         component={AllkurmiSamaj}
       />
@@ -62,14 +63,8 @@ const DrawerNavigation = () => {
         component={Membershipplan}
       />
 
-      <Drawer.Screen
-        name="Share"
-        component={Share}
-      />
-        <Drawer.Screen
-        name="Rate Us"
-        component={RateUs}
-      />
+      <Drawer.Screen name="Share" component={Share} />
+      <Drawer.Screen name="Rate Us" component={RateUs} />
       <Drawer.Screen
         name={translate('drawerScreen.divorced')}
         component={DivorcedProfile}
