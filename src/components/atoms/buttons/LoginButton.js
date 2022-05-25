@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View,ActivityIndicator,TouchableOpacity, Pressable} from 'react-native';
+import {StyleSheet, Text, ActivityIndicator, Pressable} from 'react-native';
 import React from 'react';
 import {
   heightPercentageToDP,
@@ -7,21 +7,15 @@ import {
 
 const LoginButton = ({title, onPress, loading}) => {
   return (
-    <Pressable
-      onPress={onPress}
-      style={styles.container}
-      disabled={loading}>
+    <Pressable onPress={onPress} style={styles.container} disabled={loading}>
       {loading ? (
-        <ActivityIndicator  size={30} color={'white'} />
+        <ActivityIndicator size={30} color={'white'} />
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
     </Pressable>
   );
 };
-
-
-
 
 export default LoginButton;
 
@@ -34,14 +28,13 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentageToDP('2'),
     marginHorizontal: widthPercentageToDP('8'),
     justifyContent: 'center',
-    alignItems : 'center'
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
     fontWeight: '400',
-   
+
     fontSize: 20,
     color: 'white',
   },
-  
 });

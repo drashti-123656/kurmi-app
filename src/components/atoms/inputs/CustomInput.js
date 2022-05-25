@@ -1,23 +1,17 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {StyleSheet, View, TextInput} from 'react-native';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-
-
-
-const CustomInput = ({onChangeText,value,placeholder,editable,keyboardType,multiline}) => {
+const CustomInput = ({
+  onChangeText,
+  value,
+  placeholder,
+  editable,
+  keyboardType,
+  multiline,
+}) => {
   return (
     <View style={styles.container}>
-     
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -32,24 +26,11 @@ const CustomInput = ({onChangeText,value,placeholder,editable,keyboardType,multi
   );
 };
 
-
-
 export default CustomInput;
 
 const styles = StyleSheet.create({
- 
-  input: {
-    // height: 50,
-    // margin: 12,
-    // borderWidth: 1,
-    // padding: 10,
-    // borderRadius: 10,
-   
-    // textAlignVertical : 'top'
-  },
-  container : {
+  container: {
     backgroundColor: 'white',
-   
     marginHorizontal: 30,
     marginVertical: 10,
     borderRadius: 10,
@@ -60,10 +41,9 @@ const styles = StyleSheet.create({
     height: hp(15),
     color: 'black',
   },
-  input : {
+  input: {
     flex: 1,
     color: 'black',
-    textAlignVertical : 'top'
-  }
+    textAlignVertical: 'top',
+  },
 });
-
