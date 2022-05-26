@@ -1,21 +1,53 @@
-import {View, Text, Image, TouchableOpacity, Switch} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, Switch, Alert} from 'react-native';
+import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
 import {base_URL} from '../services/httpServices';
 
 import {logout} from '../scenes/auth/redux/authReducer';
+import {TOGGLE_SWITCH_ACTIVE} from '../scenes/hideProfile/redux/HideProfileAction';
+import {
+  toggleOff,
+  toggleOn,
+} from '../scenes/hideProfile/redux/HideProfileReducer';
 const Settings = ({navigation}) => {
   const dispatch = useDispatch();
-  const {myProfileData, isFetching} = useSelector(
-    state => state.myProfileDetail,
-  );
-
-  const [isEnabled, setIsEnabled] = useState(false);
-
+  const {myProfileData} = useSelector(state => state.myProfileDetail);
+  const {isActive} = useSelector(state => state.hideProfile);
+  const handleHideProfile = () => {
+    if (isActive === true) {
+      dispatch(toggleOff({}));
+      const payload = {
+        userUpdateType: 'chnageVisibility',
+        userIsVisible: '0',
+      };
+      dispatch({
+        type: TOGGLE_SWITCH_ACTIVE,
+        payload,
+      });
+      Alert.alert('Alert Title', 'Your profile is activated', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    } else {
+      dispatch(toggleOn());
+      Alert.alert('Alert Title', 'Your profile is Deactivated', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    }
+  };
   const handleLogout = async () => {
-    dispatch(logout({}));
+    dispatch(logout());
   };
 
   return (
@@ -32,23 +64,17 @@ const Settings = ({navigation}) => {
                 source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               />
               <View style={styles.text}>
-                <Text
-                  style={{
-                    paddingLeft: 3,
-                    fontWeight: 'bold',
-                    color: 'black',
-                    fontSize: 18,
-                  }}>
+                <Text style={styles.profileDetail}>
                   {' '}
                   {myProfileData.userFirstName} {myProfileData.userLastName}
                 </Text>
-                <Text style={{paddingLeft: 10}}>{myProfileData.userEmail}</Text>
-                <Text style={{paddingLeft: 10}}>
+                <Text style={styles.infoText}>{myProfileData.userEmail}</Text>
+                <Text style={styles.infoText}>
                   {myProfileData.userMobileNo}
                 </Text>
               </View>
             </View>
-            <View style={{flex: 1, alignItems: 'center'}}>
+            <View style={styles.button}>
               <TouchableOpacity style={styles.bottomInput}>
                 <Text style={styles.textColor}> No active membership plan</Text>
               </TouchableOpacity>
@@ -61,8 +87,8 @@ const Settings = ({navigation}) => {
             <Switch
               style={styles.switch}
               trackColor={{false: EStyleSheet.value('$PRIMARY')}}
-              value={isEnabled}
-              onValueChange={value => setIsEnabled(value)}
+              value={isActive}
+              onValueChange={handleHideProfile}
             />
           </TouchableOpacity>
           <View style={styles.textmargin}>
@@ -142,7 +168,6 @@ const styles = EStyleSheet.create({
     height: 35,
     marginTop: 20,
     marginLeft: '70%',
-    // marginHorizontal: 260,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -152,7 +177,6 @@ const styles = EStyleSheet.create({
     height: 90,
     borderRadius: 50,
     marginHorizontal: 15,
-    //marginTop: 10,
   },
   text: {
     marginTop: 10,
@@ -163,7 +187,6 @@ const styles = EStyleSheet.create({
     height: 50,
     marginTop: 10,
     borderRadius: 10,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -178,5 +201,18 @@ const styles = EStyleSheet.create({
   },
   textColor: {
     color: '$PRIMARY',
+  },
+  profileDetail: {
+    paddingLeft: 3,
+    fontWeight: 'bold',
+    color: '$DARK',
+    fontSize: 18,
+  },
+  infoText: {
+    paddingLeft: 10,
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

@@ -34,7 +34,8 @@ import {
   REGISTER_USER,
   VERIFY_USER,
 } from '../scenes/auth/registration/redux/registrationActions';
-
+import {ADVANCED_SEARCH_USER} from '../scenes/search/redux/AdvanceSearchAction';
+import {advancesearchStatus} from '../scenes/search/redux/AdvancedSearchSaga';
 import {CHANGE_PASSWORD} from '../scenes/passwordChange/redux/passwordAction';
 import {changePassword} from '../scenes/passwordChange/redux/passwordSaga';
 import {DIVORCED_PROFILE} from '../scenes/divorcedProfile/redux/divorcedAction';
@@ -43,8 +44,14 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
-import {SHORT_LISTED_USERS, SHORT_LIST_PROFILE} from '../scenes/shortList/redux/ShortListAction';
-import {shortlistedUsers, shortListProfile} from '../scenes/shortList/redux/ShortListSaga';
+import {
+  SHORT_LISTED_USERS,
+  SHORT_LIST_PROFILE,
+} from '../scenes/shortList/redux/ShortListAction';
+import {
+  shortlistedUsers,
+  shortListProfile,
+} from '../scenes/shortList/redux/ShortListSaga';
 
 import {WIDOWER_PROFILE} from '../scenes/widowerProfile/redux/widowerAction';
 import {widowerStatus} from '../scenes/widowerProfile/redux/widowerSaga';
@@ -54,7 +61,13 @@ import {DISABILITY_PROFILE} from '../scenes/disabilityProfile/redux/disabilityAc
 import {disabilityStatus} from '../scenes/disabilityProfile/redux/disabilitySaga';
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
 import {myProfileDetails} from '../scenes/profile/redux/MyProfileSaga';
-
+import {hideprofileStatus} from '../scenes/hideProfile/redux/HideProfileSaga';
+import {TOGGLE_SWITCH_ACTIVE} from '../scenes/hideProfile/redux/HideProfileAction';
+import {
+  VIEW_BY_ID_PROFILE,
+  VIEW_BY_USERS,
+} from '../scenes/viewBy/redux/ViewByAction';
+import {viewByProfile, viewByUsers} from '../scenes/viewBy/redux/ViewBySaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -83,5 +96,9 @@ export default function* sagas() {
     takeLatest(DISABILITY_PROFILE, disabilityStatus),
     takeLatest(MY_PROFILE_DETAILS, myProfileDetails),
     takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
+    takeLatest(ADVANCED_SEARCH_USER, advancesearchStatus),
+    takeLatest(TOGGLE_SWITCH_ACTIVE, hideprofileStatus),
+    takeLatest(VIEW_BY_ID_PROFILE, viewByProfile),
+    takeLatest(VIEW_BY_USERS, viewByUsers),
   ]);
 }

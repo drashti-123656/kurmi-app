@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TouchableHighlight,
-} from 'react-native';
+import {TouchableOpacity, TouchableHighlight} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -17,8 +11,8 @@ import PasswordChange from '../scenes/passwordChange';
 import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
+import AdvanceSearchProfile from '../scenes/search/AdvanceSearchProfile';
 
 const newsFeedStack = createNativeStackNavigator();
 
@@ -33,44 +27,43 @@ const NewsFeedStack = ({navigation}) => {
         headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         headerTintColor: '#fff',
       }}>
+      {!isAuthenticated ? (
+        <newsFeedStack.Screen
+          name={translate('NewsFeed.kurmiShadiHeading')}
+          component={NewsFeed}
+          options={{
+            headerShown: true,
+            headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+          }}
+        />
+      ) : (
+        <newsFeedStack.Screen
+          name={translate('NewsFeed.kurmiShadiHeading')}
+          component={NewsFeed}
+          options={{
+            headerShown: true,
+            headerTitle: translate('NewsFeed.kurmiShadiHeading'),
 
-     {!isAuthenticated ? (
-      <newsFeedStack.Screen
-        name={translate('NewsFeed.kurmiShadiHeading')}
-        component={NewsFeed}
-        options={{
-          headerShown: true,
-          headerTitle: translate('NewsFeed.kurmiShadiHeading'),
-        }}
-      />
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ContactUs')}>
+                <AntDesign name="user" size={30} color="white" />
+              </TouchableOpacity>
+            ),
 
-     ) : (
-
-      <newsFeedStack.Screen
-        name={translate('NewsFeed.kurmiShadiHeading')}
-        component={NewsFeed}
-        options={{
-          headerShown: true,
-          headerTitle: translate('NewsFeed.kurmiShadiHeading'),
-
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
-              <AntDesign name="user" size={30} color="white" />
-            </TouchableOpacity>
-          ),
-
-          headerLeft: () => (
-            <TouchableHighlight onPress={() => navigation.openDrawer()}>
-              <Entypo
-                name="menu"
-                size={30}
-                color="white"
-                style={{paddingRight: 10}}
-              />
-            </TouchableHighlight>
-          ),
-        }}
-      /> )}
+            headerLeft: () => (
+              <TouchableHighlight onPress={() => navigation.openDrawer()}>
+                <Entypo
+                  name="menu"
+                  size={30}
+                  color="white"
+                  style={styles.headerStyle}
+                />
+              </TouchableHighlight>
+            ),
+          }}
+        />
+      )}
 
       <newsFeedStack.Screen
         name="DrawerNavigation"
@@ -94,8 +87,6 @@ const NewsFeedStack = ({navigation}) => {
             fontWeight: 'bold',
             color: 'white',
           },
-          // headerTintColor: '#ffff',
-          // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
           headerRight: () => (
             <TouchableOpacity>
               <Entypo name="share" size={30} color="white" />
@@ -114,8 +105,6 @@ const NewsFeedStack = ({navigation}) => {
             fontWeight: 'bold',
             color: 'white',
           },
-          // headerTintColor: '#ffff',
-          // headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         }}
       />
 
@@ -132,10 +121,27 @@ const NewsFeedStack = ({navigation}) => {
           headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         }}
       />
+      <newsFeedStack.Screen
+        name="AdvanceSearchProfile"
+        component={AdvanceSearchProfile}
+        options={{
+          headerShown: true,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+          headerTintColor: '#ffff',
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+        }}
+      />
     </newsFeedStack.Navigator>
   );
 };
 
 export default NewsFeedStack;
 
-const styles = StyleSheet.create({});
+const styles = EStyleSheet.create({
+  headerStyle: {
+    paddingRight: 10,
+  },
+});

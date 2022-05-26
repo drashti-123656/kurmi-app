@@ -1,12 +1,19 @@
-import {StyleSheet, Text, View, TextInput, Image} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import React from 'react';
-import translate from '../../../translations/configTranslations'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardType,maxLength,secureTextEntry}) => {
+const ExtendedTextInput = ({
+  onChangeText,
+  onBlur,
+  value,
+  placeholder,
+  keyboardType,
+  maxLength,
+  secureTextEntry,
+}) => {
   return (
     <View style={styles.textinput}>
       <TextInput
@@ -20,8 +27,6 @@ const ExtendedTextInput = ({onChangeText, onBlur, value, placeholder,keyboardTyp
         placeholderTextColor={'#666666'}
         keyboardType={keyboardType}
       />
-
-      
     </View>
   );
 };
@@ -31,7 +36,6 @@ export default ExtendedTextInput;
 const styles = StyleSheet.create({
   textinput: {
     backgroundColor: 'white',
-   
     marginHorizontal: 30,
     marginVertical: 10,
     borderRadius: 10,
@@ -48,8 +52,8 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     width: wp('7'),
   },
-  input : {
+  input: {
     flex: 1,
     color: 'black',
-  }
+  },
 });
