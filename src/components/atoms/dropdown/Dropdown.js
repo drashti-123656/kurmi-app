@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -28,7 +28,6 @@ const Dropdown = ({
         selectText={selectText}
         selectedItems={selectedItems}
         searchInputPlaceholderText="Search"
-        
         onChangeInput={text => console.log(text)}
         tagRemoveIconColor={'black'}
         tagBorderColor={'black'}
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     marginTop: 10,
     borderRadius: 10,
-    
   },
   itemContainer: {
     // backgroundColor: '$PRIMARY',

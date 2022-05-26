@@ -15,7 +15,6 @@ type TextExtendedProps = {
 
 const TextExtended: React.FC<TextExtendedProps> = ({
   bold,
-  semiBold,
   size,
   color,
   style,

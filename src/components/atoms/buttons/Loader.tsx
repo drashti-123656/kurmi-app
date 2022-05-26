@@ -13,5 +13,5 @@ const Loader = () => {
 export default Loader;
 
 const styles = StyleSheet.create({
-  container:{justifyContent: 'center', alignItems: 'center', flex: 1}
+  container: {justifyContent: 'center', alignItems: 'center', flex: 1},
 });

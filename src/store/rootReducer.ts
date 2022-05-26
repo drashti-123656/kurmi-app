@@ -9,9 +9,11 @@ import changePasswordReducer from '../scenes/passwordChange/redux/changepassword
 import widowerReducer from '../scenes/widowerProfile/redux/widowerReducer';
 import OthersDetailReducer from '../scenes/othersProfile/redux/OthersDetailReducer';
 import ShortListReducer from '../scenes/shortList/redux/ShortListReducer';
-
+import AdvanceSearchReducer from '../scenes/search/redux/AdvanceSearchReducer';
 import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReducer';
 import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
+import HideProfileReducer from '../scenes/hideProfile/redux/HideProfileReducer';
+import ViewByReducer from '../scenes/viewBy/redux/ViewByReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
@@ -33,6 +35,9 @@ const rootReducer = combineReducers({
 
   disabilityProfile: disabilityReducer,
   myProfileDetail: MyProfileReducer,
+  advanceSerach: AdvanceSearchReducer,
+  hideProfile: HideProfileReducer,
+  viewByProfiles: ViewByReducer,
 });
 
 export default rootReducer;
