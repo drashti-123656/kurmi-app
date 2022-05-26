@@ -1,5 +1,5 @@
 import {View, Text, ImageBackground, Image, Linking} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import translate from '../translations/configTranslations';
@@ -10,9 +10,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {base_URL} from '../services/httpServices';
-import { logout } from '../scenes/auth/redux/authReducer';
-import { fetchmyProfileDataStarted } from '../scenes/profile/redux/MyProfileReducer';
-import { MY_PROFILE_DETAILS } from '../scenes/profile/redux/MyProfileAction';
+import {logout} from '../scenes/auth/redux/authReducer';
+import {fetchmyProfileDataStarted} from '../scenes/profile/redux/MyProfileReducer';
+import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
 const CustomDrawer = props => {
   const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
@@ -22,8 +22,7 @@ const CustomDrawer = props => {
     dispatch({
       type: MY_PROFILE_DETAILS,
     });
-  }, [])
-  
+  }, []);
 
   const handleLogout = async () => {
     dispatch(logout({}));
@@ -39,10 +38,10 @@ const CustomDrawer = props => {
             source={require('../assets/user.png')}
             resizeMode="cover">
             <TouchableOpacity
-            onPress={() => {
-            props.navigation.navigate(translate('drawerScreen.Profile'));
-             }}
-             style={styles.button}>
+              onPress={() => {
+                props.navigation.navigate(translate('drawerScreen.Profile'));
+              }}
+              style={styles.button}>
               <Text style={styles.edittext}>Edit</Text>
             </TouchableOpacity>
 
@@ -50,7 +49,10 @@ const CustomDrawer = props => {
               source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
             />
-            <Text style={styles.text}>welcome,  {myProfileData.userFirstName} {myProfileData.userLastName}</Text>
+            <Text style={styles.text}>
+              welcome, {myProfileData.userFirstName}{' '}
+              {myProfileData.userLastName}
+            </Text>
             <Text style={styles.link}> {myProfileData.userEmail}</Text>
           </ImageBackground>
         </View>
@@ -208,7 +210,9 @@ const CustomDrawer = props => {
             <Fontisto name="blogger" size={22} color={styles.color} />
           )}
           label="Blog"
-          onPress={ ()=>{ Linking.openURL('https://kurmishadi.com/')}}
+          onPress={() => {
+            Linking.openURL('https://kurmishadi.com/');
+          }}
         />
         <DrawerItem
           icon={() => (
