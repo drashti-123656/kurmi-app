@@ -17,8 +17,6 @@ import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
 import Helpline from '../DrawerNavigationScreen/Helpline';
 import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
-import Blog from '../DrawerNavigationScreen/Blog';
-import Logout from '../DrawerNavigationScreen/Logout';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import WidowerProfile from '../scenes/widowerProfile/WidowerProfile';
 import {useSelector} from 'react-redux';

@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, Switch, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,9 +13,7 @@ import {
 } from '../scenes/hideProfile/redux/HideProfileReducer';
 const Settings = ({navigation}) => {
   const dispatch = useDispatch();
-  const {myProfileData, isFetching} = useSelector(
-    state => state.myProfileDetail,
-  );
+  const {myProfileData} = useSelector(state => state.myProfileDetail);
   const {isActive} = useSelector(state => state.hideProfile);
   const handleHideProfile = () => {
     if (isActive === true) {
@@ -49,7 +47,7 @@ const Settings = ({navigation}) => {
     }
   };
   const handleLogout = async () => {
-    dispatch(logout({}));
+    dispatch(logout());
   };
 
   return (
@@ -66,23 +64,17 @@ const Settings = ({navigation}) => {
                 source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
               />
               <View style={styles.text}>
-                <Text
-                  style={{
-                    paddingLeft: 3,
-                    fontWeight: 'bold',
-                    color: 'black',
-                    fontSize: 18,
-                  }}>
+                <Text style={styles.profileDetail}>
                   {' '}
                   {myProfileData.userFirstName} {myProfileData.userLastName}
                 </Text>
-                <Text style={{paddingLeft: 10}}>{myProfileData.userEmail}</Text>
-                <Text style={{paddingLeft: 10}}>
+                <Text style={styles.infoText}>{myProfileData.userEmail}</Text>
+                <Text style={styles.infoText}>
                   {myProfileData.userMobileNo}
                 </Text>
               </View>
             </View>
-            <View style={{flex: 1, alignItems: 'center'}}>
+            <View style={styles.button}>
               <TouchableOpacity style={styles.bottomInput}>
                 <Text style={styles.textColor}> No active membership plan</Text>
               </TouchableOpacity>
@@ -176,7 +168,6 @@ const styles = EStyleSheet.create({
     height: 35,
     marginTop: 20,
     marginLeft: '70%',
-    // marginHorizontal: 260,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -186,7 +177,6 @@ const styles = EStyleSheet.create({
     height: 90,
     borderRadius: 50,
     marginHorizontal: 15,
-    //marginTop: 10,
   },
   text: {
     marginTop: 10,
@@ -197,7 +187,6 @@ const styles = EStyleSheet.create({
     height: 50,
     marginTop: 10,
     borderRadius: 10,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -212,5 +201,18 @@ const styles = EStyleSheet.create({
   },
   textColor: {
     color: '$PRIMARY',
+  },
+  profileDetail: {
+    paddingLeft: 3,
+    fontWeight: 'bold',
+    color: '$DARK',
+    fontSize: 18,
+  },
+  infoText: {
+    paddingLeft: 10,
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -7,11 +7,10 @@ import {
 } from 'react-native-responsive-screen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {base_URL} from '../../../services/httpServices';
-import { useDispatch } from 'react-redux';
-import { SHORT_LIST_PROFILE } from '../../../scenes/shortList/redux/ShortListAction';
-import { showMessage } from 'react-native-flash-message';
+import {useDispatch} from 'react-redux';
+import {SHORT_LIST_PROFILE} from '../../../scenes/shortList/redux/ShortListAction';
 
-const Card = ({navigation,item,id}) => {
+const Card = ({navigation, item, id}) => {
   //const {id} = route.params;
   const dispatch = useDispatch();
 
@@ -24,32 +23,28 @@ const Card = ({navigation,item,id}) => {
       type: SHORT_LIST_PROFILE,
       payload,
     });
-
-    
   };
 
   return (
     <View style={styles.profileContainer}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('OthersProfile', {
-              id: item.userId,
-            })
-          }>
-          <View style={styles.mainContainer}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('OthersProfile', {
+            id: item.userId,
+          })
+        }>
+        <View style={styles.mainContainer}>
           <View style={styles.profileImageContainer}>
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
-              source={{uri:`${base_URL}${item.userProfileImage}`}}
+              source={{uri: `${base_URL}${item.userProfileImage}`}}
             />
             <View style={styles.footerTextContainer}>
               <Text style={styles.profileText}>
                 {item.userFirstName} {item.userLastName}
               </Text>
-              <Text style={styles.profileIntroText}>
-                Age - {item.userAge}, 
-              </Text>
+              <Text style={styles.profileIntroText}>Age - {item.userAge},</Text>
 
               <Text style={styles.profileIntroText}>
                 {item.userCity.cityName}, {item.userState.name},
@@ -58,29 +53,33 @@ const Card = ({navigation,item,id}) => {
                 {item.userCountry.countryName}
               </Text>
             </View>
-            
           </View>
-          <View
-              style={styles.line}
-            />
+          <View style={styles.line} />
 
-            <View style={styles.bottomContainer}>
-              <TouchableOpacity onPress={handleShortList}  style={styles.bottmIcons}>
-                <Icon name="star-o" size={22} color="#499A30" style={styles.icon}  />
-                <Text style={styles.bottomText}> Shortlist </Text>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.bottomContainer}>
+            <TouchableOpacity
+              onPress={handleShortList}
+              style={styles.bottmIcons}>
+              <Icon
+                name="star-o"
+                size={22}
+                color="#499A30"
+                style={styles.icon}
+              />
+              <Text style={styles.bottomText}> Shortlist </Text>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 export default Card;
 
 const styles = EStyleSheet.create({
-  profileImageContainer: { 
-     flexDirection: 'row',
+  profileImageContainer: {
+    flexDirection: 'row',
   },
   profileImg: {
     width: wp('20'),
@@ -104,8 +103,6 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
     fontSize: 13,
 
-    textAlign: 'center',
-
     alignSelf: 'flex-start',
     paddingLeft: 10,
   },
@@ -123,8 +120,8 @@ const styles = EStyleSheet.create({
   bottomContainer: {
     flexDirection: 'row',
     paddingTop: 5,
-    alignSelf : 'center',
-    marginBottom : 5,
+    alignSelf: 'center',
+    marginBottom: 5,
   },
   bottmIcons: {
     flexDirection: 'row',
@@ -135,15 +132,15 @@ const styles = EStyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
-  mainContainer : {
-    flexDirection : 'column',
+  mainContainer: {
+    flexDirection: 'column',
     height: hp('20'),
     width: wp('90'),
     paddingLeft: 10,
     backgroundColor: 'white',
-   marginHorizontal: 20,
-    justifyContent : 'center',
-    marginVertical : 5,
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    marginVertical: 5,
     borderRadius: 15,
-  }
+  },
 });

@@ -1,12 +1,10 @@
-import {StyleSheet,Alert} from 'react-native';
+import {Alert} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AdvanceSearch from '../scenes/search/AdvanceSearch';
 import Home from 'react-native-vector-icons/Entypo';
 import Search from 'react-native-vector-icons/Feather';
 import Login from '../scenes/auth/Login';
-import Registration from '../scenes/auth/registration/Registration';
-import NewsFeed from '../scenes/home/NewsFeed';
 import RegistrationStack from './RegistrationStack';
 import {useDispatch, useSelector} from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -14,16 +12,16 @@ import translate from './../translations/configTranslations';
 import NewsFeedStack from './NewsFeedStack';
 import Profile from '../scenes/profile/Profile';
 import Logout from '../scenes/auth/Logout';
-import { LOG_OUT } from '../scenes/auth/redux/authActions';
-import { logout } from '../scenes/auth/redux/authReducer';
+import {logout} from '../scenes/auth/redux/authReducer';
 
 const Tab = createBottomTabNavigator();
 
 const DashboardNavigation = () => {
   const dispatch = useDispatch();
-  const {authData: {isAuthenticated}} = useSelector(state => state.auth);
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
 
- 
   const handleLogout = async () => {
     dispatch(logout({}));
   };
@@ -53,7 +51,6 @@ const DashboardNavigation = () => {
           tabBarActiveTintColor: 'red',
           headerTintColor: 'white',
           headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
-          headerTintColor: '#fff',
           tabBarIcon: () => <Search name="search" color={'black'} size={30} />,
         }}
       />
@@ -129,5 +126,3 @@ const DashboardNavigation = () => {
 };
 
 export default DashboardNavigation;
-
-const styles = StyleSheet.create({});
