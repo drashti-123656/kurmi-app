@@ -10,7 +10,11 @@ import {
 import React from 'react';
 import {
   FETCH_CITY_DROPDOWN,
+  FETCH_EDUCATION_DROPDOWN,
+  FETCH_GOTRA_DROPDOWN,
+  FETCH_JOB_DROPDOWN,
   FETCH_STATE_DROPDOWN,
+  FETCH_AUSPICIOUS_DROPDOWN,
 } from '../../scenes/auth/registration/redux/registrationActions';
 import {
   widthPercentageToDP as wp,
@@ -25,6 +29,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {ADVANCED_SEARCH_USER} from './redux/AdvanceSearchAction';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {useEffect} from 'react';
 
 const AdvanceSearch = ({navigation}) => {
   const dispatch = useDispatch();
@@ -43,7 +48,27 @@ const AdvanceSearch = ({navigation}) => {
       auspicious,
     },
   } = useSelector(state => state.registration);
+  useEffect(() => {
+    dispatch({
+      type: FETCH_EDUCATION_DROPDOWN,
+      payload: {moduleType: 'Education'},
+    });
 
+    dispatch({
+      type: FETCH_JOB_DROPDOWN,
+      payload: {moduleType: 'Occupation'},
+    });
+
+    dispatch({
+      type: FETCH_AUSPICIOUS_DROPDOWN,
+      payload: {moduleType: 'Nakshatra'},
+    });
+
+    dispatch({
+      type: FETCH_GOTRA_DROPDOWN,
+      payload: {moduleType: 'Gotra'},
+    });
+  }, []);
   const handleadvanceProfile = values => {
     const payload = {
       filter: {
@@ -193,6 +218,17 @@ const AdvanceSearch = ({navigation}) => {
               ) : null}
 
               <View style={{flexDirection: 'row'}}>
+                {/* <Dropdown
+                  style={styles.inputMargin}
+                  uniqueKey={'id'}
+                  displayKey={'name'}
+                  items={height}
+                  selectText={translate('advanceSearch.height From')}
+                  selectedItems={values.heightFrom}
+                  onSelectedItemsChange={value =>
+                    setFieldValue('heightFrom', value)
+                  }
+                /> */}
                 <Dropdown
                   style={styles.inputMargin}
                   uniqueKey={'id'}
@@ -204,11 +240,21 @@ const AdvanceSearch = ({navigation}) => {
                     setFieldValue('heightFrom', value)
                   }
                 />
-
                 {errors.heightFrom && touched.heightFrom ? (
                   <Text style={styles.heighterror}>{errors.heightFrom}</Text>
                 ) : null}
 
+                {/* <Dropdown
+                  style={styles.inputStyle}
+                  uniqueKey={'id'}
+                  displayKey={'name'}
+                  items={height}
+                  selectText={translate('advanceSearch.height To')}
+                  selectedItems={values.heightTo}
+                  onSelectedItemsChange={value =>
+                    setFieldValue('heightTo', value)
+                  }
+                /> */}
                 <Dropdown
                   style={styles.inputStyle}
                   uniqueKey={'id'}
@@ -220,7 +266,6 @@ const AdvanceSearch = ({navigation}) => {
                     setFieldValue('heightTo', value)
                   }
                 />
-
                 {errors.heightTo && touched.heightTo ? (
                   <Text style={styles.heighttoerror}>{errors.heightTo}</Text>
                 ) : null}
@@ -368,8 +413,8 @@ const styles = EStyleSheet.create({
     marginBottom: 5,
   },
   inputStyle: {
-    marginHorizontal: -40,
-    width: 220,
+    marginHorizontal: -20,
+    width: 210,
   },
   height: {
     flexDirection: 'row',
@@ -399,7 +444,9 @@ const styles = EStyleSheet.create({
     marginTop: 20,
   },
   inputMargin: {
-    width: 210,
+    marginBottom: 10,
+    flex: 1,
+    width: 200,
   },
   radioButton: {
     height: 20,
