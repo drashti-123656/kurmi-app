@@ -55,7 +55,6 @@ const OthersProfile = ({route, navigation}) => {
     return (
       <View style={{flex: 1}}>
         <ScrollView>
-          
           <Image
             style={styles.profileImg}
             resizeMode={'contain'}
@@ -333,7 +332,10 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFamilyInfo.userFamilyInfoLand}{' '}
+                {
+                  othersProfileData.userFamilyInfo.userFamilyInfoLand
+                    .landTitleHi
+                }{' '}
               </Text>
             </View>
 
