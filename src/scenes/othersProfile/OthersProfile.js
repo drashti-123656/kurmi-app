@@ -58,7 +58,7 @@ const OthersProfile = ({route, navigation}) => {
           <Image
             style={styles.profileImg}
             resizeMode={'contain'}
-            source={{uri: `${base_URL}${othersProfileData.userProfileImage}`}}
+            source={{uri: `${othersProfileData.userProfileImage}`}}
           />
 
           <View style={styles.transparentText}>

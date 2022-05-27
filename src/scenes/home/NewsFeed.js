@@ -24,7 +24,6 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
 
-
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
@@ -188,11 +187,10 @@ const NewsFeed = ({navigation, item}) => {
                 id: item.userId,
               })
             }>
-            
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
-              source={{uri: `${base_URL}${item.userProfileImage}`}}
+              source={{uri: `${item.userProfileImage}`}}
               // source={require('../../assets/profile.png')}
             />
             {/* <View style={styles.footerTextContainer}> */}
@@ -215,27 +213,27 @@ const NewsFeed = ({navigation, item}) => {
   if (isFetching) {
     return <Loader />;
   } else {
-  return (
-    <RootScreen scrollable={true}>
-      <FlatList
-        data={newsFeedData}
-        numColumns={2}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        ListHeaderComponent={renderHeader}
-        initialNumToRender={10}
-        //ListFooterComponent={renderLoader}
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
-      />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('SeeAllProfile')}
-        style={styles.footerContainer}>
-        <Text style={styles.footerTextseeAll}> See All </Text>
-      </TouchableOpacity>
-    </RootScreen>
-  );
+    return (
+      <RootScreen scrollable={true}>
+        <FlatList
+          data={newsFeedData}
+          numColumns={2}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          ListHeaderComponent={renderHeader}
+          initialNumToRender={10}
+          //ListFooterComponent={renderLoader}
+          // refreshControl={
+          //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          // }
+        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SeeAllProfile')}
+          style={styles.footerContainer}>
+          <Text style={styles.footerTextseeAll}> See All </Text>
+        </TouchableOpacity>
+      </RootScreen>
+    );
   }
 };
 
@@ -389,7 +387,7 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     borderRadius: 10,
     backgroundColor: 'white',
-    
+
     flex: 1,
 
     shadowOffset: {
@@ -400,7 +398,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 15,
-    justifyContent : 'space-evenly',
+    justifyContent: 'space-evenly',
     marginHorizontal: 10,
     justifyContent: 'center',
     //alignItems :'center'
@@ -433,7 +431,6 @@ const styles = StyleSheet.create({
   },
   SubfooterContainer: {
     backgroundColor: 'white',
-    
   },
   profileText: {
     fontWeight: 'bold',
