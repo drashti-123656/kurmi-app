@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from '../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction'
+import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {base_URL} from '../../services/httpServices/';
@@ -375,7 +375,7 @@ const Profile = ({route}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {myProfileData.userFamilyInfo.userFamilyInfoLand}{' '}
+              {myProfileData.userFamilyInfo.userFamilyInfoLand.landTitleHi}{' '}
             </Text>
           </View>
           <View>
@@ -428,7 +428,7 @@ const styles = EStyleSheet.create({
     height: 60,
     marginTop: 20,
     marginHorizontal: 20,
-    justifyContent : 'center',
+    justifyContent: 'center',
     borderRadius: 100,
   },
   pencilIcon: {
@@ -453,7 +453,7 @@ const styles = EStyleSheet.create({
   },
   textIIndex: {
     color: '$WHITE',
-    fontSize : 20,
+    fontSize: 20,
   },
   bottomContainer: {
     flex: 3,
