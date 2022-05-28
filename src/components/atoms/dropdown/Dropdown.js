@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -16,35 +16,38 @@ const Dropdown = ({
   style,
 }) => {
   return (
-    <View style={style}>
-      <MultiSelect
-        hideTags
-        items={items}
-        uniqueKey={uniqueKey}
-        displayKey={displayKey}
-        single
-        style={styles.dropdownMargin}
-        onSelectedItemsChange={onSelectedItemsChange}
-        selectText={selectText}
-        selectedItems={selectedItems}
-        searchInputPlaceholderText="Search"
-        onChangeInput={text => console.log(text)}
-        tagRemoveIconColor={'black'}
-        tagBorderColor={'black'}
-        tagTextColor={'black'}
-        selectedItemTextColor={'black'}
-        selectedItemIconColor={'white'}
-        itemTextColor={'black'}
-        searchInputStyle={styles.brandSearchInputStyle}
-        //submitButtonText="Submit"
-        //submitButtonColor={'transparent'}
-        styleListContainer={styles.listContainer}
-        styleDropdownMenuSubsection={styles.dropdownSubSection}
-        styleInputGroup={styles.inputGroup}
-        styleItemsContainer={styles.itemContainer}
-        styleSelectorContainer={styles.selectorContainer}
-        styleRowList={styles.rowList}
-      />
+    <View style={styles.mainContainer}>
+      <View style={style}>
+        <MultiSelect
+          hideTags
+          items={items}
+          uniqueKey={uniqueKey}
+          displayKey={displayKey}
+          single
+          style={styles.dropdownMargin}
+          onSelectedItemsChange={onSelectedItemsChange}
+          selectText={selectText}
+          selectedItems={selectedItems}
+          searchInputPlaceholderText="Search"
+          onChangeInput={text => console.log(text)}
+          tagRemoveIconColor={'black'}
+          tagBorderColor={'black'}
+          tagTextColor={'black'}
+          fixedHeight={true}
+          selectedItemTextColor={'black'}
+          selectedItemIconColor={'white'}
+          itemTextColor={'black'}
+          searchInputStyle={styles.brandSearchInputStyle}
+          submitButtonText="Submit"
+          submitButtonColor={'black'}
+          styleListContainer={styles.listContainer}
+          styleDropdownMenuSubsection={styles.dropdownSubSection}
+          styleInputGroup={styles.inputGroup}
+          styleItemsContainer={styles.itemContainer}
+          styleSelectorContainer={styles.selectorContainer}
+          styleRowList={styles.rowList}
+        />
+      </View>
     </View>
   );
 };
@@ -59,6 +62,9 @@ const styles = StyleSheet.create({
   listContainer: {
     height: hp(40),
     borderRadius: 20,
+  },
+  mainContainer: {
+    overflow: 'hidden',
   },
   dropdownSubSection: {
     borderWidth: 1,

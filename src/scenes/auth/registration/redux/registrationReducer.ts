@@ -2,6 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 import translate from '../../../../translations/configTranslations';
 import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
+  registered: false,
+  isRegistering: false,
+  
+ 
+  error: '',
+
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -17,11 +23,7 @@ const initialState = {
     sister: '',
     land: '',
   },
-  registrationData: {
-    registered: false,
-    isRegistering: false,
-    error: '',
-  },
+
   dharmikJankariData: {
     gotra: '',
     native: '',
@@ -51,20 +53,26 @@ const initialState = {
     gotra: [],
     land: [],
   },
+
   registerData: {
+
+    isVerifiying: false,
+    verifyed: false,
+    error: null,
     emailid: '',
     mobilenumber: '',
     gender: '',
     profilemaker: '',
     firstname: '',
     lastname: '',
-    birthdate:'',
-
+    birthdate: '',
+    ProfilePic: {},
     country: '',
     state: '',
     city: '',
     password: '',
   },
+
   personalinfoData: {
     height: '',
     maritalstatus: '',
@@ -81,16 +89,16 @@ const registerationSlice = createSlice({
   initialState,
   reducers: {
     registrationStarted(state, action) {
-      state.registrationData.isRegistering = true;
+      state.isRegistering = true;
     },
     registrationSuccess(state, action) {
-      state.registrationData.registered = true;
-      state.registrationData.isRegistering = false;
+      state.registered = true;
+      state.isRegistering = false;
     },
     registrationsFail(state, action) {
-      state.registrationData.registered = false;
-      state.registrationData.isRegistering = false;
-      state.registrationData.error = action.payload;
+      state.registered = false;
+      state.isRegistering = false;
+      state.error = action.payload;
     },
 
     sampark(state, action) {
@@ -116,7 +124,6 @@ const registerationSlice = createSlice({
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
-   
     dharmikJankari(state, action) {
       state.dharmikJankariData.gotra = action.payload.userReligiousInfoGotra;
       state.dharmikJankariData.native =
@@ -162,19 +169,33 @@ const registerationSlice = createSlice({
       state.dropDownsData.job = action.payload;
     },
 
-    register(state, action) {
-      state.registerData.emailid = action.payload.userEmail;
-      state.registerData.mobilenumber = action.payload.userMobileNo;
+    verifyingStarted(state, action) {
+      state.registerData.isVerifiying = true;
+    },
+
+    verifyingFail(state, action) {
+      state.registerData.verifyed = false;
+      state.registerData.isVerifiying = false;
+      state.registerData.error = null;
+    },
+
+    registerSuccess(state, action) {
+      state.registerData.emailid = action.payload.where.userEmail;
+      state.registerData.mobilenumber = action.payload.where.userMobileNo;
       state.registerData.gender = action.payload.userGender;
       state.registerData.profilemaker = action.payload.userProfileCreatedBy;
       state.registerData.firstname = action.payload.userFirstName;
       state.registerData.lastname = action.payload.userLastName;
       state.registerData.birthdate = action.payload.userDob;
+      state.registerData.ProfilePic = action.payload.userProfileImage;
 
       state.registerData.country = action.payload.userCountry;
       state.registerData.state = action.payload.userState;
       state.registerData.city = action.payload.userCity;
       state.registerData.password = action.payload.password;
+
+      state.registerData.verifyed = true;
+      state.registerData.isVerifiying = false;
     },
 
     fetchProfilemakerDropdownSuccess(state, action) {
@@ -200,10 +221,9 @@ const registerationSlice = createSlice({
       state.personalinfoData.education =
         action.payload.userEducationInfoEducation;
       state.personalinfoData.job = action.payload.userEducationInfoOccupation;
-      
+
       state.personalinfoData.disability =
         action.payload.userPersonalInfoDisability;
-     
     },
   },
 });
@@ -223,7 +243,7 @@ export const {
   fetchMaritalstatusDropdownSuccess,
   fetchEducationDropdownSuccess,
   fetchJobDropdownSuccess,
-  register,
+  registerSuccess,
   fetchProfilemakerDropdownSuccess,
   fetchGotraDropdownSuccess,
   fetchCountryDropdownSuccess,
@@ -232,5 +252,7 @@ export const {
   personalInfo,
   fetchDisabilityDropdownSuccess,
   fetchLandDropdownSuccess,
+  verifyingStarted,
+  verifyingFail,
 } = actions;
 export default reducer;

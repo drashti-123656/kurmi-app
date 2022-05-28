@@ -42,7 +42,7 @@ const ParivarikParichay = () => {
       type: FETCH_LAND_DROPDOWN,
       payload: {moduleType: 'Land'},
     });
-
+console.log('isregisteringfalse=====>>',isRegistering)
     
   }, []);
   
@@ -95,10 +95,11 @@ const ParivarikParichay = () => {
       userCountry: registerData.country[0],
       userState: registerData.state[0],
       userCity:registerData.city[0],
-     
+      userProfileImage :`data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
+
     };
    
-     console.log('payload===>>',payload)
+     
     dispatch({
       type: REGISTER_USER,
       payload,
@@ -231,6 +232,7 @@ const ParivarikParichay = () => {
                 selectedItems={values.land}
                 onSelectedItemsChange={value => setFieldValue('land', value)}
               />
+              {console.log('land size===>',values)}
 
               {errors.land && touched.land ? (
                 <Text style={styles.error}>{errors.land}</Text>
@@ -241,6 +243,7 @@ const ParivarikParichay = () => {
                 onPress={handleSubmit}
                 loading={isRegistering}
               />
+             { console.log('isregisteringtrue=====>>',isRegistering)}
             </View>
           )}
         </Formik>

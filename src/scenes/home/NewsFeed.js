@@ -6,8 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  FlatList,
+  RefreshControl,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {
   widthPercentageToDP as wp,
@@ -16,152 +18,225 @@ import {
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import {Formik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {base_URL} from '../../services/httpServices/';
+import Loader from '../../components/atoms/buttons/Loader';
 
-const NewsFeed = ({navigation}) => {
-  const [fromAge, setfromAge] = useState('');
-  const [toAge, SettoAge] = useState('');
-  const [isLiked, setIsLiked] = useState([
-    {id: 1, value: true, name: 'वर', selected: true},
-    {id: 2, value: false, name: 'वधू', selected: false},
-  ]);
-  const onRadioBtnClick = item => {
-    let updatedState = isLiked.map(isLikedItem =>
-      isLikedItem.id === item.id
-        ? {...isLikedItem, selected: true}
-        : {...isLikedItem, selected: false},
-    );
-    setIsLiked(updatedState);
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
+const NewsFeed = ({navigation, item}) => {
+  const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
+  useEffect(() => {
+    const payload = {
+      filter: {
+        age: {
+          min: 18,
+          max: 40,
+        },
+        gender: 'male',
+      },
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
+  }, []);
+
+  const handleSearchProfile = values => {
+    const payload = {
+      filter: {
+        age: {
+          min: values.ageFrom,
+          max: values.ageTo,
+        },
+        gender: values.gender,
+      },
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
   };
 
-  const submitButton = () => {
-   
-  };
+  const renderHeader = () => (
+    <View>
+      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+      <Formik
+        initialValues={{
+          gender: 'male',
+          ageFrom: '',
+          ageTo: '',
+        }}
+        onSubmit={values => handleSearchProfile(values)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View>
+            <Text style={styles.bottomText}>
+              {translate('NewsFeed.choose')}
+            </Text>
+            <View style={styles.radioButtonContainer}>
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'male')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'male' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Var')}
+                </Text>
+              </TouchableOpacity>
 
-  return (
-    <RootScreen>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <Image
-                style={styles.vectorImg}
-                source={require('../../assets/Vector6.png')}
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'female')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'female' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Vadhu')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.ageContainer}>
+              <TextInput
+                onChangeText={handleChange('ageFrom')}
+                onBlur={handleBlur('ageFrom')}
+                value={values.ageFrom}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageFrom')}
+                placeholderTextColor={'#666666'}
               />
-              <Image
-                style={styles.vectorImg_1}
-                source={require('../../assets/Vector7.png')}
+
+              <TextInput
+                onChangeText={handleChange('ageTo')}
+                onBlur={handleBlur('ageTo')}
+                value={values.ageTo}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageTo')}
+                placeholderTextColor={'#666666'}
               />
-              <Image
-                style={styles.vectorImg_1}
-                source={require('../../assets/Vector8.png')}
-              />
-            </TouchableOpacity>
+            </View>
+
+            <LoginButton
+              title={translate('NewsFeed.Search')}
+              onPress={handleSubmit}
+              loading={isFetching}
+            />
           </View>
+        )}
+      </Formik>
 
-          <View style={styles.pinClipart}>
-            <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
-              <Image
-                style={styles.PinClipartImg}
-                source={require('../../assets/contact.png')}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.navbarText}>
-            {translate('NewsFeed.kurmiShadiHeading')}
+      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+      <ScrollView style={styles.footerContainer}>
+        <View style={styles.footerTitle}>
+          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
+          <Text style={styles.titleTextNext}>
+            {translate('NewsFeed.recentlyJoint')}
           </Text>
         </View>
-        <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+      </ScrollView>
+    </View>
+  );
 
-        <Text style={styles.bottomText}>{translate('NewsFeed.choose')}</Text>
-
-        <View style={styles.radioButtonContainer}>
-          {isLiked.map(item => (
-            <View style={styles.ButtonContainer}>
-              <TouchableOpacity
-                onPress={() => onRadioBtnClick(item)}
-                style={styles.radioButton}>
-                {item.selected ? <View style={styles.radioButtonIcon} /> : null}
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => onRadioBtnClick(item)}>
-                <Text style={styles.radioButtonText}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
-
-        <>
-          <View style={styles.ageContainer}>
-            <TextInput
-              onChangeText={FromAge => setfromAge(FromAge)}
-              value={fromAge}
-              style={styles.textInput}
-              placeholder={translate('NewsFeed.ageFrom')}
-              keyboardType="numeric"
-              placeholderTextColor={'#666666'}
+  const renderItem = ({item}) => {
+    return (
+      <ScrollView style={styles.SubfooterContainer}>
+        <View style={styles.profileContainer}>
+          <TouchableOpacity
+            style={styles.profileImageContainer}
+            onPress={() =>
+              navigation.navigate('OthersProfile', {
+                id: item.userId,
+              })
+            }>
+            
+            <Image
+              style={styles.profileImg}
+              resizeMode={'center'}
+              source={{uri: `${base_URL}${item.userProfileImage}`}}
+              // source={require('../../assets/profile.png')}
             />
-
-            <TextInput
-              onChangeText={ToAge => SettoAge(ToAge)}
-              value={toAge}
-              keyboardType="numeric"
-              style={styles.textInput}
-              placeholder={translate('NewsFeed.ageTo')}
-              placeholderTextColor={'#666666'}
-            />
-          </View>
-          <LoginButton 
-             title={translate('NewsFeed.Search')}
-              onPress={submitButton}
-          />
-         
-        </>
-        <View>
-          <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
-          <ScrollView style={styles.footerContainer}>
-            <View style={styles.footerTitle}>
-              <Text style={styles.titleText}>
-                {translate('NewsFeed.newIntro')}
-              </Text>
-              <Text style={styles.titleTextNext}>
-                {translate('NewsFeed.recentlyJoint')}
-              </Text>
-            </View>
-            <View style={styles.profileContainer}>
-              <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImg}
-                  source={require('../../assets/profile.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>
-                    {translate('NewsFeed.newProfile')}{' '}
-                  </Text>
-                  <Text style={styles.profileIntroText}>
-                    {translate('NewsFeed.intro')}{' '}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.profileImageContainer}>
-                <Image
-                  style={styles.profileImg}
-                  source={require('../../assets/profile1.png')}
-                />
-                <View style={styles.footerTextContainer}>
-                  <Text style={styles.profileText}>
-                    {translate('NewsFeed.newProfile')}{' '}
-                  </Text>
-                  <Text style={styles.profileIntroText}>
-                    {translate('NewsFeed.intro')}{' '}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
+            {/* <View style={styles.footerTextContainer}> */}
+            <Text style={styles.profileText}>
+              {item.userFirstName} {item.userLastName}
+            </Text>
+            <Text style={styles.profileIntroText}>
+              Age - {item.userAge}, {item.userCity.cityName},
+            </Text>
+            <Text style={styles.profileIntroText}>
+              {item.userState.name},{item.userCountry.countryName}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
+    );
+  };
+
+  // const renderLoader = () => (isFetching ? <Loader /> : null);
+  if (isFetching) {
+    return <Loader />;
+  } else {
+  return (
+    <RootScreen scrollable={true}>
+      <FlatList
+        data={newsFeedData}
+        numColumns={2}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={renderHeader}
+        initialNumToRender={10}
+        //ListFooterComponent={renderLoader}
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
+      />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SeeAllProfile')}
+        style={styles.footerContainer}>
+        <Text style={styles.footerTextseeAll}> See All </Text>
+      </TouchableOpacity>
     </RootScreen>
   );
+  }
 };
 
 export default NewsFeed;
@@ -171,7 +246,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 52,
     flexDirection: 'row',
-    backgroundColor: '#DC1C28',
+    // backgroundColor: '#DC1C28',
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -194,7 +269,6 @@ const styles = StyleSheet.create({
   PinClipartImg: {
     width: 25,
     height: 25,
-   
   },
   navbarText: {
     color: '#FFFFFF',
@@ -255,7 +329,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: 'white',
     marginLeft: 30,
-    marginVertical: 10, 
+    marginVertical: 10,
     flex: 0.44,
     fontSize: 17,
     borderRadius: 10,
@@ -278,44 +352,88 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
+    marginBottom: 20,
     justifyContent: 'center',
     alignSelf: 'center',
     fontSize: 18,
     color: '#FFFFFF',
   },
-  footerContainer: {
+  SubfooterContainer: {
     backgroundColor: '#EDEDED',
     flexDirection: 'row',
-    paddingHorizontal:10,
-    marginTop: 20,
-    paddingBottom: 40,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
   },
   titleText: {
     fontWeight: 'bold',
     color: 'black',
     fontSize: 22,
     marginTop: 10,
+    paddingLeft: 5,
   },
   titleTextNext: {
     color: '#666666',
+    paddingLeft: 5,
   },
   profileContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    //justifyContent: 'space-between',
+    backgroundColor: '#EDEDED',
+
+    //borderRadius: 10,
   },
   profileImageContainer: {
-    height: hp('30'),
+    height: hp('32'),
     width: wp('50'),
     marginTop: 30,
+    paddingLeft: 6,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    
+    flex: 1,
+
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 15,
+    justifyContent : 'space-evenly',
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    //alignItems :'center'
   },
   profileImg: {
     width: wp('44'),
     height: hp('23'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 10,
+    borderRadius: 5,
   },
   footerTextContainer: {
     backgroundColor: 'white',
+    flex: 1,
     height: hp('10'),
     width: wp('44'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 3,
+  },
+  SubfooterContainer: {
+    backgroundColor: 'white',
+    
   },
   profileText: {
     fontWeight: 'bold',
@@ -328,5 +446,15 @@ const styles = StyleSheet.create({
     color: '#666666',
     textAlign: 'center',
     fontSize: 13,
+  },
+  footerContainer: {
+    backgroundColor: '#EDEDED',
+    paddingTop: 10,
+  },
+  footerTextseeAll: {
+    color: 'red',
+    fontSize: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
   },
 });

@@ -1,0 +1,1 @@
+export const WIDOWED_PROFILE = 'WIDOWED_PROFILE';

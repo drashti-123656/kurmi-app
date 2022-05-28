@@ -4,6 +4,19 @@ export const API_URL = {
   LOG_IN: 'api/login',
   REGISTER_USER: 'api/user-registration',
   FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
-  VERIFY_USER:'api/check-user-exist'
-
+  VERIFY_USER: 'api/check-user-exist',
+  SHORTED_USER: 'api/sorted-user',
+  SHORT_LISTEDD_USERS: 'api/sorted-user-list',
+  SEARCH_PROFILE: 'api/search-profiles',
+  OTHER_PROFILE_DETAILS: 'api/get-user-details',
+  MY_PROFILE_DETAILS: 'api/get-user',
+  CHANGE_PASSWORD: 'api/user-profile-update',
+  ADVANCE_SEARCH_DATA: 'api/search-profiles',
+  DIVORCED_DATA: 'api/divorced-profiles',
+  WIDOWED_DATA: 'api/widowed-profiles',
+  WIDOWER_DATA: 'api/widower-profiles',
+  DISABILITY_DATA: 'api/disability-profiles',
+  TOGGLE_SWITCH_ACTIVE: 'api/user-profile-update',
+  VIEW_BY_USERS: 'api/profile-view-list',
+  VIEW_BY_ID_PROFILE: 'api/profile-view',
 };

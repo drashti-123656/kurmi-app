@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import translate from './../../translations/configTranslations';
-import {WhatsappSchema} from '../../utils/schema/login';
+import { WhatsappSchema } from '../../utils/schema/whatsappSchema';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import {LOG_USER} from './redux/authActions';
 import {useDispatch} from 'react-redux';
@@ -33,7 +33,7 @@ const Whatsapp = ({navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo.png')} style={styles.image} />
+      <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Text style={styles.note}>{translate('whatsapp.Note')}</Text>
       <Formik
         initialValues={{
@@ -54,7 +54,7 @@ const Whatsapp = ({navigation}) => {
             <ExtendedTextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
-              autoFocus={true}
+              
               value={values.name}
               placeholder={translate('whatsapp.name')}
               placeholderTextColor={'#666666'}
@@ -66,7 +66,7 @@ const Whatsapp = ({navigation}) => {
               onChangeText={handleChange('whatsappno')}
               onBlur={handleBlur('whatsappno')}
               value={values.whatsappno}
-              autoFocus={true}
+            
               maxLength={10}
               keyboardType = 'numeric'
               placeholder={translate('whatsapp.phoneno')}

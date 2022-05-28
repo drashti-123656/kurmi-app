@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -21,34 +22,37 @@ import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema
 import dropDownList from '../../../utils/constants/dropDownList';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
   FETCH_STATE_DROPDOWN,
+  UPDATE_PROFILE,
   VERIFY_USER,
 } from './redux/registrationActions';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {register} from './redux/registrationReducer';
+
 import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import {number} from 'yup';
-import EStyleSheet, {value} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
+import {registerSuccess} from './redux/registrationReducer';
 
-const Registration = () => {
+const Registration = ({navigation}) => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const [ProfilePic, setProfilePic] = useState(null);
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
   const {
     registerData,
-    isRegistering,
+
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
 
@@ -65,6 +69,14 @@ const Registration = () => {
   }, []);
 
   const handleregisterUser = values => {
+    if (!ProfilePic) {
+      showMessage({
+        message: 'Please upload profile image ',
+        type: 'info',
+        backgroundColor: EStyleSheet.value('$WARNING_RED'),
+      });
+      return;
+    }
     if (!termsCondition) {
       showMessage({
         message: 'Please check privacy policy checkbox ',
@@ -73,9 +85,10 @@ const Registration = () => {
       });
       return;
     }
+
     const payload = {
-      userEmail: values.emailid,
-      userMobileNo: values.mobilenumber,
+      where: {userEmail: values.emailid, userMobileNo: values.mobilenumber},
+      queryType: 'whereor',
       userGender: values.gender,
       userProfileCreatedBy: values.profilemaker,
       userFirstName: values.firstname,
@@ -85,17 +98,15 @@ const Registration = () => {
       userState: values.state,
       userCity: values.city,
       password: values.password,
+      userProfileImage: ProfilePic,
     };
-
-    console.log('dov', values.birthdate);
 
     dispatch({
       type: VERIFY_USER,
       payload,
     });
 
-    dispatch(register(payload));
-    setLoading(true);
+    dispatch(registerSuccess(payload));
   };
 
   const [isLiked, setIsLiked] = useState([
@@ -115,6 +126,15 @@ const Registration = () => {
         : {...isLikedItem, selected: false},
     );
     setIsLiked(updatedState);
+  };
+
+  const handleChooseProfilePic = () => {
+    launchImageLibrary({noData: true, includeBase64: true}, response => {
+      console.log(response);
+      if (response) {
+        setProfilePic(response);
+      }
+    });
   };
 
   return (
@@ -147,10 +167,34 @@ const Registration = () => {
         }) => (
           <View style={styles.formContainer}>
             <View style={styles.profileContainer}>
-              <Image
-                style={styles.upload_img}
-                source={require('../../../assets/upload1.png')}
-              />
+              <TouchableOpacity
+                onPress={handleChooseProfilePic}
+                style={styles.uploadProfile}>
+                {ProfilePic ? (
+                  <Image
+                    style={styles.upload_img}
+                    source={{uri: `${ProfilePic?.assets[0]?.uri}`}}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    onPress={handleChooseProfilePic}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      backgroundColor: '#333',
+                      opacity: 0.5,
+                      borderRadius: 100,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      zIndex: 1,
+                    }}>
+                    <Image
+                      source={require('./../../../assets/upload1.png')}
+                      style={{width: 150, height: 150, tintColor: '#fff'}}
+                    />
+                  </TouchableOpacity>
+                )}
+              </TouchableOpacity>
               <Text style={styles.profileText}>
                 {' '}
                 {translate('register.picUpload')}{' '}
@@ -384,8 +428,10 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={loading}
+              loading={registerData.isVerifiying}
             />
+
+            {console.log('jajskhshg=====>>>', registerData.isVerifiying)}
           </View>
         )}
       </Formik>
@@ -404,6 +450,9 @@ const styles = StyleSheet.create({
     width: 30,
     height: 25,
   },
+  uploadProfile: {
+    flex: 1,
+  },
   input_calendar: {
     marginHorizontal: 20,
     marginTop: 10,
@@ -414,6 +463,7 @@ const styles = StyleSheet.create({
   },
   dropdownStyle: {
     marginBottom: 20,
+    flex: 1,
   },
   inputMargin: {
     marginTop: 20,
@@ -447,11 +497,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   upload_img: {
-    flex: 1,
+    //flex: 1,
     width: 150,
     height: 150,
     resizeMode: 'contain',
     marginBottom: 10,
+
+    borderRadius: 100,
   },
   profileContainer: {
     justifyContent: 'center',

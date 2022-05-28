@@ -1,5 +1,5 @@
 import {call, put} from 'redux-saga/effects';
-import apiClient from './../../../../services/httpServices';
+import apiClient, {setToken} from './../../../../services/httpServices';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../../services/webConstants';
 import {
@@ -14,35 +14,45 @@ import {
   fetchProfilemakerDropdownSuccess,
   fetchStateDropdownSuccess,
   fetchZodiacDropdownSuccess,
-  register,
+  registerSuccess,
   registrationsFail,
   registrationStarted,
   registrationSuccess,
+  verifyingFail,
+  verifyingStarted,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
-import {loginSuccess} from '../../redux/authReducer';
+import {fetchLoginDataSuccess} from '../../redux/authReducer';
 
 export function* registerUser(action) {
   const payload = action.payload;
-  registrationStarted({});
-  const response = yield call(apiClient.post, API_URL.REGISTER_USER, payload);
 
-  if (response.ok) {
+  yield put(registrationStarted({}));
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.REGISTER_USER,
+    payload,
+  );
+
+  if (ok) {
     showMessage({
       message: 'successfully registered',
       type: 'success',
     });
-    yield put(loginSuccess(response.data.User));
+    yield put(fetchLoginDataSuccess(data.User));
+    setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
+
+    console.log('99988=============>>>',data.Token.original.token);
+    navigate('DashboardNavigation');
   } else {
     showMessage({
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-    registrationsFail(response.problem);
+    registrationsFail(problem);
   }
 }
-
 
 export function* zodiacDropDowns(action) {
   const payload = action.payload;
@@ -130,24 +140,35 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-  
+  console.log('seeeeeee=======>>>', payload);
+  yield put(verifyingStarted({}));
+
   const apiBody = {
     where: {
-      userEmail: payload.userEmail,
-      userMobileNo: payload.userMobileNo,
+      userEmail: payload.where.userEmail,
+      userMobileNo: payload.where.userMobileNo,
     },
+    queryType: payload.queryType,
   };
-  const response = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
-  
-  if (response.ok) {
-   
-    yield put(register(payload));
-    navigate('Personalinformation');
+
+  const {data, ok, problem} = yield call(
+    apiClient.post,
+    API_URL.VERIFY_USER,
+    apiBody,
+  );
+
+  if (ok) {
+    yield put(registerSuccess(payload));
+    navigate('PersonalInformation');
+    //yield put(verifyingSuccess({}));
   } else {
     showMessage({
-      message: 'Ops, There is already a user with this E-mail and Mobile Number',
+      message:
+        'Ops, There is already a user with this E-mail and Mobile Number',
       type: 'danger',
     });
+
+    yield put(verifyingFail({}));
   }
 }
 
@@ -159,7 +180,7 @@ export function* profilemakerDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchProfilemakerDropdownSuccess(response.data.data));
   }
@@ -173,7 +194,7 @@ export function* countryDropdown(action) {
     API_URL.FETCH_SIGN_DROPDWON,
     payload,
   );
-  
+
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
@@ -181,7 +202,6 @@ export function* countryDropdown(action) {
 
 export function* stateDropdown(action) {
   const payload = action.payload;
-
   const response = yield call(
     apiClient.post,
     API_URL.FETCH_SIGN_DROPDWON,
@@ -206,7 +226,6 @@ export function* cityDropdown(action) {
     yield put(fetchCityDropdownSuccess(response.data.data));
   }
 }
-
 
 export function* landDropdown(action) {
   const payload = action.payload;

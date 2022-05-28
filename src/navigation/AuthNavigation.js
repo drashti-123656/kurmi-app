@@ -1,61 +1,98 @@
-import {StyleSheet} from 'react-native';
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Whatsapp from '../scenes/auth/Whatsapp';
-import Login from '../scenes/auth/Login';
-import Registration from '../scenes/auth/registration/Registration';
-import DharmikJankari from '../scenes/auth/registration/DharmikJankari';
-import Sampark from '../scenes/auth/registration/Sampark';
-import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
-import Personalinformation from '../scenes/auth/registration/personalInformation';
-import DrawerNavigation from './DrawerNavigation';
-const Stack = createNativeStackNavigator();
-
-
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import DashboardNavigation from './DashboardNavigation';
+import translate from '../translations/configTranslations';
+import CustomDrawer from './customDrawer';
+import AdvanceSearch from '../scenes/search/AdvanceSearch';
+import ViewBy from '../scenes/viewBy/ViewBy';
+import ShortLists from '../scenes/shortList/ShortList';
+import Sharedbiodata from '../DrawerNavigationScreen/SharedBiodata';
+import Membershipplan from '../DrawerNavigationScreen/MembershipPlan';
+import DivorcedProfile from '../scenes/divorcedProfile/DivorcedProfile';
+import DisabilityProfile from '../scenes/disabilityProfile/DisabilityProfile';
+import WidowedProfile from '../scenes/widowedProfile/WidowedProfile';
+import Settings from '../DrawerNavigationScreen/Settings';
+import AllkurmiSamaj from '../DrawerNavigationScreen/AllkurmiSamaj';
+import Helpline from '../DrawerNavigationScreen/Helpline';
+import Share from '../DrawerNavigationScreen/Share';
+import RateUs from '../DrawerNavigationScreen/RateUs';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import WidowerProfile from '../scenes/widowerProfile/WidowerProfile';
+import {useSelector} from 'react-redux';
+const Drawer = createDrawerNavigator();
 
 const AuthNavigation = () => {
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
   return (
-    <Stack.Navigator initialRouteName='login'>
-      <Stack.Screen
-        name="login"
-        component={Login}
+    <Drawer.Navigator
+      screenOptions={{
+        drawerLabelStyle: {marginLeft: -10},
+        headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+        headerTintColor: '#fff',
+      }}
+      drawerContent={props => <CustomDrawer {...props} />}>
+      <Drawer.Screen
+        name={translate('drawerScreen.Home')}
         options={{headerShown: false}}
+        component={DashboardNavigation}
       />
-      <Stack.Screen
-        name="Registration"
-        component={Registration}
-        options={{headerShown: false}}
-      />
-        <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
-          options={{headerShown: false}}
+
+      <>
+        <Drawer.Screen name="Helpline -" component={Helpline} />
+        <Drawer.Screen
+          name={translate('drawerScreen.View By')}
+          component={ViewBy}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.shortlist')}
+          component={ShortLists}
         />
 
-      {/* <Stack.Screen
-        name="Personalinformation"
-        component={Personalinformation}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="DharmikJankari"
-        component={DharmikJankari}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Sampark"
-        component={Sampark}
-        options={{headerShown: false}}
-      />
-       <Stack.Screen
-        name="ParivarikParichay"
-        component={ParivarikParichay}
-        options={{headerShown: false}}
-      /> */}
-    </Stack.Navigator>
+        <Drawer.Screen
+          name={translate('drawerScreen.advanced search')}
+          component={AdvanceSearch}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.All Kurmi Samaj')}
+          component={AllkurmiSamaj}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.biodata share')}
+          component={Sharedbiodata}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.Membership')}
+          component={Membershipplan}
+        />
+
+        <Drawer.Screen name="Share" component={Share} />
+        <Drawer.Screen name="Rate Us" component={RateUs} />
+        <Drawer.Screen
+          name={translate('drawerScreen.divorced')}
+          component={DivorcedProfile}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.disabled')}
+          component={DisabilityProfile}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.Widower')}
+          component={WidowerProfile}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.widowed ')}
+          component={WidowedProfile}
+        />
+        <Drawer.Screen
+          name={translate('drawerScreen.settings')}
+          component={Settings}
+        />
+      </>
+    </Drawer.Navigator>
   );
 };
 
 export default AuthNavigation;
-
-const styles = StyleSheet.create({});

@@ -9,7 +9,7 @@ const RadioButton = ({value, title, onChangeValue}) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={handleOnChange}>
         <View style={styles.border}>
-          {value ? <View style={styles.dot}></View> : null}
+          {value ? <View style={styles.dot} /> : null}
         </View>
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>

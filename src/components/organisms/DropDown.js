@@ -6,7 +6,12 @@ import {
 } from 'react-native-responsive-screen';
 import MultiSelect from 'react-native-multiple-select';
 
-const DropDown = ({items, selectText, selectedItems, onSelectedItemsChange}) => {
+const DropDown = ({
+  items,
+  selectText,
+  selectedItems,
+  onSelectedItemsChange,
+}) => {
   return (
     <View style={styles.dropdown}>
       <MultiSelect
@@ -44,8 +49,8 @@ export default DropDown;
 
 const styles = StyleSheet.create({
   dropdown: {
-  marginVertical: 8,
-  flex: 1,
+    marginVertical: 8,
+    flex: 1,
   },
   brandSearchInputStyle: {
     height: hp(7),

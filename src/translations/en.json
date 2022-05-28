@@ -77,5 +77,21 @@
     "AB+":"AB+",
     "AB-":"AB-"
 
+  },
+  "drawerScreen": {
+    "Home": "Home",
+    "View By": "View By",
+    "shortlist": "shortlist",
+    "Membership": "Membership",
+    "biodata share": "biodata share",
+    "advanced search": "advanced search",
+    "divorced ": "divorced ",
+    "widowed ": "widowed",
+    "disabled ": "disabled ",
+    "Widower":"Widower",
+    "Share":"Share",
+    "settings":"Settings",
+    "All Kurmi Samaj":"All Kurmi Samaj",
+    "Helpline-":"Helpline-"
   }
 }

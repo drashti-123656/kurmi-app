@@ -64,8 +64,14 @@
     
   },
   "advanceSearch": {
-    "Profile": "प्रोफाइल बनने वाला"
+    "Gender":"जेंडर",
+    "Marital Status": "वैवाहिक स्थिति",
+    "height From":"ऊंचाई से",
+    "height To" :"ऊंचाई तक",
+    "married":"विवाहित",
+    "unmarried":"अविवाहित"
   },
+
   "ParivarikParichay": {
     "parivarikHeader" : "परिवारिक परिचय",
      "fatherName" : "पिता का नाम ",
@@ -100,6 +106,7 @@
   },
   "register": {
     "registration" : "पंजीकरण",
+    "Name" : "नाम",
     "Var": "वर",
     "Vadhu": "वधू ",
     "ProfileName": "प्रोफाइल बनाने  वाला",
@@ -181,5 +188,45 @@
     "B-":"B-",
     "AB+":"AB+",
     "AB-":"AB-"
+  },
+  "drawerScreen": {
+    "Home": "होम",
+    "Helpline-":"हेल्पलाइन -",
+    "View By": "प्रोफाइल देखा",
+    "shortlist": "शॉर्टलिस्ट",
+    "Membership": "सदस्यता",
+    "biodata share": "बायोडाटा शेयर",
+    "advanced search": "एडवांस्ड सर्च",
+    "divorced": "तलाकशुदा",
+    "widowed ": "विधवा",
+    "disabled": "विकलांग",
+    "Widower":"विधुर",
+    "Share":"शेयर",
+    "settings":"सेटिंग",
+    "All Kurmi Samaj":"सर्व कुर्मि समाज"
+  },
+  "OthersProfile" : {
+
+    "Personal information": "व्यक्तिगत  डाटा ",
+    "Height": "उचाई",
+    "Marital Status": "वैवाहिक स्थिति",
+    "Knowledge": "शिक्षा / योगयता",
+    "Job": "कर्य / नौकरी",
+    "Disability": "विकलांगता",
+    "Dharmik Jankari": "धार्मिक जानकारी",
+    "Caste": "गोत्र",
+    "Native": "माँ का गोत्र:",
+    "Birthtime": "hh:mm",
+    "Birthplace": "जन्म स्थान",
+    "Zodiacsign": "राशी",
+    "auspicious": "मांगलिक"
+  },
+
+  "Myprofile":{
+    "Education And Career":"शिक्षा और करियर",
+    "Gender":"जेंडर",
+    "update membership":"सदस्यता अपडेट करें"
   }
-}
+  }
+  
+
