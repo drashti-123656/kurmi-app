@@ -202,7 +202,6 @@ const Registration = () => {
               uniqueKey={'profileCreatedById'}
               displayKey={'profileCreatedByNameHi'}
               autoFocus={true}
-              styleListContainer={styles.profileList}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
@@ -399,8 +398,6 @@ const Registration = () => {
               onPress={handleSubmit}
               loading={registerData.isVerifiying}
             />
-
-            {console.log('jajskhshg=====>>>', registerData.isVerifiying)}
           </View>
         )}
       </Formik>

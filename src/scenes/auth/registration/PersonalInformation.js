@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -140,7 +140,6 @@ const PersonalInformation = ({navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={disability}
-              styleListContainer={styles.listContainer}
               fixedHeight={true}
               selectText={translate('Vyaktigatdata.Disability')}
               selectedItems={values.disability}
@@ -184,10 +183,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 20,
   },
-  listContainer: {
-    height: hp(13),
-    borderRadius: 20,
-  },
+
   listContainerData: {
     height: hp(40),
     borderRadius: 20,

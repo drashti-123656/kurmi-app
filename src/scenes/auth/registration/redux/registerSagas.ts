@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import apiClient, {setToken} from './../../../../services/httpServices';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../../services/webConstants';
 import {
   fetchAuspiciousDropdownSuccess,
@@ -43,7 +43,6 @@ export function* registerUser(action) {
     setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
 
-    console.log('99988=============>>>',data.Token.original.token);
     navigate('DashboardNavigation');
   } else {
     showMessage({
@@ -140,7 +139,7 @@ export function* jobDropdown(action) {
 
 export function* registerUserVerification(action) {
   const payload = action.payload;
-  console.log('seeeeeee=======>>>', payload);
+
   yield put(verifyingStarted({}));
 
   const apiBody = {

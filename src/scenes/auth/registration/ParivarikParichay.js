@@ -1,14 +1,5 @@
-import {
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -22,19 +13,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_LAND_DROPDOWN, REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-import moment from 'moment'
+import moment from 'moment';
 
 const ParivarikParichay = () => {
   const dispatch = useDispatch();
- 
+
   const {
     parivarikData,
     samparkData,
-    dharmikJankariData ,
-    dropDownsData : {land,job},
+    dharmikJankariData,
+    dropDownsData: {land, job},
     registerData,
     personalinfoData,
-    isRegistering
+    isRegistering,
   } = useSelector(state => state.registration);
 
   useEffect(() => {
@@ -42,10 +33,7 @@ const ParivarikParichay = () => {
       type: FETCH_LAND_DROPDOWN,
       payload: {moduleType: 'Land'},
     });
-console.log('isregisteringfalse=====>>',isRegistering)
-    
   }, []);
-  
 
   const handleParivarik = values => {
     const payload = {
@@ -54,39 +42,38 @@ console.log('isregisteringfalse=====>>',isRegistering)
       userContactInfoPresentAddress: samparkData.presentAdd,
       userContactInfoPermanentAddress: samparkData.permanentAdd,
 
-      userEducationInfoEducation: personalinfoData.education[0] ,
+      userEducationInfoEducation: personalinfoData.education[0],
       userEducationInfoOccupation: personalinfoData.job[0],
-      
 
-      userFamilyInfoFatherName:  values.fatherName,
-      userFamilyInfoFatherOccupation:  values.fatherOccupation[0],
-      userFamilyInfoMotherName:  values.motherName,
-      userFamilyInfoMotherMaika : values.motherMayaka,
-      userFamilyInfoNoOfBrother : values.brother,
-      
-      userFamilyInfoNoOfSister : values.sister,
+      userFamilyInfoFatherName: values.fatherName,
+      userFamilyInfoFatherOccupation: values.fatherOccupation[0],
+      userFamilyInfoMotherName: values.motherName,
+      userFamilyInfoMotherMaika: values.motherMayaka,
+      userFamilyInfoNoOfBrother: values.brother,
+
+      userFamilyInfoNoOfSister: values.sister,
       userFamilyInfoLand: values.land[0],
 
-      userPersonalInfoMaritalStatusId:  personalinfoData.maritalstatus[0],
-     
-      userPersonalInfoHeight: personalinfoData.height[0],
-      
-      userPersonalInfoDisability: personalinfoData.disability[0],
-     
+      userPersonalInfoMaritalStatusId: personalinfoData.maritalstatus[0],
 
-      userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format('YYYY-MM-DD HH:mm:ss') ,
+      userPersonalInfoHeight: personalinfoData.height[0],
+
+      userPersonalInfoDisability: personalinfoData.disability[0],
+
+      userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format(
+        'YYYY-MM-DD HH:mm:ss',
+      ),
       userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
       userReligiousInfoGotra: dharmikJankariData.gotra[0],
-     
+
       userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
       userReligiousInfoManglik: dharmikJankariData.auspicious[0],
-      
-      userReligiousInfoMotherGotra : dharmikJankariData.native[0],
 
-      
-      userProfileCreatedBy :  registerData.profilemaker[0],
-      userFirstName :  registerData.firstname,
-      userLastName :  registerData.lastname,
+      userReligiousInfoMotherGotra: dharmikJankariData.native[0],
+
+      userProfileCreatedBy: registerData.profilemaker[0],
+      userFirstName: registerData.firstname,
+      userLastName: registerData.lastname,
       userGender: registerData.gender,
       userEmail: registerData.emailid,
       userMobileNo: registerData.mobilenumber,
@@ -94,18 +81,14 @@ console.log('isregisteringfalse=====>>',isRegistering)
       password: registerData.password,
       userCountry: registerData.country[0],
       userState: registerData.state[0],
-      userCity:registerData.city[0],
-      userProfileImage :`data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
-
+      userCity: registerData.city[0],
+      userProfileImage: `data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
     };
-   
-     
+
     dispatch({
       type: REGISTER_USER,
       payload,
     });
-  
-   
   };
   return (
     <RootScreen>
@@ -131,7 +114,7 @@ console.log('isregisteringfalse=====>>',isRegistering)
             errors,
             touched,
           }) => (
-            <View style={{marginTop: '10%'}}>
+            <View style={styles.mainContainer}>
               <ExtendedTextInput
                 onChangeText={handleChange('fatherName')}
                 onBlur={handleBlur('fatherName')}
@@ -144,17 +127,18 @@ console.log('isregisteringfalse=====>>',isRegistering)
                 <Text style={styles.error}>{errors.fatherName}</Text>
               ) : null}
 
-             <Dropdown
-              style={styles.inputMargin}
-              uniqueKey={'occupationId'}
-              displayKey={'occupationTitleHi'}
-              items={job}
-              selectText={translate('ParivarikParichay.fatherOccupation')}
-              selectedItems={values.fatherOccupation}
-              onSelectedItemsChange={value => setFieldValue('fatherOccupation', value)}
-            />
-
-              
+              <Dropdown
+                style={styles.inputMargin}
+                uniqueKey={'occupationId'}
+                displayKey={'occupationTitleHi'}
+                styleListContainer={styles.listContainerData}
+                items={job}
+                selectText={translate('ParivarikParichay.fatherOccupation')}
+                selectedItems={values.fatherOccupation}
+                onSelectedItemsChange={value =>
+                  setFieldValue('fatherOccupation', value)
+                }
+              />
 
               {errors.fatherOccupation && touched.fatherOccupation ? (
                 <Text style={styles.error}>{errors.fatherOccupation}</Text>
@@ -190,7 +174,7 @@ console.log('isregisteringfalse=====>>',isRegistering)
                 onChangeText={handleChange('brother')}
                 onBlur={handleBlur('brother')}
                 value={values.brother}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 style={styles.textinput}
                 placeholder={translate('ParivarikParichay.brother')}
                 placeholderTextColor={'#666666'}
@@ -204,7 +188,7 @@ console.log('isregisteringfalse=====>>',isRegistering)
                 onChangeText={handleChange('sister')}
                 onBlur={handleBlur('sister')}
                 value={values.sister}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 style={styles.textinput}
                 placeholder={translate('ParivarikParichay.sister')}
                 placeholderTextColor={'#666666'}
@@ -223,16 +207,15 @@ console.log('isregisteringfalse=====>>',isRegistering)
                 placeholderTextColor={'#666666'}
               /> */}
 
-              <Dropdown 
+              <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'landId'}
                 displayKey={'landTitleHi'}
-                 items={land}
+                items={land}
                 selectText={translate('ParivarikParichay.land')}
                 selectedItems={values.land}
                 onSelectedItemsChange={value => setFieldValue('land', value)}
               />
-              {console.log('land size===>',values)}
 
               {errors.land && touched.land ? (
                 <Text style={styles.error}>{errors.land}</Text>
@@ -243,7 +226,6 @@ console.log('isregisteringfalse=====>>',isRegistering)
                 onPress={handleSubmit}
                 loading={isRegistering}
               />
-             { console.log('isregisteringtrue=====>>',isRegistering)}
             </View>
           )}
         </Formik>
@@ -258,6 +240,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
   },
+  mainContainer: {marginTop: '10%'},
   input_view: {
     flex: 1,
   },
@@ -271,8 +254,9 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   inputMargin: {
-    marginBottom: 20
-   },
+    marginBottom: 20,
+    marginTop: 10,
+  },
   button: {
     backgroundColor: '#DC1C28',
     height: hp(7),
@@ -319,5 +303,9 @@ const styles = StyleSheet.create({
     marginRight: 30,
     color: 'red',
     textAlign: 'right',
+  },
+  listContainerData: {
+    height: hp(40),
+    borderRadius: 20,
   },
 });
