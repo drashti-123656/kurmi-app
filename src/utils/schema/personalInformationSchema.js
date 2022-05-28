@@ -6,6 +6,6 @@ export const PersonalinformationSchema = Yup.object({
   maritalstatus: Yup.number().required(translate('Vyaktigatdata.Required')),
   education: Yup.number().required(translate('Vyaktigatdata.Required')),
   job: Yup.number().required(translate('Vyaktigatdata.Required')),
- 
-  disability: Yup.number().required(translate('Vyaktigatdata.Required'))
-})
+
+  disability: Yup.number().required(translate('Vyaktigatdata.Required')),
+});

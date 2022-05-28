@@ -42,7 +42,7 @@ export const parivarikSchema = Yup.object().shape({
   motherMayaka: Yup.string().required(translate('ParivarikParichay.Required')),
   brother: Yup.string().required(translate('ParivarikParichay.Required')),
   sister: Yup.string().required(translate('ParivarikParichay.Required')),
-   land: Yup.number().required(translate('ParivarikParichay.Required')),
+  land: Yup.number().required(translate('ParivarikParichay.Required')),
 });
 export const RegistrationvalidationSchema = Yup.object({
   profilemaker: Yup.number().required(translate('register.Required')),
@@ -67,7 +67,10 @@ export const RegistrationvalidationSchema = Yup.object({
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
       translate('whatsapp.phoneNumberNotValid'),
     ),
-  birthdate: Yup.date().max(new Date(Date.now() - 662256000000), translate('register.PleaseChoose21Above')),
+  birthdate: Yup.date().max(
+    new Date(Date.now() - 662256000000),
+    translate('register.PleaseChoose21Above'),
+  ),
   country: Yup.number().required(translate('register.Required')),
   state: Yup.number().required(translate('register.Required')),
   city: Yup.number().required(translate('register.Required')),
