@@ -1,14 +1,5 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Button,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,9 +8,9 @@ import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
 import translate from '../../../translations/configTranslations';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-import dropDownList from '../../../utils/constants/dropDownList';
+
 import {ReligiousinformationvalidationSchema} from '../../../utils/schema/religiousInformationSchema';
-import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
+
 import {useDispatch, useSelector} from 'react-redux';
 import {dharmikJankari} from './redux/registrationReducer';
 import {
@@ -28,7 +19,6 @@ import {
   FETCH_ZODIC_SIGN,
 } from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
-import DatePicker from 'react-native-date-picker';
 
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 
@@ -64,7 +54,7 @@ const DharmikJankari = ({navigation}) => {
       userReligiousInfoPlaceOfBirth: values.birthplace,
       userReligiousInfoZodiac: values.zodiacsign,
       userReligiousInfoManglik: values.auspicious,
-      userReligiousInfoMotherGotra : values.native
+      userReligiousInfoMotherGotra: values.native,
     };
 
     navigation.navigate('Sampark');
@@ -95,7 +85,7 @@ const DharmikJankari = ({navigation}) => {
           touched,
         }) => (
           <>
-            <View style={{marginTop: '15%'}}>
+            <View style={styles.mainContainer}>
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'gotraId'}
@@ -152,6 +142,7 @@ const DharmikJankari = ({navigation}) => {
                 uniqueKey={'zodiacId'}
                 displayKey={'zodiacTitleHi'}
                 items={zodiacSign}
+                styleListContainer={styles.listContainerData}
                 selectText={translate('Dharmikjankari.Zodiacsign')}
                 selectedItems={values.zodiacsign}
                 onSelectedItemsChange={value =>
@@ -167,6 +158,7 @@ const DharmikJankari = ({navigation}) => {
                 uniqueKey={'nakshatraId'}
                 displayKey={'nakshatraTitleHi'}
                 items={auspicious}
+                styleListContainer={styles.listContainerData}
                 selectText={translate('Dharmikjankari.auspicious')}
                 selectedItems={values.auspicious}
                 onSelectedItemsChange={value =>
@@ -199,6 +191,7 @@ const styles = StyleSheet.create({
   inputHeight: {
     marginTop: 40,
   },
+  mainContainer: {marginTop: '15%'},
   inputMargin: {
     marginBottom: 25,
   },
@@ -225,8 +218,8 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'contain',
   },
-  dateTimeInputStyle : {
-  marginBottom : 25,
+  dateTimeInputStyle: {
+    marginBottom: 25,
   },
   profileContainer: {
     justifyContent: 'center',
@@ -254,6 +247,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 40,
+  },
+  listContainerData: {
+    height: hp(40),
+    borderRadius: 20,
   },
   profile_img: {
     width: 180,
@@ -420,7 +417,7 @@ const styles = StyleSheet.create({
     marginRight: 40,
     position: 'relative',
     //top: 5,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   lastnameerror: {
     fontSize: 12,
