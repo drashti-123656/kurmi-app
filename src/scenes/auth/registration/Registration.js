@@ -5,8 +5,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Button,
-  Dimensions,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -19,17 +17,16 @@ import CheckBox from '@react-native-community/checkbox';
 import {Formik} from 'formik';
 import translate from '../../../translations/configTranslations';
 import {RegistrationvalidationSchema} from '../../../utils/schema/registerSchema';
-import dropDownList from '../../../utils/constants/dropDownList';
+
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {showMessage} from 'react-native-flash-message';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
   FETCH_STATE_DROPDOWN,
-  UPDATE_PROFILE,
   VERIFY_USER,
 } from './redux/registrationActions';
 
@@ -41,14 +38,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 import {registerSuccess} from './redux/registrationReducer';
 
-const Registration = ({navigation}) => {
+const Registration = () => {
   const dispatch = useDispatch();
   const [termsCondition, setTermsCondition] = useState(false);
 
   const [ProfilePic, setProfilePic] = useState(null);
-
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
 
   const {
     registerData,
@@ -109,25 +103,6 @@ const Registration = ({navigation}) => {
     dispatch(registerSuccess(payload));
   };
 
-  const [isLiked, setIsLiked] = useState([
-    {id: 1, value: true, name: translate('register.Var'), selected: true},
-    {id: 2, value: false, name: translate('register.Vadhu'), selected: false},
-  ]);
-
-  const genderSelectData = [
-    {id: 1, name: translate('register.Var')},
-    {id: 2, name: translate('register.Vadhu')},
-  ];
-
-  const onRadioBtnClick = item => {
-    let updatedState = isLiked.map(isLikedItem =>
-      isLikedItem.id === item.id
-        ? {...isLikedItem, selected: true}
-        : {...isLikedItem, selected: false},
-    );
-    setIsLiked(updatedState);
-  };
-
   const handleChooseProfilePic = () => {
     launchImageLibrary({noData: true, includeBase64: true}, response => {
       console.log(response);
@@ -178,19 +153,10 @@ const Registration = ({navigation}) => {
                 ) : (
                   <TouchableOpacity
                     onPress={handleChooseProfilePic}
-                    style={{
-                      width: 150,
-                      height: 150,
-                      backgroundColor: '#333',
-                      opacity: 0.5,
-                      borderRadius: 100,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      zIndex: 1,
-                    }}>
+                    style={styles.imageDesign}>
                     <Image
                       source={require('./../../../assets/upload1.png')}
-                      style={{width: 150, height: 150, tintColor: '#fff'}}
+                      style={styles.imageUpload}
                     />
                   </TouchableOpacity>
                 )}
@@ -236,6 +202,7 @@ const Registration = ({navigation}) => {
               uniqueKey={'profileCreatedById'}
               displayKey={'profileCreatedByNameHi'}
               autoFocus={true}
+              styleListContainer={styles.profileList}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
@@ -331,6 +298,7 @@ const Registration = ({navigation}) => {
               uniqueKey={'countryId'}
               displayKey={'countryName'}
               autoFocus={true}
+              styleListContainer={styles.listContainerData}
               items={country}
               single
               selectText={translate('register.country')}
@@ -358,6 +326,7 @@ const Registration = ({navigation}) => {
               displayKey={'name'}
               autoFocus={true}
               single
+              styleListContainer={styles.listContainerData}
               items={state}
               selectText={translate('register.state')}
               selectedItems={values.state}
@@ -465,6 +434,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flex: 1,
   },
+  imageDesign: {
+    width: 150,
+    height: 150,
+    backgroundColor: '#333',
+    opacity: 0.5,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
   inputMargin: {
     marginTop: 20,
   },
@@ -476,6 +455,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 10,
     justifyContent: 'space-between',
+  },
+  imageUpload: {
+    width: 150,
+    height: 150,
+    tintColor: '#fff',
+  },
+  profileList: {
+    height: hp(28),
+    //borderRadius: 20,
   },
   textinput: {
     backgroundColor: 'white',
@@ -504,6 +492,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
 
     borderRadius: 100,
+  },
+  listContainerData: {
+    height: hp(40),
+    borderRadius: 20,
   },
   profileContainer: {
     justifyContent: 'center',

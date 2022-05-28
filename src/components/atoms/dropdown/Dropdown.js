@@ -14,6 +14,8 @@ const Dropdown = ({
   selectedItems,
   onSelectedItemsChange,
   style,
+  fixedHeight,
+  styleListContainer,
 }) => {
   return (
     <View style={styles.mainContainer}>
@@ -33,14 +35,14 @@ const Dropdown = ({
           tagRemoveIconColor={'black'}
           tagBorderColor={'black'}
           tagTextColor={'black'}
-          fixedHeight={true}
+          fixedHeight={fixedHeight}
           selectedItemTextColor={'black'}
           selectedItemIconColor={'white'}
           itemTextColor={'black'}
           searchInputStyle={styles.brandSearchInputStyle}
           submitButtonText="Submit"
           submitButtonColor={'black'}
-          styleListContainer={styles.listContainer}
+          styleListContainer={styleListContainer}
           styleDropdownMenuSubsection={styles.dropdownSubSection}
           styleInputGroup={styles.inputGroup}
           styleItemsContainer={styles.itemContainer}
