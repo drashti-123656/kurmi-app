@@ -32,7 +32,7 @@ const Profile = ({route}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
+              source={{uri: `${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
