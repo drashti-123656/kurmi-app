@@ -23,6 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
+import {PAGE_SIZE} from '../../utils/constants/appConstants';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -48,7 +49,7 @@ const NewsFeed = ({navigation, item}) => {
         gender: 'male',
       },
       page: 1,
-      pageSIze: 10,
+      pageSIze: PAGE_SIZE,
       order: {
         column: 'id',
         type: 'desc',
@@ -221,7 +222,6 @@ const NewsFeed = ({navigation, item}) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListHeaderComponent={renderHeader}
-          initialNumToRender={10}
           //ListFooterComponent={renderLoader}
           // refreshControl={
           //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
