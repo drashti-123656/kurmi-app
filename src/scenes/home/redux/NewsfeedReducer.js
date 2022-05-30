@@ -17,7 +17,7 @@ const searchProfileSlice = createSlice({
     },
 
     fetchNewsFeedSuccess(state, action) {
-      state.newsFeedData = action.payload;
+      state.newsFeedData = action.payload.profile;
       state.isFetching = false;
       state.page = action.payload.pageNumber;
     },
