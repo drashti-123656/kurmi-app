@@ -24,7 +24,7 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
-
+import {AgevalidationSchema} from '../../utils/schema/newsFeedSchema';
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
@@ -92,6 +92,7 @@ const NewsFeed = ({navigation, item}) => {
           ageFrom: '',
           ageTo: '',
         }}
+        validationSchema={AgevalidationSchema}
         onSubmit={values => handleSearchProfile(values)}>
         {({
           handleChange,
@@ -144,7 +145,9 @@ const NewsFeed = ({navigation, item}) => {
                 placeholder={translate('NewsFeed.ageFrom')}
                 placeholderTextColor={'#666666'}
               />
-
+              {/* {errors.ageFrom && touched.ageFrom ? (
+                <Text style={styles.error}>{errors.ageFrom}</Text>
+              ) : null} */}
               <TextInput
                 onChangeText={handleChange('ageTo')}
                 onBlur={handleBlur('ageTo')}
@@ -154,8 +157,20 @@ const NewsFeed = ({navigation, item}) => {
                 placeholder={translate('NewsFeed.ageTo')}
                 placeholderTextColor={'#666666'}
               />
+              {/* {errors.ageTo && touched.ageTo ? (
+                <Text style={styles.error}>{errors.ageTo}</Text>
+              ) : null} */}
             </View>
-
+            <View style={styles.errorText}>
+              {errors.ageFrom && touched.ageFrom ? (
+                <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
+              ) : null}
+              <View style={styles.lastnameError}>
+                {errors.ageTo && touched.ageTo ? (
+                  <Text style={styles.ageToError}>{errors.ageTo}</Text>
+                ) : null}
+              </View>
+            </View>
             <LoginButton
               title={translate('NewsFeed.Search')}
               onPress={handleSubmit}
@@ -251,6 +266,24 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 18,
   },
+  errorText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  ageFromError: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: '35%',
+    color: 'red',
+  },
+  ageToError: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 30,
+    color: 'red',
+    textAlign: 'right',
+    marginBottom: 5,
+  },
   vectorImg: {
     width: 20,
     height: 5,
@@ -321,6 +354,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginTop: 15,
   },
+
   ageContainer: {
     flexDirection: 'row',
   },
@@ -335,6 +369,7 @@ const styles = StyleSheet.create({
     height: hp(7),
     color: 'black',
   },
+
   submitButton: {
     backgroundColor: '#DC1C28',
     height: hp(8),
