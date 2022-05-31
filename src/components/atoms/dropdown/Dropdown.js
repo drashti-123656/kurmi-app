@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import React from 'react';
 import {
   widthPercentageToDP as wp,
@@ -28,13 +28,14 @@ const Dropdown = ({
           single
           style={styles.dropdownMargin}
           onSelectedItemsChange={onSelectedItemsChange}
-          selectText={selectText}
+          selectText={<Text style={styles.tag}>{selectText}</Text>}
           selectedItems={selectedItems}
           searchInputPlaceholderText="Search"
           onChangeInput={text => console.log(text)}
           tagRemoveIconColor={'black'}
           tagBorderColor={'black'}
           tagTextColor={'black'}
+          textColor={'black'}
           fixedHeight={fixedHeight}
           selectedItemTextColor={'black'}
           selectedItemIconColor={'white'}
@@ -99,5 +100,8 @@ const styles = StyleSheet.create({
   },
   dropdownMargin: {
     marginTop: 40,
+  },
+  tag: {
+    color: '#666666',
   },
 });
