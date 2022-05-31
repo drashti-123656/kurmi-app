@@ -47,10 +47,12 @@ export const parivarikSchema = Yup.object().shape({
 export const RegistrationvalidationSchema = Yup.object({
   profilemaker: Yup.number().required(translate('register.Required')),
   firstname: Yup.string()
+    .trim()
     .required(translate('register.Required'))
     .matches(/^[A-Za-z ]*$/, translate('register.validName'))
     .min(3, translate('register.nameMustbe3')),
   lastname: Yup.string()
+    .trim()
     .required(translate('register.Required'))
     .matches(/^[A-Za-z ]*$/, translate('register.validName'))
     .min(3, translate('register.nameMustbe3')),
