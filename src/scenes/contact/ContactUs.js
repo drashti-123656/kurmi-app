@@ -1,13 +1,6 @@
-import {
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,13 +12,15 @@ import translate from './../../translations/configTranslations';
 import ExtendedTextInput from './../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {contactUsValidationSchema} from '../../utils/schema/contactUsSchema';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {CONTACT_USER} from './redux/contactAction';
 import CustomInput from '../../components/atoms/inputs/CustomInput';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+
+  const {isSubmitting} = useSelector(state => state.contactUsReducer);
+
   const handleContactUser = values => {
     const payload = {
       name: values.name,
@@ -36,7 +31,6 @@ const ContactUs = () => {
       type: CONTACT_USER,
       payload,
     });
-    setLoading(true);
   };
 
   return (
@@ -70,6 +64,7 @@ const ContactUs = () => {
               onChangeText={handleChange('mobileNo')}
               onBlur={handleBlur('mobileNo')}
               value={values.mobileNo}
+              maxLength={10}
               keyboardType="numeric"
               style={styles.textinput}
               placeholder={translate('ContactUs.MobileNo')}
@@ -95,7 +90,7 @@ const ContactUs = () => {
             <LoginButton
               title={translate('ContactUs.Submit')}
               onPress={handleSubmit}
-              loading={loading}
+              loading={isSubmitting}
             />
           </View>
         )}

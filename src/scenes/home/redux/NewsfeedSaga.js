@@ -26,7 +26,5 @@ export function* searchProfile(action) {
       message: 'Ops, something went wrong',
       type: 'danger',
     });
-
-   
   }
 }
