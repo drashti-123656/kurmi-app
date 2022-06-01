@@ -157,15 +157,18 @@ const NewsFeed = ({navigation, item}) => {
               />
             </View>
             <View style={styles.errorText}>
-              {errors.ageFrom && touched.ageFrom ? (
-                <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
-              ) : null}
-              <View style={styles.lastnameError}>
+              <View>
+                {errors.ageFrom && touched.ageFrom ? (
+                  <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
+                ) : null}
+              </View>
+              <View>
                 {errors.ageTo && touched.ageTo ? (
                   <Text style={styles.ageToError}>{errors.ageTo}</Text>
                 ) : null}
               </View>
             </View>
+
             <LoginButton
               title={translate('NewsFeed.Search')}
               onPress={handleSubmit}
@@ -268,15 +271,14 @@ const styles = StyleSheet.create({
   ageFromError: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: '35%',
     color: 'red',
+    marginRight: 140,
   },
   ageToError: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 30,
+    marginRight: 40,
     color: 'red',
-    textAlign: 'right',
     marginBottom: 5,
   },
   vectorImg: {
