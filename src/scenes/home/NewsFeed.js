@@ -24,7 +24,7 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
-import {AgevalidationSchema} from '../../utils/schema/newsFeedSchema';
+import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
@@ -92,7 +92,7 @@ const NewsFeed = ({navigation, item}) => {
           ageFrom: '',
           ageTo: '',
         }}
-        validationSchema={AgevalidationSchema}
+        validationSchema={agevalidationSchema}
         onSubmit={values => handleSearchProfile(values)}>
         {({
           handleChange,
@@ -145,9 +145,7 @@ const NewsFeed = ({navigation, item}) => {
                 placeholder={translate('NewsFeed.ageFrom')}
                 placeholderTextColor={'#666666'}
               />
-              {/* {errors.ageFrom && touched.ageFrom ? (
-                <Text style={styles.error}>{errors.ageFrom}</Text>
-              ) : null} */}
+
               <TextInput
                 onChangeText={handleChange('ageTo')}
                 onBlur={handleBlur('ageTo')}
@@ -157,9 +155,6 @@ const NewsFeed = ({navigation, item}) => {
                 placeholder={translate('NewsFeed.ageTo')}
                 placeholderTextColor={'#666666'}
               />
-              {/* {errors.ageTo && touched.ageTo ? (
-                <Text style={styles.error}>{errors.ageTo}</Text>
-              ) : null} */}
             </View>
             <View style={styles.errorText}>
               {errors.ageFrom && touched.ageFrom ? (
