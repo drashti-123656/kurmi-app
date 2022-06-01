@@ -23,7 +23,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
-
+import {PAGE_SIZE} from '../../utils/constants/appConstants';
+import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
@@ -48,7 +49,7 @@ const NewsFeed = ({navigation, item}) => {
         gender: 'male',
       },
       page: 1,
-      pageSIze: 10,
+      pageSIze: PAGE_SIZE,
       order: {
         column: 'id',
         type: 'desc',
@@ -91,6 +92,7 @@ const NewsFeed = ({navigation, item}) => {
           ageFrom: '',
           ageTo: '',
         }}
+        validationSchema={agevalidationSchema}
         onSubmit={values => handleSearchProfile(values)}>
         {({
           handleChange,
@@ -154,7 +156,16 @@ const NewsFeed = ({navigation, item}) => {
                 placeholderTextColor={'#666666'}
               />
             </View>
-
+            <View style={styles.errorText}>
+              {errors.ageFrom && touched.ageFrom ? (
+                <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
+              ) : null}
+              <View style={styles.lastnameError}>
+                {errors.ageTo && touched.ageTo ? (
+                  <Text style={styles.ageToError}>{errors.ageTo}</Text>
+                ) : null}
+              </View>
+            </View>
             <LoginButton
               title={translate('NewsFeed.Search')}
               onPress={handleSubmit}
@@ -221,7 +232,6 @@ const NewsFeed = ({navigation, item}) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           ListHeaderComponent={renderHeader}
-          initialNumToRender={10}
           //ListFooterComponent={renderLoader}
           // refreshControl={
           //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -250,6 +260,24 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginTop: 18,
+  },
+  errorText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  ageFromError: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: '35%',
+    color: 'red',
+  },
+  ageToError: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 30,
+    color: 'red',
+    textAlign: 'right',
+    marginBottom: 5,
   },
   vectorImg: {
     width: 20,
@@ -321,6 +349,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginTop: 15,
   },
+
   ageContainer: {
     flexDirection: 'row',
   },
@@ -335,6 +364,7 @@ const styles = StyleSheet.create({
     height: hp(7),
     color: 'black',
   },
+
   submitButton: {
     backgroundColor: '#DC1C28',
     height: hp(8),
