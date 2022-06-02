@@ -20,6 +20,7 @@ import {
   registrationSuccess,
   verifyingFail,
   verifyingStarted,
+  verifyingSuccess,
 } from './registrationReducer';
 import {navigate} from '../../../../navigation/RootNavigation';
 import {fetchLoginDataSuccess} from '../../redux/authReducer';
@@ -150,14 +151,11 @@ export function* registerUserVerification(action) {
     queryType: payload.queryType,
   };
 
-  const {data, ok, problem} = yield call(
-    apiClient.post,
-    API_URL.VERIFY_USER,
-    apiBody,
-  );
+  const {ok} = yield call(apiClient.post, API_URL.VERIFY_USER, apiBody);
 
   if (ok) {
     yield put(registerSuccess(payload));
+    yield put(verifyingSuccess({}));
     navigate('PersonalInformation');
     //yield put(verifyingSuccess({}));
   } else {

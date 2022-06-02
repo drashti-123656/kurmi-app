@@ -4,6 +4,7 @@ import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
   registered: false,
   isRegistering: false,
+  isVerifiying: false,
 
   error: '',
 
@@ -54,7 +55,6 @@ const initialState = {
   },
 
   registerData: {
-    isVerifiying: false,
     verifyed: false,
     error: null,
     emailid: '',
@@ -168,13 +168,17 @@ const registerationSlice = createSlice({
     },
 
     verifyingStarted(state, action) {
-      state.registerData.isVerifiying = true;
+      state.isVerifiying = true;
     },
 
     verifyingFail(state, action) {
       state.registerData.verifyed = false;
-      state.registerData.isVerifiying = false;
+      state.isVerifiying = false;
       state.registerData.error = null;
+    },
+
+    verifyingSuccess(state, action) {
+      state.isVerifiying = false;
     },
 
     registerSuccess(state, action) {
@@ -252,5 +256,6 @@ export const {
   fetchLandDropdownSuccess,
   verifyingStarted,
   verifyingFail,
+  verifyingSuccess,
 } = actions;
 export default reducer;

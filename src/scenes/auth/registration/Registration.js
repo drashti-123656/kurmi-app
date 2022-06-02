@@ -46,6 +46,7 @@ const Registration = () => {
 
   const {
     registerData,
+    isVerifiying,
 
     dropDownsData: {profilemaker, country, state, city},
   } = useSelector(state => state.registration);
@@ -396,8 +397,12 @@ const Registration = () => {
             <LoginButton
               title={translate('register.create Account')}
               onPress={handleSubmit}
-              loading={registerData.isVerifiying}
+              loading={isVerifiying}
             />
+            {console.log(
+              'hjafdf===============================?>>',
+              isVerifiying,
+            )}
           </View>
         )}
       </Formik>
