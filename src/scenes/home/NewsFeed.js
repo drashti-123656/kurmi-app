@@ -25,6 +25,7 @@ import {base_URL} from '../../services/httpServices/';
 import Loader from '../../components/atoms/buttons/Loader';
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
+import {VIEW_BY_ID_PROFILE} from '../viewBy/redux/ViewByAction';
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
@@ -193,11 +194,19 @@ const NewsFeed = ({navigation, item}) => {
         <View style={styles.profileContainer}>
           <TouchableOpacity
             style={styles.profileImageContainer}
-            onPress={() =>
+            onPress={() => {
               navigation.navigate('OthersProfile', {
                 id: item.userId,
-              })
-            }>
+              });
+              const payload = {
+                profileId: item.userId,
+              };
+
+              dispatch({
+                type: VIEW_BY_ID_PROFILE,
+                payload,
+              });
+            }}>
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
