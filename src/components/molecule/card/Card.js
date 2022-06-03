@@ -38,7 +38,7 @@ const Card = ({navigation, item, id}) => {
             <Image
               style={styles.profileImg}
               resizeMode={'center'}
-              source={{uri: `${base_URL}${item.userProfileImage}`}}
+              source={{uri: `${item.userProfileImage}`}}
             />
             <View style={styles.footerTextContainer}>
               <Text style={styles.profileText}>

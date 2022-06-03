@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import React from 'react';
 import {
   widthPercentageToDP as wp,
@@ -14,6 +14,8 @@ const Dropdown = ({
   selectedItems,
   onSelectedItemsChange,
   style,
+  fixedHeight,
+  styleListContainer,
 }) => {
   return (
     <View style={styles.mainContainer}>
@@ -26,21 +28,22 @@ const Dropdown = ({
           single
           style={styles.dropdownMargin}
           onSelectedItemsChange={onSelectedItemsChange}
-          selectText={selectText}
+          selectText={<Text style={styles.tag}>{selectText}</Text>}
           selectedItems={selectedItems}
           searchInputPlaceholderText="Search"
           onChangeInput={text => console.log(text)}
           tagRemoveIconColor={'black'}
           tagBorderColor={'black'}
           tagTextColor={'black'}
-          fixedHeight={true}
+          textColor={'black'}
+          fixedHeight={fixedHeight}
           selectedItemTextColor={'black'}
           selectedItemIconColor={'white'}
           itemTextColor={'black'}
           searchInputStyle={styles.brandSearchInputStyle}
           submitButtonText="Submit"
           submitButtonColor={'black'}
-          styleListContainer={styles.listContainer}
+          styleListContainer={styleListContainer}
           styleDropdownMenuSubsection={styles.dropdownSubSection}
           styleInputGroup={styles.inputGroup}
           styleItemsContainer={styles.itemContainer}
@@ -97,5 +100,8 @@ const styles = StyleSheet.create({
   },
   dropdownMargin: {
     marginTop: 40,
+  },
+  tag: {
+    color: '#666666',
   },
 });

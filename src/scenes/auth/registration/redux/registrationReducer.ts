@@ -4,8 +4,7 @@ import {heightDropdwonList} from '../../../../utils/constants/dropDownList';
 const initialState = {
   registered: false,
   isRegistering: false,
-  
- 
+
   error: '',
 
   samparkData: {
@@ -55,7 +54,6 @@ const initialState = {
   },
 
   registerData: {
-
     isVerifiying: false,
     verifyed: false,
     error: null,

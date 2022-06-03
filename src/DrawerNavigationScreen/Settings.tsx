@@ -3,7 +3,6 @@ import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {useDispatch, useSelector} from 'react-redux';
-import {base_URL} from '../services/httpServices';
 
 import {logout} from '../scenes/auth/redux/authReducer';
 import {TOGGLE_SWITCH_ACTIVE} from '../scenes/hideProfile/redux/HideProfileAction';
@@ -61,7 +60,7 @@ const Settings = ({navigation}) => {
             <View style={styles.imageContainer}>
               <Image
                 style={styles.profile}
-                source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
+                source={{uri: `${myProfileData.userProfileImage}`}}
               />
               <View style={styles.text}>
                 <Text style={styles.profileDetail}>

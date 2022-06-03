@@ -46,7 +46,7 @@ const CustomDrawer = props => {
             </TouchableOpacity>
 
             <Image
-              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
+              source={{uri: `${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
             />
             <Text style={styles.text}>

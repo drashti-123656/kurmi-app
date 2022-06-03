@@ -1,12 +1,5 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,7 +7,7 @@ import {
 import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
 import translate from '../../../translations/configTranslations';
-import dropDownList from '../../../utils/constants/dropDownList';
+
 import {PersonalinformationSchema} from '../../../utils/schema/personalInformationSchema';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
@@ -29,10 +22,10 @@ import LoginButton from '../../../components/atoms/buttons/LoginButton';
 
 const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+
   const {
     personalinfoData,
-    dropDownsData: {maritalstatus, education, job, height,disability},
+    dropDownsData: {maritalstatus, education, job, height, disability},
   } = useSelector(state => state.registration);
 
   useEffect(() => {
@@ -58,15 +51,13 @@ const PersonalInformation = ({navigation}) => {
       userPersonalInfoMaritalStatusId: values.maritalstatus,
       userEducationInfoEducation: values.education,
       userEducationInfoOccupation: values.job,
-      
+
       userPersonalInfoDisability: values.disability,
-     
     };
 
     dispatch(personalInfo(payload));
-    setLoading(true);
-    navigation.navigate('DharmikJankari');
 
+    navigation.navigate('DharmikJankari');
   };
 
   return (
@@ -77,28 +68,19 @@ const PersonalInformation = ({navigation}) => {
           maritalstatus: personalinfoData.maritalstatus,
           education: personalinfoData.education,
           job: personalinfoData.job,
-         
+
           disability: personalinfoData.disability,
-         
         }}
         validationSchema={PersonalinformationSchema}
         onSubmit={values => handleSampark(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          setFieldValue,
-          values,
-          errors,
-          touched,
-        }) => (
-          <View style={{marginTop : '15%'}}> 
-          
+        {({handleSubmit, setFieldValue, values, errors, touched}) => (
+          <View style={styles.mainContainer}>
             <Dropdown
-               style={styles.inputMargin}
+              style={styles.inputMargin}
               uniqueKey={'id'}
               displayKey={'name'}
               items={height}
+              styleListContainer={styles.listContainerData}
               selectText={translate('Vyaktigatdata.Height')}
               selectedItems={values.height}
               onSelectedItemsChange={value => setFieldValue('height', value)}
@@ -109,13 +91,16 @@ const PersonalInformation = ({navigation}) => {
             ) : null}
 
             <Dropdown
-               style={styles.inputMargin}
+              style={styles.inputMargin}
               uniqueKey={'maritalStatusId'}
               displayKey={'maritalStatusTitleHi'}
+              styleListContainer={styles.listContainerData}
               items={maritalstatus}
               selectText={translate('Vyaktigatdata.Marital Status')}
               selectedItems={values.maritalstatus}
-              onSelectedItemsChange={value => setFieldValue('maritalstatus', value)}
+              onSelectedItemsChange={value =>
+                setFieldValue('maritalstatus', value)
+              }
             />
 
             {errors.maritalstatus && touched.maritalstatus ? (
@@ -126,6 +111,7 @@ const PersonalInformation = ({navigation}) => {
               style={styles.inputMargin}
               uniqueKey={'educationId'}
               displayKey={'educationTitleHi'}
+              styleListContainer={styles.listContainerData}
               items={education}
               selectText={translate('Vyaktigatdata.Knowledge')}
               selectedItems={values.education}
@@ -139,6 +125,7 @@ const PersonalInformation = ({navigation}) => {
               style={styles.inputMargin}
               uniqueKey={'occupationId'}
               displayKey={'occupationTitleHi'}
+              styleListContainer={styles.listContainerData}
               items={job}
               selectText={translate('Vyaktigatdata.Job')}
               selectedItems={values.job}
@@ -153,6 +140,7 @@ const PersonalInformation = ({navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={disability}
+              fixedHeight={true}
               selectText={translate('Vyaktigatdata.Disability')}
               selectedItems={values.disability}
               onSelectedItemsChange={value =>
@@ -162,14 +150,12 @@ const PersonalInformation = ({navigation}) => {
             {errors.disability && touched.disability ? (
               <Text style={styles.error}>{errors.disability}</Text>
             ) : null}
-           
-            <LoginButton 
-                 title={translate('Vyaktigatdata.Next')}
+
+            <LoginButton
+              title={translate('Vyaktigatdata.Next')}
               onPress={handleSubmit}
-              // loading={loading}
             />
-           
-           </View>
+          </View>
         )}
       </Formik>
     </RootScreen>
@@ -197,6 +183,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 20,
   },
+
+  listContainerData: {
+    height: hp(40),
+    borderRadius: 20,
+  },
   term: {
     color: '#FFFFFF',
     fontSize: 13,
@@ -219,7 +210,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   inputMargin: {
-  marginBottom: 20
+    marginBottom: 20,
   },
   ageContainer: {
     flexDirection: 'row',
@@ -401,12 +392,11 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 12,
     fontWeight: 'bold',
-    //marginHorizontal: 50,
+    marginBottom: 5,
     color: 'red',
     textAlign: 'right',
     marginRight: 40,
     position: 'relative',
-    //top: 5,
   },
   lastnameerror: {
     fontSize: 12,
@@ -489,5 +479,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 20,
+  },
+  mainContainer: {
+    marginTop: '15%',
   },
 });
