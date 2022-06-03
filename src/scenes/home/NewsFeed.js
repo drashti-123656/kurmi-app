@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  RefreshControl,
+  Pressable,
 } from 'react-native';
 import React, {useEffect} from 'react';
-import {useState} from 'react';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -21,23 +21,15 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
-import {base_URL} from '../../services/httpServices/';
-import Loader from '../../components/atoms/buttons/Loader';
+
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
+import Loader from '../../components/atoms/buttons/Loader';
 
-const NewsFeed = ({navigation, item}) => {
+const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
-  const [refreshing, setRefreshing] = useState(false);
-  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
-  }, []);
+  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
 
   useEffect(() => {
     const payload = {
@@ -83,165 +75,156 @@ const NewsFeed = ({navigation, item}) => {
     });
   };
 
-  const renderHeader = () => (
-    <View>
-      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
-      <Formik
-        initialValues={{
-          gender: 'male',
-          ageFrom: '',
-          ageTo: '',
-        }}
-        validationSchema={agevalidationSchema}
-        onSubmit={values => handleSearchProfile(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          setFieldValue,
-          values,
-          errors,
-          touched,
-        }) => (
-          <View>
-            <Text style={styles.bottomText}>
-              {translate('NewsFeed.choose')}
-            </Text>
-            <View style={styles.radioButtonContainer}>
-              <TouchableOpacity
-                style={styles.ButtonContainer}
-                onPress={() => setFieldValue('gender', 'male')}>
-                <View style={styles.radioButton}>
-                  {values.gender === 'male' ? (
-                    <View style={styles.radioButtonIcon} />
-                  ) : null}
-                </View>
-                <Text style={styles.radioButtonText}>
-                  {translate('register.Var')}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.ButtonContainer}
-                onPress={() => setFieldValue('gender', 'female')}>
-                <View style={styles.radioButton}>
-                  {values.gender === 'female' ? (
-                    <View style={styles.radioButtonIcon} />
-                  ) : null}
-                </View>
-                <Text style={styles.radioButtonText}>
-                  {translate('register.Vadhu')}
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.ageContainer}>
-              <TextInput
-                onChangeText={handleChange('ageFrom')}
-                onBlur={handleBlur('ageFrom')}
-                value={values.ageFrom}
-                keyboardType="numeric"
-                style={styles.textInput}
-                placeholder={translate('NewsFeed.ageFrom')}
-                placeholderTextColor={'#666666'}
-              />
-
-              <TextInput
-                onChangeText={handleChange('ageTo')}
-                onBlur={handleBlur('ageTo')}
-                value={values.ageTo}
-                keyboardType="numeric"
-                style={styles.textInput}
-                placeholder={translate('NewsFeed.ageTo')}
-                placeholderTextColor={'#666666'}
-              />
-            </View>
-            <View style={styles.errorText}>
-              {errors.ageFrom && touched.ageFrom ? (
-                <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
-              ) : null}
-              <View style={styles.lastnameError}>
-                {errors.ageTo && touched.ageTo ? (
-                  <Text style={styles.ageToError}>{errors.ageTo}</Text>
-                ) : null}
-              </View>
-            </View>
-            <LoginButton
-              title={translate('NewsFeed.Search')}
-              onPress={handleSubmit}
-              loading={isFetching}
-            />
-          </View>
-        )}
-      </Formik>
-
-      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
-      <ScrollView style={styles.footerContainer}>
-        <View style={styles.footerTitle}>
-          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
-          <Text style={styles.titleTextNext}>
-            {translate('NewsFeed.recentlyJoint')}
-          </Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
-
   const renderItem = ({item}) => {
     return (
-      <ScrollView style={styles.SubfooterContainer}>
-        <View style={styles.profileContainer}>
-          <TouchableOpacity
-            style={styles.profileImageContainer}
-            onPress={() =>
-              navigation.navigate('OthersProfile', {
-                id: item.userId,
-              })
-            }>
-            <Image
-              style={styles.profileImg}
-              resizeMode={'center'}
-              source={{uri: `${item.userProfileImage}`}}
-              // source={require('../../assets/profile.png')}
-            />
-            {/* <View style={styles.footerTextContainer}> */}
-            <Text style={styles.profileText}>
-              {item.userFirstName} {item.userLastName}
-            </Text>
-            <Text style={styles.profileIntroText}>
-              Age - {item.userAge}, {item.userCity.cityName},
-            </Text>
-            <Text style={styles.profileIntroText}>
-              {item.userState.name},{item.userCountry.countryName}
-            </Text>
-          </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.profileContainer}
+        onPress={() =>
+          navigation.navigate('OthersProfile', {
+            id: item.userId,
+          })
+        }>
+        <Image
+          style={styles.profileImg}
+          resizeMode={'center'}
+          source={{uri: `${item.userProfileImage}`}}
+        />
+        <View style={styles.cardMargin}>
+          <Text style={styles.profileText}>
+            {item.userFirstName} {item.userLastName}
+          </Text>
+          <Text style={styles.profileIntroText}>
+            Age - {item.userAge}, {item.userCity.cityName},
+          </Text>
+          <Text style={styles.profileIntroText}>
+            {item.userState.name},{item.userCountry.countryName}
+          </Text>
         </View>
-      </ScrollView>
+      </TouchableOpacity>
     );
   };
 
-  // const renderLoader = () => (isFetching ? <Loader /> : null);
   if (isFetching) {
     return <Loader />;
   } else {
     return (
       <RootScreen scrollable={true}>
+        <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+        <Formik
+          initialValues={{
+            gender: 'male',
+            ageFrom: '',
+            ageTo: '',
+          }}
+          validationSchema={agevalidationSchema}
+          onSubmit={values => handleSearchProfile(values)}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue,
+            values,
+            errors,
+            touched,
+          }) => (
+            <View>
+              <Text style={styles.bottomText}>
+                {translate('NewsFeed.choose')}
+              </Text>
+              <View style={styles.radioButtonContainer}>
+                <TouchableOpacity
+                  style={styles.ButtonContainer}
+                  onPress={() => setFieldValue('gender', 'male')}>
+                  <View style={styles.radioButton}>
+                    {values.gender === 'male' ? (
+                      <View style={styles.radioButtonIcon} />
+                    ) : null}
+                  </View>
+                  <Text style={styles.radioButtonText}>
+                    {translate('register.Var')}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.ButtonContainer}
+                  onPress={() => setFieldValue('gender', 'female')}>
+                  <View style={styles.radioButton}>
+                    {values.gender === 'female' ? (
+                      <View style={styles.radioButtonIcon} />
+                    ) : null}
+                  </View>
+                  <Text style={styles.radioButtonText}>
+                    {translate('register.Vadhu')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.ageContainer}>
+                <TextInput
+                  onChangeText={handleChange('ageFrom')}
+                  onBlur={handleBlur('ageFrom')}
+                  value={values.ageFrom}
+                  keyboardType="numeric"
+                  style={styles.textInput}
+                  placeholder={translate('NewsFeed.ageFrom')}
+                  placeholderTextColor={'#666666'}
+                />
+
+                <TextInput
+                  onChangeText={handleChange('ageTo')}
+                  onBlur={handleBlur('ageTo')}
+                  value={values.ageTo}
+                  keyboardType="numeric"
+                  style={styles.textInput}
+                  placeholder={translate('NewsFeed.ageTo')}
+                  placeholderTextColor={'#666666'}
+                />
+              </View>
+              <View style={styles.errorText}>
+                {errors.ageFrom && touched.ageFrom ? (
+                  <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
+                ) : null}
+                <View style={styles.lastnameError}>
+                  {errors.ageTo && touched.ageTo ? (
+                    <Text style={styles.ageToError}>{errors.ageTo}</Text>
+                  ) : null}
+                </View>
+              </View>
+              <LoginButton
+                title={translate('NewsFeed.Search')}
+                onPress={handleSubmit}
+                loading={isFetching}
+              />
+            </View>
+          )}
+        </Formik>
+
+        <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+        <ScrollView style={styles.footerContainer}>
+          <View style={styles.footerTitle}>
+            <Text style={styles.titleText}>
+              {translate('NewsFeed.newIntro')}
+            </Text>
+            <Text style={styles.titleTextNext}>
+              {translate('NewsFeed.recentlyJoint')}
+            </Text>
+          </View>
+        </ScrollView>
         <FlatList
+          horizontal
           data={newsFeedData}
-          numColumns={2}
           renderItem={renderItem}
+          contentContainerStyle={styles.cardBackground}
           keyExtractor={item => item.id}
-          ListHeaderComponent={renderHeader}
-          //ListFooterComponent={renderLoader}
-          // refreshControl={
-          //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          // }
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={styles.cardSeprater} />}
         />
-        <TouchableOpacity
+
+        <Pressable
           onPress={() => navigation.navigate('SeeAllProfile')}
           style={styles.footerContainer}>
           <Text style={styles.footerTextseeAll}> See All </Text>
-        </TouchableOpacity>
+        </Pressable>
       </RootScreen>
     );
   }
@@ -250,17 +233,6 @@ const NewsFeed = ({navigation, item}) => {
 export default NewsFeed;
 
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'stretch',
-    height: 52,
-    flexDirection: 'row',
-    // backgroundColor: '#DC1C28',
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  imageContainer: {
-    marginTop: 18,
-  },
   errorText: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -279,30 +251,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginBottom: 5,
   },
-  vectorImg: {
-    width: 20,
-    height: 5,
-  },
-  vectorImg_1: {
-    width: 15,
-    height: 5,
-  },
-  pinClipart: {
-    position: 'absolute',
-    top: 15,
-    right: 15,
-  },
-  PinClipartImg: {
-    width: 25,
-    height: 25,
-  },
-  navbarText: {
-    color: '#FFFFFF',
-    fontSize: 25,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginHorizontal: 20,
-  },
+
   title: {
     marginTop: 10,
     marginBottom: 10,
@@ -404,21 +353,17 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   profileContainer: {
-    // flexDirection: 'row',
-    //justifyContent: 'space-between',
-    backgroundColor: '#EDEDED',
-
-    //borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 5,
+    borderRadius: 10,
   },
   profileImageContainer: {
     height: hp('32'),
     width: wp('50'),
-    marginTop: 30,
-    paddingLeft: 6,
-    borderRadius: 10,
-    backgroundColor: 'white',
+    marginTop: 20,
+    marginBottom: 20,
 
-    flex: 1,
+    backgroundColor: 'white',
 
     shadowOffset: {
       width: 0,
@@ -430,20 +375,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'space-evenly',
     marginHorizontal: 10,
-    justifyContent: 'center',
-    //alignItems :'center'
   },
   profileImg: {
-    width: wp('44'),
-    height: hp('23'),
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 10,
+    flex: 1,
+    width: wp('50'),
+    height: wp('50'),
+    resizeMode: 'content',
     borderRadius: 5,
+    paddingHorizontal: 5,
   },
   footerTextContainer: {
     backgroundColor: 'white',
@@ -459,9 +398,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 3,
   },
-  SubfooterContainer: {
-    backgroundColor: 'white',
-  },
+
   profileText: {
     fontWeight: 'bold',
     color: 'black',
@@ -477,11 +414,22 @@ const styles = StyleSheet.create({
   footerContainer: {
     backgroundColor: '#EDEDED',
     paddingTop: 10,
+    flex: 1,
   },
   footerTextseeAll: {
     color: 'red',
     fontSize: 20,
     marginBottom: 20,
     alignSelf: 'center',
+  },
+  cardBackground: {
+    backgroundColor: '#EDEDED',
+    padding: 10,
+  },
+  cardSeprater: {
+    width: 10,
+  },
+  cardMargin: {
+    marginVertical: 10,
   },
 });
