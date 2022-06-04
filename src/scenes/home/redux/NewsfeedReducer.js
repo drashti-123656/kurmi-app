@@ -4,7 +4,7 @@ const initialState = {
   newsFeedData: [],
   error: '',
   isFetching: false,
-  page: 1,
+  pageIndex: 1,
   isPaginationRequired: true,
 };
 
@@ -16,10 +16,11 @@ const searchProfileSlice = createSlice({
       state.isFetching = true;
     },
 
-    fetchNewsFeedSuccess(state, action) {
-      state.newsFeedData = action.payload.profile;
+    fetchNewsFeedSuccess(state, {payload}) {
+      state.newsFeedData = payload.profile;
       state.isFetching = false;
-      state.page = action.payload.pageNumber;
+      state.pageIndex = payload.pageNumber;
+      state.isPaginationRequired = payload.isPaginationRequired;
     },
     fetchNewsFeedFail(state, action) {
       state.isFetching = false;

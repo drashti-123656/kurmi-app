@@ -13,9 +13,8 @@ import {PAGE_SIZE} from '../../utils/constants/appConstants';
 
 const SeeAllProfile = ({navigation}) => {
   const dispatch = useDispatch();
-  const {newsFeedData, isFetching, isPaginationRequired, page} = useSelector(
-    state => state.newsfeed,
-  );
+  const {newsFeedData, isFetching, isPaginationRequired, pageIndex} =
+    useSelector(state => state.newsfeed);
 
   const _fetchProfiles = pageNumber => {
     const payload = {
@@ -44,7 +43,7 @@ const SeeAllProfile = ({navigation}) => {
 
   const _paginateUsersProfiles = () => {
     if (isPaginationRequired) {
-      _fetchProfiles(page + 1);
+      _fetchProfiles(pageIndex + 1);
     }
   };
 
