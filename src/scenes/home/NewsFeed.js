@@ -82,6 +82,115 @@ const NewsFeed = ({navigation}) => {
     });
   };
 
+
+  const renderHeader = () => (
+    <View>
+      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
+      <Formik
+        initialValues={{
+          gender: 'male',
+          ageFrom: '',
+          ageTo: '',
+        }}
+        validationSchema={agevalidationSchema}
+        onSubmit={values => handleSearchProfile(values)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View>
+            <Text style={styles.bottomText}>
+              {translate('NewsFeed.choose')}
+            </Text>
+            <View style={styles.radioButtonContainer}>
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'male')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'male' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Var')}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.ButtonContainer}
+                onPress={() => setFieldValue('gender', 'female')}>
+                <View style={styles.radioButton}>
+                  {values.gender === 'female' ? (
+                    <View style={styles.radioButtonIcon} />
+                  ) : null}
+                </View>
+                <Text style={styles.radioButtonText}>
+                  {translate('register.Vadhu')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.ageContainer}>
+              <TextInput
+                onChangeText={handleChange('ageFrom')}
+                onBlur={handleBlur('ageFrom')}
+                value={values.ageFrom}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageFrom')}
+                placeholderTextColor={'#666666'}
+              />
+
+              <TextInput
+                onChangeText={handleChange('ageTo')}
+                onBlur={handleBlur('ageTo')}
+                value={values.ageTo}
+                keyboardType="numeric"
+                style={styles.textInput}
+                placeholder={translate('NewsFeed.ageTo')}
+                placeholderTextColor={'#666666'}
+              />
+            </View>
+            <View style={styles.errorText}>
+              <View>
+                {errors.ageFrom && touched.ageFrom ? (
+                  <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
+                ) : null}
+              </View>
+              <View>
+                {errors.ageTo && touched.ageTo ? (
+                  <Text style={styles.ageToError}>{errors.ageTo}</Text>
+                ) : null}
+              </View>
+            </View>
+
+            <LoginButton
+              title={translate('NewsFeed.Search')}
+              onPress={handleSubmit}
+              loading={isFetching}
+            />
+          </View>
+        )}
+      </Formik>
+
+      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+      <ScrollView style={styles.footerContainer}>
+        <View style={styles.footerTitle}>
+          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
+          <Text style={styles.titleTextNext}>
+            {translate('NewsFeed.recentlyJoint')}
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+
   const renderItem = ({item}) => {
     return (
 
@@ -284,15 +393,14 @@ const styles = StyleSheet.create({
   ageFromError: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: '35%',
     color: 'red',
+    marginRight: 140,
   },
   ageToError: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 30,
+    marginRight: 40,
     color: 'red',
-    textAlign: 'right',
     marginBottom: 5,
   },
 
