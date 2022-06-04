@@ -217,18 +217,7 @@ const AdvanceSearch = ({navigation}) => {
                 <Text style={styles.error}>{errors.maritalstatus}</Text>
               ) : null}
 
-              <View style={{flexDirection: 'row'}}>
-                {/* <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={height}
-                  selectText={translate('advanceSearch.height From')}
-                  selectedItems={values.heightFrom}
-                  onSelectedItemsChange={value =>
-                    setFieldValue('heightFrom', value)
-                  }
-                /> */}
+              <View style={styles.heightContainer}>
                 <Dropdown
                   style={styles.inputMargin}
                   uniqueKey={'id'}
@@ -240,35 +229,27 @@ const AdvanceSearch = ({navigation}) => {
                     setFieldValue('heightFrom', value)
                   }
                 />
+                <Dropdown
+                  style={styles.inputMargin}
+                  uniqueKey={'id'}
+                  displayKey={'name'}
+                  items={height}
+                  selectText={translate('advanceSearch.height To')}
+                  selectedItems={values.heightTo}
+                  onSelectedItemsChange={value =>
+                    setFieldValue('heightTo', value)
+                  }
+                />
+              </View>
+              <View style={styles.errorText}>
                 {errors.heightFrom && touched.heightFrom ? (
                   <Text style={styles.heighterror}>{errors.heightFrom}</Text>
                 ) : null}
-
-                {/* <Dropdown
-                  style={styles.inputStyle}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={height}
-                  selectText={translate('advanceSearch.height To')}
-                  selectedItems={values.heightTo}
-                  onSelectedItemsChange={value =>
-                    setFieldValue('heightTo', value)
-                  }
-                /> */}
-                <Dropdown
-                  style={styles.inputStyle}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={height}
-                  selectText={translate('advanceSearch.height To')}
-                  selectedItems={values.heightTo}
-                  onSelectedItemsChange={value =>
-                    setFieldValue('heightTo', value)
-                  }
-                />
-                {errors.heightTo && touched.heightTo ? (
-                  <Text style={styles.heighttoerror}>{errors.heightTo}</Text>
-                ) : null}
+                <View style={styles.lastnameError}>
+                  {errors.heightTo && touched.heightTo ? (
+                    <Text style={styles.heighttoerror}>{errors.heightTo}</Text>
+                  ) : null}
+                </View>
               </View>
 
               <Dropdown
@@ -404,6 +385,10 @@ const styles = EStyleSheet.create({
     marginLeft: 30,
     color: 'white',
   },
+  errorText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
   dropboxError: {
     fontSize: 12,
     fontWeight: 'bold',
@@ -426,6 +411,13 @@ const styles = EStyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 20,
   },
+  lastnameerror: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginHorizontal: 50,
+    color: 'red',
+    marginRight: 40,
+  },
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -447,6 +439,13 @@ const styles = EStyleSheet.create({
     marginBottom: 10,
     flex: 1,
     width: 200,
+    marginLeft: -15,
+  },
+  heightContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginBottom: 10,
+    justifyContent: 'space-between',
   },
   radioButton: {
     height: 20,
@@ -486,6 +485,16 @@ const styles = EStyleSheet.create({
     height: hp(7),
     color: 'black',
   },
+  heightinput: {
+    backgroundColor: 'white',
+    marginHorizontal: 10,
+    borderRadius: 10,
+    height: hp(7),
+    color: 'black',
+    fontSize: 15,
+    flex: 0.9,
+    paddingLeft: 10,
+  },
   button: {
     backgroundColor: '$PRIMARY',
     height: hp(7),
@@ -511,20 +520,16 @@ const styles = EStyleSheet.create({
   heighterror: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 30,
+    marginRight: '35%',
     color: 'red',
-    textAlign: 'right',
-    marginTop: 60,
-    marginHorizontal: -90,
   },
   heighttoerror: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 30,
+    marginRight: 40,
     color: 'red',
     textAlign: 'right',
-    marginTop: 60,
-    marginHorizontal: -50,
+    marginBottom: 5,
   },
   dropdownStyle: {
     marginBottom: 20,
