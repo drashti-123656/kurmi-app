@@ -14,6 +14,7 @@ import disabilityReducer from '../scenes/disabilityProfile/redux/disabilityReduc
 import MyProfileReducer from '../scenes/profile/redux/MyProfileReducer';
 import HideProfileReducer from '../scenes/hideProfile/redux/HideProfileReducer';
 import ViewByReducer from '../scenes/viewBy/redux/ViewByReducer';
+import contactReducer from '../scenes/contact/redux/contactReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   registration: registrationReducer,
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   advanceSerach: AdvanceSearchReducer,
   hideProfile: HideProfileReducer,
   viewByProfiles: ViewByReducer,
+  contactUsReducer: contactReducer,
 });
 
 export default rootReducer;
