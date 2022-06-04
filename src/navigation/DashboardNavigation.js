@@ -47,12 +47,19 @@ const DashboardNavigation = ({navigation}) => {
         component={AdvanceSearch}
         options={{
           tabBarLabel: 'search',
-          headerTitle: 'Advance Search',
+          headerTitle: translate('advanceSearch.Advanced Search'),
           headerTitleAlign: 'center',
           tabBarActiveTintColor: 'red',
           headerTintColor: 'white',
           headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
           tabBarIcon: () => <Search name="search" color={'black'} size={30} />,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('NewsFeedStack')}
+              style={styles.headerStyle}>
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+          ),
         }}
       />
       {!isAuthenticated ? (
