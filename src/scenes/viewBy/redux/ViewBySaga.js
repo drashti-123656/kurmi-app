@@ -1,10 +1,14 @@
-import {call, put} from 'redux-saga/effects';
+import {call, put, select} from 'redux-saga/effects';
 import apiClient from '../../../services/httpServices';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../services/webConstants';
-import { fetchViewByDataSuccess, fetchViewByUserDataFail, fetchViewByUserDataStarted, viewBySuccess } from './ViewByReducer';
-
-
+import {PAGE_SIZE} from '../../../utils/constants/appConstants';
+import {
+  fetchViewByDataSuccess,
+  fetchViewByUserDataFail,
+  fetchViewByUserDataStarted,
+  viewBySuccess,
+} from './ViewByReducer';
 
 export function* viewByProfile(action) {
   const payload = action.payload;
@@ -13,10 +17,9 @@ export function* viewByProfile(action) {
     API_URL.VIEW_BY_ID_PROFILE,
     payload,
   );
-  console.log('view priofile====>',data)
+  console.log('view priofile====>', data);
 
   if (ok) {
-    
     yield put(viewBySuccess(data));
   }
 }
@@ -29,13 +32,25 @@ export function* viewByUsers(action) {
     API_URL.VIEW_BY_USERS,
     payload,
   );
-  console.log('view by userssssss==>>',data)
+  let finalProfileList = [];
+  if (payload.page > 1) {
+    const {viewByUsersData} = yield select(state => state.viewByProfiles);
+    finalProfileList = viewByUsersData.concat(data.data);
+  } else {
+    finalProfileList = data.data;
+  }
+  console.log('view by userssssss==>>', data);
 
   if (ok) {
-    yield put(fetchViewByDataSuccess(data));
+    yield put(
+      fetchViewByDataSuccess({
+        profile: finalProfileList,
+        pageNumber: payload.page,
+      }),
+    );
   } else {
     showMessage({
-      message: 'Ops, something went wrong',
+      message: 'Login Your Account!',
       type: 'danger',
     });
     fetchViewByUserDataFail(problem);

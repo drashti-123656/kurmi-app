@@ -24,7 +24,14 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
+
+import {VIEW_BY_ID_PROFILE} from '../viewBy/redux/ViewByAction';
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 import Loader from '../../components/atoms/buttons/Loader';
+
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
@@ -77,6 +84,42 @@ const NewsFeed = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
+
+      <ScrollView style={styles.SubfooterContainer}>
+        <View style={styles.profileContainer}>
+          <TouchableOpacity
+            style={styles.profileImageContainer}
+            onPress={() => {
+              navigation.navigate('OthersProfile', {
+                id: item.userId,
+              });
+              const payload = {
+                profileId: item.userId,
+              };
+
+              dispatch({
+                type: VIEW_BY_ID_PROFILE,
+                payload,
+              });
+            }}>
+            <Image
+              style={styles.profileImg}
+              resizeMode={'center'}
+              source={{uri: `${item.userProfileImage}`}}
+              // source={require('../../assets/profile.png')}
+            />
+            {/* <View style={styles.footerTextContainer}> */}
+            <Text style={styles.profileText}>
+              {item.userFirstName} {item.userLastName}
+            </Text>
+            <Text style={styles.profileIntroText}>
+              Age - {item.userAge}, {item.userCity.cityName},
+            </Text>
+            <Text style={styles.profileIntroText}>
+              {item.userState.name},{item.userCountry.countryName}
+            </Text>
+          </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.profileContainer}
         onPress={() =>
@@ -99,6 +142,7 @@ const NewsFeed = ({navigation}) => {
           <Text style={styles.profileIntroText}>
             {item.userState.name},{item.userCountry.countryName}
           </Text>
+
         </View>
       </TouchableOpacity>
     );
