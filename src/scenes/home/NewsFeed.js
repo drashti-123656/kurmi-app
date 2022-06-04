@@ -24,14 +24,7 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
-
-import {VIEW_BY_ID_PROFILE} from '../viewBy/redux/ViewByAction';
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
-
 import Loader from '../../components/atoms/buttons/Loader';
-
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
@@ -82,153 +75,8 @@ const NewsFeed = ({navigation}) => {
     });
   };
 
-
-  const renderHeader = () => (
-    <View>
-      <Text style={styles.title}>{translate('NewsFeed.title')}</Text>
-      <Formik
-        initialValues={{
-          gender: 'male',
-          ageFrom: '',
-          ageTo: '',
-        }}
-        validationSchema={agevalidationSchema}
-        onSubmit={values => handleSearchProfile(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          setFieldValue,
-          values,
-          errors,
-          touched,
-        }) => (
-          <View>
-            <Text style={styles.bottomText}>
-              {translate('NewsFeed.choose')}
-            </Text>
-            <View style={styles.radioButtonContainer}>
-              <TouchableOpacity
-                style={styles.ButtonContainer}
-                onPress={() => setFieldValue('gender', 'male')}>
-                <View style={styles.radioButton}>
-                  {values.gender === 'male' ? (
-                    <View style={styles.radioButtonIcon} />
-                  ) : null}
-                </View>
-                <Text style={styles.radioButtonText}>
-                  {translate('register.Var')}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.ButtonContainer}
-                onPress={() => setFieldValue('gender', 'female')}>
-                <View style={styles.radioButton}>
-                  {values.gender === 'female' ? (
-                    <View style={styles.radioButtonIcon} />
-                  ) : null}
-                </View>
-                <Text style={styles.radioButtonText}>
-                  {translate('register.Vadhu')}
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.ageContainer}>
-              <TextInput
-                onChangeText={handleChange('ageFrom')}
-                onBlur={handleBlur('ageFrom')}
-                value={values.ageFrom}
-                keyboardType="numeric"
-                style={styles.textInput}
-                placeholder={translate('NewsFeed.ageFrom')}
-                placeholderTextColor={'#666666'}
-              />
-
-              <TextInput
-                onChangeText={handleChange('ageTo')}
-                onBlur={handleBlur('ageTo')}
-                value={values.ageTo}
-                keyboardType="numeric"
-                style={styles.textInput}
-                placeholder={translate('NewsFeed.ageTo')}
-                placeholderTextColor={'#666666'}
-              />
-            </View>
-            <View style={styles.errorText}>
-              <View>
-                {errors.ageFrom && touched.ageFrom ? (
-                  <Text style={styles.ageFromError}>{errors.ageFrom}</Text>
-                ) : null}
-              </View>
-              <View>
-                {errors.ageTo && touched.ageTo ? (
-                  <Text style={styles.ageToError}>{errors.ageTo}</Text>
-                ) : null}
-              </View>
-            </View>
-
-            <LoginButton
-              title={translate('NewsFeed.Search')}
-              onPress={handleSubmit}
-              loading={isFetching}
-            />
-          </View>
-        )}
-      </Formik>
-
-      <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
-      <ScrollView style={styles.footerContainer}>
-        <View style={styles.footerTitle}>
-          <Text style={styles.titleText}>{translate('NewsFeed.newIntro')}</Text>
-          <Text style={styles.titleTextNext}>
-            {translate('NewsFeed.recentlyJoint')}
-          </Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
-
-
   const renderItem = ({item}) => {
     return (
-
-      <ScrollView style={styles.SubfooterContainer}>
-        <View style={styles.profileContainer}>
-          <TouchableOpacity
-            style={styles.profileImageContainer}
-            onPress={() => {
-              navigation.navigate('OthersProfile', {
-                id: item.userId,
-              });
-              const payload = {
-                profileId: item.userId,
-              };
-
-              dispatch({
-                type: VIEW_BY_ID_PROFILE,
-                payload,
-              });
-            }}>
-            <Image
-              style={styles.profileImg}
-              resizeMode={'center'}
-              source={{uri: `${item.userProfileImage}`}}
-              // source={require('../../assets/profile.png')}
-            />
-            {/* <View style={styles.footerTextContainer}> */}
-            <Text style={styles.profileText}>
-              {item.userFirstName} {item.userLastName}
-            </Text>
-            <Text style={styles.profileIntroText}>
-              Age - {item.userAge}, {item.userCity.cityName},
-            </Text>
-            <Text style={styles.profileIntroText}>
-              {item.userState.name},{item.userCountry.countryName}
-            </Text>
-          </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.profileContainer}
         onPress={() =>
@@ -251,7 +99,6 @@ const NewsFeed = ({navigation}) => {
           <Text style={styles.profileIntroText}>
             {item.userState.name},{item.userCountry.countryName}
           </Text>
-
         </View>
       </TouchableOpacity>
     );
@@ -393,14 +240,15 @@ const styles = StyleSheet.create({
   ageFromError: {
     fontSize: 12,
     fontWeight: 'bold',
+    marginRight: '35%',
     color: 'red',
-    marginRight: 140,
   },
   ageToError: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginRight: 40,
+    marginRight: 30,
     color: 'red',
+    textAlign: 'right',
     marginBottom: 5,
   },
 
