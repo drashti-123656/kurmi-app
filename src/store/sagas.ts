@@ -68,6 +68,8 @@ import {
   VIEW_BY_USERS,
 } from '../scenes/viewBy/redux/ViewByAction';
 import {viewByProfile, viewByUsers} from '../scenes/viewBy/redux/ViewBySaga';
+import {EDIT_PROFILE} from '../scenes/editProfile/redux/editProfileAction';
+import {editProfile} from '../scenes/editProfile/redux/editprofileSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -100,5 +102,6 @@ export default function* sagas() {
     takeLatest(TOGGLE_SWITCH_ACTIVE, hideprofileStatus),
     takeLatest(VIEW_BY_ID_PROFILE, viewByProfile),
     takeLatest(VIEW_BY_USERS, viewByUsers),
+    takeLatest(EDIT_PROFILE, editProfile),
   ]);
 }

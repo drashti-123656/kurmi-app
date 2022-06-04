@@ -1,4 +1,4 @@
-import {Text, View, Image, ScrollView} from 'react-native';
+import {Text, View, Image, ScrollView, Alert} from 'react-native';
 import React, {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -8,7 +8,7 @@ import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {base_URL} from '../../services/httpServices/';
-const Profile = ({route}) => {
+const Profile = ({route, navigation, item}) => {
   const {myProfileData, isFetching} = useSelector(
     state => state.myProfileDetail,
   );
@@ -32,7 +32,7 @@ const Profile = ({route}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={{uri: `${myProfileData.userProfileImage}`}}
+              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
@@ -72,7 +72,15 @@ const Profile = ({route}) => {
               {translate('Vyaktigatdata.Personal information')}
             </Text>
             <View style={styles.pencilIcon}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(
+                    translate('Vyaktigatdata.Personal information'),
+                    {
+                      myProfileData,
+                    },
+                  )
+                }>
                 <Image
                   source={require('../../assets/pencilimage.png')}
                   style={styles.pencil}
@@ -98,11 +106,12 @@ const Profile = ({route}) => {
               {translate('Vyaktigatdata.Marital Status')}
             </Text>
             {/* <Text style={styles.detailsText}>
-      {' '}
-      {
-        myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
-      }{' '}
-    </Text> */}
+              {' '}
+              {
+                myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+                  .maritalStatusTitleHi
+              }{' '}
+            </Text> */}
             <Text style={styles.textStyle}>
               {translate('register.birthdate')}
             </Text>
@@ -124,10 +133,10 @@ const Profile = ({route}) => {
             <Text style={styles.textStyle}>
               {translate('register.ProfileName')}{' '}
             </Text>
-            {/* <Text style={styles.detailsText}>
-      {' '}
-      {myProfileData.userProfileCreatedBy}{' '}
-    </Text> */}
+            <Text style={styles.detailsText}>
+              {' '}
+              {myProfileData.userProfileCreatedBy.profileCreatedByNameHi}{' '}
+            </Text>
             <Text style={styles.textStyle}>
               {translate('register.country')}{' '}
             </Text>
@@ -145,6 +154,28 @@ const Profile = ({route}) => {
               {' '}
               {myProfileData.userCity.cityName}{' '}
             </Text>
+            <View style={styles.dataContainer}>
+              <Text style={styles.textHeading}>
+                {translate('Vyaktigatdata.Knowledge')}
+              </Text>
+              {/* <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData.userEducationInfo.userEducationInfoEducation
+                    .educationTitleHi
+                }
+              </Text> */}
+              <Text style={styles.textStyle}>
+                {translate('Vyaktigatdata.Job')}
+              </Text>
+              {/* <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData.userEducationInfo.userEducationInfoOccupation
+                    .occupationTitleHi
+                }{' '}
+              </Text> */}
+            </View>
           </View>
           <View>
             <View style={styles.separatorLine} />
@@ -156,7 +187,12 @@ const Profile = ({route}) => {
               {translate('samPark.samparkheader')}
             </Text>
             <View style={styles.pencilIcon}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(translate('samPark.samparkheader'), {
+                    myProfileData,
+                  })
+                }>
                 <Image
                   source={require('../../assets/pencilimage.png')}
                   style={styles.pencil}
@@ -205,7 +241,12 @@ const Profile = ({route}) => {
               {translate('Dharmikjankari.Dharmik Jankari')}
             </Text>
             <View style={styles.pencilIcon}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('dharmikjankariEditProfile', {
+                    myProfileData,
+                  })
+                }>
                 <Image
                   source={require('../../assets/pencilimage.png')}
                   style={styles.pencil}
@@ -217,13 +258,13 @@ const Profile = ({route}) => {
             <Text style={styles.textHeading}>
               {translate('Dharmikjankari.Caste')}
             </Text>
-            {/* <Text style={styles.detailsText}>
-      {' '}
-      {
-        myProfileData.userReligiousInfo.userReligiousInfoSubCaste
-          .subcasteTitleHi
-      }{' '}
-    </Text> */}
+            <Text style={styles.detailsText}>
+              {' '}
+              {
+                myProfileData.userReligiousInfo.userReligiousInfoGotra
+                  .gotraTitleHi
+              }{' '}
+            </Text>
             <Text style={styles.textStyle}>
               {translate('Dharmikjankari.Native')}
             </Text>
@@ -275,51 +316,16 @@ const Profile = ({route}) => {
 
           <View style={styles.imageContainer}>
             <Text style={styles.heading}>
-              {translate('Myprofile.Education And Career')}
-            </Text>
-            <View style={styles.pencilIcon}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../assets/pencilimage.png')}
-                  style={styles.pencil}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.dataContainer}>
-            <Text style={styles.textHeading}>
-              {translate('Vyaktigatdata.Knowledge')}
-            </Text>
-            <Text style={styles.detailsText}>
-              {' '}
-              {/* {
-                myProfileData.userEducationInfo.userEducationInfoEducation
-                  .educationTitleHi
-              } */}
-            </Text>
-            <Text style={styles.textStyle}>
-              {translate('Vyaktigatdata.Job')}
-            </Text>
-            {/* <Text style={styles.detailsText}>
-        {' '}
-        {
-          myProfileData.userEducationInfo.userEducationInfoOccupation
-            .occupationTitleHi
-        }{' '}
-      </Text> */}
-          </View>
-
-          <View>
-            <View style={styles.separatorLine} />
-          </View>
-
-          <View style={styles.imageContainer}>
-            <Text style={styles.heading}>
               {' '}
               {translate('ParivarikParichay.parivarikHeader')}
             </Text>
             <View style={styles.pencilIcon}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('parivarikParichyEditProfile', {
+                    myProfileData,
+                  })
+                }>
                 <Image
                   source={require('../../assets/pencilimage.png')}
                   style={styles.pencil}
@@ -339,9 +345,12 @@ const Profile = ({route}) => {
               {translate('ParivarikParichay.fatherOccupation')}{' '}
             </Text>
             {/* <Text style={styles.detailsText}>
-        {' '}
-        {myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation}{' '}
-      </Text> */}
+              {' '}
+              {
+                myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
+                  .occupationTitleHi
+              }{' '}
+            </Text> */}
             <Text style={styles.textStyle}>
               {translate('ParivarikParichay.motherName')}{' '}
             </Text>
@@ -353,9 +362,12 @@ const Profile = ({route}) => {
               {translate('ParivarikParichay.motherMayaka')}
             </Text>
             {/* <Text style={styles.detailsText}>
-        {' '}
-        {myProfileData.userFamilyInfo.userFamilyInfoMotherOccupation.occupationTitleHi}{' '}
-      </Text> */}
+              {' '}
+              {
+                myProfileData.userFamilyInfo.userFamilyInfoMotherOccupation
+                  .occupationTitleHi
+              }{' '}
+            </Text> */}
             <Text style={styles.textStyle}>
               {translate('ParivarikParichay.brother')}{' '}
             </Text>
