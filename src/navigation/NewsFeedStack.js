@@ -10,10 +10,14 @@ import SeeAllProfile from '../scenes/home/SeeAllProfile';
 import PasswordChange from '../scenes/passwordChange';
 import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {useSelector} from 'react-redux';
 import AdvanceSearchProfile from '../scenes/search/AdvanceSearchProfile';
-
+import PersonalInfoEditProfile from '../scenes/editProfile/PersonalInfoEditProfile';
+import samparkEditProfile from '../scenes/editProfile/samparkEditProfile';
+import parivarikParichyEditProfile from '../scenes/editProfile/parivarikParichyEditProfile';
+import dharmikjankariEditProfile from '../scenes/editProfile/dharmikjankariEditProfile';
 const newsFeedStack = createNativeStackNavigator();
 
 const NewsFeedStack = ({navigation}) => {
@@ -121,6 +125,108 @@ const NewsFeedStack = ({navigation}) => {
           headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         }}
       />
+      <newsFeedStack.Screen
+        name={translate('Vyaktigatdata.Personal information')}
+        component={PersonalInfoEditProfile}
+        options={{
+          headerShown: true,
+          headerTitle: translate('Vyaktigatdata.Personal information'),
+
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('My Profile')}>
+              <Ionicons
+                name="arrow-back"
+                size={30}
+                color="white"
+                style={styles.headerStyle}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <newsFeedStack.Screen
+        name={translate('samPark.samparkheader')}
+        component={samparkEditProfile}
+        options={{
+          headerShown: true,
+          headerTitle: translate('samPark.samparkheader'),
+
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('My Profile')}>
+              <Ionicons
+                name="arrow-back"
+                size={30}
+                color="white"
+                style={styles.headerStyle}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
+      <newsFeedStack.Screen
+        name="parivarikParichyEditProfile"
+        component={parivarikParichyEditProfile}
+        options={{
+          headerShown: true,
+          headerTitle: 'parivarikParichyEditProfile',
+
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('My Profile')}>
+              <Ionicons
+                name="arrow-back"
+                size={30}
+                color="white"
+                style={styles.headerStyle}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <newsFeedStack.Screen
+        name="dharmikjankariEditProfile"
+        component={dharmikjankariEditProfile}
+        options={{
+          headerShown: true,
+          headerTitle: 'dharmikjankariEditProfile',
+
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('My Profile')}>
+              <Ionicons
+                name="arrow-back"
+                size={30}
+                color="white"
+                style={styles.headerStyle}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
       <newsFeedStack.Screen
         name="AdvanceSearchProfile"
         component={AdvanceSearchProfile}
