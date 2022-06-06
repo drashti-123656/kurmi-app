@@ -97,6 +97,7 @@ const DashboardNavigation = ({navigation}) => {
             options={{
               tabBarLabel: 'Profile',
               headerShown: true,
+              headerTitle: translate('Myprofile.myProfile'),
               tabBarActiveTintColor: 'red',
               headerTitleAlign: 'center',
               headerTintColor: 'white',

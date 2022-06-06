@@ -158,20 +158,20 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {
+                {/* {
                   othersProfileData.userEducationInfo.userEducationInfoEducation
                     .educationTitleHi
-                }
+                } */}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Job')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {
+                {/* {
                   othersProfileData.userEducationInfo
                     .userEducationInfoOccupation.occupationTitleHi
-                }{' '}
+                }{' '} */}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -331,11 +331,11 @@ const OthersProfile = ({route, navigation}) => {
                 {translate('ParivarikParichay.land')}
               </Text>
               <Text style={styles.detailsText}>
-                {' '}
+                {/* {' '}
                 {
                   othersProfileData.userFamilyInfo.userFamilyInfoLand
                     .landTitleHi
-                }{' '}
+                }{' '} */}
               </Text>
             </View>
 

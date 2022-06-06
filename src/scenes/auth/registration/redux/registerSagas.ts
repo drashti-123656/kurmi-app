@@ -44,7 +44,7 @@ export function* registerUser(action) {
     setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
 
-    navigate('DashboardNavigation');
+    // navigate('DashboardNavigation');
   } else {
     showMessage({
       message: 'Ops, something went wrong',

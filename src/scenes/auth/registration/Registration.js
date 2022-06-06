@@ -107,7 +107,7 @@ const Registration = () => {
   const handleChooseProfilePic = () => {
     launchImageLibrary({noData: true, includeBase64: true}, response => {
       console.log(response);
-      if (response) {
+      if (!response.didCancel) {
         setProfilePic(response);
       }
     });
@@ -399,10 +399,6 @@ const Registration = () => {
               onPress={handleSubmit}
               loading={isVerifiying}
             />
-            {console.log(
-              'hjafdf===============================?>>',
-              isVerifiying,
-            )}
           </View>
         )}
       </Formik>

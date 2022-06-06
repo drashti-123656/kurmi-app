@@ -32,7 +32,7 @@ const Profile = ({route, navigation, item}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
-              source={{uri: `${base_URL}${myProfileData.userProfileImage}`}}
+              source={{uri: `${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
@@ -260,10 +260,10 @@ const Profile = ({route, navigation, item}) => {
             </Text>
             <Text style={styles.detailsText}>
               {' '}
-              {
+              {/* {
                 myProfileData.userReligiousInfo.userReligiousInfoGotra
                   .gotraTitleHi
-              }{' '}
+              }{' '} */}
             </Text>
             <Text style={styles.textStyle}>
               {translate('Dharmikjankari.Native')}

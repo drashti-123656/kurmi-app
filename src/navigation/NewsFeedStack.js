@@ -18,6 +18,7 @@ import PersonalInfoEditProfile from '../scenes/editProfile/PersonalInfoEditProfi
 import samparkEditProfile from '../scenes/editProfile/samparkEditProfile';
 import parivarikParichyEditProfile from '../scenes/editProfile/parivarikParichyEditProfile';
 import dharmikjankariEditProfile from '../scenes/editProfile/dharmikjankariEditProfile';
+import Profile from '../scenes/profile/Profile';
 const newsFeedStack = createNativeStackNavigator();
 
 const NewsFeedStack = ({navigation}) => {
@@ -109,6 +110,19 @@ const NewsFeedStack = ({navigation}) => {
             fontWeight: 'bold',
             color: 'white',
           },
+        }}
+      />
+      <newsFeedStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitle: translate('Myprofile.myProfile'),
+          //   headerShown: true,
+          //   headerTitle: 'नया  प्रोफाइल',
+          //   headerTitleStyle: {
+          //     fontWeight: 'bold',
+          //     color: 'white',
+          //   },
         }}
       />
 
