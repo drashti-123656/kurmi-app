@@ -2,17 +2,20 @@ import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PasswordInputText from 'react-native-hide-show-password-input';
-import {passwordChangeValidationSchema} from '../utils/schema/passwordChangeValidationSchema';
+
 import {useDispatch, useSelector} from 'react-redux';
-import { CHANGE_PASSWORD } from './passwordChange/redux/passwordAction';
+import LoginButton from '../../components/atoms/buttons/LoginButton';
+import { passwordChangeValidationSchema } from '../../utils/schema/passwordChangeValidationSchema';
+import { CHANGE_PASSWORD } from './redux/passwordAction';
 
 const PasswordChange = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  
+  const {isLoading} = useSelector(state => state.changePassword);
 
   const handleChangePassword = values => {
     const payload = {
-      userUpdateType:"chnagePassword",
+      userUpdateType: 'chnagePassword',
       userOldPassword: values.currentPassword,
       userPassword: values.NewPassword,
       userConfrimPassword: values.Retypenewpassword,
@@ -21,7 +24,7 @@ const PasswordChange = () => {
       type: CHANGE_PASSWORD,
       payload,
     });
-    setLoading(true);
+    
   };
   return (
     <>
@@ -63,9 +66,13 @@ const PasswordChange = () => {
               <Text style={styles.error}>{errors.Retypenewpassword}</Text>
             ) : null}
 
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.text}>Update</Text>
-            </TouchableOpacity>
+            <View style={{marginTop: 50}}>
+            <LoginButton
+              title={'Update'}
+              onPress={handleSubmit}
+              loading={isLoading}
+            />
+            </View>
           </View>
         )}
       </Formik>
@@ -82,12 +89,10 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 120,
     marginTop: 60,
-    borderWidth: 1,
     borderRadius: 50,
     width: 120,
     height: 40,
     backgroundColor: '#c3773b',
-    borderColor: '#DC1C28',
   },
   error: {
     fontSize: 12,

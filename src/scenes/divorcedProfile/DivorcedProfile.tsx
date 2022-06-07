@@ -1,10 +1,9 @@
-import {StyleSheet, Text, View, FlatList, RefreshControl} from 'react-native';
+import {StyleSheet, View, FlatList, RefreshControl} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {DIVORCED_PROFILE} from './redux/divorcedAction';
 import Card from '../../components/molecule/card/Card';
-import {fetchDivorcedDataStarted} from './redux/divorcedReducer';
 import Loader from '../../components/atoms/buttons/Loader';
 
 const wait = timeout => {

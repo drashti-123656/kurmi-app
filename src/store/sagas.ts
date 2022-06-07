@@ -1,4 +1,4 @@
-import {all, take, takeLatest} from 'redux-saga/effects';
+import {all, takeLatest} from 'redux-saga/effects';
 import {LOG_IN, LOG_USER} from '../scenes/auth/redux/authActions';
 import {logUser} from '../scenes/auth/redux/authSagas';
 import {CONTACT_USER} from '../scenes/contact/redux/contactAction';
