@@ -41,7 +41,7 @@ const rootReducer = combineReducers({
   hideProfile: HideProfileReducer,
   viewByProfiles: ViewByReducer,
   contactUsReducer: contactReducer,
-
+  changePassword: changePasswordReducer,
   editProfile: EditProfileReducer,
 });
 

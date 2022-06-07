@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, FlatList, RefreshControl} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
@@ -12,7 +12,6 @@ import Loader from '../../components/atoms/buttons/Loader';
 
 const WidowerProfile = ({navigation}) => {
   const {widowerData, isFetching} = useSelector(state => state.widowerProfile);
-  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
 
   // const onRefresh = React.useCallback(() => {

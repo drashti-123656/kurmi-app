@@ -7,7 +7,7 @@ import DrawerNavigation from './DrawerNavigation';
 import ContactUs from '../scenes/contact/ContactUs';
 import OthersProfile from '../scenes/othersProfile/OthersProfile';
 import SeeAllProfile from '../scenes/home/SeeAllProfile';
-import PasswordChange from '../scenes/passwordChange';
+import PasswordChange from '../scenes/passwordChange/passwordChange';
 import translate from './../translations/configTranslations';
 import Entypo from 'react-native-vector-icons/dist/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';

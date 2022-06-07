@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Button, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {
-  widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import translate from '../../../translations/configTranslations';
 import moment from 'moment';
 
 interface DateTimePickerProps {
