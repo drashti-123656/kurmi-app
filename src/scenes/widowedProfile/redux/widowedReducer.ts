@@ -3,6 +3,8 @@ const initialState = {
   widowedData: [],
   isFetching: false,
   error: '',
+  pageIndex: 1,
+  isPaginationRequired: true,
 };
 
 const widowedSlice = createSlice({
@@ -12,9 +14,11 @@ const widowedSlice = createSlice({
     fetchWidowedDataStarted(state) {
       state.isFetching = true;
     },
-    fetchWidowedDataSuccess(state, action) {
-      state.widowedData = action.payload;
+    fetchWidowedDataSuccess(state, {payload}) {
+      state.widowedData = payload.profile;
       state.isFetching = false;
+      state.pageIndex = payload.pageNumber;
+      state.isPaginationRequired = payload.isPaginationRequired;
     },
     fetchWidowedDataFail(state) {
       state.isFetching = false;
