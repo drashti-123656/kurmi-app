@@ -11,7 +11,6 @@ const disabilitySlice = createSlice({
   name: 'disabilityProfile',
   initialState,
   reducers: {
-    
     fetchDisabilityDataStarted(state) {
       state.isFetching = true;
     },
