@@ -1,2 +1,2 @@
-export const VIEW_BY_ID_PROFILE= 'VIEW_BY_ID_PROFILE';
-export const VIEW_BY_USERS= 'VIEW_BY_USERS';
+export const VIEW_BY_ID_PROFILE = 'VIEW_BY_ID_PROFILE';
+export const VIEW_BY_USERS = 'VIEW_BY_USERS';

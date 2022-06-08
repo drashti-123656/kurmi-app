@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-  viewByProfileData: [],
+  viewByData: [],
   viewByUsersData: [],
   error: '',
   isfetching: false,
-  page: 1,
+  pageIndex: 1,
   isPaginationRequired: true,
 };
 
@@ -14,20 +14,20 @@ const viewProfileSlice = createSlice({
   initialState,
   reducers: {
     viewBySuccess(state, action) {
-      state.viewByProfileData = action.payload;
+      state.viewByData = action.payload;
     },
     viewByFail(state, action) {
-      state.viewByProfileData.isfetching = false;
-      state.viewByProfileData.error = action.payload;
+      state.viewByData.isfetching = false;
+      state.viewByData.error = action.payload;
     },
-
     fetchViewByUserDataStarted(state) {
       state.isfetching = true;
     },
-    fetchViewByDataSuccess(state, action) {
-      state.viewByUsersData = action.payload.profile;
+    fetchViewByDataSuccess(state, {payload}) {
+      state.viewByUsersData = payload.profile;
       state.isfetching = false;
-      state.page = action.payload.pageNumber;
+      state.pageIndex = payload.pageNumber;
+      state.isPaginationRequired = payload.isPaginationRequired;
     },
     fetchViewByUserDataFail(state) {
       state.isfetching = false;
