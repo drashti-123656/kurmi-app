@@ -1,41 +1,40 @@
-import {StyleSheet, View, FlatList, RefreshControl} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {FlatList, RefreshControl} from 'react-native';
+import React from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 import {WIDOWED_PROFILE} from './redux/widowedAction';
 import Loader from '../../components/atoms/buttons/Loader';
-
-
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
+import { PAGE_SIZE } from '../../utils/constants/appConstants';
 
 const WidowedProfile = ({navigation}) => {
-  const {widowedData, isFetching} = useSelector(state => state.widowedProfile);
-  const [refreshing, setRefreshing] = useState(false);
+  const {widowedData, isFetching, isPaginationRequired, pageIndex} = useSelector(state => state.widowedProfile);
   const dispatch = useDispatch();
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
-  }, []);
-
-  const payload = {
-    page: 1,
-    pageSIze: 10,
-    order: {
-      column: 'id',
-      type: 'desc',
-    },
-  };
-
-  useEffect(() => {
+  const _fetchProfiles = pageNumber => {
+    const payload = {
+      page: pageNumber,
+      pageSIze: PAGE_SIZE,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
     dispatch({
       type: WIDOWED_PROFILE,
       payload,
     });
-  }, []);
+  };
+
+  const __refreshOnPull = () => {
+    _fetchProfiles(1);
+  }
+
+  const _paginateUSersProfiles = () => {
+    if(isPaginationRequired) {
+      _fetchProfiles(pageIndex + 1)
+    }
+  }
 
   const renderItem = ({item}) => {
     return <Card navigation={navigation} item={item} />;
@@ -44,8 +43,7 @@ const WidowedProfile = ({navigation}) => {
   const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
-    <RootScreen scrollable={true}>
-      <View style={styles.container}>
+    <RootScreen>
         <FlatList
           data={widowedData}
           renderItem={renderItem}
@@ -53,20 +51,14 @@ const WidowedProfile = ({navigation}) => {
           ListFooterComponent={renderLoader}
           initialNumToRender={10}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={isFetching} onRefresh={__refreshOnPull} />
           }
+          onEndReachedThreshold={0.5}
+          onEndReached={_paginateUSersProfiles}
         />
-      </View>
     </RootScreen>
   );
 };
 
 export default WidowedProfile;
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-});

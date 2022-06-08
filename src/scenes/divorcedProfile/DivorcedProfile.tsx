@@ -1,5 +1,5 @@
-import {StyleSheet, View, FlatList, RefreshControl} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {FlatList, RefreshControl} from 'react-native';
+import React from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {DIVORCED_PROFILE} from './redux/divorcedAction';

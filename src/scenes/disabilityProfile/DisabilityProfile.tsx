@@ -1,4 +1,4 @@
-import {StyleSheet, View, FlatList, RefreshControl} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
 import React from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
@@ -47,7 +47,6 @@ const DisabilityProfile = ({navigation}) => {
 
   return (
     <RootScreen>
-     
         <FlatList
           data={disabilityData}
           renderItem={renderItem}
@@ -60,7 +59,6 @@ const DisabilityProfile = ({navigation}) => {
           onEndReachedThreshold={0.5}
           onEndReached={_paginateUSersProfiles}
         />
-    
     </RootScreen>
   );
 };
