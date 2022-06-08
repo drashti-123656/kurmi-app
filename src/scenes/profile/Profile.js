@@ -32,6 +32,7 @@ const Profile = ({route, navigation, item}) => {
           <View style={styles.container}>
             <Image
               style={styles.image}
+              resizeMode={'contain'}
               source={{uri: `${myProfileData.userProfileImage}`}}
             />
             <Text style={styles.text}>
@@ -63,9 +64,9 @@ const Profile = ({route, navigation, item}) => {
               </TouchableOpacity>
             </View> */}
           </View>
-          <View>
-            <View style={styles.separatorLine} />
-          </View>
+
+          <View style={styles.separatorLine} />
+
           <View style={styles.imageContainer}>
             <Text style={styles.heading}>
               {' '}
@@ -435,13 +436,21 @@ const styles = EStyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '$PRIMARY',
-    padding: 10,
+    //padding: 10,
     width: 200,
-    height: 60,
-    marginTop: 20,
-    marginHorizontal: 20,
+    height: 50,
+    marginTop: 15,
+
+    marginHorizontal: 10,
     justifyContent: 'center',
     borderRadius: 100,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   pencilIcon: {
     marginHorizontal: 170,
@@ -477,12 +486,14 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 225,
+    height: 225,
     justifyContent: 'center',
     alignSelf: 'center',
-    borderRadius: 100,
-    marginTop: 10,
+    borderRadius: 125,
+    borderWidth: 5,
+    borderColor: 'white',
+    marginTop: 5,
   },
   separatorLine: {
     flex: 1,
@@ -493,7 +504,9 @@ const styles = EStyleSheet.create({
   text: {
     color: '$WHITE',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   textStyle: {
     color: '$DARK',
