@@ -161,6 +161,9 @@ const AdvanceSearch = ({navigation}) => {
                 items={profilemaker}
                 selectText={translate('register.ProfileName')}
                 selectedItems={values.profilemaker}
+                searchInputStyle={styles.searchInput}
+                hideDropdown={true}
+                searchIcon={false}
                 onSelectedItemsChange={value =>
                   setFieldValue('profilemaker', value)
                 }
@@ -175,6 +178,9 @@ const AdvanceSearch = ({navigation}) => {
                 items={gotra}
                 selectText={translate('Dharmikjankari.Caste')}
                 selectedItems={values.gotra}
+                searchInputStyle={styles.searchInput}
+                hideDropdown={true}
+                searchIcon={false}
                 onSelectedItemsChange={value => setFieldValue('gotra', value)}
               />
 
@@ -225,6 +231,7 @@ const AdvanceSearch = ({navigation}) => {
                   items={height}
                   selectText={translate('advanceSearch.height From')}
                   selectedItems={values.heightFrom}
+                  searchInputStyle={styles.brandSearchInputStyle}
                   onSelectedItemsChange={value =>
                     setFieldValue('heightFrom', value)
                   }
@@ -236,6 +243,7 @@ const AdvanceSearch = ({navigation}) => {
                   items={height}
                   selectText={translate('advanceSearch.height To')}
                   selectedItems={values.heightTo}
+                  searchInputStyle={styles.brandSearchInputStyle}
                   onSelectedItemsChange={value =>
                     setFieldValue('heightTo', value)
                   }
@@ -259,6 +267,7 @@ const AdvanceSearch = ({navigation}) => {
                 items={auspicious}
                 selectText={translate('Dharmikjankari.auspicious')}
                 selectedItems={values.auspicious}
+                searchInputStyle={styles.brandSearchInputStyle}
                 onSelectedItemsChange={value =>
                   setFieldValue('auspicious', value)
                 }
@@ -274,6 +283,7 @@ const AdvanceSearch = ({navigation}) => {
                 autoFocus={true}
                 items={country}
                 single
+                searchInputStyle={styles.brandSearchInputStyle}
                 selectText={translate('register.country')}
                 selectedItems={values.country}
                 onSelectedItemsChange={value => {
@@ -303,6 +313,7 @@ const AdvanceSearch = ({navigation}) => {
                 items={state}
                 selectText={translate('register.state')}
                 selectedItems={values.state}
+                searchInputStyle={styles.brandSearchInputStyle}
                 onSelectedItemsChange={value => {
                   setFieldValue('state', value);
                   dispatch({
@@ -326,6 +337,7 @@ const AdvanceSearch = ({navigation}) => {
                 displayKey={'cityName'}
                 autoFocus={true}
                 single
+                searchInputStyle={styles.brandSearchInputStyle}
                 items={city}
                 selectText={translate('register.city')}
                 selectedItems={values.city}
@@ -341,6 +353,9 @@ const AdvanceSearch = ({navigation}) => {
                 items={education}
                 selectText={translate('Vyaktigatdata.Knowledge')}
                 selectedItems={values.education}
+                searchInputStyle={styles.searchInput}
+                hideDropdown={true}
+                searchIcon={false}
                 onSelectedItemsChange={value =>
                   setFieldValue('education', value)
                 }
@@ -356,6 +371,9 @@ const AdvanceSearch = ({navigation}) => {
                 items={job}
                 selectText={translate('Vyaktigatdata.Job')}
                 selectedItems={values.job}
+                searchInputStyle={styles.searchInput}
+                hideDropdown={true}
+                searchIcon={false}
                 onSelectedItemsChange={value => setFieldValue('job', value)}
               />
               {errors.job && touched.job ? (
@@ -365,7 +383,7 @@ const AdvanceSearch = ({navigation}) => {
               <LoginButton
                 title={translate('NewsFeed.Search')}
                 onPress={handleSubmit}
-                loading={isFetching}
+                // loading={isFetching}
               />
             </View>
           )}
@@ -384,6 +402,10 @@ const styles = EStyleSheet.create({
     marginTop: 10,
     marginLeft: 30,
     color: 'white',
+  },
+  brandSearchInputStyle: {
+    height: hp(7),
+    fontSize: 18,
   },
   errorText: {
     flexDirection: 'row',
@@ -458,6 +480,9 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 20,
+  },
+  searchInput: {
+    display: 'none',
   },
   radioButtonIcon: {
     height: 12,

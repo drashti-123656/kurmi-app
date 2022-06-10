@@ -16,6 +16,9 @@ const Dropdown = ({
   style,
   fixedHeight,
   styleListContainer,
+  searchInputStyle,
+  hideDropdown,
+  searchIcon,
 }) => {
   return (
     <View style={styles.mainContainer}>
@@ -26,11 +29,12 @@ const Dropdown = ({
           uniqueKey={uniqueKey}
           displayKey={displayKey}
           single
+          searchInputPlaceholderText="Search"
+          searchIcon={searchIcon}
           style={styles.dropdownMargin}
           onSelectedItemsChange={onSelectedItemsChange}
           selectText={<Text style={styles.tag}>{selectText}</Text>}
           selectedItems={selectedItems}
-          searchInputPlaceholderText="Search"
           onChangeInput={text => console.log(text)}
           tagRemoveIconColor={'black'}
           tagBorderColor={'black'}
@@ -40,7 +44,7 @@ const Dropdown = ({
           selectedItemTextColor={'black'}
           selectedItemIconColor={'white'}
           itemTextColor={'black'}
-          searchInputStyle={styles.brandSearchInputStyle}
+          searchInputStyle={searchInputStyle}
           submitButtonText="Submit"
           submitButtonColor={'black'}
           styleListContainer={styleListContainer}
@@ -49,6 +53,7 @@ const Dropdown = ({
           styleItemsContainer={styles.itemContainer}
           styleSelectorContainer={styles.selectorContainer}
           styleRowList={styles.rowList}
+          hideDropdown={hideDropdown}
         />
       </View>
     </View>
@@ -58,10 +63,6 @@ const Dropdown = ({
 export default Dropdown;
 
 const styles = StyleSheet.create({
-  brandSearchInputStyle: {
-    height: hp(7),
-    fontSize: 18,
-  },
   listContainer: {
     height: hp(40),
     borderRadius: 20,
