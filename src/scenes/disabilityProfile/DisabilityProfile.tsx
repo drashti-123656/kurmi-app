@@ -1,17 +1,15 @@
 import {FlatList, RefreshControl} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 import {DISABILITY_PROFILE} from './redux/disabilityAction';
 import Loader from '../../components/atoms/buttons/Loader';
-import { PAGE_SIZE } from '../../utils/constants/appConstants';
-
+import {PAGE_SIZE} from '../../utils/constants/appConstants';
 
 const DisabilityProfile = ({navigation}) => {
-  const {disabilityData, isFetching, isPaginationRequired, pageIndex} = useSelector(
-    state => state.disabilityProfile,
-  );
+  const {disabilityData, isFetching, isPaginationRequired, pageIndex} =
+    useSelector(state => state.disabilityProfile);
   const dispatch = useDispatch();
 
   const _fetchProfiles = pageNumber => {
@@ -29,15 +27,19 @@ const DisabilityProfile = ({navigation}) => {
     });
   };
 
+  useEffect(() => {
+    _fetchProfiles(1);
+  }, []);
+
   const __refreshOnPull = () => {
     _fetchProfiles(1);
-  }
+  };
 
   const _paginateUSersProfiles = () => {
-    if(isPaginationRequired) {
-      _fetchProfiles(pageIndex + 1)
+    if (isPaginationRequired) {
+      _fetchProfiles(pageIndex + 1);
     }
-  }
+  };
 
   const renderItem = ({item}) => {
     return <Card navigation={navigation} item={item} />;
@@ -47,18 +49,18 @@ const DisabilityProfile = ({navigation}) => {
 
   return (
     <RootScreen>
-        <FlatList
-          data={disabilityData}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          ListFooterComponent={renderLoader}
-          initialNumToRender={10}
-          refreshControl={
-            <RefreshControl refreshing={isFetching} onRefresh={__refreshOnPull} />
-          }
-          onEndReachedThreshold={0.5}
-          onEndReached={_paginateUSersProfiles}
-        />
+      <FlatList
+        data={disabilityData}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListFooterComponent={renderLoader}
+        initialNumToRender={10}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={__refreshOnPull} />
+        }
+        onEndReachedThreshold={0.5}
+        onEndReached={_paginateUSersProfiles}
+      />
     </RootScreen>
   );
 };
