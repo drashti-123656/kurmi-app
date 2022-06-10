@@ -1,5 +1,5 @@
 import {FlatList, RefreshControl} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
@@ -26,6 +26,10 @@ const WidowerProfile = ({navigation}) => {
       payload,
     });
   };
+
+  useEffect(() => {
+    _fetchProfiles(1);
+  }, []);
 
   const __refreshOnPull = () => {
     _fetchProfiles(1);
