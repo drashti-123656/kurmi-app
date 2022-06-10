@@ -90,6 +90,9 @@ const DharmikJankari = ({navigation}) => {
                 style={styles.inputMargin}
                 uniqueKey={'gotraId'}
                 displayKey={'gotraTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 items={gotra}
                 selectText={translate('Dharmikjankari.Caste')}
                 selectedItems={values.gotra}
@@ -102,6 +105,9 @@ const DharmikJankari = ({navigation}) => {
 
               <Dropdown
                 style={styles.inputMargin}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 uniqueKey={'gotraId'}
                 displayKey={'gotraTitleHi'}
                 items={gotra}
@@ -141,6 +147,9 @@ const DharmikJankari = ({navigation}) => {
                 style={styles.inputMargin}
                 uniqueKey={'zodiacId'}
                 displayKey={'zodiacTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 items={zodiacSign}
                 styleListContainer={styles.listContainerData}
                 selectText={translate('Dharmikjankari.Zodiacsign')}
@@ -157,6 +166,9 @@ const DharmikJankari = ({navigation}) => {
                 style={styles.inputMargin}
                 uniqueKey={'nakshatraId'}
                 displayKey={'nakshatraTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 items={auspicious}
                 styleListContainer={styles.listContainerData}
                 selectText={translate('Dharmikjankari.auspicious')}
@@ -202,6 +214,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 16,
     marginTop: 20,
+  },
+  searchInput: {
+    display: 'none',
   },
   term: {
     color: '#FFFFFF',
