@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemContainer: {
-    // backgroundColor: '$PRIMARY',
+    //backgroundColor: '$PRIMARY',
     borderRadius: 10,
   },
   selectorContainer: {

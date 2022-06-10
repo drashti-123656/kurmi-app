@@ -80,6 +80,9 @@ const PersonalInformation = ({navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={height}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               styleListContainer={styles.listContainerData}
               selectText={translate('Vyaktigatdata.Height')}
               selectedItems={values.height}
@@ -93,6 +96,9 @@ const PersonalInformation = ({navigation}) => {
             <Dropdown
               style={styles.inputMargin}
               uniqueKey={'maritalStatusId'}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               displayKey={'maritalStatusTitleHi'}
               styleListContainer={styles.listContainerData}
               items={maritalstatus}
@@ -110,6 +116,9 @@ const PersonalInformation = ({navigation}) => {
             <Dropdown
               style={styles.inputMargin}
               uniqueKey={'educationId'}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               displayKey={'educationTitleHi'}
               styleListContainer={styles.listContainerData}
               items={education}
@@ -125,6 +134,9 @@ const PersonalInformation = ({navigation}) => {
               style={styles.inputMargin}
               uniqueKey={'occupationId'}
               displayKey={'occupationTitleHi'}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               styleListContainer={styles.listContainerData}
               items={job}
               selectText={translate('Vyaktigatdata.Job')}
@@ -140,6 +152,9 @@ const PersonalInformation = ({navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={disability}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               fixedHeight={true}
               selectText={translate('Vyaktigatdata.Disability')}
               selectedItems={values.disability}
@@ -283,6 +298,9 @@ const styles = StyleSheet.create({
   profileImageContainer: {
     flexDirection: 'row',
     marginTop: 40,
+  },
+  searchInput: {
+    display: 'none',
   },
 
   imageContainer: {

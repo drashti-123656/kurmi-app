@@ -131,6 +131,9 @@ const ParivarikParichay = () => {
                 style={styles.inputMargin}
                 uniqueKey={'occupationId'}
                 displayKey={'occupationTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 styleListContainer={styles.listContainerData}
                 items={job}
                 selectText={translate('ParivarikParichay.fatherOccupation')}
@@ -211,6 +214,9 @@ const ParivarikParichay = () => {
                 style={styles.inputMargin}
                 uniqueKey={'landId'}
                 displayKey={'landTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 items={land}
                 selectText={translate('ParivarikParichay.land')}
                 selectedItems={values.land}
@@ -263,6 +269,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginTop: 20,
     borderRadius: 10,
+  },
+  searchInput: {
+    display: 'none',
   },
   text_btn: {
     textAlign: 'center',

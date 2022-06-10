@@ -206,6 +206,9 @@ const Registration = () => {
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               onSelectedItemsChange={value =>
                 setFieldValue('profilemaker', value)
               }
@@ -349,6 +352,7 @@ const Registration = () => {
 
             <Dropdown
               style={styles.dropdownStyle}
+              styleListContainer={styles.listContainerData}
               uniqueKey={'cityId'}
               displayKey={'cityName'}
               autoFocus={true}
@@ -782,5 +786,8 @@ const styles = StyleSheet.create({
     marginRight: '20%',
     color: 'red',
     //marginLeft: '20%',
+  },
+  searchInput: {
+    display: 'none',
   },
 });
