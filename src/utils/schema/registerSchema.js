@@ -79,9 +79,9 @@ export const RegistrationvalidationSchema = Yup.object({
   password: Yup.string()
     .required(translate('register.validPassword'))
     .oneOf([Yup.ref('password'), null])
-    .min(8, translate('register.passwordhave8Character'))
-    .oneOf([Yup.ref('password'), null])
-    .matches(/[a-z]/, translate('register.passwordhaveLowerCase'))
-    .oneOf([Yup.ref('password'), null])
-    .matches(/[A-Z]/, translate('register.passwordhaveUpperCase')),
+    .min(8, translate('register.passwordhave8Character')),
+  // .oneOf([Yup.ref('password'), null])
+  // .matches(/[a-z]/, translate('register.passwordhaveLowerCase'))
+  // .oneOf([Yup.ref('password'), null])
+  // .matches(/[A-Z]/, translate('register.passwordhaveUpperCase')),
 });
