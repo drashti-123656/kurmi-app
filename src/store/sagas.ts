@@ -44,6 +44,9 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
+import {downloadPdf} from '../scenes/shareBioData/redux/DownloadPdfSaga';
+
 import {
   SHORT_LISTED_USERS,
   SHORT_LIST_PROFILE,
@@ -104,5 +107,6 @@ export default function* sagas() {
     takeLatest(VIEW_BY_ID_PROFILE, viewByProfile),
     takeLatest(VIEW_BY_USERS, viewByUsers),
     takeLatest(EDIT_PROFILE, editProfile),
+    takeLatest(DOWNLOAD_PDF, downloadPdf),
   ]);
 }
