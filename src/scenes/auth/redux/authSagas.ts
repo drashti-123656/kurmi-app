@@ -32,24 +32,23 @@ export function* loginUser(action) {
     API_URL.LOG_IN,
     payload,
   );
+  console.log('logggg====>', data);
   if (ok) {
-    yield put(fetchLoginDataSuccess(data.User));
+    yield put(fetchLoginDataSuccess(data.token));
+
     setToken(data.token);
     showMessage({
       message: 'successfully Logged In',
       type: 'success',
     });
-
-   
   } else {
-    console.log('worngPassword===>>',data.User)
+    console.log('worngPassword===>>', data.User);
     yield put(fetchLoginDataFail({}));
     showMessage({
       message: 'Please Register Your Account!!',
       type: 'danger',
     });
-    
 
-   // fetchLoginDataFail(problem);
+    // fetchLoginDataFail(problem);
   }
 }

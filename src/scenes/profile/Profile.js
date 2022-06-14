@@ -7,10 +7,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
-import {base_URL} from '../../services/httpServices/';
-const Profile = ({route, navigation, item}) => {
+import {clearLedgerDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
+import RNShare from 'react-native-share';
+
+const Profile = ({navigation}) => {
   const {myProfileData, isFetching} = useSelector(
     state => state.myProfileDetail,
+  );
+  const {downloadProfileSuccess, downloadedProfileFilePath} = useSelector(
+    state => state.downloadPdf,
   );
   const dispatch = useDispatch();
 
@@ -22,7 +27,21 @@ const Profile = ({route, navigation, item}) => {
       type: MY_PROFILE_DETAILS,
     });
   }, []);
-
+  useEffect(() => {
+    if (downloadProfileSuccess) {
+      RNShare.open({
+        title: 'Invoice',
+        message: 'Invoice',
+        url: `file://${downloadedProfileFilePath}`,
+      })
+        .catch(reason => {
+          console.log('failed: ', reason);
+        })
+        .finally(() => {
+          dispatch(clearLedgerDownloadStatus({}));
+        });
+    }
+  }, [downloadProfileSuccess]);
   if (isFetching) {
     return <Loader />;
   } else {
