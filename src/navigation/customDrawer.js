@@ -98,7 +98,7 @@ const CustomDrawer = props => {
           )}
           label={translate('drawerScreen.biodata share')}
           onPress={() => {
-            props.navigation.navigate(translate('drawerScreen.biodata share'));
+            props.navigation.navigate(translate('drawerScreen.Profile'));
           }}
         />
         <DrawerItem
