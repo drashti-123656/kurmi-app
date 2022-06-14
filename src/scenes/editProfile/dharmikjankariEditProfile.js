@@ -32,6 +32,8 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 const DharmikjankariEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
+  const {isUpdating} = useSelector(state => state.editProfile);
+
   const {
     dropDownsData: {zodiacSign, auspicious, gotra},
   } = useSelector(state => state.registration);
@@ -78,7 +80,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
 
       userReligiousInfoGotra: 4,
       userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: values.auspicious[0],
+      userReligiousInfoManglik: 5,
       userReligiousInfoMotherGotra: values.native[0],
 
       userFirstName: 'df',
@@ -106,13 +108,13 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       {console.log('mydharmikjankariiiii===>', myProfileData)}
       <Formik
         initialValues={{
-          gotra: [
-            myProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi,
-          ],
+          // gotra: [
+          //   myProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi,
+          // ],
           native: [
             myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
           ],
-          zodiacsign: [
+          zodiacSign: [
             myProfileData.userReligiousInfo.userReligiousInfoZodiac
               .zodiacTitleHi,
           ],
@@ -133,11 +135,9 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
                 selectedItems={values.gotra}
                 onSelectedItemsChange={value => setFieldValue('gotra', value)}
               />
-
               {errors.gotra && touched.gotra ? (
                 <Text style={styles.error}>{errors.gotra}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'gotraId'}
@@ -148,26 +148,23 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
                 onSelectedItemsChange={value => setFieldValue('native', value)}
                 onChangeInput={values.native}
               />
-
               {errors.native && touched.native ? (
                 <Text style={styles.error}>{errors.native}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'zodiacId'}
                 displayKey={'zodiacTitleHi'}
                 items={zodiacSign}
-                selectText={values.zodiacsign}
-                selectedItems={values.zodiacsign}
+                selectText={values.zodiacSign}
+                selectedItems={values.zodiacSign}
                 onSelectedItemsChange={value =>
-                  setFieldValue('zodiacsign', value)
+                  setFieldValue('zodiacSign', value)
                 }
               />
-              {errors.zodiacsign && touched.zodiacsign ? (
-                <Text style={styles.error}>{errors.zodiacsign}</Text>
+              {errors.zodiacSign && touched.zodiacSign ? (
+                <Text style={styles.error}>{errors.zodiacSign}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'nakshatraId'}
@@ -182,8 +179,12 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
               {errors.auspicious && touched.auspicious ? (
                 <Text style={styles.error}>{errors.auspicious}</Text>
               ) : null}
-
-              <LoginButton title="Update" onPress={handleSubmit} />
+              <LoginButton
+                title="Update"
+                onPress={handleSubmit}
+                loading={isUpdating}
+              />
+              {console.log('dharmikloading======>', isUpdating)}
             </View>
           </>
         )}

@@ -11,13 +11,14 @@ import CustomInput from '../../components/atoms/inputs/CustomInput';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {EDIT_PROFILE} from './redux/editProfileAction';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 const SamparkEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
+  const {isUpdating} = useSelector(state => state.editProfile);
 
   const handleeditProfile = values => {
     console.log('values===>', values);
@@ -147,7 +148,12 @@ const SamparkEditProfile = ({route, navigation}) => {
                 <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
 
-              <LoginButton title="Update" onPress={handleSubmit} />
+              <LoginButton
+                title="Update"
+                onPress={handleSubmit}
+                loading={isUpdating}
+              />
+              {console.log('samparkloading======>', isUpdating)}
             </View>
           </View>
         )}

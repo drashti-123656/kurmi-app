@@ -28,7 +28,7 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 const PersonalInfoEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
-
+  const {isUpdating} = useSelector(state => state.editProfile);
   const {
     dropDownsData: {
       country,
@@ -74,8 +74,8 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       userContactInfoPresentAddress: 'Address',
       userContactInfoPermanentAddress: 'Permanent',
 
-      userEducationInfoEducation: values.education[0],
-      userEducationInfoOccupation: values.job[0],
+      userEducationInfoEducation: 1,
+      userEducationInfoOccupation: 1,
 
       userFamilyInfoFatherName: 'FatherName',
       userFamilyInfoFatherOccupation: 1,
@@ -85,7 +85,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       userFamilyInfoNoOfSister: 1,
       userFamilyInfoNoOfBrother: 1,
 
-      userPersonalInfoMaritalStatusId: values.maritalstatus[0],
+      userPersonalInfoMaritalStatusId: 2,
       userPersonalInfoHeight: values.height[0],
       userPersonalInfoDisability: values.disability[0],
 
@@ -98,9 +98,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       userLastName: values.lastname,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 2,
-      userState: 1,
-      userCity: 1,
+      userCountry: 5,
+      userState: 5,
+      userCity: 5,
       userProfileImage: '',
     };
     navigation.navigate('My Profile');
@@ -337,7 +337,12 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               <Text style={styles.error}>{errors.disability}</Text>
             ) : null}
 
-            <LoginButton title="Update" onPress={handleSubmit} />
+            <LoginButton
+              title="Update"
+              onPress={handleSubmit}
+              loading={isUpdating}
+            />
+            {console.log('loading======>', isUpdating)}
           </View>
         )}
       </Formik>
