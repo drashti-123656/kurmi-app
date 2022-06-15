@@ -224,30 +224,40 @@ const AdvanceSearch = ({navigation}) => {
               ) : null}
 
               <View style={styles.heightContainer}>
-                <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={height}
-                  selectText={translate('advanceSearch.height From')}
-                  selectedItems={values.heightFrom}
-                  searchInputStyle={styles.brandSearchInputStyle}
-                  onSelectedItemsChange={value =>
-                    setFieldValue('heightFrom', value)
-                  }
-                />
-                <Dropdown
-                  style={styles.inputMargin}
-                  uniqueKey={'id'}
-                  displayKey={'name'}
-                  items={height}
-                  selectText={translate('advanceSearch.height To')}
-                  selectedItems={values.heightTo}
-                  searchInputStyle={styles.brandSearchInputStyle}
-                  onSelectedItemsChange={value =>
-                    setFieldValue('heightTo', value)
-                  }
-                />
+                <View style={styles.inputWrap}>
+                  <Dropdown
+                    style={styles.dropContainer}
+                    uniqueKey={'id'}
+                    displayKey={'name'}
+                    items={height}
+                    fixedHeight={true}
+                    selectText={translate('advanceSearch.height From')}
+                    selectedItems={values.heightFrom}
+                    searchInputStyle={styles.searchInput}
+                    hideDropdown={true}
+                    searchIcon={false}
+                    onSelectedItemsChange={value =>
+                      setFieldValue('heightFrom', value)
+                    }
+                  />
+                </View>
+                <View style={styles.inputWrap}>
+                  <Dropdown
+                    style={styles.dropContainer}
+                    uniqueKey={'id'}
+                    displayKey={'name'}
+                    items={height}
+                    fixedHeight={true}
+                    selectText={translate('advanceSearch.height To')}
+                    selectedItems={values.heightTo}
+                    searchInputStyle={styles.searchInput}
+                    hideDropdown={true}
+                    searchIcon={false}
+                    onSelectedItemsChange={value =>
+                      setFieldValue('heightTo', value)
+                    }
+                  />
+                </View>
               </View>
               <View style={styles.errorText}>
                 {errors.heightFrom && touched.heightFrom ? (
@@ -347,15 +357,17 @@ const AdvanceSearch = ({navigation}) => {
                 <Text style={styles.dropboxError}>{errors.city}</Text>
               ) : null}
               <Dropdown
-                style={styles.dropdownStyle}
+                style={styles.inputMargin}
                 uniqueKey={'educationId'}
+                hideDropdown={true}
+                searchIcon={false}
+                fixedHeight={true}
+                searchInputStyle={styles.searchInput}
                 displayKey={'educationTitleHi'}
+                styleListContainer={styles.listContainerData}
                 items={education}
                 selectText={translate('Vyaktigatdata.Knowledge')}
                 selectedItems={values.education}
-                searchInputStyle={styles.searchInput}
-                hideDropdown={true}
-                searchIcon={false}
                 onSelectedItemsChange={value =>
                   setFieldValue('education', value)
                 }
@@ -365,15 +377,17 @@ const AdvanceSearch = ({navigation}) => {
               ) : null}
 
               <Dropdown
-                style={styles.dropdownStyle}
+                style={styles.inputMargin}
                 uniqueKey={'occupationId'}
                 displayKey={'occupationTitleHi'}
-                items={job}
-                selectText={translate('Vyaktigatdata.Job')}
-                selectedItems={values.job}
-                searchInputStyle={styles.searchInput}
                 hideDropdown={true}
                 searchIcon={false}
+                searchInputStyle={styles.searchInput}
+                styleListContainer={styles.listContainerData}
+                items={job}
+                fixedHeight={true}
+                selectText={translate('Vyaktigatdata.Job')}
+                selectedItems={values.job}
                 onSelectedItemsChange={value => setFieldValue('job', value)}
               />
               {errors.job && touched.job ? (
@@ -383,8 +397,9 @@ const AdvanceSearch = ({navigation}) => {
               <LoginButton
                 title={translate('NewsFeed.Search')}
                 onPress={handleSubmit}
-                // loading={isFetching}
+                loading={isFetching}
               />
+              {console.log('advanceisfetchh==========>', isFetching)}
             </View>
           )}
         </Formik>
@@ -458,16 +473,19 @@ const styles = EStyleSheet.create({
     marginTop: 20,
   },
   inputMargin: {
-    marginBottom: 10,
+    marginBottom: 20,
+  },
+  inputWrap: {
     flex: 1,
-    width: 200,
-    marginLeft: -15,
+    marginBottom: 5,
+    marginHorizontal: -15,
   },
   heightContainer: {
     flexDirection: 'row',
     marginHorizontal: 20,
     marginBottom: 10,
     justifyContent: 'space-between',
+    flex: 1,
   },
   radioButton: {
     height: 20,
@@ -489,6 +507,10 @@ const styles = EStyleSheet.create({
     width: 12,
     borderRadius: 9,
     backgroundColor: 'white',
+  },
+  dropContainer: {
+    marginBottom: 5,
+    width: 200,
   },
   radioButtonText: {
     fontSize: 17,
