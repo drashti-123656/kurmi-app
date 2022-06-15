@@ -23,7 +23,7 @@ const AdvanceSearchProfile = ({navigation}) => {
   const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
-    <RootScreen scrollable={true}>
+    <RootScreen>
       {advanceserachData ? (
         <View style={styles.container}>
           <FlatList
