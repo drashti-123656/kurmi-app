@@ -199,7 +199,9 @@ const NewsFeed = ({navigation}) => {
           )}
         </Formik>
 
-        <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('AdvanceSearch')}>
+          <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+        </TouchableOpacity>
         <ScrollView style={styles.footerContainer}>
           <View style={styles.footerTitle}>
             <Text style={styles.titleText}>
