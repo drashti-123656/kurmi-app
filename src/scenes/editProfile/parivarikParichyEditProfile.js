@@ -24,6 +24,8 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 const ParivarikParichyEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
+  const {isUpdating} = useSelector(state => state.editProfile);
+
   const {
     dropDownsData: {land, job},
   } = useSelector(state => state.registration);
@@ -125,11 +127,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 placeholder={translate('ParivarikParichay.fatherName')}
                 placeholderTextColor={'#666666'}
               />
-
               {errors.fatherName && touched.fatherName ? (
                 <Text style={styles.error}>{errors.fatherName}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.dropdownStyle}
                 uniqueKey={'occupationId'}
@@ -142,11 +142,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                   setFieldValue('fatherOccupation', value)
                 }
               />
-
               {errors.fatherOccupation && touched.fatherOccupation ? (
                 <Text style={styles.error}>{errors.fatherOccupation}</Text>
               ) : null}
-
               <ExtendedTextInput
                 onChangeText={handleChange('motherName')}
                 onBlur={handleBlur('motherName')}
@@ -155,11 +153,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 placeholder={translate('ParivarikParichay.motherName')}
                 placeholderTextColor={'#666666'}
               />
-
               {errors.motherName && touched.motherName ? (
                 <Text style={styles.error}>{errors.motherName}</Text>
               ) : null}
-
               <ExtendedTextInput
                 onChangeText={handleChange('motherMayaka')}
                 onBlur={handleBlur('motherMayaka')}
@@ -168,11 +164,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 placeholder={translate('ParivarikParichay.motherMayaka')}
                 placeholderTextColor={'#666666'}
               />
-
               {errors.motherMayaka && touched.motherMayaka ? (
                 <Text style={styles.error}>{errors.motherMayaka}</Text>
               ) : null}
-
               <ExtendedTextInput
                 onChangeText={handleChange('brother')}
                 onBlur={handleBlur('brother')}
@@ -182,11 +176,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 placeholder={translate('ParivarikParichay.brother')}
                 placeholderTextColor={'#666666'}
               />
-
               {errors.brother && touched.brother ? (
                 <Text style={styles.error}>{errors.brother}</Text>
               ) : null}
-
               <ExtendedTextInput
                 onChangeText={handleChange('sister')}
                 onBlur={handleBlur('sister')}
@@ -196,11 +188,9 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 placeholder={translate('ParivarikParichay.sister')}
                 placeholderTextColor={'#666666'}
               />
-
               {errors.sister && touched.sister ? (
                 <Text style={styles.error}>{errors.sister}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.dropdownStyle}
                 uniqueKey={'landId'}
@@ -211,16 +201,15 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 onSelectedItemsChange={value => setFieldValue('land', value)}
               />
               {console.log('land size===>', values)}
-
               {errors.land && touched.land ? (
                 <Text style={styles.error}>{errors.land}</Text>
               ) : null}
-
               <LoginButton
                 title="Update"
                 onPress={handleSubmit}
-                // loading={registerData.isVerifiying}
+                loading={isUpdating}
               />
+              {console.log('parivarikloading======>', isUpdating)}
             </View>
           </>
         )}
