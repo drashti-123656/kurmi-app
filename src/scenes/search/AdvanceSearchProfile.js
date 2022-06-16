@@ -54,8 +54,8 @@ const styles = EStyleSheet.create({
   textStyle: {
     fontWeight: 'bold',
     color: '$WHITE',
-    marginHorizontal: 85,
+    marginHorizontal: 120,
     marginTop: 250,
-    fontSize: 30,
+    fontSize: 20,
   },
 });
