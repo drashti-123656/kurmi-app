@@ -434,12 +434,19 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  profileCreated: {
+    marginTop: -15,
+    marginHorizontal: 25,
+    color: ' $PLACEHOLDER',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
   detailsText: {
     fontSize: 15,
     marginBottom: 5,
-    color: '$DARK',
+    marginTop: 5,
+    color: '$PLACEHOLDER',
     marginLeft: 18,
-    fontWeight: 'bold',
   },
   heading: {
     color: '$PRIMARY',
@@ -488,6 +495,9 @@ const styles = EStyleSheet.create({
   },
   bottomContainer: {
     flex: 3,
+    marginHorizontal: 20,
+    marginTop: 30,
+    fontSize: 20,
   },
   mainContainer: {
     flex: 1,
@@ -517,20 +527,20 @@ const styles = EStyleSheet.create({
   textStyle: {
     color: '$DARK',
     marginHorizontal: 20,
-    marginTop: 30,
-    fontSize: 20,
-    fontWeight: 'bold',
+    marginTop: 15,
+    fontSize: 15,
+    fontWeight: '600',
   },
   textHeading: {
     color: '$DARK',
     marginHorizontal: 20,
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '600',
   },
   headerText: {
     color: '$DARK',
     marginHorizontal: 20,
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
