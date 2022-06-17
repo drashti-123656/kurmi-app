@@ -1,4 +1,4 @@
-import {Alert, TouchableOpacity} from 'react-native';
+import {Alert, TouchableOpacity, View, Image} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -15,6 +15,7 @@ import Profile from '../scenes/profile/Profile';
 import Logout from '../scenes/auth/Logout';
 import {logout} from '../scenes/auth/redux/authReducer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
 const Tab = createBottomTabNavigator();
 
@@ -113,11 +114,25 @@ const DashboardNavigation = ({navigation}) => {
                 <Search name="user-plus" color={'black'} size={30} />
               ),
               headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => downloadPdf()}
-                  style={styles.headerStyle}>
-                  <Entypo name="share" size={30} color="white" />
-                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <TouchableOpacity
+                    // onPress={() => downloadPdf()}
+                    style={styles.imageStyle}>
+                    <MaterialCommunityIcons
+                      name="image-edit-outline"
+                      size={30}
+                      color="white"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => downloadPdf()}
+                    style={styles.headerStyle}>
+                    <Entypo name="share" size={30} color="white" />
+                  </TouchableOpacity>
+                </View>
               ),
               headerLeft: () => (
                 <TouchableOpacity
@@ -163,5 +178,12 @@ export default DashboardNavigation;
 const styles = EStyleSheet.create({
   headerStyle: {
     marginHorizontal: 20,
+  },
+  imageStyle: {
+    marginHorizontal: -10,
+  },
+  tinyLogo: {
+    height: 30,
+    width: 30,
   },
 });
