@@ -192,6 +192,8 @@ export function* countryDropdown(action) {
     payload,
   );
 
+  // payload = [{id: 1, name: 'India'}];
+
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
