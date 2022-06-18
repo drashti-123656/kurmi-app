@@ -301,11 +301,12 @@ const Registration = () => {
               uniqueKey={'countryId'}
               displayKey={'countryName'}
               autoFocus={true}
-              styleListContainer={styles.listContainerData}
-              items={country}
-              single
+              items={[{countryId: 101, countryName: 'India'}]}
+              searchIcon={false}
+              hideDropdown={true}
               selectText={translate('register.country')}
               selectedItems={values.country}
+              searchInputStyle={styles.searchInput}
               onSelectedItemsChange={value => {
                 setFieldValue('country', value);
 
