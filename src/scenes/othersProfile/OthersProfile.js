@@ -21,6 +21,10 @@ import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
 import {base_URL} from '../../services/httpServices/';
 import {showMessage} from 'react-native-flash-message';
 import Loader from '../../components/atoms/buttons/Loader';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData, isFetching} = useSelector(
@@ -57,7 +61,7 @@ const OthersProfile = ({route, navigation}) => {
         <ScrollView>
           <Image
             style={styles.profileImg}
-            resizeMode={'contain'}
+            resizeMode={'cover'}
             source={{uri: `${othersProfileData.userProfileImage}`}}
           />
 
@@ -85,6 +89,15 @@ const OthersProfile = ({route, navigation}) => {
               />
               <Text style={styles.contactText}> Call Now </Text>
             </TouchableOpacity>
+            <TouchableOpacity style={{flexDirection: 'row'}}>
+              <Icon
+                name="whatsapp"
+                size={30}
+                color={EStyleSheet.value('$PRIMARY')}
+                style={{marginVertical: 20}}
+              />
+              <Text style={styles.contactText}> WhatsaApp </Text>
+            </TouchableOpacity>
 
             <TouchableOpacity style={{flexDirection: 'row'}}>
               <MaterialIcons
@@ -101,22 +114,27 @@ const OthersProfile = ({route, navigation}) => {
             <Text style={styles.headingText}>
               {translate('Vyaktigatdata.Personal information')}
             </Text>
+
             <View style={styles.subDetailContainer}>
-              <Text style={styles.subHeadingText}>
-                {translate('register.Name')}{' '}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {othersProfileData.userFirstName}{' '}
-                {othersProfileData.userLastName}{' '}
-              </Text>
-              <Text style={styles.subHeadingText}>
-                {translate('register.birthdate')}{' '}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {othersProfileData.userDob}{' '}
-              </Text>
+              <View style={styles.alignment}>
+                <Text style={styles.subHeadingText}>
+                  {translate('register.Name')}{' '}
+                </Text>
+                <Text style={styles.detailsText}>
+                  {' '}
+                  {othersProfileData.userFirstName}{' '}
+                  {othersProfileData.userLastName}{' '}
+                </Text>
+              </View>
+              <View style={styles.alignment}>
+                <Text style={styles.subHeadingText}>
+                  {translate('register.birthdate')}{' '}
+                </Text>
+                <Text style={styles.detailsText}>
+                  {' '}
+                  {othersProfileData.userDob}{' '}
+                </Text>
+              </View>
               <Text style={styles.subHeadingText}>
                 {translate('register.city')}{' '}
               </Text>
@@ -463,14 +481,15 @@ const styles = StyleSheet.create({
   subHeadingText: {
     color: 'black',
     fontSize: 15,
-    marginLeft: 5,
+    //marginLeft: 5,
     fontWeight: '600',
   },
   detailsText: {
     fontSize: 15,
     marginBottom: 10,
     color: '#666666',
-    marginLeft: 5,
+    //marginLeft: 5,
+    //marginHorizontal: 20,
   },
   subDetailContainer: {
     marginLeft: 10,
@@ -522,5 +541,14 @@ const styles = StyleSheet.create({
   },
   subNamesDetails: {
     color: 'white',
+  },
+  alignment: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+
+    // marginTop: 5,
+    // marginHorizontal: 40,
+    /// flexWrap: 'wrap',
+    //justifyContent: 'space-evenly',
   },
 });
