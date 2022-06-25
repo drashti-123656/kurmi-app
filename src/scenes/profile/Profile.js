@@ -587,10 +587,13 @@ const styles = EStyleSheet.create({
   image: {
     width: 200,
     height: 200,
+    resizeMode: 'cover',
     justifyContent: 'center',
     alignSelf: 'center',
     borderRadius: 100,
     marginTop: 10,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   separatorLine: {
     flex: 1,
