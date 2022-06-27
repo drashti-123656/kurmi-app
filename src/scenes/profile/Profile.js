@@ -523,13 +523,10 @@ const Profile = ({navigation}) => {
               <Text style={styles.textStyle}>
                 {translate('ParivarikParichay.motherMayaka')}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userFamilyInfo.userFamilyInfoMotherOccupation
-                  .occupationTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {myProfileData.userFamilyInfo.userFamilyInfoMotherMaika}{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>

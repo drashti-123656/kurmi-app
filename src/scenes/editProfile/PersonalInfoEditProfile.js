@@ -69,38 +69,54 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
   const handleeditProfile = values => {
     const payload = {
       userUpdateType: 'general',
-      userContactInfoContactNo: '9874563210',
-      userContactInfoWhatsappNo: 9874563210,
-      userContactInfoPresentAddress: 'Address',
-      userContactInfoPermanentAddress: 'Permanent',
+      userContactInfoContactNo:
+        myProfileData.userContactInfo.userContactInfoContactNo,
+      userContactInfoWhatsappNo:
+        myProfileData.userContactInfo.userContactInfoWhatsappNo,
+      userContactInfoPresentAddress:
+        myProfileData.userContactInfo.userContactInfoPresentAddress,
+      userContactInfoPermanentAddress:
+        myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
-      userEducationInfoEducation: 1,
-      userEducationInfoOccupation: 1,
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
 
-      userFamilyInfoFatherName: 'FatherName',
-      userFamilyInfoFatherOccupation: 1,
-      userFamilyInfoMotherName: 'MotherName',
-      userFamilyInfoLand: 1,
-      userFamilyInfoMotherMaika: 'dffdf',
-      userFamilyInfoNoOfSister: 1,
-      userFamilyInfoNoOfBrother: 1,
+      userFamilyInfoFatherName:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoMotherName:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+      userFamilyInfoLand:
+        myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+      userFamilyInfoMotherMaika:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+      userFamilyInfoNoOfSister:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+      userFamilyInfoNoOfBrother:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
       userPersonalInfoMaritalStatusId: 2,
       userPersonalInfoHeight: values.height[0],
       userPersonalInfoDisability: values.disability[0],
 
-      userReligiousInfoGotra: 4,
-      userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 5,
-      userReligiousInfoMotherGotra: 5,
+      userReligiousInfoGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+      userReligiousInfoZodiac:
+        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+      userReligiousInfoManglik:
+        myProfileData.userReligiousInfo.userReligiousInfoId,
+      userReligiousInfoMotherGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
 
       userFirstName: values.firstname,
       userLastName: values.lastname,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 5,
-      userState: 5,
-      userCity: 5,
+      userCountry: values.country[0],
+      userState: values.state[0],
+      userCity: values.city[0],
       userProfileImage: '',
     };
     navigation.navigate('My Profile');
@@ -128,9 +144,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
           emailid: myProfileData.userEmail,
 
           // birthdate: new Date(),
-          country: [myProfileData.userCountry.countryName],
-          state: [myProfileData.userState.name],
-          city: [myProfileData.userCity.cityName],
+          country: [myProfileData.userCountry.countryId],
+          state: [myProfileData.userState.stateId],
+          city: [myProfileData.userCity.cityId],
           height: [myProfileData.userPersonalInfo.userPersonalInfoHeight],
           maritalstatus: [myProfileData.userPersonalInfo.maritalStatusTitleEn],
           disability: [
@@ -205,7 +221,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'countryId'}
               displayKey={'countryName'}
               autoFocus={true}
-              items={country}
+              items={[{countryId: 101, countryName: 'India'}]}
               single
               selectText={values.country}
               selectedItems={values.country}
@@ -216,7 +232,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
                   type: FETCH_STATE_DROPDOWN,
                   payload: {
                     filter: {
-                      countryId: value[0],
+                      countryId: value[101],
                     },
                     moduleType: 'State',
                   },
