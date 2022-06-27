@@ -223,7 +223,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               autoFocus={true}
               items={[{countryId: 101, countryName: 'India'}]}
               single
-              selectText={values.country}
+              selectText="India"
               selectedItems={values.country}
               onSelectedItemsChange={value => {
                 setFieldValue('country', value);
@@ -249,7 +249,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               autoFocus={true}
               single
               items={state}
-              selectText={values.state}
+              selectText={myProfileData.userState.name}
               selectedItems={values.state}
               onSelectedItemsChange={value => {
                 setFieldValue('state', value);
@@ -275,7 +275,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               autoFocus={true}
               single
               items={city}
-              selectText={values.city}
+              selectText={myProfileData.userCity.cityName}
               selectedItems={values.city}
               onSelectedItemsChange={value => setFieldValue('city', value)}
             />
@@ -503,9 +503,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 90,
   },
-  profileText: {
-    fontWeight: 'bold',
-  },
+
   profileImageContainer: {
     flexDirection: 'row',
     marginTop: 40,
@@ -691,11 +689,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 20,
   },
-  profileText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+
   dropboxError: {
     fontSize: 12,
     fontWeight: 'bold',
