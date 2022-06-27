@@ -96,7 +96,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
 
       userReligiousInfoGotra: '4',
       userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: values.auspicious[0],
+      userReligiousInfoManglik: 1,
       userReligiousInfoMotherGotra: values.native[0],
 
       userFirstName: myProfileData.userFirstName,
