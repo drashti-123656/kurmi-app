@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import moment from 'moment';
 
 interface DateTimePickerProps {
@@ -11,11 +9,13 @@ interface DateTimePickerProps {
   onSelect: (value: Date) => void;
   mode: 'datetime' | 'date' | 'time';
   style: 'marginTop' | 'marginBottom';
+  placeholder: 'string' | 'string';
 }
 
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
   value,
   onSelect,
+  placeholder,
   mode,
   style,
 }) => {
@@ -41,6 +41,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       <DatePicker
         modal
         open={open}
+        placeholder={placeholder}
         date={value}
         onConfirm={date => {
           setOpen(false);
