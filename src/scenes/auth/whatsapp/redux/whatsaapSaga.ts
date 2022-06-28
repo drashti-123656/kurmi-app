@@ -12,9 +12,8 @@ export function* logUser(action) {
     API_URL.LOG_USER,
     payload,
   );
-  console.log('ok======>>', ok);
+
   if (ok) {
-    console.log('passta======>>', data);
     yield put(savingSuccess({}));
     navigate('DashboardNavigation');
   }

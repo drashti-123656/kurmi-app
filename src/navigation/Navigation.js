@@ -16,7 +16,6 @@ const Navigation = () => {
   const {isFirstlaunch} = useSelector(state => state.whatsApp);
   return (
     <NavigationContainer ref={navigationRef}>
-      {console.log('fry=====>>', isFirstlaunch)}
       <Stack.Navigator>
         <>
           {!isAuthenticated ? (
