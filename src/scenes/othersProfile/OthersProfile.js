@@ -251,21 +251,11 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo
-                    .userReligiousInfoPlaceOfBirth
+                  othersProfileData?.userReligiousInfo
+                    ?.userReligiousInfoPlaceOfBirth
                 }{' '}
               </Text>
-              <Text style={styles.subHeadingText}>
-                {' '}
-                {translate('Dharmikjankari.Zodiacsign')}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {
-                  othersProfileData.userReligiousInfo.userReligiousInfoZodiac
-                    .zodiacTitleHi
-                }{' '}
-              </Text>
+
               <Text style={styles.subHeadingText}>
                 {' '}
                 {translate('Dharmikjankari.auspicious')}
@@ -273,7 +263,7 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo.userReligiousInfoManglik
+                  othersProfileData?.userReligiousInfo?.userReligiousInfoManglik
                 }{' '}
               </Text>
             </View>
@@ -294,7 +284,9 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
+                {
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoFatherName
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
