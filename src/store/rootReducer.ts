@@ -17,8 +17,10 @@ import ViewByReducer from '../scenes/viewBy/redux/ViewByReducer';
 import contactReducer from '../scenes/contact/redux/contactReducer';
 import EditProfileReducer from '../scenes/editProfile/redux/editProfileReducer';
 import DownloadPdfReducer from '../scenes/shareBioData/redux/DownloadPdfReducer';
+import whatsAppReducer from '../scenes/auth/whatsapp/redux/whatsAppReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
+  whatsApp: whatsAppReducer,
   registration: registrationReducer,
 
   newsfeed: NewsfeedReducer,

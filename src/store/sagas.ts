@@ -1,6 +1,6 @@
 import {all, takeLatest} from 'redux-saga/effects';
 import {LOG_IN, LOG_USER} from '../scenes/auth/redux/authActions';
-import {logUser} from '../scenes/auth/redux/authSagas';
+import {logUser} from '../scenes/auth/whatsapp/redux/whatsaapSaga';
 import {CONTACT_USER} from '../scenes/contact/redux/contactAction';
 import {contactUser} from '../scenes/contact/redux/contactSaga';
 import {loginUser} from '../scenes/auth/redux/authSagas';
