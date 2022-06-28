@@ -46,37 +46,50 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
   const handleDharmikJankari = values => {
     const payload = {
       userUpdateType: 'general',
-      userContactInfoWhatsappNo: 9874563210,
-      userContactInfoPresentAddress: 'Address',
-      userContactInfoPermanentAddress: 'Permanent',
+      userContactInfoContactNo:
+        myProfileData.userContactInfo.userContactInfoContactNo,
+      userContactInfoWhatsappNo:
+        myProfileData.userContactInfo.userContactInfoWhatsappNo,
+      userContactInfoPresentAddress:
+        myProfileData.userContactInfo.userContactInfoPresentAddress,
+      userContactInfoPermanentAddress:
+        myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
-      userEducationInfoEducation: 1,
-      userEducationInfoOccupation: 1,
-
+      userPersonalInfoMaritalStatusId:
+        myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+          .maritalStatusId,
+      userPersonalInfoHeight:
+        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+      userPersonalInfoDisability:
+        myProfileData.userPersonalInfo.userPersonalInfoDisability,
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
       userFamilyInfoFatherName: values.fatherName,
       userFamilyInfoFatherOccupation: '1',
       userFamilyInfoMotherName: values.motherName,
-      userFamilyInfoLand: 1,
+      userFamilyInfoLand: values.land[0],
       userFamilyInfoMotherMaika: values.motherMayaka,
       userFamilyInfoNoOfSister: values.sister,
       userFamilyInfoNoOfBrother: values.brother,
 
-      userPersonalInfoMaritalStatusId: 2,
-      userPersonalInfoHeight: 1,
-      userPersonalInfoDisability: 1,
+      userReligiousInfoGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+      userReligiousInfoZodiac:
+        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+      userReligiousInfoManglik:
+        myProfileData.userReligiousInfo.userReligiousInfoId,
+      userReligiousInfoMotherGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
 
-      userReligiousInfoGotra: 4,
-      userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 5,
-      userReligiousInfoMotherGotra: 5,
-
-      userFirstName: 'stest',
-      userLastName: 'stest',
+      userFirstName: myProfileData.userFirstName,
+      userLastName: myProfileData.userLastName,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 5,
-      userState: 5,
-      userCity: 5,
+      userCountry: myProfileData.userCountry.countryId,
+      userState: myProfileData.userState.stateId,
+      userCity: myProfileData.userCity.cityId,
       userProfileImage: '',
     };
 
@@ -106,7 +119,7 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
           motherMayaka: myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
           brother: myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
           sister: myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
-          land: [myProfileData.userFamilyInfo.userFamilyInfoLand.landTitleHi],
+          land: [myProfileData.userFamilyInfo.userFamilyInfoLand.landId],
         }}
         onSubmit={values => handleDharmikJankari(values)}>
         {({

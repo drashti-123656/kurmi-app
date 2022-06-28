@@ -29,33 +29,49 @@ const SamparkEditProfile = ({route, navigation}) => {
       userContactInfoPresentAddress: values.presentAdd,
       userContactInfoPermanentAddress: values.permanentAdd,
 
-      userEducationInfoEducation: 1,
-      userEducationInfoOccupation: 1,
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
 
-      userFamilyInfoFatherName: 'FatherName',
-      userFamilyInfoFatherOccupation: 1,
-      userFamilyInfoMotherName: 'MotherName',
-      userFamilyInfoLand: 1,
-      userFamilyInfoMotherMaika: 'dffdf',
-      userFamilyInfoNoOfSister: 1,
-      userFamilyInfoNoOfBrother: 1,
+      userFamilyInfoFatherName:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoMotherName:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+      userFamilyInfoLand:
+        myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+      userFamilyInfoMotherMaika:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+      userFamilyInfoNoOfSister:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+      userFamilyInfoNoOfBrother:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
-      userPersonalInfoMaritalStatusId: 2,
-      userPersonalInfoHeight: 1,
-      userPersonalInfoDisability: 1,
+      userPersonalInfoMaritalStatusId:
+        myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+          .maritalStatusId,
+      userPersonalInfoHeight:
+        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+      userPersonalInfoDisability:
+        myProfileData.userPersonalInfo.userPersonalInfoDisability,
 
-      userReligiousInfoGotra: 4,
-      userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 5,
-      userReligiousInfoMotherGotra: 5,
+      userReligiousInfoGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+      userReligiousInfoZodiac:
+        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+      userReligiousInfoManglik:
+        myProfileData.userReligiousInfo.userReligiousInfoId,
+      userReligiousInfoMotherGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
 
-      userFirstName: 'stest',
-      userLastName: 'stest',
+      userFirstName: myProfileData.userFirstName,
+      userLastName: myProfileData.userLastName,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 5,
-      userState: 5,
-      userCity: 5,
+      userCountry: myProfileData.userCountry.countryId,
+      userState: myProfileData.userState.stateId,
+      userCity: myProfileData.userCity.cityId,
       userProfileImage: '',
     };
     console.log('fjdfhdfdj==>', payload);

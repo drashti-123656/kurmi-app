@@ -291,7 +291,7 @@ const AdvanceSearch = ({navigation}) => {
                 uniqueKey={'countryId'}
                 displayKey={'countryName'}
                 autoFocus={true}
-                items={country}
+                items={[{countryId: 101, countryName: 'India'}]}
                 single
                 searchInputStyle={styles.brandSearchInputStyle}
                 selectText={translate('register.country')}
@@ -303,7 +303,7 @@ const AdvanceSearch = ({navigation}) => {
                     type: FETCH_STATE_DROPDOWN,
                     payload: {
                       filter: {
-                        countryId: value[0],
+                        countryId: value[101],
                       },
                       moduleType: 'State',
                     },
@@ -330,7 +330,7 @@ const AdvanceSearch = ({navigation}) => {
                     type: FETCH_CITY_DROPDOWN,
                     payload: {
                       filter: {
-                        cityStateId: value[0],
+                        cityStateId: value[101],
                       },
                       moduleType: 'City',
                     },
