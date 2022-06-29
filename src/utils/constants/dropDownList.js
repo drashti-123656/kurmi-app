@@ -1,6 +1,6 @@
 import translate from '../../translations/configTranslations';
 
-const heightDropdwonList =  [
+const heightDropdwonList = [
   {id: 1, name: '4ft 5inch - 134 cm'},
   {id: 2, name: '4ft 6inch - 137 cm'},
   {id: 3, name: '4ft 7inch - 139 cm'},
@@ -32,7 +32,7 @@ const heightDropdwonList =  [
   {id: 30, name: '6ft 9inch - 205 cm'},
   {id: 31, name: '6ft 10inch - 208 cm'},
   {id: 32, name: '6ft 11inch - 210 cm'},
-]
+];
 
 const profilemakerDropdownlist = [
   {name: translate('profilemaker.Myself'), id: 1},
@@ -40,12 +40,7 @@ const profilemakerDropdownlist = [
   {name: translate('profilemaker.Parents'), id: 3},
   {name: translate('profilemaker.Other'), id: 4},
 ];
-const colourDropdownList = [
-  {name: translate('colour.Fair'), id: 1},
-  {name: translate('colour.Light'), id: 2},
-  {name: translate('colour.Medium'), id: 3},
-  {name: translate('colour.Dark'), id: 4},
-];
+
 const disabilityDropdownList = [
   {name: translate('Disability.Yes'), id: 1},
   {name: translate('Disability.No'), id: 2},
@@ -61,10 +56,8 @@ const bloodgroupDropdownList = [
   {name: translate('BloodGroup.AB-'), id: 2},
 ];
 
-export  {
-  heightDropdwonList,
-  profilemakerDropdownlist,
-  colourDropdownList,
-  disabilityDropdownList,
-  bloodgroupDropdownList,
-};
+export // heightDropdwonList,
+// profilemakerDropdownlist,
+// disabilityDropdownList,
+// bloodgroupDropdownList,
+ {};

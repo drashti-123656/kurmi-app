@@ -40,11 +40,6 @@ const DharmikJankari = ({navigation}) => {
       type: FETCH_AUSPICIOUS_DROPDOWN,
       payload: {moduleType: 'Nakshatra'},
     });
-
-    dispatch({
-      type: FETCH_GOTRA_DROPDOWN,
-      payload: {moduleType: 'Gotra'},
-    });
   }, []);
 
   const handleDharmikJankari = values => {
@@ -86,50 +81,19 @@ const DharmikJankari = ({navigation}) => {
         }) => (
           <>
             <View style={styles.mainContainer}>
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'gotraId'}
-                displayKey={'gotraTitleHi'}
-                hideDropdown={true}
-                searchIcon={false}
-                searchInputStyle={styles.searchInput}
-                items={gotra}
-                selectText={translate('Dharmikjankari.Caste')}
-                selectedItems={values.gotra}
-                onSelectedItemsChange={value => setFieldValue('gotra', value)}
+              <TextInput
+                style={styles.commonInput}
+                onChangeText={handleChange('gotra')}
+                onBlur={handleBlur('gotra')}
+                value={values.gotra}
+                placeholder={translate('Dharmikjankari.Caste')}
+                placeholderTextColor={'#666666'}
               />
 
               {errors.gotra && touched.gotra ? (
                 <Text style={styles.error}>{errors.gotra}</Text>
               ) : null}
 
-              <Dropdown
-                style={styles.inputMargin}
-                hideDropdown={true}
-                searchIcon={false}
-                searchInputStyle={styles.searchInput}
-                uniqueKey={'gotraId'}
-                displayKey={'gotraTitleHi'}
-                items={gotra}
-                selectText={translate('Dharmikjankari.Native')}
-                selectedItems={values.native}
-                onSelectedItemsChange={value => setFieldValue('native', value)}
-              />
-
-              {errors.native && touched.native ? (
-                <Text style={styles.error}>{errors.native}</Text>
-              ) : null}
-
-              <DateTimePicker
-                style={styles.dateTimeInputStyle}
-                value={values.birthtime}
-                onSelect={value => setFieldValue('birthtime', value)}
-                mode="time"
-              />
-
-              {errors.birthtime && touched.birthtime ? (
-                <Text style={styles.error}>{errors.birthtime}</Text>
-              ) : null}
               <TextInput
                 style={styles.commonInput}
                 onChangeText={handleChange('birthplace')}
@@ -145,32 +109,12 @@ const DharmikJankari = ({navigation}) => {
 
               <Dropdown
                 style={styles.inputMargin}
-                uniqueKey={'zodiacId'}
-                displayKey={'zodiacTitleHi'}
-                hideDropdown={true}
-                searchIcon={false}
-                searchInputStyle={styles.searchInput}
-                items={zodiacSign}
-                styleListContainer={styles.listContainerData}
-                selectText={translate('Dharmikjankari.Zodiacsign')}
-                selectedItems={values.zodiacsign}
-                onSelectedItemsChange={value =>
-                  setFieldValue('zodiacsign', value)
-                }
-              />
-              {errors.zodiacsign && touched.zodiacsign ? (
-                <Text style={styles.error}>{errors.zodiacsign}</Text>
-              ) : null}
-
-              <Dropdown
-                style={styles.inputMargin}
                 uniqueKey={'nakshatraId'}
                 displayKey={'nakshatraTitleHi'}
                 hideDropdown={true}
                 searchIcon={false}
                 searchInputStyle={styles.searchInput}
                 items={auspicious}
-                styleListContainer={styles.listContainerData}
                 selectText={translate('Dharmikjankari.auspicious')}
                 selectedItems={values.auspicious}
                 onSelectedItemsChange={value =>

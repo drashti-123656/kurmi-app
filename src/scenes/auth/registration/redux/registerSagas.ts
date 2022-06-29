@@ -6,8 +6,10 @@ import {
   fetchAuspiciousDropdownSuccess,
   fetchCityDropdownSuccess,
   fetchCountryDropdownSuccess,
+  fetchDisabilityDropdownSuccess,
   fetchEducationDropdownSuccess,
   fetchGotraDropdownSuccess,
+  fetchHeightDropdownSuccess,
   fetchJobDropdownSuccess,
   fetchLandDropdownSuccess,
   fetchMaritalstatusDropdownSuccess,
@@ -138,6 +140,20 @@ export function* jobDropdown(action) {
   }
 }
 
+export function* heightDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchHeightDropdownSuccess(response.data.data));
+  }
+}
+
 export function* registerUserVerification(action) {
   const payload = action.payload;
 
@@ -237,5 +253,19 @@ export function* landDropdown(action) {
 
   if (response.ok) {
     yield put(fetchLandDropdownSuccess(response.data.data));
+  }
+}
+
+export function* disabiltyDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchDisabilityDropdownSuccess(response.data.data));
   }
 }
