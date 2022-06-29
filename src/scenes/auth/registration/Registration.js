@@ -64,14 +64,6 @@ const Registration = () => {
   }, []);
 
   const handleregisterUser = values => {
-    if (!ProfilePic) {
-      showMessage({
-        message: 'Please upload profile image ',
-        type: 'info',
-        backgroundColor: EStyleSheet.value('$WARNING_RED'),
-      });
-      return;
-    }
     if (!termsCondition) {
       showMessage({
         message: 'Please check privacy policy checkbox ',
@@ -284,6 +276,7 @@ const Registration = () => {
 
             <DateTimePicker
               value={values.birthdate}
+              placeholder="Enter Your DOB"
               onSelect={value => setFieldValue('birthdate', value)}
               mode="date"
             />
