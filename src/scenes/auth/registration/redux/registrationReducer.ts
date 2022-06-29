@@ -145,6 +145,7 @@ const registerationSlice = createSlice({
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
     },
+
     fetchHeightDropdownSuccess(state, action) {
       state.dropDownsData.height = action.payload;
     },

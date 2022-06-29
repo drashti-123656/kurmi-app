@@ -29,6 +29,7 @@ const ParivarikParichay = () => {
   } = useSelector(state => state.registration);
 
   useEffect(() => {
+    console.log('isRegistering=====>>', isRegistering);
     dispatch({
       type: FETCH_LAND_DROPDOWN,
       payload: {moduleType: 'Land'},
@@ -82,13 +83,14 @@ const ParivarikParichay = () => {
       userCountry: registerData.country[0],
       userState: registerData.state[0],
       userCity: registerData.city[0],
-      userProfileImage: `data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
+      userProfileImage: `data.image/jpg;base64,${registerData?.ProfilePic?.assets[0]?.base64}`,
     };
     console.log('occupation=======>>', payload);
     dispatch({
       type: REGISTER_USER,
       payload,
     });
+    console.log('payloadiiii===========>', payload);
   };
   return (
     <RootScreen>
@@ -240,6 +242,7 @@ const ParivarikParichay = () => {
                 onPress={handleSubmit}
                 loading={isRegistering}
               />
+              {console.log('isRegisteringNext=====>>', isRegistering)}
             </View>
           )}
         </Formik>
