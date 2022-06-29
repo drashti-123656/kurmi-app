@@ -51,7 +51,6 @@ const DharmikJankari = ({navigation}) => {
       userReligiousInfoManglik: values.auspicious,
       userReligiousInfoMotherGotra: values.native,
     };
-    console.log('gotraa=====>>', payload);
 
     navigation.navigate('Sampark');
 
