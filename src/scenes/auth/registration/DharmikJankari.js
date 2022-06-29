@@ -52,7 +52,7 @@ const DharmikJankari = ({navigation}) => {
       userReligiousInfoMotherGotra: values.native,
     };
 
-    navigation.navigate('Sampark');
+    navigation.navigate('ParivarikParichay');
 
     dispatch(dharmikJankari(payload));
   };
