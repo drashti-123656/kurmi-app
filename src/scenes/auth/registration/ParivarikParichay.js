@@ -22,7 +22,7 @@ const ParivarikParichay = () => {
     parivarikData,
     samparkData,
     dharmikJankariData,
-    dropDownsData: {land, job},
+    dropDownsData: {land},
     registerData,
     personalinfoData,
     isRegistering,
@@ -46,7 +46,7 @@ const ParivarikParichay = () => {
       userEducationInfoOccupation: personalinfoData.job[0],
 
       userFamilyInfoFatherName: values.fatherName,
-      userFamilyInfoFatherOccupation: values.fatherOccupation[0],
+      userFamilyInfoFatherOccupation: values.fatherOccupation,
       userFamilyInfoMotherName: values.motherName,
       userFamilyInfoMotherMaika: values.motherMayaka,
       userFamilyInfoNoOfBrother: values.brother,
@@ -84,7 +84,7 @@ const ParivarikParichay = () => {
       userCity: registerData.city[0],
       userProfileImage: `data.image/jpg;base64,${registerData.ProfilePic.assets[0].base64}`,
     };
-
+    console.log('occupation=======>>', payload);
     dispatch({
       type: REGISTER_USER,
       payload,
@@ -127,7 +127,7 @@ const ParivarikParichay = () => {
                 <Text style={styles.error}>{errors.fatherName}</Text>
               ) : null}
 
-              <Dropdown
+              {/* <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'occupationId'}
                 displayKey={'occupationTitleHi'}
@@ -141,6 +141,14 @@ const ParivarikParichay = () => {
                 onSelectedItemsChange={value =>
                   setFieldValue('fatherOccupation', value)
                 }
+              /> */}
+              <ExtendedTextInput
+                onChangeText={handleChange('fatherOccupation')}
+                onBlur={handleBlur('fatherOccupation')}
+                value={values.fatherOccupation}
+                style={styles.textinput}
+                placeholder={translate('ParivarikParichay.fatherOccupation')}
+                placeholderTextColor={'#666666'}
               />
 
               {errors.fatherOccupation && touched.fatherOccupation ? (

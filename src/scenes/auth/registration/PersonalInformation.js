@@ -137,7 +137,7 @@ const PersonalInformation = ({navigation}) => {
               hideDropdown={true}
               searchIcon={false}
               searchInputStyle={styles.searchInput}
-              styleListContainer={styles.listContainerData}
+              //styleListContainer={styles.listContainerData}
               items={job}
               selectText={translate('Vyaktigatdata.Job')}
               selectedItems={values.job}

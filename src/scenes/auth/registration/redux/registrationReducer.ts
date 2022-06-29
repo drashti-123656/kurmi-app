@@ -5,9 +5,7 @@ const initialState = {
   registered: false,
   isRegistering: false,
   isVerifiying: false,
-
   error: '',
-
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -33,17 +31,13 @@ const initialState = {
     auspicious: '',
   },
   dropDownsData: {
-    zodiacSign: [],
     auspicious: [],
-    height: heightDropdwonList,
+    height: [],
     maritalstatus: [],
     education: [],
     job: [],
 
-    disability: [
-      {id: 1, name: translate('Disability.Yes')},
-      {id: 2, name: translate('Disability.No')},
-    ],
+    disability: [],
 
     profilemaker: [],
     birthdate: [],
