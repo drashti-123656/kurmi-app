@@ -61,6 +61,7 @@ const Settings = ({navigation}) => {
               <Image
                 style={styles.profile}
                 source={{uri: `${myProfileData.userProfileImage}`}}
+                resizeMode="cover"
               />
               <View style={styles.text}>
                 <Text style={styles.profileDetail}>
@@ -176,6 +177,8 @@ const styles = EStyleSheet.create({
     height: 90,
     borderRadius: 50,
     marginHorizontal: 15,
+    borderWidth: 3,
+    borderColor: '#C3773B',
   },
   text: {
     marginTop: 10,
