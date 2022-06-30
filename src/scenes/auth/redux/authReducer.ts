@@ -15,17 +15,17 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    fetchLoginDataStarted(state,action) {
+    fetchLoginDataStarted(state, action) {
       state.authData.loading = true;
     },
-    fetchLoginDataSuccess(state,action) {
+    fetchLoginDataSuccess(state, action) {
       state.authData.isAuthenticated = true;
       state.authData.userData = {};
       state.authData.token = action.payload;
       state.authData.error = null;
       state.authData.loading = false;
     },
-    fetchLoginDataFail(state,action) {
+    fetchLoginDataFail(state, action) {
       state.authData.loading = false;
       state.authData.error = null;
     },
@@ -48,5 +48,12 @@ const authSlice = createSlice({
 
 const {actions, reducer} = authSlice;
 
-export const {fetchLoginDataStarted, fetchLoginDataSuccess, fetchLoginDataFail, logout, authError, authLoading} = actions;
+export const {
+  fetchLoginDataStarted,
+  fetchLoginDataSuccess,
+  fetchLoginDataFail,
+  logout,
+  authError,
+  authLoading,
+} = actions;
 export default reducer;

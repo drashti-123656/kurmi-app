@@ -11,6 +11,7 @@ import {
   educationDropdown,
   gotraDropdown,
   jobDropdown,
+  disabiltyDropdown,
   landDropdown,
   martialstatusDropdown,
   profilemakerDropdown,
@@ -18,13 +19,16 @@ import {
   registerUserVerification,
   stateDropdown,
   zodiacDropDowns,
+  heightDropdown,
 } from '../scenes/auth/registration/redux/registerSagas';
 import {
   FETCH_AUSPICIOUS_DROPDOWN,
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
+  FETCH_DISABILITY,
   FETCH_EDUCATION_DROPDOWN,
   FETCH_GOTRA_DROPDOWN,
+  FETCH_HEIGHT,
   FETCH_JOB_DROPDOWN,
   FETCH_LAND_DROPDOWN,
   FETCH_MARITALSTATUS_DROPDOWN,
@@ -108,5 +112,7 @@ export default function* sagas() {
     takeLatest(VIEW_BY_USERS, viewByUsers),
     takeLatest(EDIT_PROFILE, editProfile),
     takeLatest(DOWNLOAD_PDF, downloadPdf),
+    takeLatest(FETCH_HEIGHT, heightDropdown),
+    takeLatest(FETCH_DISABILITY, disabiltyDropdown),
   ]);
 }

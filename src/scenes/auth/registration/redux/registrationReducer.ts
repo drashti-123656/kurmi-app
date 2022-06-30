@@ -5,9 +5,7 @@ const initialState = {
   registered: false,
   isRegistering: false,
   isVerifiying: false,
-
   error: '',
-
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -33,17 +31,13 @@ const initialState = {
     auspicious: '',
   },
   dropDownsData: {
-    zodiacSign: [],
     auspicious: [],
-    height: heightDropdwonList,
+    height: [],
     maritalstatus: [],
     education: [],
     job: [],
 
-    disability: [
-      {id: 1, name: translate('Disability.Yes')},
-      {id: 2, name: translate('Disability.No')},
-    ],
+    disability: [],
 
     profilemaker: [],
     birthdate: [],
@@ -114,11 +108,9 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoFatherOccupation;
       state.parivarikData.motherName = action.payload.userFamilyInfoMotherName;
       state.parivarikData.motherMayaka =
-        action.payload.userFamilyInfoMotherOccupation;
-      state.parivarikData.brother =
-        action.payload.userFamilyInfoNoOfMarriedBrothers;
-      state.parivarikData.sister =
-        action.payload.userFamilyInfoNoOfMarriedSisters;
+        action.payload.userFamilyInfoMotherMaika;
+      state.parivarikData.brother = action.payload.userFamilyInfoNoOfBrother;
+      state.parivarikData.sister = action.payload.userFamilyInfoNoOfSister;
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
@@ -151,6 +143,7 @@ const registerationSlice = createSlice({
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
     },
+
     fetchHeightDropdownSuccess(state, action) {
       state.dropDownsData.height = action.payload;
     },

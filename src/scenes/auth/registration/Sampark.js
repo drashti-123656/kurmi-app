@@ -19,33 +19,80 @@ import ExtendedTextInput from './../../../components/atoms/inputs/ExtendedTextIn
 import translate from './../../../translations/configTranslations';
 import {samparkSchema} from './../../../utils/schema/registerSchema';
 
-import {sampark} from './redux/registrationReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {navigationRef} from '../../../navigation/RootNavigation';
 import CustomInput from '../../../components/atoms/inputs/CustomInput';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
+import moment from 'moment';
+import {REGISTER_USER} from './redux/registrationActions';
 
 const Sampark = ({navigation}) => {
   const dispatch = useDispatch();
-  const {samparkData} = useSelector(state => state.registration);
+  const {
+    parivarikData,
+    samparkData,
+    dharmikJankariData,
+    dropDownsData: {land},
+    registerData,
+    personalinfoData,
+    isRegistering,
+  } = useSelector(state => state.registration);
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-   
-  }, [samparkData]);
-
   const handleSampark = values => {
+    console.log('parivarikData====>>', parivarikData);
     const payload = {
       userContactInfoContactNo: values.mobileNo,
       userContactInfoWhatsappNo: values.whatsAppNo,
       userContactInfoPresentAddress: values.presentAdd,
       userContactInfoPermanentAddress: values.permanentAdd,
-    };
+      userEducationInfoEducation: personalinfoData.education[0],
+      userEducationInfoOccupation: personalinfoData.job[0],
 
-    dispatch(sampark(payload));
-    setLoading(true);
-    navigation.navigate('ParivarikParichay');
+      userFamilyInfoFatherName: parivarikData.fatherName,
+      userFamilyInfoFatherOccupation: parivarikData.fatherOccupation,
+      userFamilyInfoMotherName: parivarikData.motherName,
+      userFamilyInfoMotherMaika: parivarikData.motherMayaka,
+      userFamilyInfoNoOfBrother: parivarikData.brother,
+
+      userFamilyInfoNoOfSister: parivarikData.sister,
+      userFamilyInfoLand: parivarikData.land[0],
+
+      userPersonalInfoMaritalStatusId: personalinfoData.maritalstatus[0],
+
+      userPersonalInfoHeight: personalinfoData.height[0],
+
+      userPersonalInfoDisability: personalinfoData.disability[0],
+
+      userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format(
+        'YYYY-MM-DD HH:mm:ss',
+      ),
+      userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
+      userReligiousInfoGotra: dharmikJankariData.gotra[0],
+
+      userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
+      userReligiousInfoManglik: dharmikJankariData.auspicious[0],
+
+      userReligiousInfoMotherGotra: dharmikJankariData.native[0],
+
+      userProfileCreatedBy: registerData.profilemaker[0],
+      userFirstName: registerData.firstname,
+      userLastName: registerData.lastname,
+      userGender: registerData.gender,
+      userEmail: registerData.emailid,
+      userMobileNo: registerData.mobilenumber,
+      userDob: moment(registerData.birthdate).format('YYYY-MM-DD'),
+      password: registerData.password,
+      userCountry: registerData.country[0],
+      userState: registerData.state[0],
+      userCity: registerData.city[0],
+      userProfileImage: `data.image/jpg;base64,${registerData?.ProfilePic?.assets[0]?.base64}`,
+    };
+    dispatch({
+      type: REGISTER_USER,
+      payload,
+    });
   };
 
   return (
@@ -68,13 +115,13 @@ const Sampark = ({navigation}) => {
             errors,
             touched,
           }) => (
-            <View >
+            <View>
               <ExtendedTextInput
                 onChangeText={handleChange('mobileNo')}
                 onBlur={handleBlur('mobileNo')}
                 value={values.mobileNo}
                 maxLength={10}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -87,7 +134,7 @@ const Sampark = ({navigation}) => {
                 onBlur={handleBlur('whatsAppNo')}
                 value={values.whatsAppNo}
                 maxLength={10}
-                keyboardType = 'numeric'
+                keyboardType="numeric"
                 placeholder={translate('samPark.whatsAppNo')}
                 placeholderTextColor={'#666666'}
               />
@@ -129,13 +176,11 @@ const Sampark = ({navigation}) => {
                 <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
 
-            <LoginButton 
-                 title={translate('samPark.Next')}
-              onPress={handleSubmit}
-              // loading={loading}
-
-            />
-             
+              <LoginButton
+                title={translate('ParivarikParichay.register')}
+                onPress={handleSubmit}
+                loading={isRegistering}
+              />
             </View>
           )}
         </Formik>

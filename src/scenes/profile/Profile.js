@@ -1,5 +1,5 @@
 import {Text, View, Image, ScrollView, Alert} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from '../../translations/configTranslations';
@@ -9,8 +9,10 @@ import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {clearLedgerDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
 import RNShare from 'react-native-share';
-
+import {launchImageLibrary} from 'react-native-image-picker';
+import {EDIT_PROFILE} from '../editProfile/redux/editProfileAction';
 const Profile = ({navigation}) => {
+  const [response, setResponse] = useState();
   const {myProfileData, isFetching} = useSelector(
     state => state.myProfileDetail,
   );
@@ -18,7 +20,76 @@ const Profile = ({navigation}) => {
     state => state.downloadPdf,
   );
   const dispatch = useDispatch();
+  const handleChooseProfilePic = () => {
+    launchImageLibrary({noData: true, includeBase64: true}, response => {
+      if (!response.didCancel) {
+        setResponse(response);
 
+        const payload = {
+          userUpdateType: 'general',
+          userContactInfoContactNo:
+            myProfileData.userContactInfo.userContactInfoContactNo,
+          userContactInfoWhatsappNo:
+            myProfileData.userContactInfo.userContactInfoWhatsappNo,
+          userContactInfoPresentAddress:
+            myProfileData.userContactInfo.userContactInfoPresentAddress,
+          userContactInfoPermanentAddress:
+            myProfileData.userContactInfo.userContactInfoPermanentAddress,
+
+          userEducationInfoEducation:
+            myProfileData.userEducationInfo.userEducationInfoId,
+          userEducationInfoOccupation:
+            myProfileData.userEducationInfo.userEducationInfoId,
+
+          userFamilyInfoFatherName:
+            myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+          userFamilyInfoFatherOccupation: '1',
+          userFamilyInfoMotherName:
+            myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+          userFamilyInfoLand:
+            myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+          userFamilyInfoMotherMaika:
+            myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+          userFamilyInfoNoOfSister:
+            myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+          userFamilyInfoNoOfBrother:
+            myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
+
+          userPersonalInfoMaritalStatusId:
+            myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+              .maritalStatusId,
+          userPersonalInfoHeight:
+            myProfileData.userPersonalInfo.userPersonalInfoHeight,
+          userPersonalInfoDisability:
+            myProfileData.userPersonalInfo.userPersonalInfoDisability,
+
+          userReligiousInfoGotra:
+            myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+          userReligiousInfoZodiac:
+            myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+          userReligiousInfoManglik:
+            myProfileData.userReligiousInfo.userReligiousInfoId,
+          userReligiousInfoMotherGotra:
+            myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+
+          userFirstName: myProfileData.userFirstName,
+          userLastName: myProfileData.userLastName,
+          userGender: 'male',
+          userDob: '1988-06-27',
+          userCountry: myProfileData.userCountry.countryId,
+          userState: myProfileData.userState.stateId,
+          userCity: myProfileData.userCity.cityId,
+          userProfileImage: `data:image/png;base64, ${response.assets[0].base64}`,
+        };
+        console.log('payloddddd==>', payload.userProfileImage);
+
+        dispatch({
+          type: EDIT_PROFILE,
+          payload,
+        });
+      }
+    });
+  };
   useEffect(() => {
     console.log('myprofileDataaa====>>', myProfileData);
     dispatch(fetchmyProfileDataStarted());
@@ -49,10 +120,29 @@ const Profile = ({navigation}) => {
       <ScrollView>
         <View style={styles.mainContainer}>
           <View style={styles.container}>
-            <Image
-              style={styles.image}
-              source={{uri: `${myProfileData.userProfileImage}`}}
-            />
+            <TouchableOpacity
+              onPress={handleChooseProfilePic}
+              style={styles.uploadProfile}>
+              {response ? (
+                <Image
+                  style={styles.image}
+                  source={{uri: `${response?.assets[0]?.uri}`}}
+                />
+              ) : (
+                <TouchableOpacity onPress={handleChooseProfilePic}>
+                  <Image
+                    style={styles.image}
+                    source={{uri: `${myProfileData.userProfileImage}`}}
+                  />
+                </TouchableOpacity>
+              )}
+            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={handleChooseProfilePic}>
+              <Image
+                style={styles.image}
+                source={{uri: `${myProfileData.userProfileImage}`}}
+              />
+            </TouchableOpacity> */}
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
             </Text>
@@ -114,16 +204,17 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.nameText}>
                 {' '}
-                {myProfileData.userFirstName}{' '}
+                {myProfileData?.userFirstName}{' '}
               </Text>
             </View>
+
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('register.EmailId')}
               </Text>
               <Text style={styles.emailidText}>
                 {' '}
-                {myProfileData.userEmail}{' '}
+                {myProfileData?.userEmail}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -132,26 +223,26 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.genderText}>
                 {' '}
-                {myProfileData.userGender}{' '}
+                {myProfileData?.userGender}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('Vyaktigatdata.Marital Status')}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
-                  .maritalStatusTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userPersonalInfo
+                    ?.userPersonalInfoMaritalStatusId?.maritalStatusTitleHi
+                }{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('register.birthdate')}
               </Text>
-              <Text style={styles.dob}> {myProfileData.userDob} </Text>
+              <Text style={styles.dob}> {myProfileData?.userDob} </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
@@ -159,7 +250,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.heightText}>
                 {' '}
-                {myProfileData.userPersonalInfo.userPersonalInfoHeight}{' '}
+                {myProfileData?.userPersonalInfo?.userPersonalInfoHeight}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -168,7 +259,9 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.heightText}>
                 {' '}
-                {myProfileData.userPersonalInfo.userPersonalInfoDisability}{' '}
+                {
+                  myProfileData?.userPersonalInfo?.userPersonalInfoDisability
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -177,17 +270,21 @@ const Profile = ({navigation}) => {
               </Text>
               <View style={styles.profileMargin}>
                 <Text style={styles.profileCreate}>
-                  {myProfileData.userProfileCreatedBy.profileCreatedByNameHi}
+                  {' '}
+                  {
+                    myProfileData?.userProfileCreatedBy?.profileCreatedByNameHi
+                  }{' '}
                 </Text>
               </View>
             </View>
+
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('register.country')}{' '}
               </Text>
               <Text style={styles.countryText}>
                 {' '}
-                {myProfileData.userCountry.countryName}{' '}
+                {myProfileData?.userCountry?.countryName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -196,7 +293,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.stateText}>
                 {' '}
-                {myProfileData.userState.name}{' '}
+                {myProfileData?.userState?.name}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -205,32 +302,33 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.countryText}>
                 {' '}
-                {myProfileData.userCity.cityName}{' '}
+                {myProfileData?.userCity?.cityName}{' '}
               </Text>
             </View>
+
             <View style={styles.profileContain}>
               <Text style={styles.textHeading}>
                 {translate('Vyaktigatdata.Knowledge')}
               </Text>
-              {/* <Text style={styles.detailsText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
-                  myProfileData.userEducationInfo.userEducationInfoEducation
-                    .educationTitleHi
+                  myProfileData?.userEducationInfo?.userEducationInfoEducation
+                    ?.educationTitleHi
                 }
-              </Text> */}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('Vyaktigatdata.Job')}
               </Text>
-              {/* <Text style={styles.detailsText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
-                  myProfileData.userEducationInfo.userEducationInfoOccupation
-                    .occupationTitleHi
+                  myProfileData?.userEducationInfo?.userEducationInfoOccupation
+                    ?.occupationTitleHi
                 }{' '}
-              </Text> */}
+              </Text>
             </View>
           </View>
           <View>
@@ -263,26 +361,27 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userContactInfo.userContactInfoContactNo}
+                {myProfileData?.userContactInfo?.userContactInfoContactNo}
               </Text>
             </View>
+
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('samPark.whatsAppNo')}{' '}
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userContactInfo.userContactInfoWhatsappNo}{' '}
+                {myProfileData?.userContactInfo?.userContactInfoWhatsappNo}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('samPark.presentAdd')}{' '}
               </Text>
-              <Text style={styles.samparkText}>
+              <Text style={styles.samparkLast}>
                 {' '}
                 {
-                  myProfileData.userContactInfo.userContactInfoPresentAddress
+                  myProfileData?.userContactInfo?.userContactInfoPresentAddress
                 }{' '}
               </Text>
             </View>
@@ -293,7 +392,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.samparkLast}>
                 {' '}
                 {
-                  myProfileData.userContactInfo.userContactInfoPermanentAddress
+                  myProfileData?.userContactInfo
+                    ?.userContactInfoPermanentAddress
                 }{' '}
               </Text>
             </View>
@@ -327,10 +427,10 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {/* {
-                myProfileData.userReligiousInfo.userReligiousInfoGotra
-                  .gotraTitleHi
-              }{' '} */}
+                {
+                  myProfileData?.userReligiousInfo?.userReligiousInfoGotra
+                    ?.gotraTitleHi
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -340,7 +440,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.nativeText}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoMotherGotra
+                  myProfileData?.userReligiousInfo?.userReligiousInfoMotherGotra
                 }{' '}
               </Text>
             </View>
@@ -349,7 +449,10 @@ const Profile = ({navigation}) => {
                 {translate('Dharmikjankari.Birthtime')}{' '}
               </Text>
               <Text style={styles.birthText}>
-                {myProfileData.userReligiousInfo.userReligiousInfoTimeOfBirth}
+                {' '}
+                {
+                  myProfileData?.userReligiousInfo?.userReligiousInfoTimeOfBirth
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -359,7 +462,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth
+                  myProfileData?.userReligiousInfo
+                    ?.userReligiousInfoPlaceOfBirth
                 }{' '}
               </Text>
             </View>
@@ -370,8 +474,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoZodiac
-                    .zodiacTitleHi
+                  myProfileData?.userReligiousInfo?.userReligiousInfoZodiac
+                    ?.zodiacTitleHi
                 }{' '}
               </Text>
             </View>
@@ -381,7 +485,9 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.dharmikManglik}>
                 {' '}
-                {myProfileData.userReligiousInfo.userReligiousInfoManglik}{' '}
+                {
+                  myProfileData?.userReligiousInfo?.userReligiousInfoManglik
+                }{' '}
               </Text>
             </View>
           </View>
@@ -415,20 +521,20 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoFatherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('ParivarikParichay.fatherOccupation')}{' '}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
-                  .occupationTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userFamilyInfo?.userFamilyInfoFatherOccupation
+                    ?.occupationTitleHi
+                }{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
@@ -436,20 +542,17 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoMotherName}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoMotherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('ParivarikParichay.motherMayaka')}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userFamilyInfo.userFamilyInfoMotherOccupation
-                  .occupationTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoMotherMaika}{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
@@ -457,7 +560,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.parivarikText}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfBrother}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -466,7 +569,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.parivarikText}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoNoOfSister}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfSister}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -476,7 +579,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userFamilyInfo.userFamilyInfoLand.landTitleHi
+                  myProfileData?.userFamilyInfo?.userFamilyInfoLand?.landTitleHi
                 }{' '}
               </Text>
             </View>
@@ -501,14 +604,6 @@ const styles = EStyleSheet.create({
   profileMargin: {
     marginTop: -20,
   },
-  footer: {
-    color: '$PRIMARY',
-    marginTop: 20,
-    marginVertical: 40,
-    marginHorizontal: 20,
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
   nameText: {
     marginRight: 120,
     color: '$PLACEHOLDER',
@@ -521,6 +616,23 @@ const styles = EStyleSheet.create({
     fontSize: 15,
     marginBottom: 5,
   },
+  footer: {
+    color: '$PRIMARY',
+    marginTop: 20,
+    marginVertical: 40,
+    marginHorizontal: 20,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  upload_img: {
+    //flex: 1,
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    marginBottom: 10,
+
+    borderRadius: 100,
+  },
   profileCreated: {
     marginTop: -15,
     marginHorizontal: 25,
@@ -531,7 +643,9 @@ const styles = EStyleSheet.create({
   detailsText: {
     fontSize: 15,
     marginBottom: 5,
+
     color: '$PLACEHOLDER',
+
     marginRight: 70,
   },
   parivarikText: {
@@ -690,10 +804,13 @@ const styles = EStyleSheet.create({
   image: {
     width: 200,
     height: 200,
+    resizeMode: 'cover',
     justifyContent: 'center',
     alignSelf: 'center',
     borderRadius: 100,
     marginTop: 10,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   separatorLine: {
     flex: 1,
