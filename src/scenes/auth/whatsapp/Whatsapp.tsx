@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Formik} from 'formik';
 
-import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import translate from './../../translations/configTranslations';
-import { WhatsappSchema } from '../../utils/schema/whatsappSchema';
-import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import {LOG_USER} from './redux/authActions';
+import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
+import translate from '../../../translations/configTranslations';
+import {WhatsappSchema} from '../../../utils/schema/whatsappSchema';
+import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
+import {LOG_USER} from '../redux/authActions';
 import {useDispatch} from 'react-redux';
-import LoginButton from '../../components/atoms/buttons/LoginButton';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
@@ -28,12 +28,14 @@ const Whatsapp = ({navigation}) => {
       payload,
     });
     setLoading(true);
-
   };
 
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo1.png')} style={styles.image} />
+      <Image
+        source={require('../../../assets/logo1.png')}
+        style={styles.image}
+      />
       <Text style={styles.note}>{translate('whatsapp.Note')}</Text>
       <Formik
         initialValues={{
@@ -54,7 +56,6 @@ const Whatsapp = ({navigation}) => {
             <ExtendedTextInput
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
-              
               value={values.name}
               placeholder={translate('whatsapp.name')}
               placeholderTextColor={'#666666'}
@@ -66,9 +67,8 @@ const Whatsapp = ({navigation}) => {
               onChangeText={handleChange('whatsappno')}
               onBlur={handleBlur('whatsappno')}
               value={values.whatsappno}
-            
               maxLength={10}
-              keyboardType = 'numeric'
+              keyboardType="numeric"
               placeholder={translate('whatsapp.phoneno')}
               placeholderTextColor={'#666666'}
             />
