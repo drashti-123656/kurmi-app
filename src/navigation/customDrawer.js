@@ -9,7 +9,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {base_URL} from '../services/httpServices';
 import {logout} from '../scenes/auth/redux/authReducer';
 import {fetchmyProfileDataStarted} from '../scenes/profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
@@ -48,6 +47,7 @@ const CustomDrawer = props => {
             <Image
               source={{uri: `${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
+              resizeMode="cover"
             />
             <Text style={styles.text}>
               welcome, {myProfileData.userFirstName}{' '}
