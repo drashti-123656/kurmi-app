@@ -194,7 +194,7 @@ const Registration = () => {
               style={styles.dropdownStyle}
               uniqueKey={'profileCreatedById'}
               displayKey={'profileCreatedByNameHi'}
-              autoFocus={true}
+              //autoFocus={true}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
