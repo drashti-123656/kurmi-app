@@ -58,20 +58,21 @@ const OthersProfile = ({route, navigation}) => {
           <Image
             style={styles.profileImg}
             resizeMode={'contain'}
-            source={{uri: `${othersProfileData.userProfileImage}`}}
+            source={{uri: `${othersProfileData?.userProfileImage}`}}
           />
 
           <View style={styles.transparentText}>
             <Text style={styles.subNames}>
               {' '}
-              {othersProfileData.userFirstName} {othersProfileData.userLastName}{' '}
+              {othersProfileData?.userFirstName}{' '}
+              {othersProfileData?.userLastName}{' '}
             </Text>
             <Text style={styles.subNamesDetails}>
               {' '}
-              Age - {othersProfileData.userAge},{' '}
-              {othersProfileData.userCity.cityName},{' '}
-              {othersProfileData.userState.name},{' '}
-              {othersProfileData.userCountry.countryName}
+              Age - {othersProfileData?.userAge},{' '}
+              {othersProfileData?.userCity?.cityName},{' '}
+              {othersProfileData?.userState?.name},{' '}
+              {othersProfileData?.userCountry?.countryName}
             </Text>
           </View>
 
@@ -107,36 +108,36 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFirstName}{' '}
-                {othersProfileData.userLastName}{' '}
+                {othersProfileData?.userFirstName}{' '}
+                {othersProfileData?.userLastName}{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('register.birthdate')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userDob}{' '}
+                {othersProfileData?.userDob}{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('register.city')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userCity.cityName}{' '}
+                {othersProfileData?.userCity?.cityName}{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('register.state')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userState.name}{' '}
+                {othersProfileData?.userState?.name}{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('register.country')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userCountry.countryName}{' '}
+                {othersProfileData?.userCountry?.countryName}{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Marital Status')}{' '}
@@ -150,7 +151,9 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userPersonalInfo.userPersonalInfoHeight}{' '}
+                {
+                  othersProfileData?.userPersonalInfo?.userPersonalInfoHeight
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -158,20 +161,20 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {/* {
-                  othersProfileData.userEducationInfo.userEducationInfoEducation
-                    .educationTitleHi
-                } */}
+                {
+                  othersProfileData?.userEducationInfo
+                    ?.userEducationInfoEducation?.educationTitleHi
+                }
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Job')}{' '}
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {/* {
-                  othersProfileData.userEducationInfo
-                    .userEducationInfoOccupation.occupationTitleHi
-                }{' '} */}
+                {
+                  othersProfileData?.userEducationInfo
+                    ?.userEducationInfoOccupation?.occupationTitleHi
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -180,7 +183,8 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userPersonalInfo.userPersonalInfoDisability
+                  othersProfileData?.userPersonalInfo
+                    ?.userPersonalInfoDisability
                 }{' '}
               </Text>
             </View>
@@ -200,10 +204,10 @@ const OthersProfile = ({route, navigation}) => {
                 {translate('Dharmikjankari.Caste')}
               </Text>
               <Text style={styles.detailsText}>
-                {/* {
-                othersProfileData.userReligiousInfo.userReligiousInfoGotra
-                  .gotraTitleHi
-              } */}
+                {
+                  othersProfileData?.userReligiousInfo?.userReligiousInfoGotra
+                    ?.gotraTitleHi
+                }
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -212,8 +216,8 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo
-                    .userReligiousInfoMotherGotra
+                  othersProfileData?.userReligiousInfo
+                    ?.userReligiousInfoMotherGotra
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -223,8 +227,8 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo
-                    .userReligiousInfoTimeOfBirth
+                  othersProfileData?.userReligiousInfo
+                    ?.userReligiousInfoTimeOfBirth
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -233,21 +237,11 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo
-                    .userReligiousInfoPlaceOfBirth
+                  othersProfileData?.userReligiousInfo
+                    ?.userReligiousInfoPlaceOfBirth
                 }{' '}
               </Text>
-              <Text style={styles.subHeadingText}>
-                {' '}
-                {translate('Dharmikjankari.Zodiacsign')}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {
-                  othersProfileData.userReligiousInfo.userReligiousInfoZodiac
-                    .zodiacTitleHi
-                }{' '}
-              </Text>
+
               <Text style={styles.subHeadingText}>
                 {' '}
                 {translate('Dharmikjankari.auspicious')}
@@ -255,7 +249,7 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userReligiousInfo.userReligiousInfoManglik
+                  othersProfileData?.userReligiousInfo?.userReligiousInfoManglik
                 }{' '}
               </Text>
             </View>
@@ -276,7 +270,9 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
+                {
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoFatherName
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -285,10 +281,10 @@ const OthersProfile = ({route, navigation}) => {
 
               <Text style={styles.detailsText}>
                 {' '}
-                {/* {
-                othersProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
-                  .occupationTitleHi
-              }{' '} */}
+                {
+                  othersProfileData?.userFamilyInfo
+                    ?.userFamilyInfoFatherOccupation?.occupationTitleHi
+                }{' '}
               </Text>
 
               <Text style={styles.subHeadingText}>
@@ -297,7 +293,9 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFamilyInfo.userFamilyInfoMotherName}{' '}
+                {
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoMotherName
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.motherMayaka')}
@@ -305,7 +303,7 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userFamilyInfo.userFamilyInfoMotherMaika
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoMotherMaika
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -315,7 +313,7 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userFamilyInfo.userFamilyInfoNoOfBrother
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoNoOfBrother
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -324,18 +322,20 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userFamilyInfo.userFamilyInfoNoOfSister}{' '}
+                {
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoNoOfSister
+                }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
                 {translate('ParivarikParichay.land')}
               </Text>
               <Text style={styles.detailsText}>
-                {/* {' '}
+                {' '}
                 {
-                  othersProfileData.userFamilyInfo.userFamilyInfoLand
-                    .landTitleHi
-                }{' '} */}
+                  othersProfileData?.userFamilyInfo?.userFamilyInfoLand
+                    ?.landTitleHi
+                }{' '}
               </Text>
             </View>
 
@@ -355,7 +355,7 @@ const OthersProfile = ({route, navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {othersProfileData.userContactInfo.userContactInfoContactNo}
+                {othersProfileData?.userContactInfo?.userContactInfoContactNo}
               </Text>
               <Text style={styles.subHeadingText}>
                 {' '}
@@ -364,7 +364,7 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userContactInfo.userContactInfoWhatsappNo
+                  othersProfileData?.userContactInfo?.userContactInfoWhatsappNo
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -374,8 +374,8 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userContactInfo
-                    .userContactInfoPresentAddress
+                  othersProfileData?.userContactInfo
+                    ?.userContactInfoPresentAddress
                 }{' '}
               </Text>
               <Text style={styles.subHeadingText}>
@@ -384,8 +384,8 @@ const OthersProfile = ({route, navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  othersProfileData.userContactInfo
-                    .userContactInfoPermanentAddress
+                  othersProfileData?.userContactInfo
+                    ?.userContactInfoPermanentAddress
                 }{' '}
               </Text>
             </View>

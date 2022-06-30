@@ -204,7 +204,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.nameText}>
                 {' '}
-                {myProfileData.userFirstName}{' '}
+                {myProfileData?.userFirstName}{' '}
               </Text>
             </View>
 
@@ -214,7 +214,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.emailidText}>
                 {' '}
-                {myProfileData.userEmail}{' '}
+                {myProfileData?.userEmail}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -223,26 +223,26 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.genderText}>
                 {' '}
-                {myProfileData.userGender}{' '}
+                {myProfileData?.userGender}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('Vyaktigatdata.Marital Status')}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
-                  .maritalStatusTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userPersonalInfo
+                    ?.userPersonalInfoMaritalStatusId?.maritalStatusTitleHi
+                }{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('register.birthdate')}
               </Text>
-              <Text style={styles.dob}> {myProfileData.userDob} </Text>
+              <Text style={styles.dob}> {myProfileData?.userDob} </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
@@ -250,7 +250,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.heightText}>
                 {' '}
-                {myProfileData.userPersonalInfo.userPersonalInfoHeight}{' '}
+                {myProfileData?.userPersonalInfo?.userPersonalInfoHeight}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -259,7 +259,9 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.heightText}>
                 {' '}
-                {myProfileData.userPersonalInfo.userPersonalInfoDisability}{' '}
+                {
+                  myProfileData?.userPersonalInfo?.userPersonalInfoDisability
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -270,7 +272,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.profileCreate}>
                   {' '}
                   {
-                    myProfileData.userProfileCreatedBy.profileCreatedByNameHi
+                    myProfileData?.userProfileCreatedBy?.profileCreatedByNameHi
                   }{' '}
                 </Text>
               </View>
@@ -282,7 +284,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.countryText}>
                 {' '}
-                {myProfileData.userCountry.countryName}{' '}
+                {myProfileData?.userCountry?.countryName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -291,7 +293,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.stateText}>
                 {' '}
-                {myProfileData.userState.name}{' '}
+                {myProfileData?.userState?.name}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -300,7 +302,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.countryText}>
                 {' '}
-                {myProfileData.userCity.cityName}{' '}
+                {myProfileData?.userCity?.cityName}{' '}
               </Text>
             </View>
 
@@ -308,25 +310,25 @@ const Profile = ({navigation}) => {
               <Text style={styles.textHeading}>
                 {translate('Vyaktigatdata.Knowledge')}
               </Text>
-              {/* <Text style={styles.detailsText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
-                  myProfileData.userEducationInfo.userEducationInfoEducation
-                    .educationTitleHi
+                  myProfileData?.userEducationInfo?.userEducationInfoEducation
+                    ?.educationTitleHi
                 }
-              </Text> */}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('Vyaktigatdata.Job')}
               </Text>
-              {/* <Text style={styles.detailsText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
-                  myProfileData.userEducationInfo.userEducationInfoOccupation
-                    .occupationTitleHi
+                  myProfileData?.userEducationInfo?.userEducationInfoOccupation
+                    ?.occupationTitleHi
                 }{' '}
-              </Text> */}
+              </Text>
             </View>
           </View>
           <View>
@@ -359,7 +361,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userContactInfo.userContactInfoContactNo}
+                {myProfileData?.userContactInfo?.userContactInfoContactNo}
               </Text>
             </View>
 
@@ -369,7 +371,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userContactInfo.userContactInfoWhatsappNo}{' '}
+                {myProfileData?.userContactInfo?.userContactInfoWhatsappNo}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -379,7 +381,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.samparkLast}>
                 {' '}
                 {
-                  myProfileData.userContactInfo.userContactInfoPresentAddress
+                  myProfileData?.userContactInfo?.userContactInfoPresentAddress
                 }{' '}
               </Text>
             </View>
@@ -390,7 +392,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.samparkLast}>
                 {' '}
                 {
-                  myProfileData.userContactInfo.userContactInfoPermanentAddress
+                  myProfileData?.userContactInfo
+                    ?.userContactInfoPermanentAddress
                 }{' '}
               </Text>
             </View>
@@ -424,10 +427,10 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {/* {
-                myProfileData.userReligiousInfo.userReligiousInfoGotra
-                  .gotraTitleHi
-              }{' '} */}
+                {
+                  myProfileData?.userReligiousInfo?.userReligiousInfoGotra
+                    ?.gotraTitleHi
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -437,7 +440,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.nativeText}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoMotherGotra
+                  myProfileData?.userReligiousInfo?.userReligiousInfoMotherGotra
                 }{' '}
               </Text>
             </View>
@@ -448,7 +451,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.birthText}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoTimeOfBirth
+                  myProfileData?.userReligiousInfo?.userReligiousInfoTimeOfBirth
                 }{' '}
               </Text>
             </View>
@@ -459,7 +462,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth
+                  myProfileData?.userReligiousInfo
+                    ?.userReligiousInfoPlaceOfBirth
                 }{' '}
               </Text>
             </View>
@@ -470,8 +474,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userReligiousInfo.userReligiousInfoZodiac
-                    .zodiacTitleHi
+                  myProfileData?.userReligiousInfo?.userReligiousInfoZodiac
+                    ?.zodiacTitleHi
                 }{' '}
               </Text>
             </View>
@@ -481,7 +485,9 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.dharmikManglik}>
                 {' '}
-                {myProfileData.userReligiousInfo.userReligiousInfoManglik}{' '}
+                {
+                  myProfileData?.userReligiousInfo?.userReligiousInfoManglik
+                }{' '}
               </Text>
             </View>
           </View>
@@ -515,20 +521,20 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoFatherName}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoFatherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
                 {translate('ParivarikParichay.fatherOccupation')}{' '}
               </Text>
-              {/* <Text style={styles.detailsText}>
-              {' '}
-              {
-                myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
-                  .occupationTitleHi
-              }{' '}
-            </Text> */}
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userFamilyInfo?.userFamilyInfoFatherOccupation
+                    ?.occupationTitleHi
+                }{' '}
+              </Text>
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.textStyle}>
@@ -536,7 +542,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.samparkDetails}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoMotherName}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoMotherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -545,7 +551,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoMotherMaika}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoMotherMaika}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -554,7 +560,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.parivarikText}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfBrother}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -563,7 +569,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.parivarikText}>
                 {' '}
-                {myProfileData.userFamilyInfo.userFamilyInfoNoOfSister}{' '}
+                {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfSister}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -573,7 +579,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.dharmikLast}>
                 {' '}
                 {
-                  myProfileData.userFamilyInfo.userFamilyInfoLand.landTitleHi
+                  myProfileData?.userFamilyInfo?.userFamilyInfoLand?.landTitleHi
                 }{' '}
               </Text>
             </View>
