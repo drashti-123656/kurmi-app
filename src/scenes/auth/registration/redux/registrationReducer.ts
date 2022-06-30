@@ -108,11 +108,9 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoFatherOccupation;
       state.parivarikData.motherName = action.payload.userFamilyInfoMotherName;
       state.parivarikData.motherMayaka =
-        action.payload.userFamilyInfoMotherOccupation;
-      state.parivarikData.brother =
-        action.payload.userFamilyInfoNoOfMarriedBrothers;
-      state.parivarikData.sister =
-        action.payload.userFamilyInfoNoOfMarriedSisters;
+        action.payload.userFamilyInfoMotherMaika;
+      state.parivarikData.brother = action.payload.userFamilyInfoNoOfBrother;
+      state.parivarikData.sister = action.payload.userFamilyInfoNoOfSister;
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 

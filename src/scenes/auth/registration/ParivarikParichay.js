@@ -13,19 +13,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FETCH_LAND_DROPDOWN, REGISTER_USER} from './redux/registrationActions';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import Dropdown from '../../../components/atoms/dropdown/Dropdown';
-import moment from 'moment';
+import {parivarik} from './redux/registrationReducer';
 
-const ParivarikParichay = () => {
+const ParivarikParichay = ({navigation}) => {
   const dispatch = useDispatch();
 
   const {
     parivarikData,
-    samparkData,
-    dharmikJankariData,
     dropDownsData: {land},
-    registerData,
-    personalinfoData,
-    isRegistering,
   } = useSelector(state => state.registration);
 
   useEffect(() => {
@@ -37,14 +32,6 @@ const ParivarikParichay = () => {
 
   const handleParivarik = values => {
     const payload = {
-      userContactInfoContactNo: samparkData.mobileNo,
-      userContactInfoWhatsappNo: samparkData.whatsAppNo,
-      userContactInfoPresentAddress: samparkData.presentAdd,
-      userContactInfoPermanentAddress: samparkData.permanentAdd,
-
-      userEducationInfoEducation: personalinfoData.education[0],
-      userEducationInfoOccupation: personalinfoData.job[0],
-
       userFamilyInfoFatherName: values.fatherName,
       userFamilyInfoFatherOccupation: values.fatherOccupation,
       userFamilyInfoMotherName: values.motherName,
@@ -52,43 +39,12 @@ const ParivarikParichay = () => {
       userFamilyInfoNoOfBrother: values.brother,
 
       userFamilyInfoNoOfSister: values.sister,
-      userFamilyInfoLand: values.land[0],
-
-      userPersonalInfoMaritalStatusId: personalinfoData.maritalstatus[0],
-
-      userPersonalInfoHeight: personalinfoData.height[0],
-
-      userPersonalInfoDisability: personalinfoData.disability[0],
-
-      userReligiousInfoTimeOfBirth: moment(dharmikJankariData.birthtime).format(
-        'YYYY-MM-DD HH:mm:ss',
-      ),
-      userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
-      userReligiousInfoGotra: dharmikJankariData.gotra[0],
-
-      userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
-      userReligiousInfoManglik: dharmikJankariData.auspicious[0],
-
-      userReligiousInfoMotherGotra: dharmikJankariData.native[0],
-
-      userProfileCreatedBy: registerData.profilemaker[0],
-      userFirstName: registerData.firstname,
-      userLastName: registerData.lastname,
-      userGender: registerData.gender,
-      userEmail: registerData.emailid,
-      userMobileNo: registerData.mobilenumber,
-      userDob: moment(registerData.birthdate).format('YYYY-MM-DD'),
-      password: registerData.password,
-      userCountry: registerData.country[0],
-      userState: registerData.state[0],
-      userCity: registerData.city[0],
-      userProfileImage: `data.image/jpg;base64,${registerData?.ProfilePic?.assets[0]?.base64}`,
+      userFamilyInfoLand: values.land,
     };
 
-    dispatch({
-      type: REGISTER_USER,
-      payload,
-    });
+    dispatch(parivarik(payload));
+
+    navigation.navigate('Sampark');
   };
   return (
     <RootScreen>
@@ -236,9 +192,8 @@ const ParivarikParichay = () => {
               ) : null}
 
               <LoginButton
-                title={translate('ParivarikParichay.register')}
+                title={translate('samPark.Next')}
                 onPress={handleSubmit}
-                loading={isRegistering}
               />
             </View>
           )}
