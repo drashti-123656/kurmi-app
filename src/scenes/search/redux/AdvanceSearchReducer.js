@@ -3,6 +3,8 @@ const initialState = {
   advanceserachData: [],
   isFetching: false,
   error: '',
+  pageIndex: 1,
+  isPaginationRequired: true,
 };
 
 const advanceSearchSlice = createSlice({
@@ -12,9 +14,11 @@ const advanceSearchSlice = createSlice({
     fetchAdvanceSearchStarted(state) {
       state.isFetching = true;
     },
-    fetchAdvanceSearchSuccess(state, action) {
-      state.advanceserachData = action.payload;
+    fetchAdvanceSearchSuccess(state, {payload}) {
+      state.advanceserachData = payload.profile;
       state.isFetching = false;
+      state.pageIndex = payload.pageNumber;
+      state.isPaginationRequired = payload.isPaginationRequired;
     },
     fetchAdvanceSearchFail(state) {
       state.isFetching = false;

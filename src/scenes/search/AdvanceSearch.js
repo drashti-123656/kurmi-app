@@ -1,17 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_EDUCATION_DROPDOWN,
-  FETCH_GOTRA_DROPDOWN,
   FETCH_JOB_DROPDOWN,
   FETCH_STATE_DROPDOWN,
   FETCH_AUSPICIOUS_DROPDOWN,
@@ -30,6 +21,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {ADVANCED_SEARCH_USER} from './redux/AdvanceSearchAction';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {useEffect} from 'react';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 
 const AdvanceSearch = ({navigation}) => {
   const dispatch = useDispatch();
@@ -38,12 +30,10 @@ const AdvanceSearch = ({navigation}) => {
   const {
     dropDownsData: {
       profilemaker,
-      country,
       state,
       city,
       education,
       job,
-      gotra,
       height,
       auspicious,
     },
@@ -62,11 +52,6 @@ const AdvanceSearch = ({navigation}) => {
     dispatch({
       type: FETCH_AUSPICIOUS_DROPDOWN,
       payload: {moduleType: 'Nakshatra'},
-    });
-
-    dispatch({
-      type: FETCH_GOTRA_DROPDOWN,
-      payload: {moduleType: 'Gotra'},
     });
   }, []);
   const handleadvanceProfile = values => {
@@ -96,7 +81,9 @@ const AdvanceSearch = ({navigation}) => {
       payload,
     });
 
-    navigation.navigate('AdvanceSearchProfile');
+    navigation.navigate('AdvanceSearchProfile', {
+      paramKey: payload.filter,
+    });
   };
 
   return (
@@ -121,7 +108,15 @@ const AdvanceSearch = ({navigation}) => {
           }}
           validationSchema={advanceSearchSchema}
           onSubmit={values => handleadvanceProfile(values)}>
-          {({handleSubmit, setFieldValue, values, errors, touched}) => (
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched,
+          }) => (
             <View>
               <View style={styles.radioButtonContainer}>
                 <TouchableOpacity
@@ -171,17 +166,12 @@ const AdvanceSearch = ({navigation}) => {
               {errors.profilemaker && touched.profilemaker ? (
                 <Text style={styles.dropboxError}>{errors.profilemaker}</Text>
               ) : null}
-              <Dropdown
-                style={styles.dropdownStyle}
-                uniqueKey={'gotraId'}
-                displayKey={'gotraTitleHi'}
-                items={gotra}
-                selectText={translate('Dharmikjankari.Caste')}
-                selectedItems={values.gotra}
-                searchInputStyle={styles.searchInput}
-                hideDropdown={true}
-                searchIcon={false}
-                onSelectedItemsChange={value => setFieldValue('gotra', value)}
+              <ExtendedTextInput
+                onChangeText={handleChange('gotra')}
+                onBlur={handleBlur('gotra')}
+                value={values.gotra}
+                placeholder={translate('Dharmikjankari.Caste')}
+                placeholderTextColor={'#666666'}
               />
 
               {errors.gotra && touched.gotra ? (
@@ -399,7 +389,6 @@ const AdvanceSearch = ({navigation}) => {
                 onPress={handleSubmit}
                 loading={isFetching}
               />
-              {console.log('advanceisfetchh==========>', isFetching)}
             </View>
           )}
         </Formik>
@@ -460,18 +449,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     marginRight: 100,
   },
-  radioButtonIcon: {
-    height: 12,
-    width: 12,
-    borderRadius: 9,
-    backgroundColor: 'white',
-  },
-  radioButtonText: {
-    fontSize: 25,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginTop: 20,
-  },
+
   inputMargin: {
     marginBottom: 20,
   },
