@@ -61,13 +61,10 @@ const OthersProfile = ({route, navigation}) => {
         <ScrollView>
           <Image
             style={styles.profileImg}
-<<<<<<< HEAD
             resizeMode={'cover'}
             source={{uri: `${othersProfileData.userProfileImage}`}}
-=======
             resizeMode={'contain'}
             source={{uri: `${othersProfileData?.userProfileImage}`}}
->>>>>>> 3bee460fe79ff908444d53006b216f93909c1190
           />
 
           <View style={styles.transparentText}>
@@ -122,7 +119,6 @@ const OthersProfile = ({route, navigation}) => {
             </Text>
 
             <View style={styles.subDetailContainer}>
-<<<<<<< HEAD
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {translate('register.Name')}{' '}
@@ -142,7 +138,6 @@ const OthersProfile = ({route, navigation}) => {
                   {othersProfileData.userDob}{' '}
                 </Text>
               </View>
-=======
               <Text style={styles.subHeadingText}>
                 {translate('register.Name')}{' '}
               </Text>
@@ -158,7 +153,6 @@ const OthersProfile = ({route, navigation}) => {
                 {' '}
                 {othersProfileData?.userDob}{' '}
               </Text>
->>>>>>> 3bee460fe79ff908444d53006b216f93909c1190
               <Text style={styles.subHeadingText}>
                 {translate('register.city')}{' '}
               </Text>
@@ -506,11 +500,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     //marginLeft: 5,
     fontWeight: '600',
+    flex: 1,
   },
   detailsText: {
     fontSize: 15,
     marginBottom: 10,
     color: '#666666',
+    flex: 1,
     //marginLeft: 5,
     //marginHorizontal: 20,
   },
