@@ -93,6 +93,8 @@ const Sampark = ({navigation}) => {
       type: REGISTER_USER,
       payload,
     });
+    console.log('gotraa===>>', dharmikJankariData);
+    console.log('fatherOccupation==========>>', parivarikData);
   };
 
   return (
