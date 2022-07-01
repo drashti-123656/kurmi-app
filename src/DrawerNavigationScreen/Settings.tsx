@@ -1,4 +1,12 @@
-import {View, Text, Image, TouchableOpacity, Switch, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Switch,
+  Alert,
+  Linking,
+} from 'react-native';
 import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -103,12 +111,18 @@ const Settings = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://kurmishadi.com/privacy/');
+              }}>
               <Text style={styles.textStyle}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://kurmishadi.com/terms/');
+              }}>
               <Text style={styles.textStyle}>Term Of Use</Text>
             </TouchableOpacity>
           </View>
