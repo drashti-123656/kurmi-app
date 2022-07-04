@@ -34,7 +34,7 @@ const OthersProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('id====>>', id);
+    console.log('shubhangi========>>', othersProfileData.userProfileImage);
     dispatch({
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
@@ -155,6 +155,16 @@ const OthersProfile = ({route, navigation}) => {
                 <Text style={styles.detailsText}>
                   {' '}
                   {othersProfileData?.userState?.name}{' '}
+                </Text>
+              </View>
+              <View style={styles.alignment}>
+                <Text style={styles.subHeadingText}>
+                  {translate('Vyaktigatdata.gender')}{' '}
+                </Text>
+
+                <Text style={styles.detailsText}>
+                  {' '}
+                  {othersProfileData?.userGender}{' '}
                 </Text>
               </View>
               <View style={styles.alignment}>
