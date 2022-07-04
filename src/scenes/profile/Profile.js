@@ -250,7 +250,9 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.heightText}>
                 {' '}
-                {myProfileData?.userPersonalInfo?.userPersonalInfoHeight}{' '}
+                {
+                  myProfileData?.userPersonalInfo?.userPersonalInfoHeight?.name
+                }{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
@@ -261,6 +263,7 @@ const Profile = ({navigation}) => {
                 {' '}
                 {
                   myProfileData?.userPersonalInfo?.userPersonalInfoDisability
+                    ?.nakshatraTitleHi
                 }{' '}
               </Text>
             </View>
@@ -427,10 +430,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {
-                  myProfileData?.userReligiousInfo?.userReligiousInfoGotra
-                    ?.gotraTitleHi
-                }{' '}
+                {myProfileData?.userReligiousInfo?.userReligiousInfoGotra}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
