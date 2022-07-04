@@ -160,7 +160,9 @@
     "Next": "आगे",
     "Gotra": "गोत्र",
     "MaaKaGotra": "माँ का गोत्र",
-    "Required": "*आवश्यक"
+    "Required": "*आवश्यक",
+    "profileCreatedBy": "प्रोफ़ाइल द्वारा बनाई गई",
+    "gender": "जेंडर"
   },
   "profilemaker": {
     "Myself": "स्वयं",
