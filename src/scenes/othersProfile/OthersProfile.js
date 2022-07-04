@@ -480,16 +480,16 @@ export default OthersProfile;
 
 const styles = StyleSheet.create({
   profileImg: {
-    height: '27%',
-    width: '100%',
+    height: heightPercentageToDP('60'),
+    width: widthPercentageToDP('100'),
     backgroundColor: 'black',
   },
   contactContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    paddingVertical: 8,
+    paddingVertical: 3,
     shadowColor: '#000',
-    height: '5.5%',
+    height: heightPercentageToDP('9'),
     justifyContent: 'space-evenly',
     shadowOffset: {
       width: 0,
@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
   detailContainer: {
     flex: 1,
     paddingTop: 20,
-    marginBottom: '110%',
+    marginBottom: 10,
     marginLeft: 10,
   },
   headingText: {
@@ -583,7 +583,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     paddingLeft: 20,
     paddingTop: 5,
-    height: '4.5%',
+    height: heightPercentageToDP('8'),
   },
   subNamesDetails: {
     color: 'white',
