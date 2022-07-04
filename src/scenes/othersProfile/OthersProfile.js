@@ -34,7 +34,6 @@ const OthersProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('shubhangi========>>', othersProfileData.userProfileImage);
     dispatch({
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
