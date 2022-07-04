@@ -26,7 +26,7 @@ const TextExtended: React.FC<TextExtendedProps> = ({
     <Text
       style={EStyleSheet.flatten([
         {
-          color: color ? color : EStyleSheet.value('$BLACK'),
+          color: color ? color : 'black',
           fontSize: size,
           fontWeight: bold ? 'bold' : 'normal',
         },

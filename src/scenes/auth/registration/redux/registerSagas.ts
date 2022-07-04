@@ -3,6 +3,7 @@ import apiClient, {setToken} from './../../../../services/httpServices';
 import {showMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../../services/webConstants';
 import {
+  clearDataAfterLogout,
   fetchAuspiciousDropdownSuccess,
   fetchCityDropdownSuccess,
   fetchCountryDropdownSuccess,
@@ -45,6 +46,7 @@ export function* registerUser(action) {
     yield put(fetchLoginDataSuccess(data.User));
     setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
+    yield put(clearDataAfterLogout({}));
 
     // navigate('DashboardNavigation');
   } else {

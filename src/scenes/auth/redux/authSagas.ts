@@ -1,26 +1,13 @@
 import {call, put} from 'redux-saga/effects';
-import {navigate} from '../../../navigation/RootNavigation';
+
 import apiClient, {setToken} from './../../../services/httpServices';
 import {API_URL} from './../../../services/webConstants';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {
   fetchLoginDataFail,
   fetchLoginDataStarted,
   fetchLoginDataSuccess,
 } from './authReducer';
-
-export function* logUser(action) {
-  const payload = action.payload;
-  const {data, ok, problem} = yield call(
-    apiClient.post,
-    API_URL.LOG_USER,
-    payload,
-  );
-
-  if (ok) {
-    navigate('DashboardNavigation');
-  }
-}
 
 export function* loginUser(action) {
   const payload = action.payload;
