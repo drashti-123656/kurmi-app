@@ -69,7 +69,7 @@ const Sampark = ({navigation}) => {
         'YYYY-MM-DD HH:mm:ss',
       ),
       userReligiousInfoPlaceOfBirth: dharmikJankariData.birthplace,
-      userReligiousInfoGotra: dharmikJankariData.gotra[0],
+      userReligiousInfoGotra: dharmikJankariData.gotra,
 
       userReligiousInfoZodiac: dharmikJankariData.zodiacsign[0],
       userReligiousInfoManglik: dharmikJankariData.auspicious[0],
