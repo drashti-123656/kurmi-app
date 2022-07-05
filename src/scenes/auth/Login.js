@@ -1,16 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  Pressable,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
+import React from 'react';
 import {Formik} from 'formik';
-import CheckBox from '@react-native-community/checkbox';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {
   heightPercentageToDP,
@@ -23,12 +13,8 @@ import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {LOG_IN} from './redux/authActions';
 const Login = ({navigation}) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const dispatch = useDispatch();
   const {authData} = useSelector(state => state.auth);
-
-  
-  
 
   const handleLogin = values => {
     const payload = {
@@ -85,35 +71,18 @@ const Login = ({navigation}) => {
             <LoginButton
               title={translate('login.Log-in')}
               onPress={handleSubmit}
-             loading={authData.loading}
+              loading={authData.loading}
             />
-            {console.log('loader22145462374',authData.loading)}
 
             <View style={styles.alignedRowContainer}>
-              <View style={styles.alignedRowContainer1}>
-                <CheckBox
-                  tintColors={{true: 'white'}}
-                  disabled={false}
-                  value={toggleCheckBox}
-                  onValueChange={newValue => setToggleCheckBox(newValue)}
-                />
-                <Text style={{color: 'white', fontSize: 15}}>
-                  {translate('login.remenberMe')}
-                </Text>
-              </View>
+              <View style={styles.alignedRowContainer1}></View>
 
-              <Text style={{color: 'white', fontSize: 15}}>
+              <Text style={styles.forgotPassword}>
                 {translate('login.forgotPassword')}
               </Text>
             </View>
 
-            <Text
-              style={{
-                color: 'white',
-                fontSize: widthPercentageToDP('4.5%'),
-                alignSelf: 'center',
-                marginTop: heightPercentageToDP('5%'),
-              }}>
+            <Text style={styles.createAcccount}>
               {translate('login.createAccountPrefix')}
             </Text>
 
@@ -125,16 +94,7 @@ const Login = ({navigation}) => {
               </Text>
             </Pressable>
 
-            <Text
-              style={{
-                color: 'white',
-                fontSize: widthPercentageToDP('4.5%'),
-                alignSelf: 'center',
-                paddingTop: 20,
-                marginBottom: 20,
-              }}>
-              {translate('genral.webLink')}
-            </Text>
+            <Text style={styles.webLink}>{translate('genral.webLink')}</Text>
           </View>
         )}
       </Formik>
@@ -151,6 +111,19 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+  },
+  createAcccount: {
+    color: 'white',
+    fontSize: widthPercentageToDP('4.5%'),
+    alignSelf: 'center',
+    marginTop: heightPercentageToDP('5%'),
+  },
+  webLink: {
+    color: 'white',
+    fontSize: widthPercentageToDP('4.5%'),
+    alignSelf: 'center',
+    paddingTop: 20,
+    marginBottom: 20,
   },
   btnContainer: {
     backgroundColor: '#c3773b',
@@ -199,6 +172,10 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     color: 'black',
+  },
+  forgotPassword: {
+    color: 'white',
+    fontSize: 15,
   },
   button: {
     backgroundColor: '#DC1C28',
