@@ -5,7 +5,9 @@ import {
   FETCH_EDUCATION_DROPDOWN,
   FETCH_JOB_DROPDOWN,
   FETCH_STATE_DROPDOWN,
+  FETCH_HEIGHT,
   FETCH_AUSPICIOUS_DROPDOWN,
+  FETCH_LAND_DROPDOWN,
 } from '../../scenes/auth/registration/redux/registrationActions';
 import {
   widthPercentageToDP as wp,
@@ -36,6 +38,7 @@ const AdvanceSearch = ({navigation}) => {
       job,
       height,
       auspicious,
+      land,
     },
   } = useSelector(state => state.registration);
   useEffect(() => {
@@ -53,6 +56,10 @@ const AdvanceSearch = ({navigation}) => {
       type: FETCH_AUSPICIOUS_DROPDOWN,
       payload: {moduleType: 'Nakshatra'},
     });
+    dispatch({
+      type: FETCH_HEIGHT,
+      payload: {moduleType: 'Height'},
+    });
   }, []);
   const handleadvanceProfile = values => {
     const payload = {
@@ -62,12 +69,13 @@ const AdvanceSearch = ({navigation}) => {
           min: values.heightFrom[0],
           max: values.heightTo[0],
         },
-        // manglik : values.auspicious,
+        // manglik: values.auspicious,
         country: values.country[0],
         state: values.state[0],
         city: values.city[0],
         education: values.education[0],
         occupation: values.job[0],
+        land: values.land[0],
       },
       page: 1,
       pageSIze: 10,
@@ -105,8 +113,8 @@ const AdvanceSearch = ({navigation}) => {
             city: '',
             education: '',
             job: '',
+            land: '',
           }}
-          validationSchema={advanceSearchSchema}
           onSubmit={values => handleadvanceProfile(values)}>
           {({
             handleSubmit,
@@ -114,8 +122,6 @@ const AdvanceSearch = ({navigation}) => {
             handleBlur,
             setFieldValue,
             values,
-            errors,
-            touched,
           }) => (
             <View>
               <View style={styles.radioButtonContainer}>
@@ -144,9 +150,6 @@ const AdvanceSearch = ({navigation}) => {
                     {translate('register.Vadhu')}
                   </Text>
                 </TouchableOpacity>
-                {errors.gender && touched.gender ? (
-                  <Text style={styles.error}>{errors.gender}</Text>
-                ) : null}
               </View>
               <Dropdown
                 style={styles.dropdownStyle}
@@ -163,9 +166,7 @@ const AdvanceSearch = ({navigation}) => {
                   setFieldValue('profilemaker', value)
                 }
               />
-              {errors.profilemaker && touched.profilemaker ? (
-                <Text style={styles.dropboxError}>{errors.profilemaker}</Text>
-              ) : null}
+
               <ExtendedTextInput
                 onChangeText={handleChange('gotra')}
                 onBlur={handleBlur('gotra')}
@@ -173,10 +174,6 @@ const AdvanceSearch = ({navigation}) => {
                 placeholder={translate('Dharmikjankari.Caste')}
                 placeholderTextColor={'#666666'}
               />
-
-              {errors.gotra && touched.gotra ? (
-                <Text style={styles.error}>{errors.gotra}</Text>
-              ) : null}
 
               <Text style={styles.title}>
                 {' '}
@@ -209,15 +206,12 @@ const AdvanceSearch = ({navigation}) => {
                   </Text>
                 </TouchableOpacity>
               </View>
-              {errors.maritalstatus && touched.maritalstatus ? (
-                <Text style={styles.error}>{errors.maritalstatus}</Text>
-              ) : null}
 
               <View style={styles.heightContainer}>
                 <View style={styles.inputWrap}>
                   <Dropdown
                     style={styles.dropContainer}
-                    uniqueKey={'id'}
+                    uniqueKey={'heightId'}
                     displayKey={'name'}
                     items={height}
                     fixedHeight={true}
@@ -234,7 +228,7 @@ const AdvanceSearch = ({navigation}) => {
                 <View style={styles.inputWrap}>
                   <Dropdown
                     style={styles.dropContainer}
-                    uniqueKey={'id'}
+                    uniqueKey={'heightId'}
                     displayKey={'name'}
                     items={height}
                     fixedHeight={true}
@@ -247,16 +241,6 @@ const AdvanceSearch = ({navigation}) => {
                       setFieldValue('heightTo', value)
                     }
                   />
-                </View>
-              </View>
-              <View style={styles.errorText}>
-                {errors.heightFrom && touched.heightFrom ? (
-                  <Text style={styles.heighterror}>{errors.heightFrom}</Text>
-                ) : null}
-                <View style={styles.lastnameError}>
-                  {errors.heightTo && touched.heightTo ? (
-                    <Text style={styles.heighttoerror}>{errors.heightTo}</Text>
-                  ) : null}
                 </View>
               </View>
 
@@ -272,9 +256,6 @@ const AdvanceSearch = ({navigation}) => {
                   setFieldValue('auspicious', value)
                 }
               />
-              {errors.auspicious && touched.auspicious ? (
-                <Text style={styles.dropboxError}>{errors.auspicious}</Text>
-              ) : null}
 
               <Dropdown
                 style={styles.dropdownStyle}
@@ -300,9 +281,6 @@ const AdvanceSearch = ({navigation}) => {
                   });
                 }}
               />
-              {errors.country && touched.country ? (
-                <Text style={styles.dropboxError}>{errors.country}</Text>
-              ) : null}
 
               <Dropdown
                 style={styles.dropdownStyle}
@@ -327,9 +305,6 @@ const AdvanceSearch = ({navigation}) => {
                   });
                 }}
               />
-              {errors.state && touched.state ? (
-                <Text style={styles.dropboxError}>{errors.state}</Text>
-              ) : null}
 
               <Dropdown
                 style={styles.dropdownStyle}
@@ -343,9 +318,7 @@ const AdvanceSearch = ({navigation}) => {
                 selectedItems={values.city}
                 onSelectedItemsChange={value => setFieldValue('city', value)}
               />
-              {errors.city && touched.city ? (
-                <Text style={styles.dropboxError}>{errors.city}</Text>
-              ) : null}
+
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'educationId'}
@@ -362,9 +335,6 @@ const AdvanceSearch = ({navigation}) => {
                   setFieldValue('education', value)
                 }
               />
-              {errors.education && touched.education ? (
-                <Text style={styles.error}>{errors.education}</Text>
-              ) : null}
 
               <Dropdown
                 style={styles.inputMargin}
@@ -380,9 +350,18 @@ const AdvanceSearch = ({navigation}) => {
                 selectedItems={values.job}
                 onSelectedItemsChange={value => setFieldValue('job', value)}
               />
-              {errors.job && touched.job ? (
-                <Text style={styles.error}>{errors.job}</Text>
-              ) : null}
+              <Dropdown
+                style={styles.inputMargin}
+                uniqueKey={'landId'}
+                displayKey={'landTitleHi'}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
+                items={land}
+                selectText={translate('ParivarikParichay.land')}
+                selectedItems={values.land}
+                onSelectedItemsChange={value => setFieldValue('land', value)}
+              />
 
               <LoginButton
                 title={translate('NewsFeed.Search')}
