@@ -57,7 +57,7 @@ const CustomDrawer = props => {
 
   const sendWhatsApp = () => {
     let msg = 'Please, Tell me What can i help you?';
-    let phoneWithCountryCode = 9981424199;
+    let phoneWithCountryCode = +919406034346;
 
     let mobile =
       Platform.OS == 'android'
