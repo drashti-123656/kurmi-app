@@ -262,6 +262,7 @@ const OthersProfile = ({route, navigation}) => {
                   {translate('Dharmikjankari.Caste')}
                 </Text>
                 <Text style={styles.detailsText}>
+                  {/* {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra} */}
                   {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra}
                 </Text>
               </View>
@@ -326,7 +327,7 @@ const OthersProfile = ({route, navigation}) => {
                   {
                     othersProfileData?.userFamilyInfo
                       ?.userFamilyInfoFatherOccupation
-                  }{' '}
+                  }
                 </Text>
               </View>
               <View style={styles.alignment}>
