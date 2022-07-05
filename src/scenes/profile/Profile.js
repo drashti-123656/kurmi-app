@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
-import {clearLedgerDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
+import {clearProfileDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
 import RNShare from 'react-native-share';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {EDIT_PROFILE} from '../editProfile/redux/editProfileAction';
@@ -81,7 +81,6 @@ const Profile = ({navigation}) => {
           userCity: myProfileData.userCity.cityId,
           userProfileImage: `data:image/png;base64, ${response.assets[0].base64}`,
         };
-        console.log('payloddddd==>', payload.userProfileImage);
 
         dispatch({
           type: EDIT_PROFILE,
@@ -93,7 +92,6 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     console.log('myprofileDataaa====>>', myProfileData);
     dispatch(fetchmyProfileDataStarted());
-    console.log('myprofileDataaa====>>', isFetching);
     dispatch({
       type: MY_PROFILE_DETAILS,
     });
@@ -109,7 +107,7 @@ const Profile = ({navigation}) => {
           console.log('failed: ', reason);
         })
         .finally(() => {
-          dispatch(clearLedgerDownloadStatus({}));
+          dispatch(clearProfileDownloadStatus({}));
         });
     }
   }, [downloadProfileSuccess]);
