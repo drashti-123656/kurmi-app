@@ -6,6 +6,7 @@ import {
   Linking,
   alert,
   Share,
+  Platform,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
@@ -52,6 +53,32 @@ const CustomDrawer = props => {
 
   const handleLogout = async () => {
     dispatch(logout({}));
+  };
+
+  const sendWhatsApp = () => {
+    let msg = 'Please, Tell me What can i help you?';
+    let phoneWithCountryCode = +919406034346;
+
+    let mobile =
+      Platform.OS == 'android'
+        ? phoneWithCountryCode
+        : '+' + phoneWithCountryCode;
+    if (mobile) {
+      if (msg) {
+        let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+        Linking.openURL(url)
+          .then(data => {
+            console.log('WhatsApp Opened');
+          })
+          .catch(() => {
+            alert('Make sure WhatsApp installed on your device');
+          });
+      } else {
+        alert('Please insert message to send');
+      }
+    } else {
+      alert('Please insert mobile no');
+    }
   };
 
   return (
@@ -209,9 +236,7 @@ const CustomDrawer = props => {
             <MaterialIcons name="headset-mic" size={22} color={styles.color} />
           )}
           label="Helpline -"
-          onPress={() => {
-            props.navigation.navigate('Helpline -');
-          }}
+          onPress={sendWhatsApp}
         />
 
         <DrawerItem
