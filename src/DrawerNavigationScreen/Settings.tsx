@@ -6,6 +6,8 @@ import {
   Switch,
   Alert,
   Linking,
+  Share,
+  alert,
 } from 'react-native';
 import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
@@ -22,6 +24,26 @@ const Settings = ({navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
   const {isActive} = useSelector(state => state.hideProfile);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'https://play.google.com/store/apps/details?id=com.kurmishadi',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleHideProfile = () => {
     if (isActive === true) {
       dispatch(toggleOff({}));
@@ -106,7 +128,7 @@ const Settings = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onShare}>
               <Text style={styles.textStyle}>Share App</Text>
             </TouchableOpacity>
           </View>
