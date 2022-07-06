@@ -8,6 +8,8 @@ import {
   alert,
   Linking,
   Platform,
+  Pressable,
+  Alert,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
@@ -33,6 +35,9 @@ const OthersProfile = ({route, navigation}) => {
   const {othersProfileData, isFetching} = useSelector(
     state => state.othersDetail,
   );
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
   const {id} = route.params;
   const dispatch = useDispatch();
 
@@ -53,6 +58,16 @@ const OthersProfile = ({route, navigation}) => {
       payload,
     });
   };
+
+  const handleSecurity = () =>
+    Alert.alert('Alert', 'Send Intrest', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]);
 
   const sendWhatsApp = () => {
     let msg = 'Please, Tell me What can i help you?';
@@ -112,36 +127,81 @@ const OthersProfile = ({route, navigation}) => {
           </View>
 
           <View style={styles.contactContainer}>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
-              <Icon
-                name="phone"
-                size={30}
-                color={EStyleSheet.value('$PRIMARY')}
-                style={{marginVertical: 20}}
-              />
-              <Text style={styles.contactText}> Call Now </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              //  onPress={sendWhatsApp}
-              style={{flexDirection: 'row'}}>
-              <Icon
-                name="whatsapp"
-                size={28}
-                color={EStyleSheet.value('$PRIMARY')}
-                style={{marginVertical: 20}}
-              />
-              <Text style={styles.contactText}> WhatsaApp </Text>
-            </TouchableOpacity>
+            {!isAuthenticated ? (
+              <>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Login')}
+                  style={{flexDirection: 'row'}}>
+                  <Icon
+                    name="phone"
+                    size={30}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> Call Now </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Login')}
+                  style={{flexDirection: 'row'}}>
+                  <Icon
+                    name="whatsapp"
+                    size={28}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> WhatsaApp </Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={{flexDirection: 'row'}}>
-              <MaterialIcons
-                name="email"
-                size={30}
-                color={EStyleSheet.value('$PRIMARY')}
-                style={{marginVertical: 20}}
-              />
-              <Text style={styles.contactText}> Email </Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Login')}
+                  style={{flexDirection: 'row'}}>
+                  <MaterialIcons
+                    name="email"
+                    size={30}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> Email </Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <>
+                <TouchableOpacity
+                  onPress={handleSecurity}
+                  style={{flexDirection: 'row'}}>
+                  <Icon
+                    name="phone"
+                    size={30}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> Call Now </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handleSecurity}
+                  style={{flexDirection: 'row'}}>
+                  <Icon
+                    name="whatsapp"
+                    size={28}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> WhatsaApp </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={handleSecurity}
+                  style={{flexDirection: 'row'}}>
+                  <MaterialIcons
+                    name="email"
+                    size={30}
+                    color={EStyleSheet.value('$PRIMARY')}
+                    style={{marginVertical: 20}}
+                  />
+                  <Text style={styles.contactText}> Email </Text>
+                </TouchableOpacity>
+              </>
+            )}
           </View>
           {/* {renderLoader()} */}
           <View style={styles.detailContainer}>
@@ -436,48 +496,83 @@ const OthersProfile = ({route, navigation}) => {
                 <Text style={styles.subHeadingText}>
                   {translate('samPark.mobileNo')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {othersProfileData?.userContactInfo?.userContactInfoContactNo}
-                </Text>
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {' '}
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoContactNo
+                      }
+                    </Text>
+                  </>
+                )}
               </View>
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {' '}
                   {translate('samPark.whatsAppNo')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {
-                    othersProfileData?.userContactInfo
-                      ?.userContactInfoWhatsappNo
-                  }{' '}
-                </Text>
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoWhatsappNo
+                      }{' '}
+                    </Text>
+                  </>
+                )}
               </View>
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {' '}
                   {translate('samPark.presentAdd')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {
-                    othersProfileData?.userContactInfo
-                      ?.userContactInfoPresentAddress
-                  }{' '}
-                </Text>
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {' '}
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoPresentAddress
+                      }{' '}
+                    </Text>
+                  </>
+                )}
               </View>
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {translate('samPark.permanentAdd')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {
-                    othersProfileData?.userContactInfo
-                      ?.userContactInfoPermanentAddress
-                  }{' '}
-                </Text>
+
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {' '}
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoPermanentAddress
+                      }{' '}
+                    </Text>
+                  </>
+                )}
               </View>
             </View>
           </View>
@@ -491,15 +586,31 @@ const OthersProfile = ({route, navigation}) => {
         </ScrollView>
 
         <View style={styles.bottomContainer}>
-          <TouchableOpacity onPress={handleShortList} style={styles.shortlist}>
-            <Icon
-              name="star-o"
-              size={40}
-              color="#c3773b"
-              style={{paddingLeft: 6}}
-            />
-            <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
-          </TouchableOpacity>
+          {!isAuthenticated ? (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              style={styles.shortlist}>
+              <Icon
+                name="star-o"
+                size={40}
+                color="#c3773b"
+                style={{paddingLeft: 6}}
+              />
+              <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={handleShortList}
+              style={styles.shortlist}>
+              <Icon
+                name="star-o"
+                size={40}
+                color="#c3773b"
+                style={{paddingLeft: 6}}
+              />
+              <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -508,7 +619,7 @@ const OthersProfile = ({route, navigation}) => {
 
 export default OthersProfile;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   profileImg: {
     height: heightPercentageToDP('60'),
     width: widthPercentageToDP('100'),
@@ -626,5 +737,12 @@ const styles = StyleSheet.create({
     // marginHorizontal: 40,
     /// flexWrap: 'wrap',
     //justifyContent: 'space-evenly',
+  },
+  loginUrl: {
+    fontSize: 15,
+    marginBottom: 10,
+    color: '$PRIMARY',
+    flex: 1,
+    paddingRight: 62,
   },
 });
