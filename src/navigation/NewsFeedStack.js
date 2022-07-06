@@ -1,5 +1,5 @@
-import {TouchableOpacity, TouchableHighlight, Share, alert} from 'react-native';
-import React from 'react';
+import {TouchableOpacity, TouchableHighlight} from 'react-native';
+import React, {useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import NewsFeed from '../scenes/home/NewsFeed';
@@ -58,6 +58,22 @@ const NewsFeedStack = ({navigation}) => {
           options={{
             headerShown: true,
             headerTitle: translate('NewsFeed.kurmiShadiHeading'),
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <AntDesign name="user" size={30} color="white" />
+              </TouchableOpacity>
+            ),
+
+            headerLeft: () => (
+              <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+                <Entypo
+                  name="menu"
+                  size={30}
+                  color="white"
+                  style={styles.headerStyle}
+                />
+              </TouchableHighlight>
+            ),
           }}
         />
       ) : (
