@@ -1,12 +1,4 @@
-import {
-  TouchableOpacity,
-  TouchableHighlight,
-  Modal,
-  View,
-  Text,
-  Alert,
-  Pressable,
-} from 'react-native';
+import {TouchableOpacity, TouchableHighlight} from 'react-native';
 import React, {useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -33,6 +25,25 @@ const NewsFeedStack = ({navigation}) => {
   const {
     authData: {isAuthenticated},
   } = useSelector(state => state.auth);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'https://play.google.com/store/apps/details?id=com.kurmishadi',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <newsFeedStack.Navigator
       initialRouteName="NewsFeed"
@@ -117,7 +128,7 @@ const NewsFeedStack = ({navigation}) => {
             color: 'white',
           },
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onShare}>
               <Entypo name="share" size={30} color="white" />
             </TouchableOpacity>
           ),

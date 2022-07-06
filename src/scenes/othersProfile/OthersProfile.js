@@ -5,6 +5,9 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  alert,
+  Linking,
+  Platform,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
@@ -51,6 +54,32 @@ const OthersProfile = ({route, navigation}) => {
     });
   };
 
+  const sendWhatsApp = () => {
+    let msg = 'Please, Tell me What can i help you?';
+    let phoneWithCountryCode = 9981424199;
+
+    let mobile =
+      Platform.OS == 'android'
+        ? phoneWithCountryCode
+        : '+' + phoneWithCountryCode;
+    if (mobile) {
+      if (msg) {
+        let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+        Linking.openURL(url)
+          .then(data => {
+            console.log('WhatsApp Opened');
+          })
+          .catch(() => {
+            alert('Make sure WhatsApp installed on your device');
+          });
+      } else {
+        alert('Please insert message to send');
+      }
+    } else {
+      alert('Please insert mobile no');
+    }
+  };
+
   //  const renderLoader = () => (isFetching ? <Loader /> : null);
   if (isFetching) {
     return <Loader />;
@@ -92,7 +121,9 @@ const OthersProfile = ({route, navigation}) => {
               />
               <Text style={styles.contactText}> Call Now </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              //  onPress={sendWhatsApp}
+              style={{flexDirection: 'row'}}>
               <Icon
                 name="whatsapp"
                 size={28}
@@ -262,8 +293,7 @@ const OthersProfile = ({route, navigation}) => {
                   {translate('Dharmikjankari.Caste')}
                 </Text>
                 <Text style={styles.detailsText}>
-                  {/* {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra} */}
-                  {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra}
+                  {othersProfileData.userReligiousInfo.userReligiousInfoGotra}
                 </Text>
               </View>
 
@@ -323,10 +353,9 @@ const OthersProfile = ({route, navigation}) => {
                 </Text>
 
                 <Text style={styles.detailsText}>
-                  {' '}
                   {
-                    othersProfileData?.userFamilyInfo
-                      ?.userFamilyInfoFatherOccupation
+                    othersProfileData.userFamilyInfo
+                      .userFamilyInfoFatherOccupation
                   }
                 </Text>
               </View>
