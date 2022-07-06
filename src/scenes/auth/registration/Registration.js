@@ -61,6 +61,16 @@ const Registration = () => {
       type: FETCH_COUNTRY_DROPDOWN,
       payload: {moduleType: 'Country'},
     });
+
+    dispatch({
+      type: FETCH_STATE_DROPDOWN,
+      payload: {
+        filter: {
+          countryId: 101,
+        },
+        moduleType: 'State',
+      },
+    });
   }, []);
 
   const handleregisterUser = values => {
@@ -289,7 +299,31 @@ const Registration = () => {
               {translate('register.Note')}
             </Text>
 
-            <Dropdown
+            <ExtendedTextInput
+              value={values.country}
+              //maxLength={10}
+              //autoFocus={true}
+              // keyboardType="numeric"
+              editable={false}
+              style={styles.commonInput}
+              placeholder={translate('register.country')}
+              placeholderTextColor={'black'}
+              // onSelectedItemsChange={value => {
+              //   setFieldValue('country', value);
+
+              //   dispatch({
+              //     type: FETCH_STATE_DROPDOWN,
+              //     payload: {
+              //       filter: {
+              //         countryId: 101,
+              //       },
+              //       moduleType: 'State',
+              //     },
+              //   });
+              // }}
+            />
+
+            {/* <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'countryId'}
               displayKey={'countryName'}
@@ -300,23 +334,11 @@ const Registration = () => {
               selectText={translate('register.country')}
               selectedItems={values.country}
               searchInputStyle={styles.searchInput}
-              onSelectedItemsChange={value => {
-                setFieldValue('country', value);
-
-                dispatch({
-                  type: FETCH_STATE_DROPDOWN,
-                  payload: {
-                    filter: {
-                      countryId: value[0],
-                    },
-                    moduleType: 'State',
-                  },
-                });
-              }}
             />
             {errors.country && touched.country ? (
               <Text style={styles.dropboxError}>{errors.country}</Text>
-            ) : null}
+            ) : null} */}
+
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'stateId'}

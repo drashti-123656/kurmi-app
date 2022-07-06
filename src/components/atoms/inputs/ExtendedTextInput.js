@@ -13,18 +13,21 @@ const ExtendedTextInput = ({
   keyboardType,
   maxLength,
   secureTextEntry,
+  placeholderTextColor,
+  editable,
 }) => {
   return (
     <View style={styles.textinput}>
       <TextInput
         style={styles.input}
+        editable={editable}
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
-        placeholderTextColor={'#666666'}
+        placeholderTextColor={placeholderTextColor}
         keyboardType={keyboardType}
       />
     </View>
