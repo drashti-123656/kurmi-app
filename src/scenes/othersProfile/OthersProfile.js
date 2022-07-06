@@ -537,25 +537,42 @@ const OthersProfile = ({route, navigation}) => {
                   {' '}
                   {translate('samPark.presentAdd')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {
-                    othersProfileData?.userContactInfo
-                      ?.userContactInfoPresentAddress
-                  }{' '}
-                </Text>
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {' '}
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoPresentAddress
+                      }{' '}
+                    </Text>
+                  </>
+                )}
               </View>
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {translate('samPark.permanentAdd')}
                 </Text>
-                <Text style={styles.detailsText}>
-                  {' '}
-                  {
-                    othersProfileData?.userContactInfo
-                      ?.userContactInfoPermanentAddress
-                  }{' '}
-                </Text>
+
+                {!isAuthenticated ? (
+                  <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.loginUrl}>Click here to login</Text>
+                  </Pressable>
+                ) : (
+                  <>
+                    <Text style={styles.detailsText}>
+                      {' '}
+                      {
+                        othersProfileData?.userContactInfo
+                          ?.userContactInfoPermanentAddress
+                      }{' '}
+                    </Text>
+                  </>
+                )}
               </View>
             </View>
           </View>
@@ -569,15 +586,31 @@ const OthersProfile = ({route, navigation}) => {
         </ScrollView>
 
         <View style={styles.bottomContainer}>
-          <TouchableOpacity onPress={handleShortList} style={styles.shortlist}>
-            <Icon
-              name="star-o"
-              size={40}
-              color="#c3773b"
-              style={{paddingLeft: 6}}
-            />
-            <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
-          </TouchableOpacity>
+          {!isAuthenticated ? (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              style={styles.shortlist}>
+              <Icon
+                name="star-o"
+                size={40}
+                color="#c3773b"
+                style={{paddingLeft: 6}}
+              />
+              <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={handleShortList}
+              style={styles.shortlist}>
+              <Icon
+                name="star-o"
+                size={40}
+                color="#c3773b"
+                style={{paddingLeft: 6}}
+              />
+              <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
