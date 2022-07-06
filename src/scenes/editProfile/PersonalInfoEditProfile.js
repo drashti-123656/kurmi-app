@@ -303,7 +303,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={height}
-              selectText={myProfileData.userPersonalInfo.userPersonalInfoHeight}
+              selectText={
+                myProfileData.userPersonalInfo.userPersonalInfoHeight.name
+              }
               selectedItems={values.height}
               onSelectedItemsChange={value => setFieldValue('height', value)}
             />
@@ -343,6 +345,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               items={disability}
               selectText={
                 myProfileData.userPersonalInfo.userPersonalInfoDisability
+                  .nakshatraTitleHi
               }
               selectedItems={values.disability}
               onSelectedItemsChange={value =>
