@@ -19,6 +19,7 @@ const Dropdown = ({
   searchInputStyle,
   hideDropdown,
   searchIcon,
+  editable,
 }) => {
   return (
     <View style={styles.mainContainer}>
@@ -29,6 +30,7 @@ const Dropdown = ({
           uniqueKey={uniqueKey}
           displayKey={displayKey}
           single
+          editable={editable}
           searchInputPlaceholderText="Search"
           searchIcon={searchIcon}
           style={styles.dropdownMargin}

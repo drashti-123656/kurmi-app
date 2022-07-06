@@ -300,40 +300,55 @@ const Registration = () => {
             </Text>
 
             <ExtendedTextInput
-              value={values.country}
+              value={'India'}
               //maxLength={10}
               //autoFocus={true}
               // keyboardType="numeric"
+
               editable={false}
               style={styles.commonInput}
               placeholder={translate('register.country')}
               placeholderTextColor={'black'}
-              // onSelectedItemsChange={value => {
-              //   setFieldValue('country', value);
+              onSelectedItemsChange={value => {
+                setFieldValue('country', value);
 
-              //   dispatch({
-              //     type: FETCH_STATE_DROPDOWN,
-              //     payload: {
-              //       filter: {
-              //         countryId: 101,
-              //       },
-              //       moduleType: 'State',
-              //     },
-              //   });
-              // }}
+                dispatch({
+                  type: FETCH_STATE_DROPDOWN,
+                  payload: {
+                    filter: {
+                      countryId: 101,
+                    },
+                    moduleType: 'State',
+                  },
+                });
+              }}
             />
 
             {/* <Dropdown
               style={styles.dropdownStyle}
-              uniqueKey={'countryId'}
-              displayKey={'countryName'}
+              uniqueKey={101}
+              displayKey={'India'}
               autoFocus={true}
+              editable={false}
               items={[{countryId: 101, countryName: 'India'}]}
               searchIcon={false}
               hideDropdown={true}
               selectText={translate('register.country')}
               selectedItems={values.country}
               searchInputStyle={styles.searchInput}
+              onSelectedItemsChange={value => {
+                setFieldValue('country', value);
+
+                dispatch({
+                  type: FETCH_STATE_DROPDOWN,
+                  payload: {
+                    filter: {
+                      countryId: 101,
+                    },
+                    moduleType: 'State',
+                  },
+                });
+              }}
             />
             {errors.country && touched.country ? (
               <Text style={styles.dropboxError}>{errors.country}</Text>
