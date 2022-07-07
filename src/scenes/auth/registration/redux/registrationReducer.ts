@@ -59,7 +59,7 @@ const initialState = {
     lastname: '',
     birthdate: '',
     ProfilePic: {},
-    country: '',
+    country: 'India',
     state: '',
     city: '',
     password: '',

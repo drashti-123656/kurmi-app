@@ -91,12 +91,13 @@ const Registration = () => {
       userFirstName: values.firstname,
       userLastName: values.lastname,
       userDob: values.birthdate,
-      userCountry: values.country,
+      userCountry: 'India',
       userState: values.state,
       userCity: values.city,
       password: values.password,
       userProfileImage: ProfilePic,
     };
+    console.log('payload===========>>>', payload);
 
     dispatch({
       type: VERIFY_USER,
@@ -301,27 +302,10 @@ const Registration = () => {
 
             <ExtendedTextInput
               value={'India'}
-              //maxLength={10}
-              //autoFocus={true}
-              // keyboardType="numeric"
-
               editable={false}
               style={styles.commonInput}
               placeholder={translate('register.country')}
               placeholderTextColor={'black'}
-              onSelectedItemsChange={value => {
-                setFieldValue('country', value);
-
-                dispatch({
-                  type: FETCH_STATE_DROPDOWN,
-                  payload: {
-                    filter: {
-                      countryId: 101,
-                    },
-                    moduleType: 'State',
-                  },
-                });
-              }}
             />
 
             {/* <Dropdown
