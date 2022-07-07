@@ -71,7 +71,7 @@ export const RegistrationvalidationSchema = Yup.object({
     new Date(Date.now() - 662256000000),
     translate('register.PleaseChoose21Above'),
   ),
-  country: Yup.number().required(translate('register.Required')),
+  //country: Yup.number().required(translate('register.Required')),
   state: Yup.number().required(translate('register.Required')),
   city: Yup.number().required(translate('register.Required')),
   password: Yup.string()

@@ -84,7 +84,7 @@ const Sampark = ({navigation}) => {
       userMobileNo: registerData.mobilenumber,
       userDob: moment(registerData.birthdate).format('YYYY-MM-DD'),
       password: registerData.password,
-      userCountry: registerData.country[0],
+      userCountry: 101,
       userState: registerData.state[0],
       userCity: registerData.city[0],
       userProfileImage: `data.image/jpg;base64,${registerData?.ProfilePic?.assets[0]?.base64}`,
