@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 import Loader from '../../components/atoms/buttons/Loader';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
-import {clearProfileDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
+import {clearLedgerDownloadStatus} from '../shareBioData/redux/DownloadPdfReducer';
 import RNShare from 'react-native-share';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {EDIT_PROFILE} from '../editProfile/redux/editProfileAction';
@@ -37,13 +37,16 @@ const Profile = ({navigation}) => {
             myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
           userEducationInfoEducation:
-            myProfileData.userEducationInfo.userEducationInfoId,
+            myProfileData.userEducationInfo.userEducationInfoEducation
+              .educationId,
           userEducationInfoOccupation:
-            myProfileData.userEducationInfo.userEducationInfoId,
+            myProfileData.userEducationInfo.userEducationInfoOccupation
+              .occupationId,
 
           userFamilyInfoFatherName:
             myProfileData.userFamilyInfo.userFamilyInfoFatherName,
-          userFamilyInfoFatherOccupation: '1',
+          userFamilyInfoFatherOccupation:
+            myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation,
           userFamilyInfoMotherName:
             myProfileData.userFamilyInfo.userFamilyInfoMotherName,
           userFamilyInfoLand:
@@ -59,18 +62,17 @@ const Profile = ({navigation}) => {
             myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
               .maritalStatusId,
           userPersonalInfoHeight:
-            myProfileData.userPersonalInfo.userPersonalInfoHeight,
+            myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
           userPersonalInfoDisability:
-            myProfileData.userPersonalInfo.userPersonalInfoDisability,
+            myProfileData.userPersonalInfo.userPersonalInfoDisability
+              .nakshatraId,
 
           userReligiousInfoGotra:
-            myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
-          userReligiousInfoZodiac:
-            myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+            myProfileData.userReligiousInfo.userReligiousInfoGotra,
+          userReligiousInfoZodiac: 6,
           userReligiousInfoManglik:
-            myProfileData.userReligiousInfo.userReligiousInfoId,
-          userReligiousInfoMotherGotra:
-            myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+            myProfileData.userReligiousInfo.userReligiousInfoManglik,
+          userReligiousInfoMotherGotra: 5,
 
           userFirstName: myProfileData.userFirstName,
           userLastName: myProfileData.userLastName,
@@ -81,6 +83,7 @@ const Profile = ({navigation}) => {
           userCity: myProfileData.userCity.cityId,
           userProfileImage: `data:image/png;base64, ${response.assets[0].base64}`,
         };
+        console.log('payloddddd==>', payload.userProfileImage);
 
         dispatch({
           type: EDIT_PROFILE,
@@ -90,8 +93,9 @@ const Profile = ({navigation}) => {
     });
   };
   useEffect(() => {
-    console.log('myprofileDataaa====>>', myProfileData);
+    // console.log('myprofileDataaa====>>', myProfileData);
     dispatch(fetchmyProfileDataStarted());
+    console.log('myprofileDataaa====>>', isFetching);
     dispatch({
       type: MY_PROFILE_DETAILS,
     });
@@ -107,7 +111,7 @@ const Profile = ({navigation}) => {
           console.log('failed: ', reason);
         })
         .finally(() => {
-          dispatch(clearProfileDownloadStatus({}));
+          dispatch(clearLedgerDownloadStatus({}));
         });
     }
   }, [downloadProfileSuccess]);
@@ -136,11 +140,11 @@ const Profile = ({navigation}) => {
               )}
             </TouchableOpacity>
             {/* <TouchableOpacity onPress={handleChooseProfilePic}>
-              <Image
-                style={styles.image}
-                source={{uri: `${myProfileData.userProfileImage}`}}
-              />
-            </TouchableOpacity> */}
+            <Image
+              style={styles.image}
+              source={{uri: `${myProfileData.userProfileImage}`}}
+            />
+          </TouchableOpacity> */}
             <Text style={styles.text}>
               {myProfileData.userFirstName} {myProfileData.userLastName}
             </Text>
@@ -154,21 +158,21 @@ const Profile = ({navigation}) => {
             </TouchableOpacity>
 
             {/* <View style={styles.whatsappIcon}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../assets/whatsappicon.png')}
-                  style={styles.imageStyle}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.gmailIcon}>
-              <TouchableOpacity>
-                <Image
-                  source={require('../../assets/gmail.png')}
-                  style={styles.imageStyle}
-                />
-              </TouchableOpacity>
-            </View> */}
+            <TouchableOpacity>
+              <Image
+                source={require('../../assets/whatsappicon.png')}
+                style={styles.imageStyle}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.gmailIcon}>
+            <TouchableOpacity>
+              <Image
+                source={require('../../assets/gmail.png')}
+                style={styles.imageStyle}
+              />
+            </TouchableOpacity>
+          </View> */}
           </View>
           <View>
             <View style={styles.separatorLine} />
@@ -197,35 +201,35 @@ const Profile = ({navigation}) => {
           </View>
           <View style={styles.dataContainer}>
             <View style={styles.profileContain}>
-              <Text style={styles.headerText}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.Name')}
               </Text>
-              <Text style={styles.nameText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userFirstName}{' '}
               </Text>
             </View>
 
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.EmailId')}
               </Text>
-              <Text style={styles.emailidText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userEmail}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Myprofile.Gender')}{' '}
               </Text>
-              <Text style={styles.genderText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userGender}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Marital Status')}
               </Text>
               <Text style={styles.detailsText}>
@@ -237,16 +241,16 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.birthdate')}
               </Text>
-              <Text style={styles.dob}> {myProfileData?.userDob} </Text>
+              <Text style={styles.detailsText}> {myProfileData?.userDob} </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Height')}
               </Text>
-              <Text style={styles.heightText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userPersonalInfo?.userPersonalInfoHeight?.name
@@ -254,10 +258,10 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Disability')}{' '}
               </Text>
-              <Text style={styles.heightText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userPersonalInfo?.userPersonalInfoDisability
@@ -266,10 +270,10 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.ProfileName')}{' '}
               </Text>
-              <View style={styles.profileMargin}>
+              <View style={styles.detailsText}>
                 <Text style={styles.profileCreate}>
                   {' '}
                   {
@@ -280,35 +284,26 @@ const Profile = ({navigation}) => {
             </View>
 
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
-                {translate('register.country')}{' '}
-              </Text>
-              <Text style={styles.countryText}>
-                {' '}
-                {myProfileData?.userCountry?.countryName}{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.state')}{' '}
               </Text>
-              <Text style={styles.stateText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userState?.name}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('register.city')}{' '}
               </Text>
-              <Text style={styles.countryText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userCity?.cityName}{' '}
               </Text>
             </View>
 
             <View style={styles.profileContain}>
-              <Text style={styles.textHeading}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Knowledge')}
               </Text>
               <Text style={styles.detailsText}>
@@ -320,7 +315,7 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Job')}
               </Text>
               <Text style={styles.detailsText}>
@@ -357,29 +352,29 @@ const Profile = ({navigation}) => {
           </View>
           <View style={styles.dataContainer}>
             <View style={styles.profileContain}>
-              <Text style={styles.textHeading}>
+              <Text style={styles.subHeadingText}>
                 {translate('samPark.mobileNo')}
               </Text>
-              <Text style={styles.samparkDetails}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userContactInfo?.userContactInfoContactNo}
               </Text>
             </View>
 
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('samPark.whatsAppNo')}{' '}
               </Text>
-              <Text style={styles.samparkDetails}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userContactInfo?.userContactInfoWhatsappNo}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('samPark.presentAdd')}{' '}
               </Text>
-              <Text style={styles.samparkLast}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userContactInfo?.userContactInfoPresentAddress
@@ -387,10 +382,10 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('samPark.permanentAdd')}{' '}
               </Text>
-              <Text style={styles.samparkLast}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userContactInfo
@@ -423,7 +418,7 @@ const Profile = ({navigation}) => {
           </View>
           <View style={styles.dataContainer}>
             <View style={styles.profileContain}>
-              <Text style={styles.textHeading}>
+              <Text style={styles.subHeadingText}>
                 {translate('Dharmikjankari.Caste')}
               </Text>
               <Text style={styles.detailsText}>
@@ -431,33 +426,12 @@ const Profile = ({navigation}) => {
                 {myProfileData?.userReligiousInfo?.userReligiousInfoGotra}{' '}
               </Text>
             </View>
+
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
-                {translate('Dharmikjankari.Native')}
-              </Text>
-              <Text style={styles.nativeText}>
-                {' '}
-                {
-                  myProfileData?.userReligiousInfo?.userReligiousInfoMotherGotra
-                }{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
-                {translate('Dharmikjankari.Birthtime')}{' '}
-              </Text>
-              <Text style={styles.birthText}>
-                {' '}
-                {
-                  myProfileData?.userReligiousInfo?.userReligiousInfoTimeOfBirth
-                }{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Dharmikjankari.Birthplace')}{' '}
               </Text>
-              <Text style={styles.dharmikLast}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userReligiousInfo
@@ -465,23 +439,12 @@ const Profile = ({navigation}) => {
                 }{' '}
               </Text>
             </View>
+
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
-                {translate('Dharmikjankari.Zodiacsign')}{' '}
-              </Text>
-              <Text style={styles.dharmikLast}>
-                {' '}
-                {
-                  myProfileData?.userReligiousInfo?.userReligiousInfoZodiac
-                    ?.zodiacTitleHi
-                }{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('Dharmikjankari.auspicious')}{' '}
               </Text>
-              <Text style={styles.dharmikManglik}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userReligiousInfo?.userReligiousInfoManglik
@@ -514,16 +477,16 @@ const Profile = ({navigation}) => {
           </View>
           <View style={styles.dataContainer}>
             <View style={styles.profileContain}>
-              <Text style={styles.textHeading}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.fatherName')}
               </Text>
-              <Text style={styles.samparkDetails}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userFamilyInfo?.userFamilyInfoFatherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.fatherOccupation')}{' '}
               </Text>
               <Text style={styles.detailsText}>
@@ -535,16 +498,16 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.motherName')}{' '}
               </Text>
-              <Text style={styles.samparkDetails}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userFamilyInfo?.userFamilyInfoMotherName}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.motherMayaka')}
               </Text>
               <Text style={styles.detailsText}>
@@ -553,28 +516,28 @@ const Profile = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.brother')}{' '}
               </Text>
-              <Text style={styles.parivarikText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfBrother}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.sister')}{' '}
               </Text>
-              <Text style={styles.parivarikText}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {myProfileData?.userFamilyInfo?.userFamilyInfoNoOfSister}{' '}
               </Text>
             </View>
             <View style={styles.profileContain}>
-              <Text style={styles.textStyle}>
+              <Text style={styles.subHeadingText}>
                 {translate('ParivarikParichay.land')}{' '}
               </Text>
-              <Text style={styles.dharmikLast}>
+              <Text style={styles.detailsText}>
                 {' '}
                 {
                   myProfileData?.userFamilyInfo?.userFamilyInfoLand?.landTitleHi
@@ -640,11 +603,11 @@ const styles = EStyleSheet.create({
   },
   detailsText: {
     fontSize: 15,
-    marginBottom: 5,
-
-    color: '$PLACEHOLDER',
-
-    marginRight: 70,
+    marginBottom: 10,
+    color: '#666666',
+    flex: 1,
+    //marginLeft: 5,
+    //marginHorizontal: 20,
   },
   parivarikText: {
     fontSize: 15,
@@ -841,8 +804,13 @@ const styles = EStyleSheet.create({
   },
   profileContain: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 5,
-    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+  },
+  subHeadingText: {
+    color: 'black',
+    fontSize: 15,
+    marginHorizontal: 20,
+    fontWeight: '600',
+    flex: 1,
   },
 });
