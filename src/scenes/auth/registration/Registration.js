@@ -61,17 +61,19 @@ const Registration = () => {
       type: FETCH_COUNTRY_DROPDOWN,
       payload: {moduleType: 'Country'},
     });
+
+    dispatch({
+      type: FETCH_STATE_DROPDOWN,
+      payload: {
+        filter: {
+          countryId: 101,
+        },
+        moduleType: 'State',
+      },
+    });
   }, []);
 
   const handleregisterUser = values => {
-    if (!ProfilePic) {
-      showMessage({
-        message: 'Please upload profile image ',
-        type: 'info',
-        backgroundColor: EStyleSheet.value('$WARNING_RED'),
-      });
-      return;
-    }
     if (!termsCondition) {
       showMessage({
         message: 'Please check privacy policy checkbox ',
@@ -89,12 +91,13 @@ const Registration = () => {
       userFirstName: values.firstname,
       userLastName: values.lastname,
       userDob: values.birthdate,
-      userCountry: values.country,
+      userCountry: 'India',
       userState: values.state,
       userCity: values.city,
       password: values.password,
       userProfileImage: ProfilePic,
     };
+    console.log('payload===========>>>', payload);
 
     dispatch({
       type: VERIFY_USER,
@@ -202,10 +205,13 @@ const Registration = () => {
               style={styles.dropdownStyle}
               uniqueKey={'profileCreatedById'}
               displayKey={'profileCreatedByNameHi'}
-              autoFocus={true}
+              //autoFocus={true}
               items={profilemaker}
               selectText={translate('register.ProfileName')}
               selectedItems={values.profilemaker}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               onSelectedItemsChange={value =>
                 setFieldValue('profilemaker', value)
               }
@@ -281,6 +287,7 @@ const Registration = () => {
 
             <DateTimePicker
               value={values.birthdate}
+              placeholder="Enter Your DOB"
               onSelect={value => setFieldValue('birthdate', value)}
               mode="date"
             />
@@ -293,16 +300,26 @@ const Registration = () => {
               {translate('register.Note')}
             </Text>
 
-            <Dropdown
+            <ExtendedTextInput
+              value={'India'}
+              editable={false}
+              style={styles.commonInput}
+              placeholder={translate('register.country')}
+              placeholderTextColor={'black'}
+            />
+
+            {/* <Dropdown
               style={styles.dropdownStyle}
-              uniqueKey={'countryId'}
-              displayKey={'countryName'}
+              uniqueKey={101}
+              displayKey={'India'}
               autoFocus={true}
-              styleListContainer={styles.listContainerData}
-              items={country}
-              single
+              editable={false}
+              items={[{countryId: 101, countryName: 'India'}]}
+              searchIcon={false}
+              hideDropdown={true}
               selectText={translate('register.country')}
               selectedItems={values.country}
+              searchInputStyle={styles.searchInput}
               onSelectedItemsChange={value => {
                 setFieldValue('country', value);
 
@@ -310,7 +327,7 @@ const Registration = () => {
                   type: FETCH_STATE_DROPDOWN,
                   payload: {
                     filter: {
-                      countryId: value[0],
+                      countryId: 101,
                     },
                     moduleType: 'State',
                   },
@@ -319,7 +336,8 @@ const Registration = () => {
             />
             {errors.country && touched.country ? (
               <Text style={styles.dropboxError}>{errors.country}</Text>
-            ) : null}
+            ) : null} */}
+
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'stateId'}
@@ -349,6 +367,7 @@ const Registration = () => {
 
             <Dropdown
               style={styles.dropdownStyle}
+              styleListContainer={styles.listContainerData}
               uniqueKey={'cityId'}
               displayKey={'cityName'}
               autoFocus={true}
@@ -782,5 +801,8 @@ const styles = StyleSheet.create({
     marginRight: '20%',
     color: 'red',
     //marginLeft: '20%',
+  },
+  searchInput: {
+    display: 'none',
   },
 });

@@ -1,29 +1,66 @@
-import {StyleSheet, Text, View, FlatList, RefreshControl} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {Text, View, FlatList, RefreshControl} from 'react-native';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
 import Loader from '../../components/atoms/buttons/Loader';
 import EStyleSheet from 'react-native-extended-stylesheet';
-const AdvanceSearchProfile = ({navigation}) => {
-  const [refreshing, setRefreshing] = useState(false);
+import {PAGE_SIZE} from '../../utils/constants/appConstants';
+import {ADVANCED_SEARCH_USER} from './redux/AdvanceSearchAction';
+const AdvanceSearchProfile = ({navigation, route}) => {
+  const {advanceserachData, isFetching, isPaginationRequired, pageIndex} =
+    useSelector(state => state.advanceSerach);
+  const dispatch = useDispatch();
 
-  const {advanceserachData, isFetching} = useSelector(
-    state => state.advanceSerach,
-  );
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
+  const _fetchProfiles = ({pageNumber}) => {
+    const payload = {
+      filter: {
+        gender: route.params.paramKey.gender,
+        height: {
+          min: route.params.paramKey.height.min,
+          max: route.params.paramKey.height.max,
+        },
+        manglik: route.params.paramKey.manglik,
+        country: route.params.paramKey.country,
+        state: route.params.paramKey.state,
+        city: route.params.paramKey.city,
+        education: route.params.paramKey.education,
+        occupation: route.params.paramKey.occupation,
+      },
+      page: pageNumber,
+      pageSIze: PAGE_SIZE,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: ADVANCED_SEARCH_USER,
+      payload,
+    });
+  };
+
+  useEffect(() => {
+    _fetchProfiles(1);
   }, []);
+
+  const __refreshOnPull = () => {
+    _fetchProfiles(1);
+  };
+
+  const _paginateUSersProfiles = () => {
+    if (isPaginationRequired) {
+      _fetchProfiles(pageIndex + 1);
+    }
+  };
 
   const renderItem = ({item}) => {
     return <Card navigation={navigation} item={item} />;
   };
 
   const renderLoader = () => (isFetching ? <Loader /> : null);
-
   return (
-    <RootScreen scrollable={true}>
+    <RootScreen>
       {advanceserachData ? (
         <View style={styles.container}>
           <FlatList
@@ -33,8 +70,13 @@ const AdvanceSearchProfile = ({navigation}) => {
             ListFooterComponent={renderLoader}
             initialNumToRender={10}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              <RefreshControl
+                refreshing={isFetching}
+                onRefresh={__refreshOnPull}
+              />
             }
+            onEndReachedThreshold={0.5}
+            onEndReached={_paginateUSersProfiles}
           />
         </View>
       ) : (
@@ -54,8 +96,8 @@ const styles = EStyleSheet.create({
   textStyle: {
     fontWeight: 'bold',
     color: '$WHITE',
-    marginHorizontal: 85,
+    marginHorizontal: 120,
     marginTop: 250,
-    fontSize: 30,
+    fontSize: 20,
   },
 });

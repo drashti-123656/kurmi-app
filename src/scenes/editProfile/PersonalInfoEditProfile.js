@@ -28,7 +28,7 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 const PersonalInfoEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
-
+  const {isUpdating} = useSelector(state => state.editProfile);
   const {
     dropDownsData: {
       country,
@@ -69,38 +69,54 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
   const handleeditProfile = values => {
     const payload = {
       userUpdateType: 'general',
-      userContactInfoContactNo: '9874563210',
-      userContactInfoWhatsappNo: 9874563210,
-      userContactInfoPresentAddress: 'Address',
-      userContactInfoPermanentAddress: 'Permanent',
+      userContactInfoContactNo:
+        myProfileData.userContactInfo.userContactInfoContactNo,
+      userContactInfoWhatsappNo:
+        myProfileData.userContactInfo.userContactInfoWhatsappNo,
+      userContactInfoPresentAddress:
+        myProfileData.userContactInfo.userContactInfoPresentAddress,
+      userContactInfoPermanentAddress:
+        myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
-      userEducationInfoEducation: values.education[0],
-      userEducationInfoOccupation: values.job[0],
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
 
-      userFamilyInfoFatherName: 'FatherName',
-      userFamilyInfoFatherOccupation: 1,
-      userFamilyInfoMotherName: 'MotherName',
-      userFamilyInfoLand: 1,
-      userFamilyInfoMotherMaika: 'dffdf',
-      userFamilyInfoNoOfSister: 1,
-      userFamilyInfoNoOfBrother: 1,
+      userFamilyInfoFatherName:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoMotherName:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+      userFamilyInfoLand:
+        myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+      userFamilyInfoMotherMaika:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+      userFamilyInfoNoOfSister:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+      userFamilyInfoNoOfBrother:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
-      userPersonalInfoMaritalStatusId: values.maritalstatus[0],
+      userPersonalInfoMaritalStatusId: 2,
       userPersonalInfoHeight: values.height[0],
       userPersonalInfoDisability: values.disability[0],
 
-      userReligiousInfoGotra: 4,
-      userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 5,
-      userReligiousInfoMotherGotra: 5,
+      userReligiousInfoGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+      userReligiousInfoZodiac:
+        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+      userReligiousInfoManglik:
+        myProfileData.userReligiousInfo.userReligiousInfoId,
+      userReligiousInfoMotherGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
 
       userFirstName: values.firstname,
       userLastName: values.lastname,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 2,
-      userState: 1,
-      userCity: 1,
+      userCountry: values.country[0],
+      userState: values.state[0],
+      userCity: values.city[0],
       userProfileImage: '',
     };
     navigation.navigate('My Profile');
@@ -128,9 +144,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
           emailid: myProfileData.userEmail,
 
           // birthdate: new Date(),
-          country: [myProfileData.userCountry.countryName],
-          state: [myProfileData.userState.name],
-          city: [myProfileData.userCity.cityName],
+          country: [myProfileData.userCountry.countryId],
+          state: [myProfileData.userState.stateId],
+          city: [myProfileData.userCity.cityId],
           height: [myProfileData.userPersonalInfo.userPersonalInfoHeight],
           maritalstatus: [myProfileData.userPersonalInfo.maritalStatusTitleEn],
           disability: [
@@ -205,9 +221,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'countryId'}
               displayKey={'countryName'}
               autoFocus={true}
-              items={country}
+              items={[{countryId: 101, countryName: 'India'}]}
               single
-              selectText={values.country}
+              selectText="India"
               selectedItems={values.country}
               onSelectedItemsChange={value => {
                 setFieldValue('country', value);
@@ -216,7 +232,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
                   type: FETCH_STATE_DROPDOWN,
                   payload: {
                     filter: {
-                      countryId: value[0],
+                      countryId: value[101],
                     },
                     moduleType: 'State',
                   },
@@ -233,7 +249,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               autoFocus={true}
               single
               items={state}
-              selectText={values.state}
+              selectText={myProfileData.userState.name}
               selectedItems={values.state}
               onSelectedItemsChange={value => {
                 setFieldValue('state', value);
@@ -259,7 +275,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               autoFocus={true}
               single
               items={city}
-              selectText={values.city}
+              selectText={myProfileData.userCity.cityName}
               selectedItems={values.city}
               onSelectedItemsChange={value => setFieldValue('city', value)}
             />
@@ -287,7 +303,9 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'id'}
               displayKey={'name'}
               items={height}
-              selectText={myProfileData.userPersonalInfo.userPersonalInfoHeight}
+              selectText={
+                myProfileData.userPersonalInfo.userPersonalInfoHeight.name
+              }
               selectedItems={values.height}
               onSelectedItemsChange={value => setFieldValue('height', value)}
             />
@@ -327,6 +345,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               items={disability}
               selectText={
                 myProfileData.userPersonalInfo.userPersonalInfoDisability
+                  .nakshatraTitleHi
               }
               selectedItems={values.disability}
               onSelectedItemsChange={value =>
@@ -337,7 +356,12 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               <Text style={styles.error}>{errors.disability}</Text>
             ) : null}
 
-            <LoginButton title="Update" onPress={handleSubmit} />
+            <LoginButton
+              title="Update"
+              onPress={handleSubmit}
+              loading={isUpdating}
+            />
+            {console.log('loading======>', isUpdating)}
           </View>
         )}
       </Formik>
@@ -482,9 +506,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 90,
   },
-  profileText: {
-    fontWeight: 'bold',
-  },
+
   profileImageContainer: {
     flexDirection: 'row',
     marginTop: 40,
@@ -670,11 +692,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 20,
   },
-  profileText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+
   dropboxError: {
     fontSize: 12,
     fontWeight: 'bold',

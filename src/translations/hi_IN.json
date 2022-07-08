@@ -1,8 +1,8 @@
 {
   "genral": {
     "webLink": "www.kurmishadi.com",
-    "phoneNo": "+91-7987233880",
-    "whatsappNo": "+91-7987233880",
+    "phoneNo": "+91-9406034346",
+    "whatsappNo": "+91-9406034346",
     "email": "contact@kurmishadi.com"
   },
   "login": {
@@ -41,7 +41,7 @@
     "ageFrom": "आयु से",
     "ageTo": "आयु तक",
     "Search": "खोजे",
-    "filterProfile": "प्रोफाइल ID से खोजें / फिल्टर लगाना है",
+    "filterProfile": "एडवांस सर्च करे / फिल्टर लगाना है",
     "newIntro": " नया  प्रोफाइल ",
     "recentlyJoint": " वे लोग अभी अभी नए जुड़े हैं",
     "newProfile": "नया प्रोफाइल",
@@ -69,8 +69,8 @@
     "Marital Status": "वैवाहिक स्थिति",
     "height From": "ऊंचाई से",
     "height To": "ऊंचाई तक",
-    "married": "विवाहित",
-    "unmarried": "अविवाहित"
+    "married": "वैवाहिक",
+    "unmarried": "अवैवाहिक"
   },
 
   "ParivarikParichay": {
@@ -114,12 +114,12 @@
     "MobileNumber": "मोबाइल नंबर",
     "birthdate": "जन्मतिथि",
     "caste": "गोत्र",
-    "country": "देश",
+    "country": "India",
     "state": " राज्य ",
     "city": " शहर ",
     "enterpassword": "पासवर्ड  डाले",
     "Note": "उम्र कम से कम 21 वर्ष होनी चाहिए",
-    "Note@": " पासवर्ड कम से कम करैक्टर के हो",
+    "Note@": " पासवर्ड कम से कम 8 करैक्टर के हो",
     "checkbox": "में  Privacy Policy और  Terms of use  से  सहमत हु ",
     "create Account": "अकाउंट बनाएं ",
     "lastName": "आखरी नाम",
@@ -153,14 +153,16 @@
     "Height": "उचाई",
     "Marital Status": "वैवाहिक स्थिति",
     "Knowledge": "शिक्षा / योगयता",
-    "Job": "कर्य / नौकरी",
+    "Job": "कार्य / नौकरी",
     "Colour": "रंग",
     "Disability": "विकलांगता",
     "BloodGroup": " ब्लड ग्रुप  ",
     "Next": "आगे",
     "Gotra": "गोत्र",
     "MaaKaGotra": "माँ का गोत्र",
-    "Required": "*आवश्यक"
+    "Required": "*आवश्यक",
+    "profileCreatedBy": "प्रोफ़ाइल द्वारा बनाई गई",
+    "gender": "जेंडर"
   },
   "profilemaker": {
     "Myself": "स्वयं",

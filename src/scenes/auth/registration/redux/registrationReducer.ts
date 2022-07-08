@@ -5,9 +5,7 @@ const initialState = {
   registered: false,
   isRegistering: false,
   isVerifiying: false,
-
   error: '',
-
   samparkData: {
     mobileNo: '',
     whatsAppNo: '',
@@ -33,17 +31,13 @@ const initialState = {
     auspicious: '',
   },
   dropDownsData: {
-    zodiacSign: [],
     auspicious: [],
-    height: heightDropdwonList,
+    height: [],
     maritalstatus: [],
     education: [],
     job: [],
 
-    disability: [
-      {id: 1, name: translate('Disability.Yes')},
-      {id: 2, name: translate('Disability.No')},
-    ],
+    disability: [],
 
     profilemaker: [],
     birthdate: [],
@@ -65,7 +59,7 @@ const initialState = {
     lastname: '',
     birthdate: '',
     ProfilePic: {},
-    country: '',
+    country: 'India',
     state: '',
     city: '',
     password: '',
@@ -114,11 +108,9 @@ const registerationSlice = createSlice({
         action.payload.userFamilyInfoFatherOccupation;
       state.parivarikData.motherName = action.payload.userFamilyInfoMotherName;
       state.parivarikData.motherMayaka =
-        action.payload.userFamilyInfoMotherOccupation;
-      state.parivarikData.brother =
-        action.payload.userFamilyInfoNoOfMarriedBrothers;
-      state.parivarikData.sister =
-        action.payload.userFamilyInfoNoOfMarriedSisters;
+        action.payload.userFamilyInfoMotherMaika;
+      state.parivarikData.brother = action.payload.userFamilyInfoNoOfBrother;
+      state.parivarikData.sister = action.payload.userFamilyInfoNoOfSister;
       state.parivarikData.land = action.payload.userFamilyInfoLand;
     },
 
@@ -151,6 +143,7 @@ const registerationSlice = createSlice({
     fetchAuspiciousDropdownSuccess(state, action) {
       state.dropDownsData.auspicious = action.payload;
     },
+
     fetchHeightDropdownSuccess(state, action) {
       state.dropDownsData.height = action.payload;
     },
@@ -198,6 +191,44 @@ const registerationSlice = createSlice({
 
       state.registerData.verifyed = true;
       state.registerData.isVerifiying = false;
+    },
+    clearDataAfterLogout(state, action) {
+      state.registerData.emailid = '';
+      state.registerData.mobilenumber = '';
+      state.registerData.gender = '';
+      state.registerData.profilemaker = '';
+      state.registerData.firstname = '';
+      state.registerData.lastname = '';
+      state.registerData.birthdate = '';
+      state.registerData.ProfilePic = '';
+
+      state.registerData.country = '';
+      state.registerData.state = '';
+      state.registerData.city = '';
+      state.registerData.password = '';
+      state.personalinfoData.height = '';
+      state.personalinfoData.maritalstatus = '';
+      state.personalinfoData.education = '';
+      state.personalinfoData.job = '';
+
+      state.personalinfoData.disability = '';
+      state.dharmikJankariData.gotra = '';
+      state.dharmikJankariData.native = '';
+      state.dharmikJankariData.birthtime = '';
+      state.dharmikJankariData.birthplace = '';
+      state.dharmikJankariData.zodiacsign = '';
+      state.dharmikJankariData.auspicious = '';
+      state.parivarikData.fatherName = '';
+      state.parivarikData.fatherOccupation = '';
+      state.parivarikData.motherName = '';
+      state.parivarikData.motherMayaka = '';
+      state.parivarikData.brother = '';
+      state.parivarikData.sister = '';
+      state.parivarikData.land = '';
+      state.samparkData.mobileNo = '';
+      state.samparkData.whatsAppNo = '';
+      state.samparkData.presentAdd = '';
+      state.samparkData.permanentAdd = '';
     },
 
     fetchProfilemakerDropdownSuccess(state, action) {
@@ -257,5 +288,6 @@ export const {
   verifyingStarted,
   verifyingFail,
   verifyingSuccess,
+  clearDataAfterLogout,
 } = actions;
 export default reducer;

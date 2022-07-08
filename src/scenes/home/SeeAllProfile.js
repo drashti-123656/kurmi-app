@@ -15,6 +15,9 @@ const SeeAllProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const {newsFeedData, isFetching, isPaginationRequired, pageIndex} =
     useSelector(state => state.newsfeed);
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
 
   const _fetchProfiles = pageNumber => {
     const payload = {
@@ -42,7 +45,7 @@ const SeeAllProfile = ({navigation}) => {
   };
 
   const _paginateUsersProfiles = () => {
-    if (isPaginationRequired) {
+    if (isAuthenticated && isPaginationRequired) {
       _fetchProfiles(pageIndex + 1);
     }
   };

@@ -94,10 +94,11 @@ const NewsFeed = ({navigation}) => {
             {item.userFirstName} {item.userLastName}
           </Text>
           <Text style={styles.profileIntroText}>
-            Age - {item.userAge}, {item.userCity.cityName},
+            Age - {item.userAge},{' '}
+            {item.userPersonalInfo?.userPersonalInfoHeight?.name},
           </Text>
           <Text style={styles.profileIntroText}>
-            {item.userState.name},{item.userCountry.countryName}
+            {item.userCity.cityName},{item.userState.name}
           </Text>
         </View>
       </TouchableOpacity>
@@ -199,7 +200,9 @@ const NewsFeed = ({navigation}) => {
           )}
         </Formik>
 
-        <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('AdvanceSearch')}>
+          <Text style={styles.text}>{translate('NewsFeed.filterProfile')}</Text>
+        </TouchableOpacity>
         <ScrollView style={styles.footerContainer}>
           <View style={styles.footerTitle}>
             <Text style={styles.titleText}>

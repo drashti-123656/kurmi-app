@@ -16,6 +16,8 @@ import {
   FETCH_EDUCATION_DROPDOWN,
   FETCH_JOB_DROPDOWN,
   FETCH_MARITALSTATUS_DROPDOWN,
+  FETCH_HEIGHT,
+  FETCH_DISABILITY,
 } from './redux/registrationActions';
 import {personalInfo} from './redux/registrationReducer';
 import LoginButton from '../../../components/atoms/buttons/LoginButton';
@@ -42,6 +44,16 @@ const PersonalInformation = ({navigation}) => {
     dispatch({
       type: FETCH_JOB_DROPDOWN,
       payload: {moduleType: 'Occupation'},
+    });
+
+    dispatch({
+      type: FETCH_HEIGHT,
+      payload: {moduleType: 'Height'},
+    });
+
+    dispatch({
+      type: FETCH_DISABILITY,
+      payload: {moduleType: 'Nakshatra'},
     });
   }, []);
 
@@ -77,9 +89,12 @@ const PersonalInformation = ({navigation}) => {
           <View style={styles.mainContainer}>
             <Dropdown
               style={styles.inputMargin}
-              uniqueKey={'id'}
+              uniqueKey={'heightId'}
               displayKey={'name'}
               items={height}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               styleListContainer={styles.listContainerData}
               selectText={translate('Vyaktigatdata.Height')}
               selectedItems={values.height}
@@ -93,6 +108,9 @@ const PersonalInformation = ({navigation}) => {
             <Dropdown
               style={styles.inputMargin}
               uniqueKey={'maritalStatusId'}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               displayKey={'maritalStatusTitleHi'}
               styleListContainer={styles.listContainerData}
               items={maritalstatus}
@@ -110,6 +128,9 @@ const PersonalInformation = ({navigation}) => {
             <Dropdown
               style={styles.inputMargin}
               uniqueKey={'educationId'}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               displayKey={'educationTitleHi'}
               styleListContainer={styles.listContainerData}
               items={education}
@@ -125,7 +146,10 @@ const PersonalInformation = ({navigation}) => {
               style={styles.inputMargin}
               uniqueKey={'occupationId'}
               displayKey={'occupationTitleHi'}
-              styleListContainer={styles.listContainerData}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
+              //styleListContainer={styles.listContainerData}
               items={job}
               selectText={translate('Vyaktigatdata.Job')}
               selectedItems={values.job}
@@ -137,9 +161,12 @@ const PersonalInformation = ({navigation}) => {
 
             <Dropdown
               style={styles.inputMargin}
-              uniqueKey={'id'}
-              displayKey={'name'}
+              uniqueKey={'nakshatraId'}
+              displayKey={'nakshatraTitleHi'}
               items={disability}
+              hideDropdown={true}
+              searchIcon={false}
+              searchInputStyle={styles.searchInput}
               fixedHeight={true}
               selectText={translate('Vyaktigatdata.Disability')}
               selectedItems={values.disability}
@@ -283,6 +310,9 @@ const styles = StyleSheet.create({
   profileImageContainer: {
     flexDirection: 'row',
     marginTop: 40,
+  },
+  searchInput: {
+    display: 'none',
   },
 
   imageContainer: {

@@ -35,6 +35,5 @@ export const {
   fetchNewsFeedStarted,
   fetchNewsFeedSuccess,
   fetchNewsFeedFail,
-  fetchothersProfileData,
 } = actions;
 export default reducer;

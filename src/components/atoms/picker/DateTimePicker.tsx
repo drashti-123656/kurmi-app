@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import moment from 'moment';
+import ExtendedText from '../text/ExtendedText';
 
 interface DateTimePickerProps {
   value: Date;
   onSelect: (value: Date) => void;
   mode: 'datetime' | 'date' | 'time';
   style: 'marginTop' | 'marginBottom';
+  placeholder: 'string' | 'string';
 }
 
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
@@ -24,18 +24,23 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   useEffect(() => {
     onSelect(date);
-  }, [date]);
+  }, [date, value]);
 
   return (
     <View>
       <TouchableOpacity
         style={[styles.textinput, style]}
         onPress={() => setOpen(true)}>
-        <Text style={{color: 'black'}}>
-          {mode === 'date'
-            ? moment(value).format('DD/MM/YYYY')
-            : moment(value).format('HH:mm')}
-        </Text>
+        {moment(value).format('DD/MM/YYYY') !==
+        moment().format('DD/MM/YYYY') ? (
+          <ExtendedText>
+            {mode === 'date'
+              ? moment(value).format('DD/MM/YYYY')
+              : moment(value).format('HH:mm')}
+          </ExtendedText>
+        ) : (
+          <Text>select DOB</Text>
+        )}
       </TouchableOpacity>
 
       <DatePicker

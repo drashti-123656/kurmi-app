@@ -3,6 +3,8 @@ const initialState = {
   disabilityData: [],
   isFetching: false,
   error: '',
+  pageIndex: 1,
+  isPaginationRequired: true,
 };
 
 const disabilitySlice = createSlice({
@@ -12,9 +14,11 @@ const disabilitySlice = createSlice({
     fetchDisabilityDataStarted(state) {
       state.isFetching = true;
     },
-    fetchDisabilityDataSuccess(state, action) {
-      state.disabilityData = action.payload;
+    fetchDisabilityDataSuccess(state, {payload}) {
+      state.disabilityData = payload.profile;
       state.isFetching = false;
+      state.pageIndex = payload.pageNumber;
+      state.isPaginationRequired = payload.isPaginationRequired;
     },
     fetchDisabilityDataFail(state) {
       state.isFetching = false;

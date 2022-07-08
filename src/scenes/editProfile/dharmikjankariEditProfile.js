@@ -32,6 +32,8 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 const DharmikjankariEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
+  const {isUpdating} = useSelector(state => state.editProfile);
+
   const {
     dropDownsData: {zodiacSign, auspicious, gotra},
   } = useSelector(state => state.registration);
@@ -56,38 +58,54 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
   const handleDharmikJankari = values => {
     const payload = {
       userUpdateType: 'general',
-      userContactInfoContactNo: '9874563210',
-      userContactInfoWhatsappNo: 9874563210,
-      userContactInfoPresentAddress: 'Address',
-      userContactInfoPermanentAddress: 'Permanent',
+      userContactInfoContactNo:
+        myProfileData.userContactInfo.userContactInfoContactNo,
+      userContactInfoWhatsappNo:
+        myProfileData.userContactInfo.userContactInfoWhatsappNo,
+      userContactInfoPresentAddress:
+        myProfileData.userContactInfo.userContactInfoPresentAddress,
+      userContactInfoPermanentAddress:
+        myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
-      userEducationInfoEducation: 2,
-      userEducationInfoOccupation: 4,
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
 
-      userFamilyInfoFatherName: 'gfgkf',
-      userFamilyInfoFatherOccupation: 2,
-      userFamilyInfoMotherName: 'dbdjf',
-      userFamilyInfoLand: 2,
-      userFamilyInfoMotherMaika: 'heyyyy',
-      userFamilyInfoNoOfSister: 1,
-      userFamilyInfoNoOfBrother: 1,
+      userFamilyInfoFatherName:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoMotherName:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+      userFamilyInfoLand:
+        myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+      userFamilyInfoMotherMaika:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+      userFamilyInfoNoOfSister:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+      userFamilyInfoNoOfBrother:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
-      userPersonalInfoMaritalStatusId: 1,
-      userPersonalInfoHeight: 3,
-      userPersonalInfoDisability: 2,
+      userPersonalInfoMaritalStatusId:
+        myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+          .maritalStatusId,
+      userPersonalInfoHeight:
+        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+      userPersonalInfoDisability:
+        myProfileData.userPersonalInfo.userPersonalInfoDisability,
 
-      userReligiousInfoGotra: 4,
+      userReligiousInfoGotra: '4',
       userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: values.auspicious[0],
+      userReligiousInfoManglik: 1,
       userReligiousInfoMotherGotra: values.native[0],
 
-      userFirstName: 'df',
-      userLastName: 'dsd',
+      userFirstName: myProfileData.userFirstName,
+      userLastName: myProfileData.userLastName,
       userGender: 'male',
-      userDob: '1988-06-29',
-      userCountry: 2,
-      userState: 1,
-      userCity: 1,
+      userDob: '1988-06-27',
+      userCountry: myProfileData.userCountry.countryId,
+      userState: myProfileData.userState.stateId,
+      userCity: myProfileData.userCity.cityId,
       userProfileImage: '',
     };
     navigation.navigate('My Profile');
@@ -106,13 +124,13 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       {console.log('mydharmikjankariiiii===>', myProfileData)}
       <Formik
         initialValues={{
-          gotra: [
-            myProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi,
-          ],
+          // gotra: [
+          //   myProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi,
+          // ],
           native: [
             myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
           ],
-          zodiacsign: [
+          zodiacSign: [
             myProfileData.userReligiousInfo.userReligiousInfoZodiac
               .zodiacTitleHi,
           ],
@@ -133,11 +151,9 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
                 selectedItems={values.gotra}
                 onSelectedItemsChange={value => setFieldValue('gotra', value)}
               />
-
               {errors.gotra && touched.gotra ? (
                 <Text style={styles.error}>{errors.gotra}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'gotraId'}
@@ -148,26 +164,23 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
                 onSelectedItemsChange={value => setFieldValue('native', value)}
                 onChangeInput={values.native}
               />
-
               {errors.native && touched.native ? (
                 <Text style={styles.error}>{errors.native}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'zodiacId'}
                 displayKey={'zodiacTitleHi'}
                 items={zodiacSign}
-                selectText={values.zodiacsign}
-                selectedItems={values.zodiacsign}
+                selectText={values.zodiacSign}
+                selectedItems={values.zodiacSign}
                 onSelectedItemsChange={value =>
-                  setFieldValue('zodiacsign', value)
+                  setFieldValue('zodiacSign', value)
                 }
               />
-              {errors.zodiacsign && touched.zodiacsign ? (
-                <Text style={styles.error}>{errors.zodiacsign}</Text>
+              {errors.zodiacSign && touched.zodiacSign ? (
+                <Text style={styles.error}>{errors.zodiacSign}</Text>
               ) : null}
-
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'nakshatraId'}
@@ -182,8 +195,12 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
               {errors.auspicious && touched.auspicious ? (
                 <Text style={styles.error}>{errors.auspicious}</Text>
               ) : null}
-
-              <LoginButton title="Update" onPress={handleSubmit} />
+              <LoginButton
+                title="Update"
+                onPress={handleSubmit}
+                loading={isUpdating}
+              />
+              {console.log('dharmikloading======>', isUpdating)}
             </View>
           </>
         )}

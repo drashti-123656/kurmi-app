@@ -16,8 +16,11 @@ import HideProfileReducer from '../scenes/hideProfile/redux/HideProfileReducer';
 import ViewByReducer from '../scenes/viewBy/redux/ViewByReducer';
 import contactReducer from '../scenes/contact/redux/contactReducer';
 import EditProfileReducer from '../scenes/editProfile/redux/editProfileReducer';
+import DownloadPdfReducer from '../scenes/shareBioData/redux/DownloadPdfReducer';
+import whatsAppReducer from '../scenes/auth/whatsapp/redux/whatsAppReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
+  whatsApp: whatsAppReducer,
   registration: registrationReducer,
 
   newsfeed: NewsfeedReducer,
@@ -34,7 +37,7 @@ const rootReducer = combineReducers({
   shortListProfiles: ShortListReducer,
 
   widowerProfile: widowerReducer,
-
+  downloadPdf: DownloadPdfReducer,
   disabilityProfile: disabilityReducer,
   myProfileDetail: MyProfileReducer,
   advanceSerach: AdvanceSearchReducer,

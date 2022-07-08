@@ -1,4 +1,13 @@
-import {View, Text, ImageBackground, Image, Linking} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  Linking,
+  alert,
+  Share,
+  Platform,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -9,7 +18,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {base_URL} from '../services/httpServices';
 import {logout} from '../scenes/auth/redux/authReducer';
 import {fetchmyProfileDataStarted} from '../scenes/profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
@@ -24,8 +32,53 @@ const CustomDrawer = props => {
     });
   }, []);
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'https://play.google.com/store/apps/details?id=com.kurmishadi',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleLogout = async () => {
     dispatch(logout({}));
+  };
+
+  const sendWhatsApp = () => {
+    let msg = 'Please, Tell me What can i help you?';
+    let phoneWithCountryCode = +919406034346;
+
+    let mobile =
+      Platform.OS == 'android'
+        ? phoneWithCountryCode
+        : '+' + phoneWithCountryCode;
+    if (mobile) {
+      if (msg) {
+        let url = 'whatsapp://send?text=' + msg + '&phone=' + mobile;
+        Linking.openURL(url)
+          .then(data => {
+            console.log('WhatsApp Opened');
+          })
+          .catch(() => {
+            alert('Make sure WhatsApp installed on your device');
+          });
+      } else {
+        alert('Please insert message to send');
+      }
+    } else {
+      alert('Please insert mobile no');
+    }
   };
 
   return (
@@ -48,6 +101,7 @@ const CustomDrawer = props => {
             <Image
               source={{uri: `${myProfileData.userProfileImage}`}}
               style={styles.drawerimage}
+              resizeMode="cover"
             />
             <Text style={styles.text}>
               welcome, {myProfileData.userFirstName}{' '}
@@ -98,7 +152,7 @@ const CustomDrawer = props => {
           )}
           label={translate('drawerScreen.biodata share')}
           onPress={() => {
-            props.navigation.navigate(translate('drawerScreen.biodata share'));
+            props.navigation.navigate('My Profile');
           }}
         />
         <DrawerItem
@@ -182,9 +236,7 @@ const CustomDrawer = props => {
             <MaterialIcons name="headset-mic" size={22} color={styles.color} />
           )}
           label="Helpline -"
-          onPress={() => {
-            props.navigation.navigate('Helpline -');
-          }}
+          onPress={sendWhatsApp}
         />
 
         <DrawerItem
@@ -192,9 +244,7 @@ const CustomDrawer = props => {
             <MaterialIcons name="share" size={22} color={styles.color} />
           )}
           label="Share"
-          onPress={() => {
-            props.navigation.navigate('Share');
-          }}
+          onPress={onShare}
         />
         <DrawerItem
           icon={() => (
@@ -202,7 +252,9 @@ const CustomDrawer = props => {
           )}
           label="Rate Us"
           onPress={() => {
-            props.navigation.navigate('Rate Us');
+            Linking.openURL(
+              'https://play.google.com/store/apps/details?id=com.kurmishadi',
+            );
           }}
         />
         <DrawerItem

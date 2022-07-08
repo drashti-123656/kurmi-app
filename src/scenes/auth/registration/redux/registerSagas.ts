@@ -3,11 +3,14 @@ import apiClient, {setToken} from './../../../../services/httpServices';
 import {showMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../../services/webConstants';
 import {
+  clearDataAfterLogout,
   fetchAuspiciousDropdownSuccess,
   fetchCityDropdownSuccess,
   fetchCountryDropdownSuccess,
+  fetchDisabilityDropdownSuccess,
   fetchEducationDropdownSuccess,
   fetchGotraDropdownSuccess,
+  fetchHeightDropdownSuccess,
   fetchJobDropdownSuccess,
   fetchLandDropdownSuccess,
   fetchMaritalstatusDropdownSuccess,
@@ -43,6 +46,7 @@ export function* registerUser(action) {
     yield put(fetchLoginDataSuccess(data.User));
     setToken(data.Token.original.token);
     yield put(registrationSuccess({}));
+    yield put(clearDataAfterLogout({}));
 
     // navigate('DashboardNavigation');
   } else {
@@ -138,6 +142,20 @@ export function* jobDropdown(action) {
   }
 }
 
+export function* heightDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchHeightDropdownSuccess(response.data.data));
+  }
+}
+
 export function* registerUserVerification(action) {
   const payload = action.payload;
 
@@ -192,6 +210,8 @@ export function* countryDropdown(action) {
     payload,
   );
 
+  // payload = [{id: 1, name: 'India'}];
+
   if (response.ok) {
     yield put(fetchCountryDropdownSuccess(response.data.data));
   }
@@ -235,5 +255,19 @@ export function* landDropdown(action) {
 
   if (response.ok) {
     yield put(fetchLandDropdownSuccess(response.data.data));
+  }
+}
+
+export function* disabiltyDropdown(action) {
+  const payload = action.payload;
+
+  const response = yield call(
+    apiClient.post,
+    API_URL.FETCH_SIGN_DROPDWON,
+    payload,
+  );
+
+  if (response.ok) {
+    yield put(fetchDisabilityDropdownSuccess(response.data.data));
   }
 }

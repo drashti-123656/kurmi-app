@@ -20,4 +20,5 @@ export const API_URL = {
   VIEW_BY_USERS: 'api/profile-view-list',
   VIEW_BY_ID_PROFILE: 'api/profile-view',
   EDIT_PROFILE: 'api/user-profile-update',
+  DOWNLOAD_PDF: 'api/download-profile',
 };

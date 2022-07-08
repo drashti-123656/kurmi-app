@@ -1,4 +1,14 @@
-import {View, Text, Image, TouchableOpacity, Switch, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Switch,
+  Alert,
+  Linking,
+  Share,
+  alert,
+} from 'react-native';
 import React from 'react';
 import RootScreen from '../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -14,6 +24,26 @@ const Settings = ({navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
   const {isActive} = useSelector(state => state.hideProfile);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'https://play.google.com/store/apps/details?id=com.kurmishadi',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleHideProfile = () => {
     if (isActive === true) {
       dispatch(toggleOff({}));
@@ -61,6 +91,7 @@ const Settings = ({navigation}) => {
               <Image
                 style={styles.profile}
                 source={{uri: `${myProfileData.userProfileImage}`}}
+                resizeMode="cover"
               />
               <View style={styles.text}>
                 <Text style={styles.profileDetail}>
@@ -97,17 +128,23 @@ const Settings = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onShare}>
               <Text style={styles.textStyle}>Share App</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://kurmishadi.com/privacy/');
+              }}>
               <Text style={styles.textStyle}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.textmargin}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://kurmishadi.com/terms/');
+              }}>
               <Text style={styles.textStyle}>Term Of Use</Text>
             </TouchableOpacity>
           </View>
@@ -176,6 +213,8 @@ const styles = EStyleSheet.create({
     height: 90,
     borderRadius: 50,
     marginHorizontal: 15,
+    borderWidth: 3,
+    borderColor: '#C3773B',
   },
   text: {
     marginTop: 10,

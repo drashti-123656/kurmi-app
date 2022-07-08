@@ -1,6 +1,6 @@
 import {all, takeLatest} from 'redux-saga/effects';
 import {LOG_IN, LOG_USER} from '../scenes/auth/redux/authActions';
-import {logUser} from '../scenes/auth/redux/authSagas';
+import {logUser} from '../scenes/auth/whatsapp/redux/whatsaapSaga';
 import {CONTACT_USER} from '../scenes/contact/redux/contactAction';
 import {contactUser} from '../scenes/contact/redux/contactSaga';
 import {loginUser} from '../scenes/auth/redux/authSagas';
@@ -11,6 +11,7 @@ import {
   educationDropdown,
   gotraDropdown,
   jobDropdown,
+  disabiltyDropdown,
   landDropdown,
   martialstatusDropdown,
   profilemakerDropdown,
@@ -18,13 +19,16 @@ import {
   registerUserVerification,
   stateDropdown,
   zodiacDropDowns,
+  heightDropdown,
 } from '../scenes/auth/registration/redux/registerSagas';
 import {
   FETCH_AUSPICIOUS_DROPDOWN,
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
+  FETCH_DISABILITY,
   FETCH_EDUCATION_DROPDOWN,
   FETCH_GOTRA_DROPDOWN,
+  FETCH_HEIGHT,
   FETCH_JOB_DROPDOWN,
   FETCH_LAND_DROPDOWN,
   FETCH_MARITALSTATUS_DROPDOWN,
@@ -44,6 +48,9 @@ import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetail
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
 import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
+import {downloadPdf} from '../scenes/shareBioData/redux/DownloadPdfSaga';
+
 import {
   SHORT_LISTED_USERS,
   SHORT_LIST_PROFILE,
@@ -89,8 +96,9 @@ export default function* sagas() {
     takeLatest(FETCH_CITY_DROPDOWN, cityDropdown),
     takeLatest(FETCH_GOTRA_DROPDOWN, gotraDropdown),
     takeLatest(FETCH_LAND_DROPDOWN, landDropdown),
-    takeLatest(DIVORCED_PROFILE, divorcedStatus),
+    // takeLatest(DIVORCED_PROFILE, divorcedStatus),
     takeLatest(FETCH_SEARCH_PROFILE, searchProfile),
+    takeLatest(DIVORCED_PROFILE, divorcedStatus),
     takeLatest(OTHERS_PROFILE_DETAILS, otherProfileDetails),
     takeLatest(SHORT_LIST_PROFILE, shortListProfile),
     takeLatest(WIDOWED_PROFILE, widowedStatus),
@@ -103,5 +111,8 @@ export default function* sagas() {
     takeLatest(VIEW_BY_ID_PROFILE, viewByProfile),
     takeLatest(VIEW_BY_USERS, viewByUsers),
     takeLatest(EDIT_PROFILE, editProfile),
+    takeLatest(DOWNLOAD_PDF, downloadPdf),
+    takeLatest(FETCH_HEIGHT, heightDropdown),
+    takeLatest(FETCH_DISABILITY, disabiltyDropdown),
   ]);
 }

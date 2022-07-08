@@ -11,13 +11,14 @@ import CustomInput from '../../components/atoms/inputs/CustomInput';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {EDIT_PROFILE} from './redux/editProfileAction';
 import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 const SamparkEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
+  const {isUpdating} = useSelector(state => state.editProfile);
 
   const handleeditProfile = values => {
     console.log('values===>', values);
@@ -28,33 +29,49 @@ const SamparkEditProfile = ({route, navigation}) => {
       userContactInfoPresentAddress: values.presentAdd,
       userContactInfoPermanentAddress: values.permanentAdd,
 
-      userEducationInfoEducation: 1,
-      userEducationInfoOccupation: 1,
+      userEducationInfoEducation:
+        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoOccupation:
+        myProfileData.userEducationInfo.userEducationInfoId,
 
-      userFamilyInfoFatherName: 'FatherName',
-      userFamilyInfoFatherOccupation: 1,
-      userFamilyInfoMotherName: 'MotherName',
-      userFamilyInfoLand: 1,
-      userFamilyInfoMotherMaika: 'dffdf',
-      userFamilyInfoNoOfSister: 1,
-      userFamilyInfoNoOfBrother: 1,
+      userFamilyInfoFatherName:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherName,
+      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoMotherName:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherName,
+      userFamilyInfoLand:
+        myProfileData.userFamilyInfo.userFamilyInfoLand.landId,
+      userFamilyInfoMotherMaika:
+        myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
+      userFamilyInfoNoOfSister:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfSister,
+      userFamilyInfoNoOfBrother:
+        myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
-      userPersonalInfoMaritalStatusId: 2,
-      userPersonalInfoHeight: 1,
-      userPersonalInfoDisability: 1,
+      userPersonalInfoMaritalStatusId:
+        myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+          .maritalStatusId,
+      userPersonalInfoHeight:
+        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+      userPersonalInfoDisability:
+        myProfileData.userPersonalInfo.userPersonalInfoDisability,
 
-      userReligiousInfoGotra: 4,
-      userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 5,
-      userReligiousInfoMotherGotra: 5,
+      userReligiousInfoGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+      userReligiousInfoZodiac:
+        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+      userReligiousInfoManglik:
+        myProfileData.userReligiousInfo.userReligiousInfoId,
+      userReligiousInfoMotherGotra:
+        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
 
-      userFirstName: 'stest',
-      userLastName: 'stest',
+      userFirstName: myProfileData.userFirstName,
+      userLastName: myProfileData.userLastName,
       userGender: 'male',
       userDob: '1988-06-27',
-      userCountry: 5,
-      userState: 5,
-      userCity: 5,
+      userCountry: myProfileData.userCountry.countryId,
+      userState: myProfileData.userState.stateId,
+      userCity: myProfileData.userCity.cityId,
       userProfileImage: '',
     };
     console.log('fjdfhdfdj==>', payload);
@@ -147,7 +164,12 @@ const SamparkEditProfile = ({route, navigation}) => {
                 <Text style={styles.errorStyle}>{errors.permanentAdd}</Text>
               ) : null}
 
-              <LoginButton title="Update" onPress={handleSubmit} />
+              <LoginButton
+                title="Update"
+                onPress={handleSubmit}
+                loading={isUpdating}
+              />
+              {console.log('samparkloading======>', isUpdating)}
             </View>
           </View>
         )}

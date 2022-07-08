@@ -7,12 +7,15 @@ import {
 } from 'react-native-responsive-screen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {base_URL} from '../../../services/httpServices';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {SHORT_LIST_PROFILE} from '../../../scenes/shortList/redux/ShortListAction';
 
 const Card = ({navigation, item, id}) => {
   //const {id} = route.params;
   const dispatch = useDispatch();
+  const {
+    authData: {isAuthenticated},
+  } = useSelector(state => state.auth);
 
   const handleShortList = () => {
     const payload = {
@@ -47,27 +50,40 @@ const Card = ({navigation, item, id}) => {
               <Text style={styles.profileIntroText}>Age - {item.userAge},</Text>
 
               <Text style={styles.profileIntroText}>
-                {item.userCity.cityName}, {item.userState.name},
+                {item.userPersonalInfo?.userPersonalInfoHeight?.name},{' '}
+                {item?.userCity?.cityName},
               </Text>
-              <Text style={styles.profileIntroText}>
-                {item.userCountry.countryName}
-              </Text>
+              <Text style={styles.profileIntroText}>{item.userState.name}</Text>
             </View>
           </View>
           <View style={styles.line} />
 
           <View style={styles.bottomContainer}>
-            <TouchableOpacity
-              onPress={handleShortList}
-              style={styles.bottmIcons}>
-              <Icon
-                name="star-o"
-                size={22}
-                color="#499A30"
-                style={styles.icon}
-              />
-              <Text style={styles.bottomText}> Shortlist </Text>
-            </TouchableOpacity>
+            {!isAuthenticated ? (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Login')}
+                style={styles.bottmIcons}>
+                <Icon
+                  name="star-o"
+                  size={22}
+                  color="#499A30"
+                  style={styles.icon}
+                />
+                <Text style={styles.bottomText}> Shortlist </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={handleShortList}
+                style={styles.bottmIcons}>
+                <Icon
+                  name="star-o"
+                  size={22}
+                  color="#499A30"
+                  style={styles.icon}
+                />
+                <Text style={styles.bottomText}> Shortlist </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </TouchableOpacity>
