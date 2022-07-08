@@ -217,7 +217,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text style={styles.detailsText}>
                 {' '}
-                {myProfileData?.userFirstName}{' '}
+                {myProfileData?.userFirstName} {myProfileData?.userLastName}
               </Text>
             </View>
 
