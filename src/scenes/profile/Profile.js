@@ -11,6 +11,11 @@ import {clearLedgerDownloadStatus} from '../shareBioData/redux/DownloadPdfReduce
 import RNShare from 'react-native-share';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {EDIT_PROFILE} from '../editProfile/redux/editProfileAction';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 const Profile = ({navigation}) => {
   const [response, setResponse] = useState();
   const {myProfileData, isFetching} = useSelector(
@@ -193,10 +198,15 @@ const Profile = ({navigation}) => {
                     },
                   )
                 }>
-                <Image
+                <Icon
+                  name="pencil"
+                  size={35}
+                  color={EStyleSheet.value('$PRIMARY')}
+                />
+                {/* <Image
                   source={require('../../assets/pencilimage.png')}
                   style={styles.pencil}
-                />
+                /> */}
               </TouchableOpacity>
             </View>
           </View>
@@ -274,14 +284,13 @@ const Profile = ({navigation}) => {
               <Text style={styles.subHeadingText}>
                 {translate('register.ProfileName')}{' '}
               </Text>
-              <View style={styles.detailsText}>
-                <Text style={styles.profileCreate}>
-                  {' '}
-                  {
-                    myProfileData?.userProfileCreatedBy?.profileCreatedByNameHi
-                  }{' '}
-                </Text>
-              </View>
+
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userProfileCreatedBy?.profileCreatedByNameHi
+                }{' '}
+              </Text>
             </View>
 
             <View style={styles.profileContain}>
@@ -335,72 +344,6 @@ const Profile = ({navigation}) => {
           <View style={styles.imageContainer}>
             <Text style={styles.heading}>
               {' '}
-              {translate('samPark.samparkheader')}
-            </Text>
-            <View style={styles.pencilIcon}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(translate('samPark.samparkheader'), {
-                    myProfileData,
-                  })
-                }>
-                <Image
-                  source={require('../../assets/pencilimage.png')}
-                  style={styles.pencil}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.dataContainer}>
-            <View style={styles.profileContain}>
-              <Text style={styles.subHeadingText}>
-                {translate('samPark.mobileNo')}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {myProfileData?.userContactInfo?.userContactInfoContactNo}
-              </Text>
-            </View>
-
-            <View style={styles.profileContain}>
-              <Text style={styles.subHeadingText}>
-                {translate('samPark.whatsAppNo')}{' '}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {myProfileData?.userContactInfo?.userContactInfoWhatsappNo}{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.subHeadingText}>
-                {translate('samPark.presentAdd')}{' '}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {
-                  myProfileData?.userContactInfo?.userContactInfoPresentAddress
-                }{' '}
-              </Text>
-            </View>
-            <View style={styles.profileContain}>
-              <Text style={styles.subHeadingText}>
-                {translate('samPark.permanentAdd')}{' '}
-              </Text>
-              <Text style={styles.detailsText}>
-                {' '}
-                {
-                  myProfileData?.userContactInfo
-                    ?.userContactInfoPermanentAddress
-                }{' '}
-              </Text>
-            </View>
-          </View>
-          <View>
-            <View style={styles.separatorLine} />
-          </View>
-          <View style={styles.imageContainer}>
-            <Text style={styles.heading}>
-              {' '}
               {translate('Dharmikjankari.Dharmik Jankari')}
             </Text>
             <View style={styles.pencilIcon}>
@@ -410,9 +353,10 @@ const Profile = ({navigation}) => {
                     myProfileData,
                   })
                 }>
-                <Image
-                  source={require('../../assets/pencilimage.png')}
-                  style={styles.pencil}
+                <Icon
+                  name="pencil"
+                  size={35}
+                  color={EStyleSheet.value('$PRIMARY')}
                 />
               </TouchableOpacity>
             </View>
@@ -469,9 +413,10 @@ const Profile = ({navigation}) => {
                     myProfileData,
                   })
                 }>
-                <Image
-                  source={require('../../assets/pencilimage.png')}
-                  style={styles.pencil}
+                <Icon
+                  name="pencil"
+                  size={35}
+                  color={EStyleSheet.value('$PRIMARY')}
                 />
               </TouchableOpacity>
             </View>
@@ -494,7 +439,6 @@ const Profile = ({navigation}) => {
                 {' '}
                 {
                   myProfileData?.userFamilyInfo?.userFamilyInfoFatherOccupation
-                    ?.occupationTitleHi
                 }{' '}
               </Text>
             </View>
@@ -545,9 +489,74 @@ const Profile = ({navigation}) => {
                 }{' '}
               </Text>
             </View>
+            <View>
+              <View style={styles.separatorLine} />
+            </View>
           </View>
-          <View>
-            <View style={styles.separatorLine} />
+
+          <View style={styles.imageContainer}>
+            <Text style={styles.heading}>
+              {' '}
+              {translate('samPark.samparkheader')}
+            </Text>
+            <View style={styles.pencilIcon}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(translate('samPark.samparkheader'), {
+                    myProfileData,
+                  })
+                }>
+                <Icon
+                  name="pencil"
+                  size={35}
+                  color={EStyleSheet.value('$PRIMARY')}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.dataContainer}>
+            <View style={styles.profileContain}>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.mobileNo')}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {myProfileData?.userContactInfo?.userContactInfoContactNo}
+              </Text>
+            </View>
+
+            <View style={styles.profileContain}>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.whatsAppNo')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {myProfileData?.userContactInfo?.userContactInfoWhatsappNo}{' '}
+              </Text>
+            </View>
+            <View style={styles.profileContain}>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.presentAdd')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userContactInfo?.userContactInfoPresentAddress
+                }{' '}
+              </Text>
+            </View>
+            <View style={styles.profileContain}>
+              <Text style={styles.subHeadingText}>
+                {translate('samPark.permanentAdd')}{' '}
+              </Text>
+              <Text style={styles.detailsText}>
+                {' '}
+                {
+                  myProfileData?.userContactInfo
+                    ?.userContactInfoPermanentAddress
+                }{' '}
+              </Text>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -595,13 +604,7 @@ const styles = EStyleSheet.create({
 
     borderRadius: 100,
   },
-  profileCreated: {
-    marginTop: -15,
-    marginHorizontal: 25,
-    color: ' $PLACEHOLDER',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
+
   detailsText: {
     fontSize: 15,
     marginBottom: 10,
@@ -708,13 +711,14 @@ const styles = EStyleSheet.create({
   },
   heading: {
     color: '$PRIMARY',
-    marginTop: 20,
-    marginHorizontal: 20,
+    padding: heightPercentageToDP('1'),
+    //marginTop: 20,
+    // marginHorizontal: 20,
     fontWeight: 'bold',
     fontSize: 20,
   },
   dataContainer: {
-    marginTop: 20,
+    //marginTop: 20,
   },
   button: {
     alignItems: 'center',
@@ -722,9 +726,10 @@ const styles = EStyleSheet.create({
     //padding: 10,
     width: 200,
     height: 50,
-    marginTop: 15,
-
-    marginHorizontal: 10,
+    //marginTop: 15,
+    marginVertical: heightPercentageToDP('1.5'),
+    marginLeft: widthPercentageToDP('4'),
+    // marginHorizontal: 10,
     justifyContent: 'center',
     borderRadius: 100,
     shadowOffset: {
@@ -736,8 +741,7 @@ const styles = EStyleSheet.create({
     elevation: 5,
   },
   pencilIcon: {
-    marginHorizontal: 170,
-    marginTop: 20,
+    paddingLeft: widthPercentageToDP('45'),
   },
   pencil: {
     width: 30,
@@ -767,6 +771,7 @@ const styles = EStyleSheet.create({
   },
   mainContainer: {
     flex: 1,
+    marginBottom: heightPercentageToDP('2'),
   },
   imageContainer: {
     flexDirection: 'row',
@@ -782,10 +787,9 @@ const styles = EStyleSheet.create({
     marginTop: 5,
   },
   separatorLine: {
-    flex: 1,
-    backgroundColor: '$PLACEHOLDER',
-    height: 1.2,
-    marginTop: 19,
+    borderBottomColor: '#666666',
+    borderBottomWidth: 0.5,
+    marginVertical: heightPercentageToDP('1'),
   },
   text: {
     color: '$WHITE',
@@ -814,7 +818,7 @@ const styles = EStyleSheet.create({
   },
   profileContain: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    //justifyContent: 'space-evenly',
   },
   subHeadingText: {
     color: 'black',
