@@ -12,7 +12,7 @@ import {
 
 export function* addMeVisitor(action) {
   const payload = action.payload;
-  console.log('addmevistorPayload', payload);
+
   const {ok, data} = yield call(
     apiClient.post,
     API_URL.ADD_ME_VISITOR_PROFILE,
@@ -20,12 +20,7 @@ export function* addMeVisitor(action) {
   );
 
   if (ok) {
-    console.log('datavistorResponse=====>>', data);
     yield put(viewBySuccess(data));
-    showMessage({
-      message: 'Profile Visited!',
-      type: 'success',
-    });
   }
 }
 export function* viewByList(action) {
@@ -46,15 +41,11 @@ export function* viewByList(action) {
     yield put(
       fetchViewByDataSuccess({
         profile: finalProfileList,
-        isPaginationRequired: data.data.length === PAGE_SIZE,
+        isPaginationRequired: data.data?.length === PAGE_SIZE,
         pageNumber: payload.page,
       }),
     );
   } else {
     yield put(fetchViewByUserDataFail({}));
-    showMessage({
-      message: 'Ops, something went wrong',
-      type: 'danger',
-    });
   }
 }

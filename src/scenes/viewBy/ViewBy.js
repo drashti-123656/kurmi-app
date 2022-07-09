@@ -1,4 +1,4 @@
-import {FlatList, RefreshControl, Text} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
@@ -20,7 +20,7 @@ const ViewBy = ({navigation}) => {
         type: 'desc',
       },
     };
-    console.log('payload=============>>>', payload);
+
     dispatch({
       type: VIEW_BY_USERS,
       payload,
@@ -42,7 +42,14 @@ const ViewBy = ({navigation}) => {
   };
 
   const _renderEmptyMsg = () => {
-    return <Text> no one has seen your profile </Text>;
+    return (
+      <View style={styles.Container}>
+        <Text style={styles.textStyle}>
+          {' '}
+          आपकी प्रोफाइल किसी ने नहीं देखी है अभी तक{' '}
+        </Text>
+      </View>
+    );
   };
 
   const renderItem = ({item}) => {
@@ -71,3 +78,18 @@ const ViewBy = ({navigation}) => {
 };
 
 export default ViewBy;
+const styles = StyleSheet.create({
+  Container: {
+    // marginBottom: 20,
+    justifyContent: 'center',
+    //  marginTop: 20,
+    // flex: 1,
+    marginTop: '80%',
+    alignItems: 'center',
+  },
+  textStyle: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: '600',
+  },
+});
