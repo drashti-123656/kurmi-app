@@ -21,7 +21,6 @@ const NewsFeedCard = ({navigation, item, id}) => {
     const payload = {
       profileId: item.userId,
     };
-    console.log('profileId=====>>', payload);
 
     dispatch({
       type: SHORT_LIST_PROFILE,
@@ -37,7 +36,7 @@ const NewsFeedCard = ({navigation, item, id}) => {
     const payload = {
       profileId: item.userId,
     };
-    console.log('addMeAsVisitor============>>>', payload);
+
     dispatch({
       type: ADD_ME_VISITOR,
       payload,

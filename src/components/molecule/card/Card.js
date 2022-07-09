@@ -22,7 +22,6 @@ const Card = ({navigation, item, id}) => {
     const payload = {
       profileId: item.userId,
     };
-    console.log('profileId=====>>', payload);
 
     dispatch({
       type: SHORT_LIST_PROFILE,

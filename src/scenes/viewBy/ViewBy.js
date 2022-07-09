@@ -80,10 +80,8 @@ const ViewBy = ({navigation}) => {
 export default ViewBy;
 const styles = StyleSheet.create({
   Container: {
-    // marginBottom: 20,
     justifyContent: 'center',
-    //  marginTop: 20,
-    // flex: 1,
+
     marginTop: '80%',
     alignItems: 'center',
   },
