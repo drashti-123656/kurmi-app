@@ -42,7 +42,6 @@ const OthersProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('othersProfileData====>>', othersProfileData);
     dispatch({
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
@@ -227,7 +226,7 @@ const OthersProfile = ({route, navigation}) => {
                 </Text>
                 <Text style={styles.detailsText}>
                   {' '}
-                  {othersProfileData.userDob}{' '}
+                  {othersProfileData?.userDob}{' '}
                 </Text>
               </View>
               <View style={styles.alignment}>
@@ -354,7 +353,7 @@ const OthersProfile = ({route, navigation}) => {
                   {translate('Dharmikjankari.Caste')}
                 </Text>
                 <Text style={styles.detailsText}>
-                  {othersProfileData.userReligiousInfo.userReligiousInfoGotra}
+                  {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra}
                 </Text>
               </View>
 
@@ -415,8 +414,8 @@ const OthersProfile = ({route, navigation}) => {
 
                 <Text style={styles.detailsText}>
                   {
-                    othersProfileData.userFamilyInfo
-                      .userFamilyInfoFatherOccupation
+                    othersProfileData?.userFamilyInfo
+                      ?.userFamilyInfoFatherOccupation
                   }
                 </Text>
               </View>

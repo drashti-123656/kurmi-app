@@ -1,5 +1,5 @@
-import {FlatList, RefreshControl} from 'react-native';
-import React from 'react';
+import {FlatList, RefreshControl, Text} from 'react-native';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
@@ -20,11 +20,16 @@ const ViewBy = ({navigation}) => {
         type: 'desc',
       },
     };
+    console.log('payload=============>>>', payload);
     dispatch({
       type: VIEW_BY_USERS,
       payload,
     });
   };
+
+  useEffect(() => {
+    _fetchProfiles(1);
+  }, []);
 
   const __refreshOnPull = () => {
     _fetchProfiles(1);
@@ -34,6 +39,10 @@ const ViewBy = ({navigation}) => {
     if (isPaginationRequired) {
       _fetchProfiles(pageIndex + 1);
     }
+  };
+
+  const _renderEmptyMsg = () => {
+    return <Text> no one has seen your profile </Text>;
   };
 
   const renderItem = ({item}) => {
@@ -49,6 +58,7 @@ const ViewBy = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
         ListFooterComponent={renderLoader}
+        ListEmptyComponent={_renderEmptyMsg}
         initialNumToRender={10}
         refreshControl={
           <RefreshControl refreshing={isfetching} onRefresh={__refreshOnPull} />

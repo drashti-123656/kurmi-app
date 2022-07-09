@@ -18,6 +18,8 @@ import contactReducer from '../scenes/contact/redux/contactReducer';
 import EditProfileReducer from '../scenes/editProfile/redux/editProfileReducer';
 import DownloadPdfReducer from '../scenes/shareBioData/redux/DownloadPdfReducer';
 import whatsAppReducer from '../scenes/auth/whatsapp/redux/whatsAppReducer';
+import LOG_OUT from '../scenes/auth/redux/authActions';
+
 const rootReducer = combineReducers({
   auth: authReducer,
   whatsApp: whatsAppReducer,
@@ -47,5 +49,5 @@ const rootReducer = combineReducers({
   changePassword: changePasswordReducer,
   editProfile: EditProfileReducer,
 });
-
-export default rootReducer;
+export default (state, action) =>
+  rootReducer(action.type === LOG_OUT ? undefined : state, action);

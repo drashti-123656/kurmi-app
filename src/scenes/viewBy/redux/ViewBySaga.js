@@ -9,23 +9,26 @@ import {
   fetchViewByDataSuccess,
   fetchViewByUserDataFail,
 } from './ViewByReducer';
-export function* viewByProfile(action) {
+
+export function* addMeVisitor(action) {
   const payload = action.payload;
+  console.log('addmevistorPayload', payload);
   const {ok, data} = yield call(
     apiClient.post,
-    API_URL.VIEW_BY_ID_PROFILE,
+    API_URL.ADD_ME_VISITOR_PROFILE,
     payload,
   );
 
   if (ok) {
+    console.log('datavistorResponse=====>>', data);
+    yield put(viewBySuccess(data));
     showMessage({
       message: 'Profile Visited!',
       type: 'success',
     });
-    yield put(viewBySuccess(data));
   }
 }
-export function* viewByUsers(action) {
+export function* viewByList(action) {
   const payload = action.payload;
 
   yield put(fetchViewByUserDataStarted({}));
