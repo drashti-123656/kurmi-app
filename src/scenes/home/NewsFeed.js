@@ -25,6 +25,7 @@ import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
 import Loader from '../../components/atoms/buttons/Loader';
+import NewsFeedCard from '../../components/molecule/card/NewsFeedCard';
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
@@ -76,33 +77,7 @@ const NewsFeed = ({navigation}) => {
   };
 
   const renderItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={styles.profileContainer}
-        onPress={() =>
-          navigation.navigate('OthersProfile', {
-            id: item.userId,
-          })
-        }>
-        <Image
-          style={styles.profileImg}
-          resizeMode={'center'}
-          source={{uri: `${item.userProfileImage}`}}
-        />
-        <View style={styles.cardMargin}>
-          <Text style={styles.profileText}>
-            {item.userFirstName} {item.userLastName}
-          </Text>
-          <Text style={styles.profileIntroText}>
-            Age - {item.userAge},{' '}
-            {item.userPersonalInfo?.userPersonalInfoHeight?.name},
-          </Text>
-          <Text style={styles.profileIntroText}>
-            {item.userCity.cityName},{item.userState.name}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
+    return <NewsFeedCard navigation={navigation} item={item} />;
   };
 
   if (isFetching) {

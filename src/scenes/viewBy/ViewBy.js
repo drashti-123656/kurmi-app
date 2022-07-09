@@ -1,5 +1,5 @@
-import {FlatList, RefreshControl} from 'react-native';
-import React from 'react';
+import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
@@ -20,11 +20,16 @@ const ViewBy = ({navigation}) => {
         type: 'desc',
       },
     };
+
     dispatch({
       type: VIEW_BY_USERS,
       payload,
     });
   };
+
+  useEffect(() => {
+    _fetchProfiles(1);
+  }, []);
 
   const __refreshOnPull = () => {
     _fetchProfiles(1);
@@ -34,6 +39,17 @@ const ViewBy = ({navigation}) => {
     if (isPaginationRequired) {
       _fetchProfiles(pageIndex + 1);
     }
+  };
+
+  const _renderEmptyMsg = () => {
+    return (
+      <View style={styles.Container}>
+        <Text style={styles.textStyle}>
+          {' '}
+          आपकी प्रोफाइल किसी ने नहीं देखी है अभी तक{' '}
+        </Text>
+      </View>
+    );
   };
 
   const renderItem = ({item}) => {
@@ -49,6 +65,7 @@ const ViewBy = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
         ListFooterComponent={renderLoader}
+        ListEmptyComponent={_renderEmptyMsg}
         initialNumToRender={10}
         refreshControl={
           <RefreshControl refreshing={isfetching} onRefresh={__refreshOnPull} />
@@ -61,3 +78,16 @@ const ViewBy = ({navigation}) => {
 };
 
 export default ViewBy;
+const styles = StyleSheet.create({
+  Container: {
+    justifyContent: 'center',
+
+    marginTop: '80%',
+    alignItems: 'center',
+  },
+  textStyle: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: '600',
+  },
+});

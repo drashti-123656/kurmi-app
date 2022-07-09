@@ -9,6 +9,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {base_URL} from '../../../services/httpServices';
 import {useDispatch, useSelector} from 'react-redux';
 import {SHORT_LIST_PROFILE} from '../../../scenes/shortList/redux/ShortListAction';
+import {ADD_ME_VISITOR} from '../../../scenes/viewBy/redux/ViewByAction';
 
 const Card = ({navigation, item, id}) => {
   //const {id} = route.params;
@@ -28,14 +29,24 @@ const Card = ({navigation, item, id}) => {
     });
   };
 
+  const addMeVistor = () => {
+    navigation.navigate('OthersProfile', {
+      id: item.userId,
+    });
+
+    const payload = {
+      profileId: item.userId,
+    };
+
+    dispatch({
+      type: ADD_ME_VISITOR,
+      payload,
+    });
+  };
+
   return (
     <View style={styles.profileContainer}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('OthersProfile', {
-            id: item.userId,
-          })
-        }>
+      <TouchableOpacity onPress={addMeVistor}>
         <View style={styles.mainContainer}>
           <View style={styles.profileImageContainer}>
             <Image

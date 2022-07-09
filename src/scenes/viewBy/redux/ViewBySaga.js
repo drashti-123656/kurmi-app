@@ -9,23 +9,21 @@ import {
   fetchViewByDataSuccess,
   fetchViewByUserDataFail,
 } from './ViewByReducer';
-export function* viewByProfile(action) {
+
+export function* addMeVisitor(action) {
   const payload = action.payload;
+
   const {ok, data} = yield call(
     apiClient.post,
-    API_URL.VIEW_BY_ID_PROFILE,
+    API_URL.ADD_ME_VISITOR_PROFILE,
     payload,
   );
 
   if (ok) {
-    showMessage({
-      message: 'Profile Visited!',
-      type: 'success',
-    });
     yield put(viewBySuccess(data));
   }
 }
-export function* viewByUsers(action) {
+export function* viewByList(action) {
   const payload = action.payload;
 
   yield put(fetchViewByUserDataStarted({}));
@@ -43,15 +41,11 @@ export function* viewByUsers(action) {
     yield put(
       fetchViewByDataSuccess({
         profile: finalProfileList,
-        isPaginationRequired: data.data.length === PAGE_SIZE,
+        isPaginationRequired: data.data?.length === PAGE_SIZE,
         pageNumber: payload.page,
       }),
     );
   } else {
     yield put(fetchViewByUserDataFail({}));
-    showMessage({
-      message: 'Ops, something went wrong',
-      type: 'danger',
-    });
   }
 }
