@@ -37,7 +37,7 @@ const Card = ({navigation, item, id}) => {
     const payload = {
       profileId: item.userId,
     };
-    console.log('addMeAsVisitor============>>>', payload);
+
     dispatch({
       type: ADD_ME_VISITOR,
       payload,
