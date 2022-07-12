@@ -31,9 +31,6 @@ const searchProfileSlice = createSlice({
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {
-  fetchNewsFeedStarted,
-  fetchNewsFeedSuccess,
-  fetchNewsFeedFail,
-} = actions;
+export const {fetchNewsFeedStarted, fetchNewsFeedSuccess, fetchNewsFeedFail} =
+  actions;
 export default reducer;

@@ -70,10 +70,10 @@ import {myProfileDetails} from '../scenes/profile/redux/MyProfileSaga';
 import {hideprofileStatus} from '../scenes/hideProfile/redux/HideProfileSaga';
 import {TOGGLE_SWITCH_ACTIVE} from '../scenes/hideProfile/redux/HideProfileAction';
 import {
-  VIEW_BY_ID_PROFILE,
+  ADD_ME_VISITOR,
   VIEW_BY_USERS,
 } from '../scenes/viewBy/redux/ViewByAction';
-import {viewByProfile, viewByUsers} from '../scenes/viewBy/redux/ViewBySaga';
+import {addMeVisitor, viewByList} from '../scenes/viewBy/redux/ViewBySaga';
 import {EDIT_PROFILE} from '../scenes/editProfile/redux/editProfileAction';
 import {editProfile} from '../scenes/editProfile/redux/editprofileSaga';
 import {
@@ -117,8 +117,8 @@ export default function* sagas() {
     takeLatest(SHORT_LISTED_USERS, shortlistedUsers),
     takeLatest(ADVANCED_SEARCH_USER, advancesearchStatus),
     takeLatest(TOGGLE_SWITCH_ACTIVE, hideprofileStatus),
-    takeLatest(VIEW_BY_ID_PROFILE, viewByProfile),
-    takeLatest(VIEW_BY_USERS, viewByUsers),
+    takeLatest(ADD_ME_VISITOR, addMeVisitor),
+    takeLatest(VIEW_BY_USERS, viewByList),
     takeLatest(EDIT_PROFILE, editProfile),
     takeLatest(DOWNLOAD_PDF, downloadPdf),
     takeLatest(FETCH_HEIGHT, heightDropdown),

@@ -226,7 +226,7 @@ const OthersProfile = ({route, navigation}) => {
                 </Text>
                 <Text style={styles.detailsText}>
                   {' '}
-                  {othersProfileData.userDob}{' '}
+                  {othersProfileData?.userDob}{' '}
                 </Text>
               </View>
               <View style={styles.alignment}>
@@ -348,14 +348,14 @@ const OthersProfile = ({route, navigation}) => {
               {translate('Dharmikjankari.Dharmik Jankari')}
             </Text>
             <View style={styles.subDetailContainer}>
-              {/* <View style={styles.alignment}>
+              <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {translate('Dharmikjankari.Caste')}
                 </Text>
                 <Text style={styles.detailsText}>
-                  {othersProfileData.userReligiousInfo.userReligiousInfoGotra}
+                  {othersProfileData?.userReligiousInfo?.userReligiousInfoGotra}
                 </Text>
-              </View> */}
+              </View>
 
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
@@ -406,7 +406,7 @@ const OthersProfile = ({route, navigation}) => {
                   }{' '}
                 </Text>
               </View>
-              {/* <View style={styles.alignment}>
+              <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {' '}
                   {translate('ParivarikParichay.fatherOccupation')}
@@ -414,11 +414,11 @@ const OthersProfile = ({route, navigation}) => {
 
                 <Text style={styles.detailsText}>
                   {
-                    othersProfileData.userFamilyInfo
-                      .userFamilyInfoFatherOccupation
+                    othersProfileData?.userFamilyInfo
+                      ?.userFamilyInfoFatherOccupation
                   }
                 </Text>
-              </View> */}
+              </View>
               <View style={styles.alignment}>
                 <Text style={styles.subHeadingText}>
                   {' '}

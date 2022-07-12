@@ -3,10 +3,11 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   viewByData: [],
   viewByUsersData: [],
-  error: '',
+  error: 'something went wrong',
   isfetching: false,
   pageIndex: 1,
   isPaginationRequired: true,
+  clear: '',
 };
 
 const viewProfileSlice = createSlice({
@@ -18,7 +19,6 @@ const viewProfileSlice = createSlice({
     },
     viewByFail(state, action) {
       state.viewByData.isfetching = false;
-      state.viewByData.error = action.payload;
     },
     fetchViewByUserDataStarted(state) {
       state.isfetching = true;
@@ -29,9 +29,13 @@ const viewProfileSlice = createSlice({
       state.pageIndex = payload.pageNumber;
       state.isPaginationRequired = payload.isPaginationRequired;
     },
-    fetchViewByUserDataFail(state) {
+    fetchViewByUserDataFail(state, action) {
       state.isfetching = false;
       state.error = true;
+      state.isPaginationRequired = false;
+    },
+    clearViewByDataAfterLogout(state, action) {
+      return initialState;
     },
   },
 });
@@ -44,5 +48,6 @@ export const {
   fetchViewByUserDataStarted,
   fetchViewByDataSuccess,
   fetchViewByUserDataFail,
+  clearViewByDataAfterLogout,
 } = actions;
 export default reducer;

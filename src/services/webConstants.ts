@@ -18,7 +18,7 @@ export const API_URL = {
   DISABILITY_DATA: 'api/disability-profiles',
   TOGGLE_SWITCH_ACTIVE: 'api/user-profile-update',
   VIEW_BY_USERS: 'api/profile-view-list',
-  VIEW_BY_ID_PROFILE: 'api/profile-view',
+  ADD_ME_VISITOR_PROFILE: 'api/profile-view',
   EDIT_PROFILE: 'api/user-profile-update',
   DOWNLOAD_PDF: 'api/download-profile',
   ADD_GALLERY_IMAGE: 'api/add-gallery-image',

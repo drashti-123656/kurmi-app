@@ -47,24 +47,10 @@ const initialState = {
     userReligiousInfo: {
       userReligiousInfoTimeOfBirth: '',
       userReligiousInfoPlaceOfBirth: '',
-      userReligiousInfoGotra: {
-        gotraTitleHi: '',
-        gotraTitleEn: '',
-        gotraStatus: '',
-        gotraId: 0,
-        gotraCreatedAt: null,
-        gotraUpdatedAt: null,
-      },
+      userReligiousInfoGotra: '',
       userReligiousInfoSubCaste: null,
       userReligiousInfoMotherTongue: null,
-      userReligiousInfoZodiac: {
-        zodiacTitleHi: ' ',
-        zodiacTitleEn: '',
-        zodiacStatus: '',
-        zodiacId: 0,
-        zodiacCreatedAt: null,
-        zodiacUpdatedAt: null,
-      },
+      userReligiousInfoZodiac: null,
       userReligiousInfoManglik: '',
       userReligiousInfoNakshatra: null,
       userReligiousInfoMotherGotra: '',
@@ -107,14 +93,7 @@ const initialState = {
     },
     userFamilyInfo: {
       userFamilyInfoFatherName: '',
-      userFamilyInfoFatherOccupation: {
-        occupationTitleHi: '',
-        occupationTitleEn: '',
-        occupationStatus: '',
-        occupationId: 0,
-        occupationCreatedAt: null,
-        occupationUpdatedAt: null,
-      },
+      userFamilyInfoFatherOccupation: '',
       userFamilyInfoMotherName: '',
       userFamilyInfoMotherOccupation: null,
       userFamilyInfoNoOfMarriedBrothers: '',
@@ -123,7 +102,14 @@ const initialState = {
       userFamilyInfoNoOfUnmarriedSisters: '',
       userFamilyInfoMaternalUnclesName: null,
       userFamilyInfoMaternalUnclesGotra: null,
-      userFamilyInfoLand: 0,
+      userFamilyInfoLand: {
+        landTitleHi: ' ',
+        landTitleEn: ' ',
+        landStatus: '',
+        landId: 0,
+        landCreatedAt: null,
+        landUpdatedAt: null,
+      },
       userFamilyInfoHouse: '',
       userFamilyInfoCar: '',
       userFamilyInfoMotherMaika: '',
@@ -143,10 +129,23 @@ const initialState = {
         maritalStatusUpdatedAt: null,
       },
       userPersonalInfoComplexion: null,
-      userPersonalInfoHeight: 0,
+      userPersonalInfoHeight: {
+        name: ' ',
+        heightStatus: ' ',
+        heightId: 0,
+        heightCreatedAt: ' ',
+        heightUpdatedAt: ' ',
+      },
       userPersonalInfoWeight: null,
       userPersonalInfoDiet: null,
-      userPersonalInfoDisability: 0,
+      userPersonalInfoDisability: {
+        nakshatraTitleHi: ' ',
+        nakshatraTitleEn: ' ',
+        nakshatraStatus: ' ',
+        nakshatraId: 0,
+        nakshatraCreatedAt: null,
+        nakshatraUpdatedAt: null,
+      },
       userPersonalInfoBloodGroup: null,
       userPersonalInfoId: 57,
       userPersonalInfoCreatedAt: '',
@@ -155,7 +154,7 @@ const initialState = {
     userPartnerPreference: null,
     userIsVisible: '',
     userIsActive: '',
-    userProfileImage: null,
+    userProfileImage: '',
     userId: 0,
     userCreatedAt: '',
     userUpdatedAt: '',
@@ -163,6 +162,7 @@ const initialState = {
     isFetching: false,
     error: '',
   },
+
   userGalleryImage: [
     {
       userId: '',
@@ -172,6 +172,8 @@ const initialState = {
       galleryImageUpdatedAt: '',
     },
   ],
+
+
 };
 
 const searchProfileSlice = createSlice({
