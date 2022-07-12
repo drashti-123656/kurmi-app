@@ -89,6 +89,7 @@ const Sampark = ({navigation}) => {
       userCity: registerData.city[0],
       userProfileImage: `data.image/jpg;base64,${registerData?.ProfilePic?.assets[0]?.base64}`,
     };
+
     dispatch({
       type: REGISTER_USER,
       payload,

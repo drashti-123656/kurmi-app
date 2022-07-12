@@ -18,6 +18,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
 import {clearViewByDataAfterLogout} from '../scenes/viewBy/redux/ViewByReducer';
+import {clearShortlistedDataAfterLogout} from '../scenes/shortList/redux/ShortListReducer';
 const Tab = createBottomTabNavigator();
 
 const DashboardNavigation = ({navigation}) => {
@@ -29,6 +30,7 @@ const DashboardNavigation = ({navigation}) => {
   const handleLogout = async () => {
     dispatch(logout({}));
     dispatch(clearViewByDataAfterLogout({}));
+    dispatch(clearShortlistedDataAfterLogout({}));
   };
   const downloadPdf = async () => {
     dispatch({

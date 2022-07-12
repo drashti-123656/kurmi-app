@@ -6,60 +6,84 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 
 import React, {useEffect, useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Card from '../../components/molecule/card/Card';
-import { SHORT_LISTED_USERS } from './redux/ShortListAction';
+import {SHORT_LISTED_USERS} from './redux/ShortListAction';
 import Loader from '../../components/atoms/buttons/Loader';
-import { fetchShortlistedUserDataStarted } from './redux/ShortListReducer';
+import {fetchShortlistedUserDataStarted} from './redux/ShortListReducer';
+import {PAGE_SIZE} from '../../utils/constants/appConstants';
 
-
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
 const ShortList = ({navigation}) => {
-  const {shortListedUsersData, isfatching} = useSelector(state => state.shortListProfiles);
   const dispatch = useDispatch();
+  const {shortListedUsersData, isFetching, isPaginationRequired, pageIndex} =
+    useSelector(state => state.shortListProfiles);
 
-  const payload = {
-    page: 1,
-    pageSIze: 30,
-    order: {
-      column: 'id',
-      type: 'desc',
-    },
-  };
-  useEffect(() => {
-    console.log('happyyy===>>',shortListedUsersData)
-    dispatch(fetchShortlistedUserDataStarted());
+  const _fetchProfiles = pageNumber => {
+    const payload = {
+      page: pageNumber,
+      pageSIze: PAGE_SIZE,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
     dispatch({
       type: SHORT_LISTED_USERS,
       payload,
     });
+  };
+
+  useEffect(() => {
+    _fetchProfiles(1);
   }, []);
+
+  const _refreshOnPull = () => {
+    _fetchProfiles(1);
+  };
+
+  const _paginateUsersProfiles = () => {
+    if (isPaginationRequired) {
+      _fetchProfiles(pageIndex + 1);
+    }
+  };
+
+  const _renderEmptyMsg = () => {
+    return (
+      <View style={styles.Container}>
+        <Text style={styles.textStyle}>
+          {' '}
+          आपने अभी तक किसी भी प्रोफाइल को शॉर्टलिस्ट नहीं किया है
+        </Text>
+      </View>
+    );
+  };
 
   const renderItem = ({item}) => {
     return <Card navigation={navigation} item={item} />;
   };
 
-  const renderLoader = () => (isfatching ? <Loader /> : null);
+  const renderLoader = () => (isFetching ? <Loader /> : null);
 
   return (
-    <RootScreen scrollable={true}>
-    {console.log('shortListedUsersData', shortListedUsersData)}
-      <View style={styles.container}>
-        <FlatList
-          data={shortListedUsersData.data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          ListFooterComponent={renderLoader}
-          initialNumToRender={10}
-        />
-      </View>
+    <RootScreen>
+      <FlatList
+        data={shortListedUsersData}
+        renderItem={renderItem}
+        keyExtractor={item => item.userId}
+        ListFooterComponent={renderLoader}
+        ListEmptyComponent={_renderEmptyMsg}
+        initialNumToRender={10}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={_refreshOnPull} />
+        }
+        onEndReachedThreshold={0.5}
+        onEndReached={_paginateUsersProfiles}
+      />
     </RootScreen>
   );
 };
@@ -71,5 +95,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: 'center',
     marginTop: 20,
+  },
+  Container: {
+    justifyContent: 'center',
+
+    marginTop: '80%',
+    alignItems: 'center',
+  },
+  textStyle: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: '600',
   },
 });
