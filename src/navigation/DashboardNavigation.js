@@ -119,7 +119,7 @@ const DashboardNavigation = ({navigation}) => {
                     flexDirection: 'row',
                   }}>
                   <TouchableOpacity
-                    // onPress={() => downloadPdf()}
+                    onPress={() => navigation.navigate('Gallery Image')}
                     style={styles.imageStyle}>
                     <MaterialCommunityIcons
                       name="image-edit-outline"

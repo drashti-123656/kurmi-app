@@ -19,6 +19,7 @@ import samparkEditProfile from '../scenes/editProfile/samparkEditProfile';
 import parivarikParichyEditProfile from '../scenes/editProfile/parivarikParichyEditProfile';
 import dharmikjankariEditProfile from '../scenes/editProfile/dharmikjankariEditProfile';
 import Profile from '../scenes/profile/Profile';
+import Galleryimage from '../scenes/galleryImage/galleryImage';
 const newsFeedStack = createNativeStackNavigator();
 
 const NewsFeedStack = ({navigation}) => {
@@ -164,6 +165,19 @@ const NewsFeedStack = ({navigation}) => {
       <newsFeedStack.Screen
         name="Password Change"
         component={PasswordChange}
+        options={{
+          headerShown: true,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+          },
+          headerTintColor: '#ffff',
+          headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
+        }}
+      />
+      <newsFeedStack.Screen
+        name="Gallery Image"
+        component={Galleryimage}
         options={{
           headerShown: true,
           headerTitleStyle: {

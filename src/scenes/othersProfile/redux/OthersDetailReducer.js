@@ -140,7 +140,7 @@ const initialState = {
         maritalStatusStatus: '',
         maritalStatusId: 0,
         maritalStatusCreatedAt: null,
-       maritalStatusUpdatedAt: null,
+        maritalStatusUpdatedAt: null,
       },
       userPersonalInfoComplexion: null,
       userPersonalInfoHeight: 0,
@@ -163,7 +163,15 @@ const initialState = {
     isFetching: false,
     error: '',
   },
-  
+  userGalleryImage: [
+    {
+      userId: '',
+      galleryImage: null,
+      galleryImageId: 0,
+      galleryImageCreatedAt: '',
+      galleryImageUpdatedAt: '',
+    },
+  ],
 };
 
 const searchProfileSlice = createSlice({
@@ -177,7 +185,7 @@ const searchProfileSlice = createSlice({
       state.othersProfileData = action.payload;
       state.isFetching = false;
     },
-    fetchOthersProfileDataFail(state){
+    fetchOthersProfileDataFail(state) {
       state.isFetching = false;
       state.error = true;
     },
@@ -186,5 +194,9 @@ const searchProfileSlice = createSlice({
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {fetchOthersProfileDataStarted, fetchOthersProfileDataSuccess, fetchOthersProfileDataFail} = actions;
+export const {
+  fetchOthersProfileDataStarted,
+  fetchOthersProfileDataSuccess,
+  fetchOthersProfileDataFail,
+} = actions;
 export default reducer;

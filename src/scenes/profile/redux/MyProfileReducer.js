@@ -1,12 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-  
-    isFetching: false,
-    error: '',
-  
+  isFetching: false,
+  error: '',
+
   myProfileData: {
-    
     userSignupType: '',
     userUserName: '',
     userFirstName: '',
@@ -166,6 +164,15 @@ const initialState = {
     userUpdatedAt: '',
     userAge: '',
   },
+  userGalleryImage: [
+    {
+      userId: '',
+      galleryImage: null,
+      galleryImageId: 0,
+      galleryImageCreatedAt: '',
+      galleryImageUpdatedAt: '',
+    },
+  ],
 };
 
 const searchProfileSlice = createSlice({
@@ -181,13 +188,16 @@ const searchProfileSlice = createSlice({
     },
     fetchloadingDataFail(state, action) {
       state.isFetching = false;
-      state.error=true
+      state.error = true;
     },
-   
   },
 });
 
 const {actions, reducer} = searchProfileSlice;
 
-export const {fetchmyProfileDataStarted, fetchmyProfileDataSuccess,fetchloadingDataFail} = actions;
+export const {
+  fetchmyProfileDataStarted,
+  fetchmyProfileDataSuccess,
+  fetchloadingDataFail,
+} = actions;
 export default reducer;
