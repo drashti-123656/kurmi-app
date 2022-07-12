@@ -50,7 +50,6 @@ import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
 import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
 import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
 import {downloadPdf} from '../scenes/shareBioData/redux/DownloadPdfSaga';
-
 import {
   SHORT_LISTED_USERS,
   SHORT_LIST_PROFILE,
@@ -77,6 +76,16 @@ import {
 import {addMeVisitor, viewByList} from '../scenes/viewBy/redux/ViewBySaga';
 import {EDIT_PROFILE} from '../scenes/editProfile/redux/editProfileAction';
 import {editProfile} from '../scenes/editProfile/redux/editprofileSaga';
+import {
+  addgalleryImage,
+  removeImage,
+  setProfilePicture,
+} from '../scenes/galleryImage/redux/galleryImageSaga';
+import {
+  ADD_GALLERY_IMAGE,
+  REMOVE_IMAGE,
+  SET_PROFILE_PICTURE,
+} from '../scenes/galleryImage/redux/galleryImageAction';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -114,5 +123,8 @@ export default function* sagas() {
     takeLatest(DOWNLOAD_PDF, downloadPdf),
     takeLatest(FETCH_HEIGHT, heightDropdown),
     takeLatest(FETCH_DISABILITY, disabiltyDropdown),
+    takeLatest(ADD_GALLERY_IMAGE, addgalleryImage),
+    takeLatest(REMOVE_IMAGE, removeImage),
+    takeLatest(SET_PROFILE_PICTURE, setProfilePicture),
   ]);
 }

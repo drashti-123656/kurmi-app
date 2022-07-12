@@ -162,6 +162,18 @@ const initialState = {
     isFetching: false,
     error: '',
   },
+
+  userGalleryImage: [
+    {
+      userId: '',
+      galleryImage: null,
+      galleryImageId: 0,
+      galleryImageCreatedAt: '',
+      galleryImageUpdatedAt: '',
+    },
+  ],
+
+
 };
 
 const searchProfileSlice = createSlice({

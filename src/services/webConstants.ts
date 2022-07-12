@@ -21,4 +21,7 @@ export const API_URL = {
   ADD_ME_VISITOR_PROFILE: 'api/profile-view',
   EDIT_PROFILE: 'api/user-profile-update',
   DOWNLOAD_PDF: 'api/download-profile',
+  ADD_GALLERY_IMAGE: 'api/add-gallery-image',
+  REMOVE_IMAGE: 'api/delete-gallery-image',
+  SET_PROFILE_PICTURE: 'api/add-gallery-image-to-profile-image',
 };
