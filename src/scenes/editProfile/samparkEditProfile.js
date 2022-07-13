@@ -1,3 +1,5 @@
+///sampark edit//////
+
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {
@@ -21,7 +23,6 @@ const SamparkEditProfile = ({route, navigation}) => {
   const {isUpdating} = useSelector(state => state.editProfile);
 
   const handleeditProfile = values => {
-    console.log('values===>', values);
     const payload = {
       userUpdateType: 'general',
       userContactInfoContactNo: values.mobileNo,
@@ -30,13 +31,15 @@ const SamparkEditProfile = ({route, navigation}) => {
       userContactInfoPermanentAddress: values.permanentAdd,
 
       userEducationInfoEducation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoEducation.educationId,
       userEducationInfoOccupation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoOccupation
+          .occupationId,
 
       userFamilyInfoFatherName:
         myProfileData.userFamilyInfo.userFamilyInfoFatherName,
-      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoFatherOccupation:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation,
       userFamilyInfoMotherName:
         myProfileData.userFamilyInfo.userFamilyInfoMotherName,
       userFamilyInfoLand:
@@ -52,18 +55,18 @@ const SamparkEditProfile = ({route, navigation}) => {
         myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
           .maritalStatusId,
       userPersonalInfoHeight:
-        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+        myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
       userPersonalInfoDisability:
-        myProfileData.userPersonalInfo.userPersonalInfoDisability,
+        myProfileData.userPersonalInfo.userPersonalInfoDisability.nakshatraId,
 
       userReligiousInfoGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
-      userReligiousInfoZodiac:
-        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+        myProfileData.userReligiousInfo.userReligiousInfoGotra,
+      userReligiousInfoZodiac: 6,
       userReligiousInfoManglik:
-        myProfileData.userReligiousInfo.userReligiousInfoId,
-      userReligiousInfoMotherGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+        myProfileData.userReligiousInfo.userReligiousInfoManglik === 'manglik'
+          ? 1
+          : 0,
+      userReligiousInfoMotherGotra: 5,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,
@@ -74,7 +77,6 @@ const SamparkEditProfile = ({route, navigation}) => {
       userCity: myProfileData.userCity.cityId,
       userProfileImage: '',
     };
-    console.log('fjdfhdfdj==>', payload);
     navigation.navigate('My Profile');
 
     dispatch({
@@ -89,7 +91,6 @@ const SamparkEditProfile = ({route, navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      {console.log('myprofile', myProfileData)}
       <Formik
         initialValues={{
           mobileNo: myProfileData.userContactInfo.userContactInfoContactNo,
@@ -118,7 +119,6 @@ const SamparkEditProfile = ({route, navigation}) => {
                 keyboardType="numeric"
                 placeholder={translate('samPark.mobileNo')}
                 placeholderTextColor={'#666666'}
-                editable={false}
               />
 
               {errors.mobileNo && touched.mobileNo ? (
@@ -169,7 +169,6 @@ const SamparkEditProfile = ({route, navigation}) => {
                 onPress={handleSubmit}
                 loading={isUpdating}
               />
-              {console.log('samparkloading======>', isUpdating)}
             </View>
           </View>
         )}

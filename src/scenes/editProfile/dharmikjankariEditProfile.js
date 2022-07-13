@@ -29,6 +29,7 @@ import {
   FETCH_ZODIC_SIGN,
 } from '../../scenes/auth/registration/redux/registrationActions';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 const DharmikjankariEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {myProfileData} = route.params;
@@ -48,11 +49,6 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       type: FETCH_AUSPICIOUS_DROPDOWN,
       payload: {moduleType: 'Nakshatra'},
     });
-
-    dispatch({
-      type: FETCH_GOTRA_DROPDOWN,
-      payload: {moduleType: 'Gotra'},
-    });
   }, []);
 
   const handleDharmikJankari = values => {
@@ -68,13 +64,15 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
         myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
       userEducationInfoEducation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoEducation.educationId,
       userEducationInfoOccupation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoOccupation
+          .occupationId,
 
       userFamilyInfoFatherName:
         myProfileData.userFamilyInfo.userFamilyInfoFatherName,
-      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoFatherOccupation:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation,
       userFamilyInfoMotherName:
         myProfileData.userFamilyInfo.userFamilyInfoMotherName,
       userFamilyInfoLand:
@@ -90,14 +88,14 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
         myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
           .maritalStatusId,
       userPersonalInfoHeight:
-        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+        myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
       userPersonalInfoDisability:
-        myProfileData.userPersonalInfo.userPersonalInfoDisability,
+        myProfileData.userPersonalInfo.userPersonalInfoDisability.nakshatraId,
 
-      userReligiousInfoGotra: '4',
+      userReligiousInfoGotra: values.gotra,
       userReligiousInfoZodiac: 6,
-      userReligiousInfoManglik: 1,
-      userReligiousInfoMotherGotra: values.native[0],
+      userReligiousInfoManglik: values.auspicious[0],
+      userReligiousInfoMotherGotra: 5,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,
@@ -121,66 +119,40 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      {console.log('mydharmikjankariiiii===>', myProfileData)}
       <Formik
         initialValues={{
-          // gotra: [
-          //   myProfileData.userReligiousInfo.userReligiousInfoGotra.gotraTitleHi,
-          // ],
-          native: [
-            myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
-          ],
-          zodiacSign: [
-            myProfileData.userReligiousInfo.userReligiousInfoZodiac
-              .zodiacTitleHi,
-          ],
+          gotra: myProfileData.userReligiousInfo.userReligiousInfoGotra,
+
           auspicious: [
-            myProfileData.userReligiousInfo.userReligiousInfoManglik,
+            myProfileData.userReligiousInfo.userReligiousInfoManglik ===
+            'manglik'
+              ? 1
+              : 0,
           ],
         }}
         onSubmit={values => handleDharmikJankari(values)}>
-        {({handleSubmit, setFieldValue, values, errors, touched}) => (
+        {({
+          handleSubmit,
+          setFieldValue,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          touched,
+        }) => (
           <>
             <View style={styles.dropDown}>
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'gotraId'}
-                displayKey={'gotraTitleHi'}
-                items={gotra}
-                selectText={values.gotra}
-                selectedItems={values.gotra}
-                onSelectedItemsChange={value => setFieldValue('gotra', value)}
+              <ExtendedTextInput
+                onChangeText={handleChange('gotra')}
+                onBlur={handleBlur('gotra')}
+                value={values.gotra}
+                placeholder={translate('Dharmikjankari.Caste')}
+                placeholderTextColor={'#666666'}
               />
               {errors.gotra && touched.gotra ? (
                 <Text style={styles.error}>{errors.gotra}</Text>
               ) : null}
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'gotraId'}
-                displayKey={'gotraTitleHi'}
-                items={gotra}
-                selectText={values.native}
-                selectedItems={values.native}
-                onSelectedItemsChange={value => setFieldValue('native', value)}
-                onChangeInput={values.native}
-              />
-              {errors.native && touched.native ? (
-                <Text style={styles.error}>{errors.native}</Text>
-              ) : null}
-              <Dropdown
-                style={styles.inputMargin}
-                uniqueKey={'zodiacId'}
-                displayKey={'zodiacTitleHi'}
-                items={zodiacSign}
-                selectText={values.zodiacSign}
-                selectedItems={values.zodiacSign}
-                onSelectedItemsChange={value =>
-                  setFieldValue('zodiacSign', value)
-                }
-              />
-              {errors.zodiacSign && touched.zodiacSign ? (
-                <Text style={styles.error}>{errors.zodiacSign}</Text>
-              ) : null}
+
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'nakshatraId'}
@@ -200,7 +172,6 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
                 onPress={handleSubmit}
                 loading={isUpdating}
               />
-              {console.log('dharmikloading======>', isUpdating)}
             </View>
           </>
         )}

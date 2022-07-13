@@ -59,15 +59,18 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
         myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
           .maritalStatusId,
       userPersonalInfoHeight:
-        myProfileData.userPersonalInfo.userPersonalInfoHeight,
+        myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
       userPersonalInfoDisability:
-        myProfileData.userPersonalInfo.userPersonalInfoDisability,
+        myProfileData.userPersonalInfo.userPersonalInfoDisability.nakshatraId,
+
       userEducationInfoEducation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoEducation.educationId,
       userEducationInfoOccupation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+        myProfileData.userEducationInfo.userEducationInfoOccupation
+          .occupationId,
+
       userFamilyInfoFatherName: values.fatherName,
-      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoFatherOccupation: values.fatherOccupation,
       userFamilyInfoMotherName: values.motherName,
       userFamilyInfoLand: values.land[0],
       userFamilyInfoMotherMaika: values.motherMayaka,
@@ -75,13 +78,13 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
       userFamilyInfoNoOfBrother: values.brother,
 
       userReligiousInfoGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
-      userReligiousInfoZodiac:
-        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+        myProfileData.userReligiousInfo.userReligiousInfoGotra,
+      userReligiousInfoZodiac: 6,
       userReligiousInfoManglik:
-        myProfileData.userReligiousInfo.userReligiousInfoId,
-      userReligiousInfoMotherGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+        myProfileData.userReligiousInfo.userReligiousInfoManglik === 'manglik'
+          ? 1
+          : 0,
+      userReligiousInfoMotherGotra: 5,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,
@@ -98,7 +101,6 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
       type: EDIT_PROFILE,
       payload,
     });
-    console.log('payloddddd==>', payload);
     dispatch(fetchmyProfileDataStarted());
     dispatch({
       type: MY_PROFILE_DETAILS,
@@ -107,14 +109,12 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      {console.log('parivarikdattttttttt===>', myProfileData)}
       <Formik
         initialValues={{
           fatherName: myProfileData.userFamilyInfo.userFamilyInfoFatherName,
-          // fatherOccupation: [
-          //   myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation
-          //     .occupationTitleHi,
-          // ],
+          fatherOccupation:
+            myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation,
+
           motherName: myProfileData.userFamilyInfo.userFamilyInfoMotherName,
           motherMayaka: myProfileData.userFamilyInfo.userFamilyInfoMotherMaika,
           brother: myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
@@ -143,17 +143,13 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
               {errors.fatherName && touched.fatherName ? (
                 <Text style={styles.error}>{errors.fatherName}</Text>
               ) : null}
-              <Dropdown
-                style={styles.dropdownStyle}
-                uniqueKey={'occupationId'}
-                displayKey={'occupationTitleHi'}
-                styleListContainer={styles.listContainerData}
-                items={job}
-                selectText={values.fatherOccupation}
-                selectedItems={values.fatherOccupation}
-                onSelectedItemsChange={value =>
-                  setFieldValue('fatherOccupation', value)
-                }
+
+              <ExtendedTextInput
+                onChangeText={handleChange('fatherOccupation')}
+                onBlur={handleBlur('fatherOccupation')}
+                value={values.fatherOccupation}
+                placeholder={translate('ParivarikParichay.fatherOccupation')}
+                placeholderTextColor={'#666666'}
               />
               {errors.fatherOccupation && touched.fatherOccupation ? (
                 <Text style={styles.error}>{errors.fatherOccupation}</Text>
@@ -209,11 +205,13 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 uniqueKey={'landId'}
                 displayKey={'landTitleHi'}
                 items={land}
+                hideDropdown={true}
+                searchIcon={false}
+                searchInputStyle={styles.searchInput}
                 selectText={values.land}
                 selectedItems={values.land}
                 onSelectedItemsChange={value => setFieldValue('land', value)}
               />
-              {console.log('land size===>', values)}
               {errors.land && touched.land ? (
                 <Text style={styles.error}>{errors.land}</Text>
               ) : null}
@@ -222,7 +220,6 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 onPress={handleSubmit}
                 loading={isUpdating}
               />
-              {console.log('parivarikloading======>', isUpdating)}
             </View>
           </>
         )}
@@ -237,6 +234,9 @@ const styles = StyleSheet.create({
   backArrow_img: {
     width: 30,
     height: 25,
+  },
+  searchInput: {
+    display: 'none',
   },
   inputHeight: {
     marginTop: 40,
