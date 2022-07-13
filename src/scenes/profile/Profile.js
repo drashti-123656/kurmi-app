@@ -76,7 +76,11 @@ const Profile = ({navigation}) => {
             myProfileData.userReligiousInfo.userReligiousInfoGotra,
           userReligiousInfoZodiac: 6,
           userReligiousInfoManglik:
-            myProfileData.userReligiousInfo.userReligiousInfoManglik,
+            myProfileData.userReligiousInfo.userReligiousInfoManglik ===
+            'manglik'
+              ? 1
+              : 0,
+
           userReligiousInfoMotherGotra: 5,
 
           userFirstName: myProfileData.userFirstName,
@@ -88,7 +92,6 @@ const Profile = ({navigation}) => {
           userCity: myProfileData.userCity.cityId,
           userProfileImage: `data:image/png;base64, ${response.assets[0].base64}`,
         };
-        console.log('payloddddd==>', payload.userProfileImage);
 
         dispatch({
           type: EDIT_PROFILE,
@@ -98,9 +101,7 @@ const Profile = ({navigation}) => {
     });
   };
   useEffect(() => {
-    // console.log('myprofileDataaa====>>', myProfileData);
     dispatch(fetchmyProfileDataStarted());
-    console.log('myprofileDataaa====>>', isFetching);
     dispatch({
       type: MY_PROFILE_DETAILS,
     });

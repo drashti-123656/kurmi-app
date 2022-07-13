@@ -1,3 +1,5 @@
+////personal edit ///////
+
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
@@ -8,22 +10,27 @@ import {
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
 import Dropdown from '../../components/atoms/dropdown/Dropdown';
-
 import {
   FETCH_CITY_DROPDOWN,
   FETCH_COUNTRY_DROPDOWN,
   FETCH_PROFILECREATER_DROPDOWN,
   FETCH_STATE_DROPDOWN,
+  FETCH_HEIGHT,
   FETCH_MARITALSTATUS_DROPDOWN,
   FETCH_JOB_DROPDOWN,
   FETCH_EDUCATION_DROPDOWN,
+  FETCH_DISABILITY,
 } from '../auth/registration/redux/registrationActions';
 import {fetchmyProfileDataStarted} from '../profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../profile/redux/MyProfileAction';
+import translate from '../../translations/configTranslations';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {EDIT_PROFILE} from './redux/editProfileAction';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
+import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
+import {RegistrationvalidationSchema} from '../../utils/schema/registerSchema';
+import {EditProfileSchema} from '../../utils/schema/editProfileSchema';
 
 const PersonalInfoEditProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
@@ -59,10 +66,18 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       type: FETCH_JOB_DROPDOWN,
       payload: {moduleType: 'Occupation'},
     });
+    dispatch({
+      type: FETCH_HEIGHT,
+      payload: {moduleType: 'Height'},
+    });
 
     dispatch({
       type: FETCH_EDUCATION_DROPDOWN,
       payload: {moduleType: 'Education'},
+    });
+    dispatch({
+      type: FETCH_DISABILITY,
+      payload: {moduleType: 'Nakshatra'},
     });
   }, []);
 
@@ -78,14 +93,13 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       userContactInfoPermanentAddress:
         myProfileData.userContactInfo.userContactInfoPermanentAddress,
 
-      userEducationInfoEducation:
-        myProfileData.userEducationInfo.userEducationInfoId,
-      userEducationInfoOccupation:
-        myProfileData.userEducationInfo.userEducationInfoId,
+      userEducationInfoEducation: values.education[0],
+      userEducationInfoOccupation: values.job[0],
 
       userFamilyInfoFatherName:
         myProfileData.userFamilyInfo.userFamilyInfoFatherName,
-      userFamilyInfoFatherOccupation: '1',
+      userFamilyInfoFatherOccupation:
+        myProfileData.userFamilyInfo.userFamilyInfoFatherOccupation,
       userFamilyInfoMotherName:
         myProfileData.userFamilyInfo.userFamilyInfoMotherName,
       userFamilyInfoLand:
@@ -97,18 +111,19 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       userFamilyInfoNoOfBrother:
         myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
-      userPersonalInfoMaritalStatusId: 2,
+      userPersonalInfoMaritalStatusId: values.maritalstatus[0],
       userPersonalInfoHeight: values.height[0],
       userPersonalInfoDisability: values.disability[0],
 
       userReligiousInfoGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
-      userReligiousInfoZodiac:
-        myProfileData.userReligiousInfo.userReligiousInfoZodiac.zodiacId,
+        myProfileData.userReligiousInfo.userReligiousInfoGotra,
+      userReligiousInfoZodiac: 6,
       userReligiousInfoManglik:
-        myProfileData.userReligiousInfo.userReligiousInfoId,
-      userReligiousInfoMotherGotra:
-        myProfileData.userReligiousInfo.userReligiousInfoMotherGotra,
+        myProfileData.userReligiousInfo.userReligiousInfoManglik === 'manglik'
+          ? 1
+          : 0,
+
+      userReligiousInfoMotherGotra: 5,
 
       userFirstName: values.firstname,
       userLastName: values.lastname,
@@ -133,8 +148,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
 
   return (
     <RootScreen scrollable={true}>
-      {console.log('personallllllllll===>', myProfileData)}
-
       <Formik
         initialValues={{
           gender: 'male',
@@ -147,20 +160,27 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
           country: [myProfileData.userCountry.countryId],
           state: [myProfileData.userState.stateId],
           city: [myProfileData.userCity.cityId],
-          height: [myProfileData.userPersonalInfo.userPersonalInfoHeight],
-          maritalstatus: [myProfileData.userPersonalInfo.maritalStatusTitleEn],
-          disability: [
-            myProfileData.userPersonalInfo.userPersonalInfoDisability,
+          height: [
+            myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
           ],
-          // education: [
-          //   myProfileData.userEducationInfo.userEducationInfoEducation
-          //     .educationTitleHi,
-          // ],
-          // job: [
-          //   myProfileData.userEducationInfo.userEducationInfoOccupation
-          //     .occupationTitleHi,
-          // ],
+          maritalstatus: [
+            myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
+              .maritalStatusId,
+          ],
+          disability: [
+            myProfileData.userPersonalInfo.userPersonalInfoDisability
+              .nakshatraId,
+          ],
+          education: [
+            myProfileData.userEducationInfo.userEducationInfoEducation
+              .educationId,
+          ],
+          job: [
+            myProfileData.userEducationInfo.userEducationInfoOccupation
+              .occupationId,
+          ],
         }}
+        validationSchema={EditProfileSchema}
         onSubmit={values => handleeditProfile(values)}>
         {({
           handleChange,
@@ -216,38 +236,21 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               </View>
             </View>
 
-            <Dropdown
-              style={styles.dropdownStyle}
-              uniqueKey={'countryId'}
-              displayKey={'countryName'}
-              autoFocus={true}
-              items={[{countryId: 101, countryName: 'India'}]}
-              single
-              selectText="India"
-              selectedItems={values.country}
-              onSelectedItemsChange={value => {
-                setFieldValue('country', value);
-
-                dispatch({
-                  type: FETCH_STATE_DROPDOWN,
-                  payload: {
-                    filter: {
-                      countryId: value[101],
-                    },
-                    moduleType: 'State',
-                  },
-                });
-              }}
+            <ExtendedTextInput
+              value={'India'}
+              editable={false}
+              style={styles.commonInput}
+              placeholder={translate('register.country')}
+              placeholderTextColor={'black'}
             />
-            {errors.country && touched.country ? (
-              <Text style={styles.dropboxError}>{errors.country}</Text>
-            ) : null}
+
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'stateId'}
               displayKey={'name'}
               autoFocus={true}
               single
+              fixedHeight={true}
               items={state}
               selectText={myProfileData.userState.name}
               selectedItems={values.state}
@@ -257,7 +260,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
                   type: FETCH_CITY_DROPDOWN,
                   payload: {
                     filter: {
-                      cityStateId: [myProfileData.userState.stateId],
+                      cityStateId: value[0],
                     },
                     moduleType: 'City',
                   },
@@ -273,6 +276,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'cityId'}
               displayKey={'cityName'}
               autoFocus={true}
+              fixedHeight={true}
               single
               items={city}
               selectText={myProfileData.userCity.cityName}
@@ -288,6 +292,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'maritalStatusId'}
               displayKey={'maritalStatusTitleHi'}
               items={maritalstatus}
+              fixedHeight={true}
               selectText={values.maritalstatus}
               selectedItems={values.maritalstatus}
               onSelectedItemsChange={value =>
@@ -300,9 +305,13 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
             ) : null}
             <Dropdown
               style={styles.dropdownStyle}
-              uniqueKey={'id'}
+              uniqueKey={'heightId'}
               displayKey={'name'}
               items={height}
+              searchInputStyle={styles.searchInput}
+              fixedHeight={true}
+              hideDropdown={true}
+              searchIcon={false}
               selectText={
                 myProfileData.userPersonalInfo.userPersonalInfoHeight.name
               }
@@ -318,6 +327,10 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'educationId'}
               displayKey={'educationTitleHi'}
               items={education}
+              fixedHeight={true}
+              searchInputStyle={styles.searchInput}
+              hideDropdown={true}
+              searchIcon={false}
               selectText={values.education}
               selectedItems={values.education}
               onSelectedItemsChange={value => setFieldValue('education', value)}
@@ -330,6 +343,10 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               uniqueKey={'occupationId'}
               displayKey={'occupationTitleHi'}
               items={job}
+              searchInputStyle={styles.searchInput}
+              fixedHeight={true}
+              hideDropdown={true}
+              searchIcon={false}
               selectText={values.job}
               selectedItems={values.job}
               onSelectedItemsChange={value => setFieldValue('job', value)}
@@ -340,8 +357,8 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
 
             <Dropdown
               style={styles.dropdownStyle}
-              uniqueKey={'id'}
-              displayKey={'name'}
+              uniqueKey={'nakshatraId'}
+              displayKey={'nakshatraTitleHi'}
               items={disability}
               selectText={
                 myProfileData.userPersonalInfo.userPersonalInfoDisability
@@ -361,7 +378,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               onPress={handleSubmit}
               loading={isUpdating}
             />
-            {console.log('loading======>', isUpdating)}
           </View>
         )}
       </Formik>
@@ -599,6 +615,9 @@ const styles = StyleSheet.create({
     height: hp(2.5),
     width: wp(5),
   },
+  searchInput: {
+    display: 'none',
+  },
   info_text: {
     color: 'white',
     fontWeight: '500',
@@ -708,13 +727,11 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'right',
     marginBottom: 5,
-    //marginLeft : '20%'
   },
   userFirstnameError: {
     fontSize: 12,
     fontWeight: 'bold',
     marginRight: '20%',
     color: 'red',
-    //marginLeft: '20%',
   },
 });
