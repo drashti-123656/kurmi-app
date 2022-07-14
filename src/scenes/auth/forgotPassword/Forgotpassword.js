@@ -1,103 +1,54 @@
 import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
-import RootScreen from '../../components/molecule/rootScreen/RootScreen';
+import RootScreen from '../../../components/molecule/rootScreen/RootScreen';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import translate from './../../translations/configTranslations';
+import translate from '../../../translations/configTranslations';
+import ExtendedTextInput from '../../../components/atoms/inputs/ExtendedTextInput';
+import LoginButton from '../../../components/atoms/buttons/LoginButton';
+import {FORGOT_PASSWORD} from './redux/forgotPasswordAction';
 import {useDispatch, useSelector} from 'react-redux';
-import {LoginSchema} from '../../utils/schema/loginSchema';
-import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
-import LoginButton from '../../components/atoms/buttons/LoginButton';
-import {LOG_IN} from './redux/authActions';
-const Login = ({navigation}) => {
-  const dispatch = useDispatch();
-  const {authData} = useSelector(state => state.auth);
 
-  const handleLogin = values => {
+const Forgotpassword = () => {
+  const dispatch = useDispatch();
+  const {isLoading} = useSelector(state => state.forgotpassword);
+  const handleForgotPassword = values => {
     const payload = {
-      userLoginId: values.login,
-      userPassword: values.password,
+      email: values.email,
     };
     dispatch({
-      type: LOG_IN,
+      type: FORGOT_PASSWORD,
       payload,
     });
   };
-
   return (
     <RootScreen scrollable={true}>
-      <Image source={require('../../assets/logo1.png')} style={styles.image} />
       <Formik
-        initialValues={{
-          login: '',
-          password: '',
-        }}
-        validationSchema={LoginSchema}
-        onSubmit={values => handleLogin(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
+        initialValues={{email: ''}}
+        onSubmit={values => handleForgotPassword(values)}>
+        {({handleChange, handleBlur, handleSubmit, values}) => (
           <View style={styles.formContainer}>
-            <ExtendedTextInput
-              onChangeText={handleChange('login')}
-              onBlur={handleBlur('login')}
-              value={values.Source}
-              placeholder={translate('login.IdPlaceholder')}
-              placeholderTextColor={'#666666'}
-            />
-            {errors.login && touched.login ? (
-              <Text style={styles.error}>{errors.login}</Text>
-            ) : null}
-            <ExtendedTextInput
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-              secureTextEntry={true}
-              placeholder={translate('login.Password')}
-              placeholderTextColor={'#666666'}
-            />
-            {errors.password && touched.password ? (
-              <Text style={styles.error}>{errors.password}</Text>
-            ) : null}
-
-            <LoginButton
-              title={translate('login.Log-in')}
-              onPress={handleSubmit}
-              loading={authData.loading}
-            />
-
-            <View style={styles.alignedRowContainer}>
-              <View style={styles.alignedRowContainer1}></View>
-              
-              <Pressable
-               onPress={()=> navigation.navigate('Forgotpassword')}> 
-              <Text style={styles.forgotPassword}>
-                {translate('login.forgotPassword')}
-              </Text>
-              </Pressable>
-            </View>
-
-            <Text style={styles.createAcccount}>
-              {translate('login.createAccountPrefix')}
+            <Text style={styles.webLink}>
+              {translate('ForgotPassword.EnterYourEmail')}
             </Text>
 
-            <Pressable
-              onPress={() => navigation.navigate('Registration')}
-              style={styles.btnContainer}>
-              <Text style={styles.title}>
-                {translate('login.createAccount')}
-              </Text>
-            </Pressable>
-
-            <Text style={styles.webLink}>{translate('genral.webLink')}</Text>
+            <ExtendedTextInput
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+              placeholder={translate('ForgotPassword.EnterYourEmail')}
+              placeholderTextColor={'#666666'}
+            />
+            <LoginButton
+              title={translate('ForgotPassword.Send')}
+              onPress={handleSubmit}
+              loading={isLoading}
+            />
+            {/* {/* <View>
+      <Text>Forgotpassword</Text> */}
           </View>
         )}
       </Formik>
@@ -105,7 +56,7 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default Forgotpassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -113,6 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#7a4c4c',
   },
   formContainer: {
+    marginVertical: 200,
     flex: 1,
   },
   createAcccount: {
@@ -124,9 +76,9 @@ const styles = StyleSheet.create({
   webLink: {
     color: 'white',
     fontSize: widthPercentageToDP('4.5%'),
-    alignSelf: 'center',
+    marginHorizontal: 36,
     paddingTop: 20,
-    marginBottom: 20,
+    marginBottom: -1,
   },
   btnContainer: {
     backgroundColor: '#c3773b',

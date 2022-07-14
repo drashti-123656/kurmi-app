@@ -6,6 +6,8 @@ import {navigationRef} from './RootNavigation';
 import DrawerNavigation from './DrawerNavigation';
 import DashboardNavigation from './DashboardNavigation';
 import Whatsapp from '../scenes/auth/whatsapp/Whatsapp';
+import Forgotpassword from '../scenes/auth/forgotPassword/Forgotpassword';
+import translate from './../translations/configTranslations';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,14 @@ const Navigation = () => {
                   headerShown: false,
                 }}
               />
+               <Stack.Screen
+        name="Forgotpassword"
+        component={Forgotpassword}
+        options={{
+          headerShown: false,
+           headerTitle: translate('login.forgotPassword'),
+        }}
+      />
             </>
           ) : (
             <Stack.Screen
