@@ -25,13 +25,10 @@ const Galleryimage = () => {
   const [ProfilePicture, setProfilePicture] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [cropImage, setCropImage] = useState(null);
-
+  const [images, setImages] = useState([]);
   const {myProfileData} = useSelector(state => state.myProfileDetail);
   let deviceHeight = Dimensions.get('window').height;
   let deviceWidth = Dimensions.get('window').width;
-  const handleremoveProfilePicture = () => {
-    console.log('handleProfilePicture ');
-  };
 
   const handleSetProfile = id => {
     setProfilePicture(id);
@@ -59,12 +56,23 @@ const Galleryimage = () => {
       height: 400,
       cropping: true,
       noData: true,
+      multiple: true,
       includeBase64: true,
     }).then(response => {
+      let results = [];
+      response.forEach(imageInfo => {
+        results.push(imageInfo.data);
+      });
+      if (response.length > 1) {
+        setImages([...results, ...images]);
+      } else {
+        setImages(results);
+      }
       if (!response.didCancel) {
         const payload = {
-          galleryImage: `data:image/png;base64, ${response.cropRect.data}`,
+          galleryImage: `data:image/png;base64, ${results}`,
         };
+
         dispatch({
           type: ADD_GALLERY_IMAGE,
           payload,
@@ -82,19 +90,23 @@ const Galleryimage = () => {
       width: 300,
       height: 400,
       includeBase64: true,
-      cropping: true,
     }).then(response => {
       if (!response.didCancel) {
         setCropImage(response);
       }
     });
   };
+  useEffect(() => {
+    dispatch({
+      type: MY_PROFILE_DETAILS,
+    });
+  }, [myProfileData]);
 
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.imageContainer}>
-          {myProfileData?.userGalleryImage?.map(image => {
+          {myProfileData.userGalleryImage.map(image => {
             const index = `${base_URL}${image.galleryImage}`;
 
             return (
@@ -102,7 +114,9 @@ const Galleryimage = () => {
                 <View>
                   <TouchableOpacity onPress={() => editImage(index)}>
                     <ImageBackground
-                      source={{uri: `${base_URL} ${image.galleryImage}`}}
+                      source={{
+                        uri: `${base_URL}${image.galleryImage}`,
+                      }}
                       style={{
                         width: deviceWidth / 3 - 6,
                         height: deviceHeight / 5,
@@ -155,7 +169,6 @@ const Galleryimage = () => {
                   {actionTriggered === 'ACTION_1' ? (
                     <TouchableOpacity
                       onPress={() => {
-                        handleremoveProfilePicture();
                         setModalVisible(false);
                       }}
                       style={styles.profilePicture}>
