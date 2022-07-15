@@ -133,7 +133,9 @@ const Galleryimage = () => {
                           }}>
                           <MaterialCommunityIcons
                             name={
-                              ProfilePicture === image.galleryImageId
+                              myProfileData.userProfileImage.includes(
+                                image.galleryImage,
+                              )
                                 ? 'checkbox-marked-circle'
                                 : 'checkbox-blank-circle-outline'
                             }
