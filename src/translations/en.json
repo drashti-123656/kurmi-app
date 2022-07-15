@@ -93,5 +93,9 @@
     "settings":"Settings",
     "All Kurmi Samaj":"All Kurmi Samaj",
     "Helpline-":"Helpline-"
+  },
+  "ForgotPassword":{
+    "EnterYourEmail":"Enter your registered email",
+    "Send":"Send"
   }
 }

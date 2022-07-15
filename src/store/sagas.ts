@@ -86,6 +86,8 @@ import {
   REMOVE_IMAGE,
   SET_PROFILE_PICTURE,
 } from '../scenes/galleryImage/redux/galleryImageAction';
+import { FORGOT_PASSWORD } from '../scenes/auth/forgotPassword/redux/forgotPasswordAction';
+import { forgotPassword } from '../scenes/auth/forgotPassword/redux/forgotPasswordSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -126,5 +128,6 @@ export default function* sagas() {
     takeLatest(ADD_GALLERY_IMAGE, addgalleryImage),
     takeLatest(REMOVE_IMAGE, removeImage),
     takeLatest(SET_PROFILE_PICTURE, setProfilePicture),
+    takeLatest(FORGOT_PASSWORD,forgotPassword ),
   ]);
 }

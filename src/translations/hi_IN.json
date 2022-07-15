@@ -227,5 +227,10 @@
     "Gender": "जेंडर",
     "update membership": "सदस्यता अपडेट करें",
     "myProfile": "मेरी प्रोफाइल"
+  },
+  "ForgotPassword":{
+     "EnterYourEmail":"अपना रजिस्टर ईमेल दर्ज करें",
+     "Send":"भेजें"
+     
   }
 }

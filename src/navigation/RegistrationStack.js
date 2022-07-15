@@ -7,6 +7,7 @@ import ParivarikParichay from '../scenes/auth/registration/ParivarikParichay';
 import PersonalInformation from '../scenes/auth/registration/PersonalInformation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from './../translations/configTranslations';
+// import Forgotpassword from './../scenes/auth/forgotPassword/Forgotpassword';
 const Stack = createNativeStackNavigator();
 
 const RegistrationStack = () => {
@@ -16,6 +17,16 @@ const RegistrationStack = () => {
         headerStyle: {backgroundColor: EStyleSheet.value('$PRIMARY')},
         headerTintColor: '#fff',
       }}>
+
+{/* <Stack.Screen
+        name="Forgotpassword"
+        component={Forgotpassword}
+        options={{
+          headerShown: true,
+          headerTitle: translate('login.ForgotPassword'),
+        }}
+      /> */}
+        
       <Stack.Screen
         name="Registration"
         component={Registration}
