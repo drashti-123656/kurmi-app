@@ -135,6 +135,14 @@ const CustomDrawer = props => {
             props.navigation.navigate(translate('drawerScreen.shortlist'));
           }}
         />
+
+        <DrawerItem
+          icon={() => <Ionicons name="heart" size={22} color={styles.color} />}
+          label={translate('drawerScreen.Interest')}
+          onPress={() => {
+            props.navigation.navigate(translate('drawerScreen.Interest'));
+          }}
+        />
         <View>
           <View style={styles.separatorLine} />
         </View>

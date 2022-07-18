@@ -19,8 +19,7 @@ import EditProfileReducer from '../scenes/editProfile/redux/editProfileReducer';
 import DownloadPdfReducer from '../scenes/shareBioData/redux/DownloadPdfReducer';
 import whatsAppReducer from '../scenes/auth/whatsapp/redux/whatsAppReducer';
 import forgotPasswordReducer from '../scenes/auth/forgotPassword/redux/forgotPasswordReducer';
-import { LOG_OUT } from '../scenes/auth/redux/authActions';
-
+import friendRequestReducer from '../scenes/sendRequest/redux/sendRequestReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   whatsApp: whatsAppReducer,
@@ -50,6 +49,6 @@ const rootReducer = combineReducers({
   changePassword: changePasswordReducer,
   editProfile: EditProfileReducer,
   forgotpassword: forgotPasswordReducer,
-  
+  friendRequest: friendRequestReducer,
 });
 export default rootReducer;
