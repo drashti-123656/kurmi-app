@@ -19,6 +19,7 @@ import Helpline from '../DrawerNavigationScreen/Helpline';
 import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import SendRequest from '../scenes/sendRequest/sendRequest';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -44,7 +45,10 @@ const DrawerNavigation = () => {
         name={translate('drawerScreen.shortlist')}
         component={ShortLists}
       />
-
+      <Drawer.Screen
+        name={translate('drawerScreen.Interest')}
+        component={SendRequest}
+      />
       <Drawer.Screen
         name={translate('drawerScreen.advanced search')}
         component={AdvanceSearch}

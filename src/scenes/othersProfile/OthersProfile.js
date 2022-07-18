@@ -1,3 +1,5 @@
+///otherProfile///////
+
 import {
   StyleSheet,
   Text,
@@ -10,8 +12,9 @@ import {
   Platform,
   Pressable,
   Alert,
+  Modal,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
@@ -30,11 +33,15 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {SEND_FRIEND_REQUEST} from '../sendRequest/redux/sendRequestAction';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData, isFetching} = useSelector(
     state => state.othersDetail,
   );
+  const [modalVisible, setModalVisible] = useState(false);
+  const [sentRequest, setsentRequest] = useState(false);
+
   const {
     authData: {isAuthenticated},
   } = useSelector(state => state.auth);
@@ -58,16 +65,14 @@ const OthersProfile = ({route, navigation}) => {
       payload,
     });
   };
-
-  const handleSecurity = () =>
-    Alert.alert('Alert', 'Send Intrest', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
+  const handleSecurity = () => {
+    dispatch({
+      type: SEND_FRIEND_REQUEST,
+      id,
+    });
+    setsentRequest(true);
+    // setModalVisible(!modalVisible);
+  };
 
   const sendWhatsApp = () => {
     let msg = 'Please, Tell me What can i help you?';
@@ -101,6 +106,31 @@ const OthersProfile = ({route, navigation}) => {
   } else {
     return (
       <View style={{flex: 1}}>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <TouchableOpacity onPress={() => handleSecurity()}>
+                  <Text style={styles.modalText}>Send Friend Request</Text>
+                </TouchableOpacity>
+
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle}>Cancel</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          <Pressable onPress={() => setModalVisible(true)}></Pressable>
+        </View>
         <ScrollView>
           <Image
             style={styles.profileImg}
@@ -167,7 +197,7 @@ const OthersProfile = ({route, navigation}) => {
             ) : (
               <>
                 <TouchableOpacity
-                  onPress={handleSecurity}
+                  onPress={() => setModalVisible(true)}
                   style={{flexDirection: 'row'}}>
                   <Icon
                     name="phone"
@@ -178,7 +208,7 @@ const OthersProfile = ({route, navigation}) => {
                   <Text style={styles.contactText}> Call Now </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={handleSecurity}
+                  onPress={() => setModalVisible(true)}
                   style={{flexDirection: 'row'}}>
                   <Icon
                     name="whatsapp"
@@ -190,7 +220,7 @@ const OthersProfile = ({route, navigation}) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  onPress={handleSecurity}
+                  // onPress={handleSecurity}
                   style={{flexDirection: 'row'}}>
                   <MaterialIcons
                     name="email"
@@ -203,6 +233,7 @@ const OthersProfile = ({route, navigation}) => {
               </>
             )}
           </View>
+
           {/* {renderLoader()} */}
           <View style={styles.detailContainer}>
             <Text style={styles.headingText}>
@@ -744,5 +775,48 @@ const styles = EStyleSheet.create({
     color: '$PRIMARY',
     flex: 1,
     paddingRight: 62,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '$PRIMARY',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });

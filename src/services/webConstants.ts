@@ -2,7 +2,7 @@ export const API_URL = {
   LOG_USER: 'api/visitor-info-register',
   CONTACT_USER: 'api/contact-us',
   LOG_IN: 'api/login',
-  FORGOT_PASSWORD: "api/forget-password-sendTo-mail",
+  FORGOT_PASSWORD: 'api/forget-password-sendTo-mail',
   REGISTER_USER: 'api/user-registration',
   FETCH_SIGN_DROPDWON: 'api/get-user-signup-options',
   VERIFY_USER: 'api/check-user-exist',
@@ -25,4 +25,8 @@ export const API_URL = {
   ADD_GALLERY_IMAGE: 'api/add-gallery-image',
   REMOVE_IMAGE: 'api/delete-gallery-image',
   SET_PROFILE_PICTURE: 'api/add-gallery-image-to-profile-image',
+  SEND_FRIEND_REQUEST: 'api/add-profile-like',
+  RECEIVED_FRIEND_REQUEST_LIST: 'api/get-liked-profiles',
+  SEND_FRIEND_REQUEST_LIST: 'api/friend-request-send-notification',
+  ACCEPT_DENIED_PROFILE: 'api/friend-request-accept/denied',
 };

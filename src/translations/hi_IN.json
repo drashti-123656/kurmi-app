@@ -193,6 +193,7 @@
   "drawerScreen": {
     "Home": "होम",
     "Helpline-": "हेल्पलाइन -",
+    "Interest": "रुचि",
     "View By": "प्रोफाइल देखा",
     "shortlist": "शॉर्टलिस्ट",
     "Membership": "सदस्यता",
@@ -228,9 +229,8 @@
     "update membership": "सदस्यता अपडेट करें",
     "myProfile": "मेरी प्रोफाइल"
   },
-  "ForgotPassword":{
-     "EnterYourEmail":"अपना रजिस्टर ईमेल दर्ज करें",
-     "Send":"भेजें"
-     
+  "ForgotPassword": {
+    "EnterYourEmail": "अपना रजिस्टर ईमेल दर्ज करें",
+    "Send": "भेजें"
   }
 }

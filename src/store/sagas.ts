@@ -86,8 +86,20 @@ import {
   REMOVE_IMAGE,
   SET_PROFILE_PICTURE,
 } from '../scenes/galleryImage/redux/galleryImageAction';
-import { FORGOT_PASSWORD } from '../scenes/auth/forgotPassword/redux/forgotPasswordAction';
-import { forgotPassword } from '../scenes/auth/forgotPassword/redux/forgotPasswordSaga';
+import {FORGOT_PASSWORD} from '../scenes/auth/forgotPassword/redux/forgotPasswordAction';
+import {forgotPassword} from '../scenes/auth/forgotPassword/redux/forgotPasswordSaga';
+import {
+  SEND_FRIEND_REQUEST_LIST,
+  SEND_FRIEND_REQUEST,
+  RECEIVED_FRIEND_REQUEST_LIST,
+  ACCEPT_DENIED_PROFILE,
+} from '../scenes/sendRequest/redux/sendRequestAction';
+import {
+  sendFriendRequestList,
+  sendFriendRequest,
+  receivedFriendRequestList,
+  acceptDeniedFriendRequest,
+} from '../scenes/sendRequest/redux/sendRequestSaga';
 export default function* sagas() {
   yield all([
     takeLatest(LOG_USER, logUser),
@@ -128,6 +140,10 @@ export default function* sagas() {
     takeLatest(ADD_GALLERY_IMAGE, addgalleryImage),
     takeLatest(REMOVE_IMAGE, removeImage),
     takeLatest(SET_PROFILE_PICTURE, setProfilePicture),
-    takeLatest(FORGOT_PASSWORD,forgotPassword ),
+    takeLatest(FORGOT_PASSWORD, forgotPassword),
+    takeLatest(SEND_FRIEND_REQUEST, sendFriendRequest),
+    takeLatest(SEND_FRIEND_REQUEST_LIST, sendFriendRequestList),
+    takeLatest(RECEIVED_FRIEND_REQUEST_LIST, receivedFriendRequestList),
+    takeLatest(ACCEPT_DENIED_PROFILE, acceptDeniedFriendRequest),
   ]);
 }
