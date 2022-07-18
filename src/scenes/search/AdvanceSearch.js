@@ -257,29 +257,12 @@ const AdvanceSearch = ({navigation}) => {
                 }
               />
 
-              <Dropdown
-                style={styles.dropdownStyle}
-                uniqueKey={'countryId'}
-                displayKey={'countryName'}
-                autoFocus={true}
-                items={[{countryId: 101, countryName: 'India'}]}
-                single
-                searchInputStyle={styles.brandSearchInputStyle}
-                selectText={translate('register.country')}
-                selectedItems={values.country}
-                onSelectedItemsChange={value => {
-                  setFieldValue('country', value);
-
-                  dispatch({
-                    type: FETCH_STATE_DROPDOWN,
-                    payload: {
-                      filter: {
-                        countryId: value[101],
-                      },
-                      moduleType: 'State',
-                    },
-                  });
-                }}
+              <ExtendedTextInput
+                value={'India'}
+                editable={false}
+                style={styles.commonInput}
+                placeholder={translate('register.country')}
+                placeholderTextColor={'black'}
               />
 
               <Dropdown
@@ -288,6 +271,7 @@ const AdvanceSearch = ({navigation}) => {
                 displayKey={'name'}
                 autoFocus={true}
                 single
+                fixedHeight={true}
                 items={state}
                 selectText={translate('register.state')}
                 selectedItems={values.state}
@@ -298,7 +282,7 @@ const AdvanceSearch = ({navigation}) => {
                     type: FETCH_CITY_DROPDOWN,
                     payload: {
                       filter: {
-                        cityStateId: value[101],
+                        cityStateId: value[0],
                       },
                       moduleType: 'City',
                     },
@@ -311,6 +295,7 @@ const AdvanceSearch = ({navigation}) => {
                 uniqueKey={'cityId'}
                 displayKey={'cityName'}
                 autoFocus={true}
+                fixedHeight={true}
                 single
                 searchInputStyle={styles.brandSearchInputStyle}
                 items={city}

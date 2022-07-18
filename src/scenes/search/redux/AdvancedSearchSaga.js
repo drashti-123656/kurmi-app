@@ -29,7 +29,7 @@ export function* advancesearchStatus(action) {
     yield put(
       fetchAdvanceSearchSuccess({
         profile: finalProfileList,
-        isPaginationRequired: data.data.length === PAGE_SIZE,
+        isPaginationRequired: data.data?.length === PAGE_SIZE,
         pageNumber: payload.page,
       }),
     );
