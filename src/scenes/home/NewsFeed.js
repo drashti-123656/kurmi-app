@@ -1,6 +1,4 @@
 import {
-  Image,
-  StyleSheet,
   Text,
   View,
   TextInput,
@@ -26,6 +24,7 @@ import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
 import Loader from '../../components/atoms/buttons/Loader';
 import NewsFeedCard from '../../components/molecule/card/NewsFeedCard';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
@@ -75,7 +74,13 @@ const NewsFeed = ({navigation}) => {
       payload,
     });
   };
-
+  const _renderMsg = () => {
+    return (
+      <View style={styles.titleContainer}>
+        <Text style={styles.textStyle}> Profile Not Found </Text>
+      </View>
+    );
+  };
   const renderItem = ({item}) => {
     return <NewsFeedCard navigation={navigation} item={item} />;
   };
@@ -193,6 +198,7 @@ const NewsFeed = ({navigation}) => {
           data={newsFeedData}
           renderItem={renderItem}
           contentContainerStyle={styles.cardBackground}
+          ListEmptyComponent={_renderMsg}
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => <View style={styles.cardSeprater} />}
@@ -210,7 +216,7 @@ const NewsFeed = ({navigation}) => {
 
 export default NewsFeed;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   errorText: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -403,11 +409,24 @@ const styles = StyleSheet.create({
   cardBackground: {
     backgroundColor: '#EDEDED',
     padding: 10,
+    flexGrow: 1,
   },
   cardSeprater: {
     width: 10,
   },
   cardMargin: {
     marginVertical: 10,
+  },
+  titleContainer: {
+    justifyContent: 'center',
+    marginHorizontal: 100,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  textStyle: {
+    fontSize: 18,
+    color: '$DARK',
+
+    fontWeight: '700',
   },
 });

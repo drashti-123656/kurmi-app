@@ -30,7 +30,7 @@ export function* searchProfile(action) {
     yield put(
       fetchNewsFeedSuccess({
         profile: finalProfileList,
-        isPaginationRequired: data.data.length === PAGE_SIZE,
+        isPaginationRequired: data.data?.length === PAGE_SIZE,
         pageNumber: payload.page,
       }),
     );
