@@ -53,6 +53,13 @@ const AdvanceSearchProfile = ({navigation, route}) => {
       _fetchProfiles(pageIndex + 1);
     }
   };
+  const _renderEmptyMsg = () => {
+    return (
+      <View style={styles.titleContainer}>
+        <Text style={styles.text}> No Record Found </Text>
+      </View>
+    );
+  };
 
   const renderItem = ({item}) => {
     return <Card navigation={navigation} item={item} />;
@@ -61,27 +68,24 @@ const AdvanceSearchProfile = ({navigation, route}) => {
   const renderLoader = () => (isFetching ? <Loader /> : null);
   return (
     <RootScreen>
-      {advanceserachData ? (
-        <View style={styles.container}>
-          <FlatList
-            data={advanceserachData}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            ListFooterComponent={renderLoader}
-            initialNumToRender={10}
-            refreshControl={
-              <RefreshControl
-                refreshing={isFetching}
-                onRefresh={__refreshOnPull}
-              />
-            }
-            onEndReachedThreshold={0.5}
-            onEndReached={_paginateUSersProfiles}
-          />
-        </View>
-      ) : (
-        <Text style={styles.textStyle}>No record found</Text>
-      )}
+      <View style={styles.container}>
+        <FlatList
+          data={advanceserachData}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          ListFooterComponent={renderLoader}
+          initialNumToRender={10}
+          ListEmptyComponent={_renderEmptyMsg}
+          refreshControl={
+            <RefreshControl
+              refreshing={isFetching}
+              onRefresh={__refreshOnPull}
+            />
+          }
+          onEndReachedThreshold={0.5}
+          onEndReached={_paginateUSersProfiles}
+        />
+      </View>
     </RootScreen>
   );
 };
@@ -99,5 +103,16 @@ const styles = EStyleSheet.create({
     marginHorizontal: 120,
     marginTop: 250,
     fontSize: 20,
+  },
+  titleContainer: {
+    justifyContent: 'center',
+
+    marginTop: '60%',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: '700',
   },
 });
