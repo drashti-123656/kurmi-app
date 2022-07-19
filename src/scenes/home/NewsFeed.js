@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   Pressable,
+  RefreshControl,
 } from 'react-native';
 import React, {useEffect} from 'react';
 
@@ -28,8 +29,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const NewsFeed = ({navigation}) => {
   const dispatch = useDispatch();
-
-  const {newsFeedData, isFetching} = useSelector(state => state.newsfeed);
+  const {newsFeedData, isFetching, isPaginationRequired, pageIndex} =
+    useSelector(state => state.newsfeed);
 
   useEffect(() => {
     const payload = {
@@ -74,6 +75,36 @@ const NewsFeed = ({navigation}) => {
       payload,
     });
   };
+  const _fetchProfiles = pageNumber => {
+    const payload = {
+      filter: {
+        age: {
+          min: 18,
+          max: 40,
+        },
+      },
+      page: pageNumber,
+      pageSIze: PAGE_SIZE,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: FETCH_SEARCH_PROFILE,
+      payload,
+    });
+  };
+  const _refreshOnPull = () => {
+    _fetchProfiles(1);
+  };
+
+  const _paginateUsersProfiles = () => {
+    if (isPaginationRequired) {
+      _fetchProfiles(pageIndex + 1);
+    }
+  };
+
   const _renderMsg = () => {
     return (
       <View style={styles.titleContainer}>
@@ -200,6 +231,14 @@ const NewsFeed = ({navigation}) => {
           contentContainerStyle={styles.cardBackground}
           ListEmptyComponent={_renderMsg}
           keyExtractor={item => item.id}
+          refreshControl={
+            <RefreshControl
+              refreshing={isFetching}
+              onRefresh={_refreshOnPull}
+            />
+          }
+          onEndReachedThreshold={0.5}
+          onEndReached={_paginateUsersProfiles}
           showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => <View style={styles.cardSeprater} />}
         />
