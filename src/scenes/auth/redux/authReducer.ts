@@ -8,6 +8,7 @@ const initialState = {
     token: '',
     error: null,
     loading: false,
+    language: 'En', 
   },
 };
 
@@ -43,6 +44,9 @@ const authSlice = createSlice({
     authLoading(state, action) {
       state.authData.loading = action.payload;
     },
+    languageSelection(state,action) {
+      state.language = English;
+    }
   },
 });
 
@@ -55,5 +59,6 @@ export const {
   logout,
   authError,
   authLoading,
+  languageSelection,
 } = actions;
 export default reducer;

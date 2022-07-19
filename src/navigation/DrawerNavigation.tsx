@@ -81,7 +81,7 @@ const DrawerNavigation = () => {
         component={WidowerProfile}
       />
       <Drawer.Screen
-        name={translate('drawerScreen.widowed ')}
+        name={translate('drawerScreen.widowed')}
         component={WidowedProfile}
       />
       <Drawer.Screen
