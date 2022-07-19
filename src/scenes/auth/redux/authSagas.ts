@@ -19,7 +19,6 @@ export function* loginUser(action) {
     API_URL.LOG_IN,
     payload,
   );
-  console.log('logggg====>', data);
   if (ok) {
     yield put(fetchLoginDataSuccess(data.token));
 
@@ -29,10 +28,9 @@ export function* loginUser(action) {
       type: 'success',
     });
   } else {
-    console.log('worngPassword===>>', data.User);
     yield put(fetchLoginDataFail({}));
     showMessage({
-      message: 'Please Register Your Account!!',
+      message: 'Please Check Email Or Password!',
       type: 'danger',
     });
 
