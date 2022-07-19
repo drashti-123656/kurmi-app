@@ -8,6 +8,7 @@ import DashboardNavigation from './DashboardNavigation';
 import Whatsapp from '../scenes/auth/whatsapp/Whatsapp';
 import Forgotpassword from '../scenes/auth/forgotPassword/Forgotpassword';
 import translate from './../translations/configTranslations';
+import LanguageSelection from '../scenes/LanguageSelection/LanguageSelection';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,14 +24,24 @@ const Navigation = () => {
           {!isAuthenticated ? (
             <>
               {isFirstlaunch ? (
-                <Stack.Screen
-                  name="WhatsApp"
-                  component={Whatsapp}
-                  headershow
-                  options={{
-                    headerShown: false,
-                  }}
-                />
+                <>
+                  <Stack.Screen
+                    name="LanguageSelection"
+                    component={LanguageSelection}
+                    headershow
+                    options={{
+                      headerShown: false,
+                    }}
+                  />
+                  <Stack.Screen
+                    name="WhatsApp"
+                    component={Whatsapp}
+                    headershow
+                    options={{
+                      headerShown: false,
+                    }}
+                  />
+                </>
               ) : null}
               <Stack.Screen
                 name="DashboardNavigation"
@@ -40,14 +51,14 @@ const Navigation = () => {
                   headerShown: false,
                 }}
               />
-               <Stack.Screen
-        name="Forgotpassword"
-        component={Forgotpassword}
-        options={{
-          headerShown: false,
-           headerTitle: translate('login.forgotPassword'),
-        }}
-      />
+              <Stack.Screen
+                name="Forgotpassword"
+                component={Forgotpassword}
+                options={{
+                  headerShown: false,
+                  headerTitle: translate('login.forgotPassword'),
+                }}
+              />
             </>
           ) : (
             <Stack.Screen

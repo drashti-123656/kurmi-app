@@ -3,21 +3,58 @@
   "login": {
     "IdPlaceholder": "kurmishadi ID/Mobile No/Email ID",
     "Password": "Password",
+    "forgotPassword": "forgot password?",
     "createAccount": "Create Account",
-    "createAccountPrefix": "Don't have an account?"
+    "createAccountPrefix": "Don't have an account?",
+    "Log-in": "log in",
+    "IdPlaceholderRequired": "*required ",
+    "enterPassword": "please enter your password",
+    "passwordMustHave": "It must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
   },
   "ContactUs": {
     "Message": "Message",
     "Submit": "Submit"
   },
+  "NewsFeed": {
+    "Required": "*Required",
+    "kurmiShadiHeading": "kurmi Shadi",
+    "title": "i am looking",
+    "choose": "choose bride or groom",
+    "boy": "boy",
+    "girl": "girl",
+    "ageFrom": "age From",
+    "ageTo": "age To",
+    "Search": "Search",
+    "filterProfile": "Search advance / have to apply filters",
+    "newIntro": " new profile ",
+    "recentlyJoint": "Those people are just newly added",
+    "newProfile": "New Profile",
+    "intro": "28 years Raipur Chhattisgarh",
+    "Not Valid": "not valid"
+  },
   "whatsapp": {
     "Note": "Note: Only kurmi community can register",
     "Submit": "Submit",
+    "name": "name",
+    "phoneno": "Enter Whatsapp Number",
+    "Continue": "Continue",
+    "NameRequired": "Name is required",
+    "fieldRequired": "This field is required",
+    "nameMustbe3": "Name must be at least 3 characters",
+    "phoneNumberNotValid": "Phone number is not valid it must be 10 digit",
+    "itMustBe10Digits": "It should be of 10 digits",
+    "NotLookLikePhnno": "it doesn't look like a phone number",
+    "numbercantStartMinus": " Phone number cannot start with a minus",
+    "numberCantbeDecimal": "Phone number cannot contain decimal point",
+    "validName": "Please enter valid name"
   },
   "register":{
-    "ProfileName": "Profile Name",
+    "registration":"registration",
+    "Var":"Groom",
+    "Vadhu":"Bride",
+    "ProfileName": "ProfileName",
     "FirstName": "First Name",
-    "LastName":"Last Name",
+    "lastName": "Last Name",
     "EmailId":"Email Id",
     "MobileNumber":"Mobile Number",
     "birthdate":"Birth date",
@@ -25,11 +62,12 @@
     "country":"Country",
     "state":" State ",
     "city":" City ",
-    "enter password":"Enter Your Password",
+    "enterpassword":"Enter Your Password",
     "Note":"Age must be 18 years",
     "Note@":" Password must be in character number ",
     "checkbox":"I agree to the Privacy Policy and Terms of Use",
-    "create Account":"Create Account "
+    "create Account":"Create Account ",
+    "picUpload": "upload photo"
 
   },
   "Dharmikjankari":{
@@ -43,13 +81,45 @@
     "Next":"Next"
   },
   "Vyaktigatdata": {
+    "name":"name",
+    "Personal information": "Personal information ",
     "Height": "Height",
     "Marital Status": "Marital Status",
     "Knowledge": "Knowledge",
     "Job": "Job",
     "Colour": "Colour",
     "Disability": "Disability",
-    "BloodGroup": "BloodGroup"
+    "BloodGroup": "BloodGroup",
+    "Next": "Next",
+    "Gotra": "Gotra",
+    "MaaKaGotra": "Maa Ka Gotra",
+    "Required": "*Required",
+    "profileCreatedBy": "profile created by",
+    "gender": "gender"
+  },
+  "ParivarikParichay": {
+    "parivarikHeader": "family introduction",
+    "fatherName": "father's name ",
+    "fatherOccupation": "father's business",
+    "motherName": "mother's Name",
+    "motherMayaka": "mother's maiden",
+    "brother": "brother",
+    "sister": "sister",
+    "land": "land",
+    "register": "register",
+    "Required": "*Required",
+    "itMustBe10Digits": "It should be of 10 digits",
+    "NotLookLikePhnno": "it doesn't look like a phone number",
+    "NameRequired": "Name is required",
+    "validName": "Please enter valid name",
+    "nameMustbe3": "Name must be at least 3 characters"
+  },
+  "Myprofile": {
+    "Education And Career": "Education And Career",
+    "Gender": "Gender",
+    "update membership": "update membership",
+    "myProfile": "My Profile",
+    "name":"name"
   },
   "profilemaker":{
     "Myself":"Myself",
@@ -85,17 +155,42 @@
     "Membership": "Membership",
     "biodata share": "biodata share",
     "advanced search": "advanced search",
-    "divorced ": "divorced ",
+    "divorced ": "divorced",
     "widowed ": "widowed",
-    "disabled ": "disabled ",
+    "disabled ": "disabled",
     "Widower":"Widower",
     "Share":"Share",
     "settings":"Settings",
     "All Kurmi Samaj":"All Kurmi Samaj",
     "Helpline-":"Helpline-"
   },
+ 
   "ForgotPassword":{
     "EnterYourEmail":"Enter your registered email",
     "Send":"Send"
+  },
+  
+  "advanceSearch": {
+    "Advanced Search": "advance Search",
+    "Gender": "Gender",
+    "Marital Status": "Marital Status",
+    "height From": "height From",
+    "height To": "height To",
+    "married": "married",
+    "unmarried": "unmarried"
+    
+  },
+  "samPark": {
+    "samparkheader": "contact information",
+    "mobileNo": "mobile number",
+    "whatsAppNo": "whatsapp  number",
+    "presentAdd": "current address",
+    "permanentAdd": "permanent address",
+    "Next": "Next",
+    "Required": "*Required",
+    "PhoneNumberValid": "phone number is not valid",
+    "WhatsappNumberValid": "Whatsapp number is not valid",
+    "itMustBe10Digits": "It should be of 10 digits",
+    "NotLookLikePhnno": "it doesn't look like a phone number"
   }
 }

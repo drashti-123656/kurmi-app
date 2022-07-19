@@ -2,6 +2,7 @@ import {Appearance, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import Navigation from './src/navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
+import LanguageSelection from './src/scenes/LanguageSelection/LanguageSelection'
 import {Provider} from 'react-redux';
 import {store, persistedStore} from './src/store/index';
 import Login from './src/scenes/auth/Login';
@@ -9,6 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
 import ParivarikParichay from './src/scenes/auth/registration/ParivarikParichay'
+
 
 
 import NewsFeed from './src/scenes/home/NewsFeed';
@@ -38,6 +40,7 @@ const App = () => {
       persistor={persistedStore}
       onBeforeLift={() => new Promise(resolve => setTimeout(resolve, 3000))} 
       >
+      
       <Navigation />
       <FlashMessage position="top" />
       </PersistGate>
