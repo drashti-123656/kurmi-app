@@ -1,5 +1,3 @@
-///otherProfile///////
-
 import {
   StyleSheet,
   Text,
@@ -41,6 +39,11 @@ const OthersProfile = ({route, navigation}) => {
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [sentRequest, setsentRequest] = useState(false);
+  var str = othersProfileData?.userContactInfo?.userContactInfoContactNo;
+  var whatsapp = othersProfileData?.userContactInfo?.userContactInfoWhatsappNo;
+
+  var replaced = str.replace(/.(?=.{6,}$)/g, '*');
+  var replace = whatsapp.replace(/.(?=.{6,}$)/g, '*');
 
   const {
     authData: {isAuthenticated},
@@ -529,7 +532,7 @@ const OthersProfile = ({route, navigation}) => {
                 </Text>
                 {!isAuthenticated ? (
                   <Pressable onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.loginUrl}>Click here to login</Text>
+                    <Text style={styles.loginUrl}>{replaced}</Text>
                   </Pressable>
                 ) : (
                   <>
@@ -550,7 +553,7 @@ const OthersProfile = ({route, navigation}) => {
                 </Text>
                 {!isAuthenticated ? (
                   <Pressable onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.loginUrl}>Click here to login</Text>
+                    <Text style={styles.loginUrl}>{replace}</Text>
                   </Pressable>
                 ) : (
                   <>
