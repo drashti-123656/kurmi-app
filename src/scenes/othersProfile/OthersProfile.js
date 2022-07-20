@@ -39,6 +39,8 @@ const OthersProfile = ({route, navigation}) => {
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [sentRequest, setsentRequest] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [btn, setBtn] = useState(true);
   var str = othersProfileData?.userContactInfo?.userContactInfoContactNo;
   var whatsapp = othersProfileData?.userContactInfo?.userContactInfoWhatsappNo;
 
@@ -57,7 +59,11 @@ const OthersProfile = ({route, navigation}) => {
       payload: id,
     });
   }, []);
-
+  const handleisActive = () => {
+    setIsActive(current => !current);
+    setBtn(false);
+    setModalVisible(!modalVisible);
+  };
   const handleShortList = () => {
     const payload = {
       profileId: id,
@@ -69,12 +75,13 @@ const OthersProfile = ({route, navigation}) => {
     });
   };
   const handleSecurity = () => {
+    setIsActive(false);
+    setBtn(true);
     dispatch({
       type: SEND_FRIEND_REQUEST,
       id,
     });
     setsentRequest(true);
-    // setModalVisible(!modalVisible);
   };
 
   const sendWhatsApp = () => {
@@ -120,19 +127,39 @@ const OthersProfile = ({route, navigation}) => {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <TouchableOpacity onPress={() => handleSecurity()}>
-                  <Text style={styles.modalText}>Send Friend Request</Text>
-                </TouchableOpacity>
-
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.textStyle}>Cancel</Text>
-                </Pressable>
+                <Text style={styles.modalText}>Send Interest</Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <TouchableOpacity
+                    style={isActive ? styles.button : styles.buttonClose}
+                    onPress={handleisActive}>
+                    <Text
+                      style={{
+                        color: isActive ? 'white' : 'black',
+                        fontWeight: 'bold',
+                        fontSize: 16,
+                      }}>
+                      Cancel
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={btn ? styles.button : styles.buttonClose}
+                    onPress={() => handleSecurity()}>
+                    <Text
+                      style={{
+                        color: btn ? 'white' : 'black',
+                        fontWeight: 'bold',
+                        fontSize: 16,
+                      }}>
+                      Confirm
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </Modal>
-          <Pressable onPress={() => setModalVisible(true)}></Pressable>
         </View>
         <ScrollView>
           <Image
@@ -801,17 +828,28 @@ const styles = EStyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    marginHorizontal: 20,
+    marginTop: 20,
+    backgroundColor: '$PRIMARY',
+    borderRadius: 50,
+    width: 90,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '$PRIMARY',
+    marginHorizontal: 20,
+    marginTop: 20,
   },
   textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  textConfirm: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
