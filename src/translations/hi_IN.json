@@ -134,7 +134,8 @@
     "passwordhaveUpperCase": "पासवर्ड में एक अपर केस होना चाहिए",
     "passwordhave8Character": "पासवर्ड कम से कम 8 अक्षर का होना चाहिए",
     "validPassword": "कृपया एक मान्य पासवर्ड प्रदान करें",
-    "PleaseChoose21Above": "कृपिया 21 वर्ष से ऊपर चुने"
+    "PleaseChoose21Above": "कृपिया 21 वर्ष से ऊपर चुने",
+    "Age":"आयु"
   },
   "Dharmikjankari": {
     "Dharmik Jankari": "धार्मिक जानकारी",

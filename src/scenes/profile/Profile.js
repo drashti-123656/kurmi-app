@@ -260,6 +260,12 @@ const Profile = ({navigation}) => {
             </View>
             <View style={styles.profileContain}>
               <Text style={styles.subHeadingText}>
+                {translate('register.Age')}
+              </Text>
+              <Text style={styles.detailsText}> {myProfileData?.userAge} </Text>
+            </View>
+            <View style={styles.profileContain}>
+              <Text style={styles.subHeadingText}>
                 {translate('Vyaktigatdata.Height')}
               </Text>
               <Text style={styles.detailsText}>
