@@ -8,6 +8,8 @@ import {
   FETCH_HEIGHT,
   FETCH_AUSPICIOUS_DROPDOWN,
   FETCH_LAND_DROPDOWN,
+  FETCH_PROFILECREATER_DROPDOWN,
+  FETCH_COUNTRY_DROPDOWN,
 } from '../../scenes/auth/registration/redux/registrationActions';
 import {
   widthPercentageToDP as wp,
@@ -43,6 +45,11 @@ const AdvanceSearch = ({navigation}) => {
   } = useSelector(state => state.registration);
   useEffect(() => {
     dispatch({
+      type: FETCH_PROFILECREATER_DROPDOWN,
+      payload: {moduleType: 'ProfileCreatedBy'},
+    });
+
+    dispatch({
       type: FETCH_EDUCATION_DROPDOWN,
       payload: {moduleType: 'Education'},
     });
@@ -59,6 +66,24 @@ const AdvanceSearch = ({navigation}) => {
     dispatch({
       type: FETCH_HEIGHT,
       payload: {moduleType: 'Height'},
+    });
+    dispatch({
+      type: FETCH_LAND_DROPDOWN,
+      payload: {moduleType: 'Land'},
+    });
+    dispatch({
+      type: FETCH_COUNTRY_DROPDOWN,
+      payload: {moduleType: 'Country'},
+    });
+
+    dispatch({
+      type: FETCH_STATE_DROPDOWN,
+      payload: {
+        filter: {
+          countryId: 101,
+        },
+        moduleType: 'State',
+      },
     });
   }, []);
   const handleadvanceProfile = values => {
