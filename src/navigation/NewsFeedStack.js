@@ -1,4 +1,4 @@
-import {TouchableOpacity, TouchableHighlight} from 'react-native';
+import {TouchableOpacity, TouchableHighlight,Share} from 'react-native';
 import React, {useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
