@@ -1,4 +1,7 @@
+///drawernavigation/////
+
 import 'react-native-gesture-handler';
+import {TouchableOpacity, View} from 'react-native';
 import * as React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import DashboardNavigation from './DashboardNavigation';
@@ -20,9 +23,21 @@ import Share from '../DrawerNavigationScreen/Share';
 import RateUs from '../DrawerNavigationScreen/RateUs';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import SendRequest from '../scenes/sendRequest/sendRequest';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {useDispatch} from 'react-redux';
+import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigation = () => {
+const DrawerNavigation = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const downloadPdf = async () => {
+    dispatch({
+      type: DOWNLOAD_PDF,
+    });
+  };
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -60,6 +75,39 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name={translate('drawerScreen.biodata share')}
         component={Sharedbiodata}
+        options={{
+          headerShown: true,
+          headerTitle: translate('Myprofile.myProfile'),
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Gallery Image')}
+                style={styles.imageStyle}>
+                <MaterialCommunityIcons
+                  name="image-edit-outline"
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => downloadPdf()}
+                style={styles.headerStyle}>
+                <Entypo name="share" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('NewsFeedStack')}
+              style={styles.headerStyle}>
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Drawer.Screen
         name={translate('drawerScreen.Membership')}
@@ -93,3 +141,16 @@ const DrawerNavigation = () => {
 };
 
 export default DrawerNavigation;
+
+const styles = EStyleSheet.create({
+  headerStyle: {
+    marginHorizontal: 20,
+  },
+  imageStyle: {
+    marginHorizontal: -10,
+  },
+  tinyLogo: {
+    height: 30,
+    width: 30,
+  },
+});
