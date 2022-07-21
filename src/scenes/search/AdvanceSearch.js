@@ -365,6 +365,7 @@ const AdvanceSearch = ({navigation}) => {
                 uniqueKey={'landId'}
                 displayKey={'landTitleHi'}
                 hideDropdown={true}
+                fixedHeight={true}
                 searchIcon={false}
                 searchInputStyle={styles.searchInput}
                 items={land}

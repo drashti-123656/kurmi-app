@@ -43,6 +43,11 @@ const DashboardNavigation = ({navigation}) => {
       <Tab.Screen
         name="NewsFeedStack"
         component={NewsFeedStack}
+        listeners={() => ({
+          tabPress: () => {
+            navigation.navigate(translate('NewsFeed.kurmiShadiHeading'));
+          },
+        })}
         options={{
           tabBarLabel: 'Home',
           headerTitle: translate('NewsFeed.kurmiShadiHeading'),
