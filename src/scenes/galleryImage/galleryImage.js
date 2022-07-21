@@ -199,11 +199,13 @@ const Galleryimage = () => {
                       </TouchableOpacity>
                     </View>
                   ) : null}
-                </View>
-                <View style={styles.modalFooter}>
-                  <TouchableOpacity onPress={() => setModalVisible(false)}>
-                    <Text style={styles.cancelButton}>Cancel</Text>
-                  </TouchableOpacity>
+                  <View>
+                    <TouchableOpacity
+                      style={styles.btnContainer}
+                      onPress={() => setModalVisible(false)}>
+                      <Text style={styles.cancelButton}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             </View>
@@ -246,6 +248,12 @@ const styles = EStyleSheet.create({
   modalFooter: {
     marginTop: 40,
     marginLeft: 270,
+  },
+  btnContainer: {
+    position: 'absolute',
+    top: 30,
+    zIndex: 100,
+    left: Dimensions.get('window').width - 150,
   },
   imageContainer: {
     display: 'flex',
