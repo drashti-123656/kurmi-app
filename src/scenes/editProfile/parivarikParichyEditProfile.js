@@ -205,6 +205,7 @@ const ParivarikParichyEditProfile = ({route, navigation}) => {
                 uniqueKey={'landId'}
                 displayKey={'landTitleHi'}
                 items={land}
+                fixedHeight={true}
                 hideDropdown={true}
                 searchIcon={false}
                 searchInputStyle={styles.searchInput}

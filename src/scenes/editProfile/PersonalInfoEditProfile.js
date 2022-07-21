@@ -79,6 +79,15 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
       type: FETCH_DISABILITY,
       payload: {moduleType: 'Nakshatra'},
     });
+    dispatch({
+      type: FETCH_STATE_DROPDOWN,
+      payload: {
+        filter: {
+          countryId: 101,
+        },
+        moduleType: 'State',
+      },
+    });
   }, []);
 
   const handleeditProfile = values => {
@@ -243,16 +252,15 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               placeholder={translate('register.country')}
               placeholderTextColor={'black'}
             />
-
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'stateId'}
               displayKey={'name'}
               autoFocus={true}
               single
-              fixedHeight={true}
+              styleListContainer={styles.listContainerData}
               items={state}
-              selectText={myProfileData.userState.name}
+              selectText={translate('register.state')}
               selectedItems={values.state}
               onSelectedItemsChange={value => {
                 setFieldValue('state', value);
@@ -267,9 +275,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
                 });
               }}
             />
-            {errors.state && touched.state ? (
-              <Text style={styles.dropboxError}>{errors.state}</Text>
-            ) : null}
 
             <Dropdown
               style={styles.dropdownStyle}
@@ -283,9 +288,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               selectedItems={values.city}
               onSelectedItemsChange={value => setFieldValue('city', value)}
             />
-            {errors.city && touched.city ? (
-              <Text style={styles.dropboxError}>{errors.city}</Text>
-            ) : null}
 
             <Dropdown
               style={styles.dropdownStyle}
@@ -300,9 +302,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               }
             />
 
-            {errors.maritalstatus && touched.maritalstatus ? (
-              <Text style={styles.error}>{errors.maritalstatus}</Text>
-            ) : null}
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'heightId'}
@@ -319,9 +318,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               onSelectedItemsChange={value => setFieldValue('height', value)}
             />
 
-            {errors.height && touched.height ? (
-              <Text style={styles.error}>{errors.height}</Text>
-            ) : null}
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'educationId'}
@@ -335,9 +331,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               selectedItems={values.education}
               onSelectedItemsChange={value => setFieldValue('education', value)}
             />
-            {errors.education && touched.education ? (
-              <Text style={styles.error}>{errors.education}</Text>
-            ) : null}
+
             <Dropdown
               style={styles.dropdownStyle}
               uniqueKey={'occupationId'}
@@ -351,9 +345,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
               selectedItems={values.job}
               onSelectedItemsChange={value => setFieldValue('job', value)}
             />
-            {errors.job && touched.job ? (
-              <Text style={styles.error}>{errors.job}</Text>
-            ) : null}
 
             <Dropdown
               style={styles.dropdownStyle}
@@ -369,9 +360,6 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
                 setFieldValue('disability', value)
               }
             />
-            {errors.disability && touched.disability ? (
-              <Text style={styles.error}>{errors.disability}</Text>
-            ) : null}
 
             <LoginButton
               title="Update"
