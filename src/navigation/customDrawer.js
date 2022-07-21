@@ -1,3 +1,5 @@
+///custom drwer///
+
 import {
   View,
   Text,
@@ -160,7 +162,7 @@ const CustomDrawer = props => {
           )}
           label={translate('drawerScreen.biodata share')}
           onPress={() => {
-            props.navigation.navigate('My Profile');
+            props.navigation.navigate(translate('drawerScreen.biodata share'));
           }}
         />
         <DrawerItem
