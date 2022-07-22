@@ -1,41 +1,44 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
-import translate, { setLocale } from '../../translations/configTranslations';
+import translate, {setLocale} from '../../translations/configTranslations';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import en from '../../translations/en.json';
 import hi_IN from '../../translations/hi_IN.json';
 
-
 const LanguageSelection = ({navigation}) => {
   const [selected, setSelected] = useState(false);
 
   const _handleLanguageSelect = () => {
- if (selected){
-   setLocale('en')
- } else {
-  setLocale('hi_IN')
- }
-    
- navigation.navigate('WhatsApp')
+    if (selected) {
+      setLocale('en');
+    } else {
+      setLocale('hi_IN');
+    }
+
+    navigation.navigate('WhatsApp');
   };
 
   return (
     <RootScreen scrollable={true}>
+      <View>
       <Text style={styles.webLink}>
-        {translate('languageselection.select language')}
+        {translate('languageselection.Select language')}
       </Text>
+      </View>
       <View style={styles.container}>
+       
         <View style={styles.container1}>
           <Pressable style={styles.pressablecontainereng}>
             <Text
               style={styles.texteng}
               onPress={() => setSelected(!selected)}
               style={{
-                backgroundColor: selected ?  '#C3773B' : 'white' ,
+                backgroundColor: selected ? '#C3773B' : 'white',
                 padding: 20,
                 borderRadius: 22,
+             
               }}>
               ENG
             </Text>
@@ -47,16 +50,18 @@ const LanguageSelection = ({navigation}) => {
               style={styles.texthindi}
               onPress={() => setSelected(!selected)}
               style={{
-                backgroundColor: !selected ?  '#C3773B' :'white' ,
+                backgroundColor: !selected ? '#C3773B' : 'white',
                 padding: 20,
                 borderRadius: 22,
               }}>
-              {' '}
-              अ{' '}
+              {' '}{' '}{' '}
+              अ{' '}{' '}{' '}
             </Text>
           </Pressable>
         </View>
-        <View style={styles.iconview}>
+        
+        <View>       
+           <View style={styles.iconview}>
           <Pressable>
             <Icon
               name="arrow-circle-right"
@@ -66,6 +71,8 @@ const LanguageSelection = ({navigation}) => {
             />
           </Pressable>
         </View>
+        </View>
+
       </View>
     </RootScreen>
   );
@@ -92,7 +99,8 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
   pressablecontainereng: {
-    marginLeft: 100,
+     marginLeft: 100,
+    
     marginTop: 20,
   },
   texteng: {
@@ -104,7 +112,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   container2: {
-    marginLeft: 50,
+    marginLeft: 53,
     marginTop: 20,
   },
   texthindi: {
@@ -115,10 +123,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingRight: 25,
     textAlign: 'center',
-    fontWeight: 'bold',
+    
+    
   },
   iconview: {
+
     marginTop: 300,
-    marginLeft: -125,
+  marginLeft:-187,
+    alignItems:'center'
   },
 });
