@@ -105,15 +105,14 @@ const Sharedbiodata = () => {
       }
     });
   };
-  setTimeout(function () {
-    dispatch({
-      type: DOWNLOAD_PDF,
-    });
-  }, 1000);
+
   useEffect(() => {
     dispatch(fetchmyProfileDataStarted());
     dispatch({
       type: MY_PROFILE_DETAILS,
+    });
+    dispatch({
+      type: DOWNLOAD_PDF,
     });
   }, []);
   useEffect(() => {
