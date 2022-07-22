@@ -221,12 +221,12 @@ const AdvanceSearch = ({navigation}) => {
                 <TouchableOpacity
                   style={styles.ButtonContainer}
                   onPress={() => setFieldValue('maritalstatus', 'unmarried')}>
-                  <View style={styles.radioButton}>
+                  <View style={styles.radioButtonunmarried}>
                     {values.maritalstatus === 'unmarried' ? (
                       <View style={styles.radioButtonIcon} />
                     ) : null}
                   </View>
-                  <Text style={styles.radioButtonText}>
+                  <Text style={styles.radioButtonUnmarriedText}>
                     {translate('advanceSearch.unmarried')}
                   </Text>
                 </TouchableOpacity>
@@ -437,7 +437,11 @@ const styles = EStyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 100,
+    marginRight:75,
+  },
+  ButtonContainer1: {
+    
+    marginRight:75,
   },
 
   inputMargin: {
@@ -464,7 +468,19 @@ const styles = EStyleSheet.create({
     borderColor: '#E6E6E6',
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: 30,
+    marginTop: 20,
+  },
+  radioButtonunmarried:{
+    height: 20,
+    width: 20,
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#E6E6E6',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft:20,
     marginTop: 20,
   },
   searchInput: {
@@ -476,6 +492,13 @@ const styles = EStyleSheet.create({
     borderRadius: 9,
     backgroundColor: 'white',
   },
+  radioButtonunmarriedIcon:{
+    height: 12,
+    width: 12,
+    borderRadius: 9,
+    backgroundColor: 'white',
+    
+  },
   dropContainer: {
     marginBottom: 5,
     width: 200,
@@ -485,6 +508,13 @@ const styles = EStyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '400',
     marginTop: 20,
+  },
+  radioButtonUnmarriedText:{
+    fontSize: 17,
+    color: '#FFFFFF',
+    fontWeight: '400',
+    marginTop: 20,
+     marginLeft:18
   },
   textinput: {
     backgroundColor: 'white',
