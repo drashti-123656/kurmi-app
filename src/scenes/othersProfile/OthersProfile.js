@@ -126,6 +126,10 @@ const OthersProfile = ({route, navigation}) => {
               setModalVisible(!modalVisible);
             }}>
             <View style={styles.centeredView}>
+              <Pressable
+                onPress={() => setModalVisible(false)}
+                style={styles.modalPicture}
+              />
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Send Interest</Text>
                 <View
@@ -859,5 +863,13 @@ const styles = EStyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  modalPicture: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    opacity: 0.4,
+    elevation: 20,
+    position: 'absolute',
   },
 });
