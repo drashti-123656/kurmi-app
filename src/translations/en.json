@@ -48,41 +48,41 @@
     "numberCantbeDecimal": "Phone number cannot contain decimal point",
     "validName": "Please enter valid name"
   },
-  "register":{
-    "registration":"registration",
-    "Var":"Groom",
-    "Vadhu":"Bride",
+  "register": {
+    "registration": "registration",
+    "Var": "Groom",
+    "Name": "Name",
+    "Vadhu": "Bride",
     "ProfileName": "ProfileName",
     "FirstName": "First Name",
     "lastName": "Last Name",
-    "EmailId":"Email Id",
-    "MobileNumber":"Mobile Number",
-    "birthdate":"Birth date",
-    "caste":"Caste",
-    "country":"Country",
-    "state":" State ",
-    "city":" City ",
-    "enterpassword":"Enter Your Password",
-    "Note":"Age must be 18 years",
-    "Note@":" Password must be in character number ",
-    "checkbox":"I agree to the Privacy Policy and Terms of Use",
-    "create Account":"Create Account ",
+    "EmailId": "Email Id",
+    "MobileNumber": "Mobile Number",
+    "birthdate": "Birth date",
+    "caste": "Caste",
+    "country": "Country",
+    "state": " State ",
+    "city": " City ",
+    "enterpassword": "Enter Your Password",
+    "Note": "Age must be 18 years",
+    "Note@": " Password must be in character number ",
+    "checkbox": "I agree to the Privacy Policy and Terms of Use",
+    "create Account": "Create Account ",
     "picUpload": "upload photo",
-    "Age":"Age"
-
+    "Age": "Age"
   },
-  "Dharmikjankari":{
-    "Dharmik Jankari":"Dharmik Jankari",
+  "Dharmikjankari": {
+    "Dharmik Jankari": "Dharmik Jankari",
     "Caste": "Caste",
     "Native": "Native",
-    "Birthtime":"Birthtime",
-    "Birthplace":"Birthplace",
-    "Zodiacsign":"Zodiacsign",
-    "auspicious":"auspicious",
-    "Next":"Next"
+    "Birthtime": "Birthtime",
+    "Birthplace": "Birthplace",
+    "Zodiacsign": "Zodiacsign",
+    "auspicious": "auspicious",
+    "Next": "Next"
   },
   "Vyaktigatdata": {
-    "name":"name",
+    "name": "name",
     "Personal information": "Personal information ",
     "Height": "Height",
     "Marital Status": "Marital Status",
@@ -120,34 +120,33 @@
     "Gender": "Gender",
     "update membership": "update membership",
     "myProfile": "My Profile",
-    "name":"name"
+    "name": "name"
   },
-  "profilemaker":{
-    "Myself":"Myself",
-    "Relatives":"Relatives",
-    "Parents":"Parents",
-    "Other":"Other"
+  "profilemaker": {
+    "Myself": "Myself",
+    "Relatives": "Relatives",
+    "Parents": "Parents",
+    "Other": "Other"
   },
-  "colour":{
-    "Fair":"Fair",
-    "Light":"Light",
-    "Medium":"medium",
-    "Dark":"Dark"
+  "colour": {
+    "Fair": "Fair",
+    "Light": "Light",
+    "Medium": "medium",
+    "Dark": "Dark"
   },
-  "Disability":{
-    "Yes":"Yes",
-    "No":"No"
+  "Disability": {
+    "Yes": "Yes",
+    "No": "No"
   },
-  "BloodGroup":{
-    "O+":"O+",
+  "BloodGroup": {
+    "O+": "O+",
     "O-": "O-",
-    "A+":"A+",
-    "A-":"A-",
-    "B+":"B+",
-    "B-":"B-",
-    "AB+":"AB+",
-    "AB-":"AB-"
-
+    "A+": "A+",
+    "A-": "A-",
+    "B+": "B+",
+    "B-": "B-",
+    "AB+": "AB+",
+    "AB-": "AB-"
   },
   "drawerScreen": {
     "Home": "Home",
@@ -159,18 +158,18 @@
     "divorced ": "divorced",
     "widowed ": "widowed",
     "disabled ": "disabled",
-    "Widower":"Widower",
-    "Share":"Share",
-    "settings":"Settings",
-    "All Kurmi Samaj":"All Kurmi Samaj",
-    "Helpline-":"Helpline-"
+    "Widower": "Widower",
+    "Share": "Share",
+    "settings": "Settings",
+    "All Kurmi Samaj": "All Kurmi Samaj",
+    "Helpline-": "Helpline-"
   },
- 
-  "ForgotPassword":{
-    "EnterYourEmail":"Enter your registered email",
-    "Send":"Send"
+
+  "ForgotPassword": {
+    "EnterYourEmail": "Enter your registered email",
+    "Send": "Send"
   },
-  
+
   "advanceSearch": {
     "Advanced Search": "advance Search",
     "Gender": "Gender",
@@ -179,7 +178,6 @@
     "height To": "height To",
     "married": "married",
     "unmarried": "unmarried"
-    
   },
   "samPark": {
     "samparkheader": "contact information",
