@@ -748,7 +748,8 @@ const styles = EStyleSheet.create({
     elevation: 5,
   },
   pencilIcon: {
-    paddingLeft: widthPercentageToDP('45'),
+    position: 'absolute',
+    paddingLeft: widthPercentageToDP('90'),
   },
   pencil: {
     width: 30,
