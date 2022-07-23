@@ -50,6 +50,7 @@
   },
   "register": {
     "registration": "registration",
+    "Name": "Name",
     "Var": "Groom",
     "Vadhu": "Bride",
     "ProfileName": "ProfileName",
