@@ -42,3 +42,36 @@ export function* searchProfile(action) {
     });
   }
 }
+
+export function* fetchNewsFeedData(action) {
+  const payload = action.payload;
+
+  const {data, ok} = yield call(
+    apiClient.post,
+    API_URL.SEARCH_PROFILE,
+    payload,
+  );
+  let finalProfileList = [];
+  if (payload.page > 1) {
+    const {newsFeedData} = yield select(state => state.newsfeed);
+    finalProfileList = newsFeedData.concat(data.data);
+  } else {
+    finalProfileList = data.data;
+  }
+
+  if (ok) {
+    yield put(
+      fetchNewsFeedSuccess({
+        profile: finalProfileList,
+        isPaginationRequired: data.data?.length === PAGE_SIZE,
+        pageNumber: payload.page,
+      }),
+    );
+  } else {
+    yield put(fetchNewsFeedFail({}));
+    showMessage({
+      message: 'Ops, something went wrong',
+      type: 'danger',
+    });
+  }
+}

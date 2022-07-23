@@ -19,7 +19,10 @@ import translate from './../../translations/configTranslations';
 import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
-import {FETCH_SEARCH_PROFILE} from './redux/NewsfeedAction';
+import {
+  FETCH_NEWSFEED_DATA,
+  FETCH_SEARCH_PROFILE,
+} from './redux/NewsfeedAction';
 
 import {PAGE_SIZE} from '../../utils/constants/appConstants';
 import {agevalidationSchema} from '../../utils/schema/newsFeedSchema';
@@ -91,7 +94,7 @@ const NewsFeed = ({navigation}) => {
       },
     };
     dispatch({
-      type: FETCH_SEARCH_PROFILE,
+      type: FETCH_NEWSFEED_DATA,
       payload,
     });
   };
