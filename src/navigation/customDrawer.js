@@ -13,7 +13,7 @@ import {
 import React, {useEffect} from 'react';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import translate from '../translations/configTranslations';
+import translate, {getCurrentLocale} from '../translations/configTranslations';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -23,6 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../scenes/auth/redux/authReducer';
 import {fetchmyProfileDataStarted} from '../scenes/profile/redux/MyProfileReducer';
 import {MY_PROFILE_DETAILS} from '../scenes/profile/redux/MyProfileAction';
+import {setLocale} from '../translations/configTranslations';
 const CustomDrawer = props => {
   const dispatch = useDispatch();
   const {myProfileData} = useSelector(state => state.myProfileDetail);
@@ -82,7 +83,14 @@ const CustomDrawer = props => {
       alert('Please insert mobile no');
     }
   };
-
+  const LanguageSelect = () => {
+    const language = getCurrentLocale();
+    if (language === 'en') {
+      setLocale('hi_IN');
+    } else {
+      setLocale('en');
+    }
+  };
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -247,6 +255,13 @@ const CustomDrawer = props => {
           )}
           label="Helpline -"
           onPress={sendWhatsApp}
+        />
+        <DrawerItem
+          icon={() => (
+            <MaterialIcons name="translate" size={22} color={styles.color} />
+          )}
+          label="Language"
+          onPress={LanguageSelect}
         />
 
         <DrawerItem
