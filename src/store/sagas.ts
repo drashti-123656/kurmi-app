@@ -46,8 +46,14 @@ import {DIVORCED_PROFILE} from '../scenes/divorcedProfile/redux/divorcedAction';
 import {divorcedStatus} from '../scenes/divorcedProfile/redux/divorcedSaga';
 import {OTHERS_PROFILE_DETAILS} from '../scenes/othersProfile/redux/OthersDetailAction';
 import {otherProfileDetails} from '../scenes/othersProfile/redux/OthersDetailSaga';
-import {searchProfile} from '../scenes/home/redux/NewsfeedSaga';
-import {FETCH_SEARCH_PROFILE} from '../scenes/home/redux/NewsfeedAction';
+import {
+  fetchNewsFeedData,
+  searchProfile,
+} from '../scenes/home/redux/NewsfeedSaga';
+import {
+  FETCH_NEWSFEED_DATA,
+  FETCH_SEARCH_PROFILE,
+} from '../scenes/home/redux/NewsfeedAction';
 import {DOWNLOAD_PDF} from '../scenes/shareBioData/redux/DownloadPdfAction';
 import {downloadPdf} from '../scenes/shareBioData/redux/DownloadPdfSaga';
 import {
@@ -145,5 +151,6 @@ export default function* sagas() {
     takeLatest(SEND_FRIEND_REQUEST_LIST, sendFriendRequestList),
     takeLatest(RECEIVED_FRIEND_REQUEST_LIST, receivedFriendRequestList),
     takeLatest(ACCEPT_DENIED_PROFILE, acceptDeniedFriendRequest),
+    takeLatest(FETCH_NEWSFEED_DATA, fetchNewsFeedData),
   ]);
 }
