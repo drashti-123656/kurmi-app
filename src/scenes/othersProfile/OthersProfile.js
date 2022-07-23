@@ -237,7 +237,7 @@ const OthersProfile = ({route, navigation}) => {
                     name="phone"
                     size={30}
                     color={EStyleSheet.value('$PRIMARY')}
-                    style={{marginVertical: 20}}
+                    style={{marginVertical: 17}}
                   />
                   <Text style={styles.contactText}> Call Now </Text>
                 </TouchableOpacity>
@@ -248,7 +248,7 @@ const OthersProfile = ({route, navigation}) => {
                     name="whatsapp"
                     size={28}
                     color={EStyleSheet.value('$PRIMARY')}
-                    style={{marginVertical: 20}}
+                    style={{marginVertical: 17}}
                   />
                   <Text style={styles.contactText}> WhatsaApp </Text>
                 </TouchableOpacity>
@@ -260,7 +260,7 @@ const OthersProfile = ({route, navigation}) => {
                     name="email"
                     size={30}
                     color={EStyleSheet.value('$PRIMARY')}
-                    style={{marginVertical: 20}}
+                    style={{marginVertical: 17}}
                   />
                   <Text style={styles.contactText}> Email </Text>
                 </TouchableOpacity>
