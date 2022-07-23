@@ -272,6 +272,7 @@ const AdvanceSearch = ({navigation}) => {
               <Dropdown
                 style={styles.dropStyle}
                 uniqueKey={'nakshatraId'}
+                textInputProps={{autoFocus: false}}
                 displayKey={'nakshatraTitleHi'}
                 items={auspicious}
                 selectText={translate('Dharmikjankari.auspicious')}
@@ -294,7 +295,7 @@ const AdvanceSearch = ({navigation}) => {
                 style={styles.dropdownStyle}
                 uniqueKey={'stateId'}
                 displayKey={'name'}
-                autoFocus={true}
+                textInputProps={{autoFocus: false}}
                 single
                 fixedHeight={true}
                 items={state}
@@ -319,7 +320,7 @@ const AdvanceSearch = ({navigation}) => {
                 style={styles.dropdownStyle}
                 uniqueKey={'cityId'}
                 displayKey={'cityName'}
-                autoFocus={true}
+                textInputProps={{autoFocus: false}}
                 fixedHeight={true}
                 single
                 searchInputStyle={styles.brandSearchInputStyle}
@@ -437,11 +438,10 @@ const styles = EStyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight:75,
+    marginRight: 75,
   },
   ButtonContainer1: {
-    
-    marginRight:75,
+    marginRight: 75,
   },
 
   inputMargin: {
@@ -471,7 +471,7 @@ const styles = EStyleSheet.create({
     marginHorizontal: 30,
     marginTop: 20,
   },
-  radioButtonunmarried:{
+  radioButtonunmarried: {
     height: 20,
     width: 20,
     backgroundColor: 'transparent',
@@ -480,7 +480,7 @@ const styles = EStyleSheet.create({
     borderColor: '#E6E6E6',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft:20,
+    marginLeft: 20,
     marginTop: 20,
   },
   searchInput: {
@@ -492,12 +492,11 @@ const styles = EStyleSheet.create({
     borderRadius: 9,
     backgroundColor: 'white',
   },
-  radioButtonunmarriedIcon:{
+  radioButtonunmarriedIcon: {
     height: 12,
     width: 12,
     borderRadius: 9,
     backgroundColor: 'white',
-    
   },
   dropContainer: {
     marginBottom: 5,
@@ -509,12 +508,12 @@ const styles = EStyleSheet.create({
     fontWeight: '400',
     marginTop: 20,
   },
-  radioButtonUnmarriedText:{
+  radioButtonUnmarriedText: {
     fontSize: 17,
     color: '#FFFFFF',
     fontWeight: '400',
     marginTop: 20,
-     marginLeft:18
+    marginLeft: 18,
   },
   textinput: {
     backgroundColor: 'white',

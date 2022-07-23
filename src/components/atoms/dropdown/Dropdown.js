@@ -14,6 +14,7 @@ const Dropdown = ({
   selectedItems,
   onSelectedItemsChange,
   style,
+  textInputProps,
   fixedHeight,
   styleListContainer,
   searchInputStyle,
@@ -33,6 +34,7 @@ const Dropdown = ({
           editable={editable}
           searchInputPlaceholderText="Search"
           searchIcon={searchIcon}
+          textInputProps={textInputProps}
           style={styles.dropdownMargin}
           onSelectedItemsChange={onSelectedItemsChange}
           selectText={<Text style={styles.tag}>{selectText}</Text>}
