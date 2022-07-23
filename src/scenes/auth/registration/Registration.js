@@ -700,14 +700,15 @@ const styles = StyleSheet.create({
   },
   radioButtonContainer: {
     flexDirection: 'row',
+    justifyContent:'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
+    marginHorizontal: hp(0),
     marginBottom: 20,
   },
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 100,
+    marginRight: hp(4),
   },
   radioButton: {
     height: 20,
@@ -749,7 +750,7 @@ const styles = StyleSheet.create({
   radioButtonText: {
     fontSize: 25,
     color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginTop: 20,
   },
   ButtonText: {
