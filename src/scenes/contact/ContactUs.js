@@ -15,6 +15,7 @@ import {contactUsValidationSchema} from '../../utils/schema/contactUsSchema';
 import {useDispatch, useSelector} from 'react-redux';
 import {CONTACT_USER} from './redux/contactAction';
 import CustomInput from '../../components/atoms/inputs/CustomInput';
+import CustomIcon from '../../components/atoms/icon/CustomIcon';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
@@ -101,24 +102,27 @@ const ContactUs = () => {
           {translate('ContactUs.contactToUs')}
         </Text>
         <View style={styles.info}>
-          <Image
+          {/* <Image
             style={styles.info_img}
             source={require('../../assets/phoneCall.png')}
-          />
+          /> */}
+          <CustomIcon name='Vector'  style={styles.info_img}  />
           <Text style={styles.info_text}>{translate('genral.phoneNo')}</Text>
         </View>
         <View style={styles.info}>
-          <Image
+          {/* <Image
             style={styles.info_img}
             source={require('../../assets/message.png')}
-          />
+          /> */}
+          <CustomIcon name='email-svgrepo-com' style={styles.info_img}   />
           <Text style={styles.info_text}>{translate('genral.email')}</Text>
         </View>
         <View style={styles.info}>
-          <Image
+          {/* <Image
             style={styles.info_img}
             source={require('../../assets/whatsapp.png')}
-          />
+          /> */}
+          <CustomIcon name='Vector-2'   style={styles.info_img}   />
           <Text style={styles.info_text}>{translate('genral.whatsappNo')}</Text>
         </View>
       </View>
@@ -194,8 +198,9 @@ const styles = StyleSheet.create({
   },
   info_img: {
     marginHorizontal: 20,
-    height: hp(2.5),
-    width: wp(5),
+    height: hp(2.6),
+    width: wp(6),
+    color:'white',
   },
   info_text: {
     color: 'white',

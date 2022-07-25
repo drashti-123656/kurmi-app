@@ -37,6 +37,8 @@ import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 import {registerSuccess} from './redux/registrationReducer';
+import CustomIcon from '../../../components/atoms/icon/CustomIcon';
+
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -162,6 +164,7 @@ const Registration = () => {
                       source={require('./../../../assets/upload1.png')}
                       style={styles.imageUpload}
                     />
+                    {/* <CustomIcon name='pencil' style={styles.imageDesign}/>  */}
                   </TouchableOpacity>
                 )}
               </TouchableOpacity>
