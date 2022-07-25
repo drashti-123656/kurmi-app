@@ -145,7 +145,9 @@ const DashboardNavigation = ({navigation}) => {
               ),
               headerLeft: () => (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('NewsFeedStack')}
+                  onPress={() =>
+                    navigation.navigate(translate('NewsFeed.kurmiShadiHeading'))
+                  }
                   style={styles.headerStyle}>
                   <Ionicons name="arrow-back" size={30} color="white" />
                 </TouchableOpacity>
