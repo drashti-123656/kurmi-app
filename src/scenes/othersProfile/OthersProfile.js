@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   Image,
@@ -15,16 +14,14 @@ import {
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
-import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import translate from '../../translations/configTranslations';
 import {useDispatch, useSelector} from 'react-redux';
-import Entypo from 'react-native-vector-icons/dist/Entypo';
-import {fetchothersProfileData} from './redux/OthersDetailReducer';
 import {OTHERS_PROFILE_DETAILS} from './redux/OthersDetailAction';
-import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
-import {SHORT_LIST_PROFILE} from '../shortList/redux/ShortListAction';
-import {base_URL} from '../../services/httpServices/';
+import {
+  SHORT_LISTED_USERS,
+  SHORT_LIST_PROFILE,
+} from '../shortList/redux/ShortListAction';
 import {showMessage} from 'react-native-flash-message';
 import Loader from '../../components/atoms/buttons/Loader';
 import {
@@ -40,6 +37,8 @@ const OthersProfile = ({route, navigation}) => {
   const {othersProfileData, isFetching} = useSelector(
     state => state.othersDetail,
   );
+  const {shortListedUsersData} = useSelector(state => state.shortListProfiles);
+
   const {sendfriendRequestData} = useSelector(state => state.friendRequest);
   const [modalVisible, setModalVisible] = useState(false);
   const [sentRequest, setsentRequest] = useState(false);
@@ -48,6 +47,7 @@ const OthersProfile = ({route, navigation}) => {
   var str = othersProfileData?.userContactInfo?.userContactInfoContactNo;
   var whatsapp = othersProfileData?.userContactInfo?.userContactInfoWhatsappNo;
   var storeid = sendfriendRequestData?.map(w => w.userId);
+  var storeshortlistid = shortListedUsersData?.map(w => w.userId);
   var replaced = str.replace(/.(?=.{6,}$)/g, '*');
   var replace = whatsapp.replace(/.(?=.{6,}$)/g, '*');
 
@@ -58,6 +58,18 @@ const OthersProfile = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const payload = {
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: SHORT_LISTED_USERS,
+      payload,
+    });
     dispatch({
       type: OTHERS_PROFILE_DETAILS,
       payload: id,
@@ -72,9 +84,34 @@ const OthersProfile = ({route, navigation}) => {
     const payload = {
       profileId: id,
     };
-
     dispatch({
       type: SHORT_LIST_PROFILE,
+      payload,
+    });
+    showMessage({
+      message: 'Profile is ShortListed!',
+      type: 'success',
+    });
+    dispatch({
+      type: SHORT_LISTED_USERS,
+      payload,
+    });
+  };
+
+  const handleShortedList = () => {
+    const payload = {
+      profileId: id,
+    };
+    dispatch({
+      type: SHORT_LIST_PROFILE,
+      payload,
+    });
+    showMessage({
+      message: 'Profile is Remove From ShortListed!',
+      type: 'success',
+    });
+    dispatch({
+      type: SHORT_LISTED_USERS,
       payload,
     });
   };
@@ -736,6 +773,21 @@ const OthersProfile = ({route, navigation}) => {
               />
               <Text style={{color: '#c3773b', fontSize: 12}}> Shortlist </Text>
             </TouchableOpacity>
+          ) : storeshortlistid?.includes(id) ? (
+            <TouchableOpacity
+              onPress={handleShortedList}
+              style={styles.shortlisted}>
+              <Icon
+                name="star"
+                size={40}
+                color="#c3773b"
+                style={{paddingLeft: 8}}
+              />
+              <Text style={{color: '#c3773b', fontSize: 10}}>
+                {' '}
+                Shortlisted{' '}
+              </Text>
+            </TouchableOpacity>
           ) : (
             <TouchableOpacity
               onPress={handleShortList}
@@ -855,6 +907,10 @@ const styles = EStyleSheet.create({
     // alignContent : 'center',
     //justifyContent : 'center',
     //  position: 'relative',
+    paddingBottom: 5,
+  },
+  shortlisted: {
+    flexDirection: 'column',
     paddingBottom: 5,
   },
   transparentText: {

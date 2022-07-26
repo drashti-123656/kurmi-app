@@ -1,6 +1,6 @@
 import {call, put, select} from 'redux-saga/effects';
 import apiClient from '../../../services/httpServices';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {API_URL} from '../../../services/webConstants';
 import {
   fetchShortlistedDataSuccess,
@@ -17,13 +17,8 @@ export function* shortListProfile(action) {
     API_URL.SHORTED_USER,
     payload,
   );
-  console.log('shortlist', data);
 
   if (ok) {
-    showMessage({
-      message: 'Profile is sortlisted',
-      type: 'success',
-    });
     yield put(shortListSuccess(data));
   }
 }
@@ -31,7 +26,7 @@ export function* shortListProfile(action) {
 export function* shortlistedUsers(action) {
   const payload = action.payload;
   yield put(fetchShortlistedUserDataStarted({}));
-  console.log('payload', payload);
+
   const {ok, data} = yield call(
     apiClient.post,
     API_URL.SHORT_LISTEDD_USERS,
@@ -46,7 +41,6 @@ export function* shortlistedUsers(action) {
   } else {
     finalProfileList = data.data;
   }
-  console.log('response', finalProfileList);
   if (ok) {
     yield put(
       fetchShortlistedDataSuccess({

@@ -6,25 +6,31 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {base_URL} from '../../../services/httpServices';
 import {useDispatch, useSelector} from 'react-redux';
-import {SHORT_LIST_PROFILE} from '../../../scenes/shortList/redux/ShortListAction';
+import {
+  SHORT_LISTED_USERS,
+  SHORT_LIST_PROFILE,
+} from '../../../scenes/shortList/redux/ShortListAction';
 import {ADD_ME_VISITOR} from '../../../scenes/viewBy/redux/ViewByAction';
 
 const Card = ({navigation, item, id}) => {
-  //const {id} = route.params;
   const dispatch = useDispatch();
   const {
     authData: {isAuthenticated},
   } = useSelector(state => state.auth);
+  const {shortListedUsersData} = useSelector(state => state.shortListProfiles);
+  var storeshortlistid = shortListedUsersData?.map(w => w.userId);
 
   const handleShortList = () => {
     const payload = {
       profileId: item.userId,
     };
-
     dispatch({
       type: SHORT_LIST_PROFILE,
+      payload,
+    });
+    dispatch({
+      type: SHORT_LISTED_USERS,
       payload,
     });
   };
@@ -81,6 +87,16 @@ const Card = ({navigation, item, id}) => {
                   style={styles.icon}
                 />
                 <Text style={styles.bottomText}> Shortlist </Text>
+              </TouchableOpacity>
+            ) : storeshortlistid?.includes(item.userId) ? (
+              <TouchableOpacity style={styles.bottmIcons}>
+                <Icon
+                  name="star"
+                  size={22}
+                  color="#499A30"
+                  style={styles.icon}
+                />
+                <Text style={styles.bottomText}> Shortlisted </Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
