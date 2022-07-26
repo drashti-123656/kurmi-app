@@ -15,12 +15,6 @@ export function* sendFriendRequest({id}) {
     apiClient.post,
     `${API_URL.SEND_FRIEND_REQUEST}/${id}`,
   );
-  if (ok) {
-    showMessage({
-      message: 'Friend request send  successfully......',
-      type: 'success',
-    });
-  }
 }
 
 export function* sendFriendRequestList(action) {
