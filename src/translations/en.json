@@ -159,18 +159,19 @@
   "drawerScreen": {
     "Home": "Home",
     "View By": "View By",
-    "shortlist": "shortlist",
+    "shortlist": "Shortlist",
     "Membership": "Membership",
-    "biodata share": "biodata share",
-    "advanced search": "advanced search",
-    "divorced ": "divorced",
-    "widowed ": "widowed",
-    "disabled ": "disabled",
+    "biodata share": "Biodata share",
+    "advanced search": "Advanced search",
+    "widowed ": "Widowed",
     "Widower": "Widower",
     "Share": "Share",
     "settings": "Settings",
     "All Kurmi Samaj": "All Kurmi Samaj",
-    "Helpline-": "Helpline-"
+    "Helpline-": "Helpline-",
+    "Interest": "Interest",
+    "divorced": "Divorced",
+    "disabled": "Disabled"
   },
 
   "ForgotPassword": {
