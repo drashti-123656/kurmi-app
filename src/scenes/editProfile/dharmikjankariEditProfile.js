@@ -96,6 +96,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       userReligiousInfoZodiac: 6,
       userReligiousInfoManglik: values.auspicious[0],
       userReligiousInfoMotherGotra: 5,
+      userReligiousInfoPlaceOfBirth:values.PlaceOfBirth,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,
@@ -122,7 +123,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       <Formik
         initialValues={{
           gotra: myProfileData.userReligiousInfo.userReligiousInfoGotra,
-
+          PlaceOfBirth: myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
           auspicious: [
             myProfileData.userReligiousInfo.userReligiousInfoManglik ===
             'manglik'
@@ -151,6 +152,16 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
               />
               {errors.gotra && touched.gotra ? (
                 <Text style={styles.error}>{errors.gotra}</Text>
+              ) : null}
+              <ExtendedTextInput
+                onChangeText={handleChange('PlaceOfBirth')}
+                onBlur={handleBlur('PlaceOfBirth')}
+                value={values.PlaceOfBirth}
+                placeholder={translate('Dharmikjankari.place of birth')}
+                placeholderTextColor={'#666666'}
+              />
+              {errors.placeofbirth && touched.PlaceOfBirth ? (
+                <Text style={styles.error}>{errors.PlaceOfBirth}</Text>
               ) : null}
 
               <Dropdown
