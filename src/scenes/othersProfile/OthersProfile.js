@@ -31,19 +31,23 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {SEND_FRIEND_REQUEST} from '../sendRequest/redux/sendRequestAction';
+import {
+  SEND_FRIEND_REQUEST,
+  SEND_FRIEND_REQUEST_LIST,
+} from '../sendRequest/redux/sendRequestAction';
 
 const OthersProfile = ({route, navigation}) => {
   const {othersProfileData, isFetching} = useSelector(
     state => state.othersDetail,
   );
+  const {sendfriendRequestData} = useSelector(state => state.friendRequest);
   const [modalVisible, setModalVisible] = useState(false);
   const [sentRequest, setsentRequest] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [btn, setBtn] = useState(true);
   var str = othersProfileData?.userContactInfo?.userContactInfoContactNo;
   var whatsapp = othersProfileData?.userContactInfo?.userContactInfoWhatsappNo;
-
+  var storeid = sendfriendRequestData?.map(w => w.userId);
   var replaced = str.replace(/.(?=.{6,}$)/g, '*');
   var replace = whatsapp.replace(/.(?=.{6,}$)/g, '*');
 
@@ -80,6 +84,48 @@ const OthersProfile = ({route, navigation}) => {
     dispatch({
       type: SEND_FRIEND_REQUEST,
       id,
+    });
+    showMessage({
+      message: 'Friend request Send  Successfully!',
+      type: 'success',
+    });
+    const payload = {
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: SEND_FRIEND_REQUEST_LIST,
+      payload,
+    });
+    setsentRequest(true);
+  };
+
+  const handleSentRequest = () => {
+    setIsActive(false);
+    setBtn(true);
+    dispatch({
+      type: SEND_FRIEND_REQUEST,
+      id,
+    });
+    showMessage({
+      message: 'Friend request Deleted Successfully!',
+      type: 'success',
+    });
+    const payload = {
+      page: 1,
+      pageSIze: 10,
+      order: {
+        column: 'id',
+        type: 'desc',
+      },
+    };
+    dispatch({
+      type: SEND_FRIEND_REQUEST_LIST,
+      payload,
     });
     setsentRequest(true);
   };
@@ -148,7 +194,34 @@ const OthersProfile = ({route, navigation}) => {
                       Cancel
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
+                  {storeid?.includes(id) ? (
+                    <TouchableOpacity
+                      style={btn ? styles.requestSent : styles.buttonClose}
+                      onPress={() => handleSentRequest()}>
+                      <Text
+                        style={{
+                          color: btn ? 'white' : 'black',
+                          fontWeight: 'bold',
+                          fontSize: 16,
+                        }}>
+                        Request Sent
+                      </Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={btn ? styles.button : styles.buttonClose}
+                      onPress={() => handleSecurity()}>
+                      <Text
+                        style={{
+                          color: btn ? 'white' : 'black',
+                          fontWeight: 'bold',
+                          fontSize: 16,
+                        }}>
+                        Confirm
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                  {/* <TouchableOpacity
                     style={btn ? styles.button : styles.buttonClose}
                     onPress={() => handleSecurity()}>
                     <Text
@@ -159,7 +232,7 @@ const OthersProfile = ({route, navigation}) => {
                       }}>
                       Confirm
                     </Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               </View>
             </View>
@@ -838,6 +911,16 @@ const styles = EStyleSheet.create({
     borderRadius: 50,
     width: 90,
     height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  requestSent: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    backgroundColor: '$PRIMARY',
+    borderRadius: 50,
+    width: 120,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
   },
