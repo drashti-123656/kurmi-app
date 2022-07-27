@@ -265,7 +265,9 @@ const AdvanceSearch = ({navigation}) => {
                   <Dropdown
                     style={styles.dropContainer}
                     uniqueKey={'heightId'}
-                    displayKey={'name'}
+                    displayKey={
+                      language === 'hi_IN' ? 'heightTitleHi' : 'heightTitleEn'
+                    }
                     items={height}
                     fixedHeight={true}
                     selectText={translate('advanceSearch.height To')}
@@ -461,7 +463,6 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     marginRight: 40,
   },
- 
 
   inputMargin: {
     marginBottom: 20,
