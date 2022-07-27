@@ -67,6 +67,8 @@ const SamparkEditProfile = ({route, navigation}) => {
           ? 1
           : 0,
       userReligiousInfoMotherGotra: 5,
+      userReligiousInfoPlaceOfBirth:
+        myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,

@@ -133,6 +133,8 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
           : 0,
 
       userReligiousInfoMotherGotra: 5,
+      userReligiousInfoPlaceOfBirth:
+        myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
 
       userFirstName: values.firstname,
       userLastName: values.lastname,
