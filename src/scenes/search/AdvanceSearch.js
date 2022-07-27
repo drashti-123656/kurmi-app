@@ -17,7 +17,10 @@ import {
 } from 'react-native-responsive-screen';
 import RootScreen from '../../components/molecule/rootScreen/RootScreen';
 import {Formik} from 'formik';
-import translate from '../../translations/configTranslations';
+import translate, {
+  getCurrentLocale,
+  setLocale,
+} from '../../translations/configTranslations';
 import {advanceSearchSchema} from '../../utils/schema/advanceSearchSchema';
 import Dropdown from '../../components/atoms/dropdown/Dropdown';
 import {useDispatch, useSelector} from 'react-redux';
@@ -29,6 +32,8 @@ import ExtendedTextInput from '../../components/atoms/inputs/ExtendedTextInput';
 
 const AdvanceSearch = ({navigation}) => {
   const dispatch = useDispatch();
+  const language = getCurrentLocale();
+
   const {isFetching} = useSelector(state => state.advanceSerach);
 
   const {
@@ -179,7 +184,11 @@ const AdvanceSearch = ({navigation}) => {
               <Dropdown
                 style={styles.dropdownStyle}
                 uniqueKey={'profileCreatedById'}
-                displayKey={'profileCreatedByNameHi'}
+                displayKey={
+                  language === 'hi_IN'
+                    ? 'profileCreatedByNameHi'
+                    : 'profileCreatedByNameEn'
+                }
                 autoFocus={true}
                 items={profilemaker}
                 selectText={translate('register.ProfileName')}
@@ -237,7 +246,9 @@ const AdvanceSearch = ({navigation}) => {
                   <Dropdown
                     style={styles.dropContainer}
                     uniqueKey={'heightId'}
-                    displayKey={'name'}
+                    displayKey={
+                      language === 'hi_IN' ? 'heightTitleHi' : 'heightTitleEn'
+                    }
                     items={height}
                     fixedHeight={true}
                     selectText={translate('advanceSearch.height From')}
@@ -273,7 +284,9 @@ const AdvanceSearch = ({navigation}) => {
                 style={styles.dropStyle}
                 uniqueKey={'nakshatraId'}
                 textInputProps={{autoFocus: false}}
-                displayKey={'nakshatraTitleHi'}
+                displayKey={
+                  language === 'hi_IN' ? 'nakshatraTitleHi' : 'nakshatraTitleEn'
+                }
                 items={auspicious}
                 selectText={translate('Dharmikjankari.auspicious')}
                 selectedItems={values.auspicious}
@@ -337,7 +350,9 @@ const AdvanceSearch = ({navigation}) => {
                 searchIcon={false}
                 fixedHeight={true}
                 searchInputStyle={styles.searchInput}
-                displayKey={'educationTitleHi'}
+                displayKey={
+                  language === 'hi_IN' ? 'educationTitleHi' : 'educationTitleEn'
+                }
                 styleListContainer={styles.listContainerData}
                 items={education}
                 selectText={translate('Vyaktigatdata.Knowledge')}
@@ -350,7 +365,11 @@ const AdvanceSearch = ({navigation}) => {
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'occupationId'}
-                displayKey={'occupationTitleHi'}
+                displayKey={
+                  language === 'hi_IN'
+                    ? 'occupationTitleHi'
+                    : 'occupationTitleEn'
+                }
                 hideDropdown={true}
                 searchIcon={false}
                 searchInputStyle={styles.searchInput}
@@ -364,7 +383,9 @@ const AdvanceSearch = ({navigation}) => {
               <Dropdown
                 style={styles.inputMargin}
                 uniqueKey={'landId'}
-                displayKey={'landTitleHi'}
+                displayKey={
+                  language === 'hi_IN' ? 'landTitleHi' : 'landTitleEn'
+                }
                 hideDropdown={true}
                 fixedHeight={true}
                 searchIcon={false}
