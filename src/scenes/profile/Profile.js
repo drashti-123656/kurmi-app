@@ -82,6 +82,8 @@ const Profile = ({navigation}) => {
               : 0,
 
           userReligiousInfoMotherGotra: 5,
+          userReligiousInfoPlaceOfBirth:
+            myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
 
           userFirstName: myProfileData.userFirstName,
           userLastName: myProfileData.userLastName,

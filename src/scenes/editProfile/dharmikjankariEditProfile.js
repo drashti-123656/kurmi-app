@@ -96,7 +96,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       userReligiousInfoZodiac: 6,
       userReligiousInfoManglik: values.auspicious[0],
       userReligiousInfoMotherGotra: 5,
-      userReligiousInfoPlaceOfBirth:values.PlaceOfBirth,
+      userReligiousInfoPlaceOfBirth: values.PlaceOfBirth,
 
       userFirstName: myProfileData.userFirstName,
       userLastName: myProfileData.userLastName,
@@ -123,7 +123,8 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
       <Formik
         initialValues={{
           gotra: myProfileData.userReligiousInfo.userReligiousInfoGotra,
-          PlaceOfBirth: myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
+          PlaceOfBirth:
+            myProfileData.userReligiousInfo.userReligiousInfoPlaceOfBirth,
           auspicious: [
             myProfileData.userReligiousInfo.userReligiousInfoManglik ===
             'manglik'
