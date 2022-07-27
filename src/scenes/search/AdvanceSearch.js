@@ -459,11 +459,9 @@ const styles = EStyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 75,
+    marginRight: 40,
   },
-  ButtonContainer1: {
-    marginRight: 75,
-  },
+ 
 
   inputMargin: {
     marginBottom: 20,
@@ -471,7 +469,7 @@ const styles = EStyleSheet.create({
   inputWrap: {
     flex: 1,
     marginBottom: 5,
-    marginHorizontal: -15,
+    marginHorizontal: -20,
   },
   heightContainer: {
     flexDirection: 'row',
