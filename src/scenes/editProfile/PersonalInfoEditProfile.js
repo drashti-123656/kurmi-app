@@ -68,7 +68,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
     });
     dispatch({
       type: FETCH_HEIGHT,
-      payload: {moduleType: 'Height'},
+      payload: {moduleType: 'HeightHi'},
     });
 
     dispatch({
@@ -121,7 +121,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
         myProfileData.userFamilyInfo.userFamilyInfoNoOfBrother,
 
       userPersonalInfoMaritalStatusId: values.maritalstatus[0],
-      userPersonalInfoHeight: values.height[0],
+      userPersonalInfoHeight: values.Height[0],
       userPersonalInfoDisability: values.disability[0],
 
       userReligiousInfoGotra:
@@ -172,7 +172,7 @@ const PersonalInfoEditProfile = ({route, navigation}) => {
           state: [myProfileData.userState.stateId],
           city: [myProfileData.userCity.cityId],
           height: [
-            myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
+            myProfileData.userPersonalInfo.userPersonalInfoHeight.HeightTitleHi,
           ],
           maritalstatus: [
             myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId

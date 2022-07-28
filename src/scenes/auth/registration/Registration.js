@@ -37,7 +37,7 @@ import LoginButton from '../../../components/atoms/buttons/LoginButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '../../../components/atoms/picker/DateTimePicker';
 import {registerSuccess} from './redux/registrationReducer';
-import CustomIcon from '../../../components/atoms/icon/CustomIcon';
+// import CustomIcon from '../../../components/atoms/icon/CustomIcon';
 
 
 const Registration = () => {

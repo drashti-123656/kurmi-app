@@ -14,8 +14,8 @@ import LoginButton from '../../components/atoms/buttons/LoginButton';
 import {contactUsValidationSchema} from '../../utils/schema/contactUsSchema';
 import {useDispatch, useSelector} from 'react-redux';
 import {CONTACT_USER} from './redux/contactAction';
-import CustomInput from '../../components/atoms/inputs/CustomInput';
-import CustomIcon from '../../components/atoms/icon/CustomIcon';
+// import CustomInput from '../../components/atoms/inputs/CustomInput';
+// import CustomIcon from '../../components/atoms/icon/CustomIcon';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
