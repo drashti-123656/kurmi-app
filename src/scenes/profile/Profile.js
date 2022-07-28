@@ -273,7 +273,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.detailsText}>
                 {' '}
                 {
-                  myProfileData?.userPersonalInfo?.userPersonalInfoHeight?.name
+                  myProfileData?.userPersonalInfo?.userPersonalInfoHeight?.heightTitleEn
                 }{' '}
               </Text>
             </View>

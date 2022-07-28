@@ -88,7 +88,7 @@ const DharmikjankariEditProfile = ({route, navigation}) => {
         myProfileData.userPersonalInfo.userPersonalInfoMaritalStatusId
           .maritalStatusId,
       userPersonalInfoHeight:
-        myProfileData.userPersonalInfo.userPersonalInfoHeight.heightId,
+        myProfileData.userPersonalInfo.userPersonalInfoHeight.heightTitleEn,
       userPersonalInfoDisability:
         myProfileData.userPersonalInfo.userPersonalInfoDisability.nakshatraId,
 

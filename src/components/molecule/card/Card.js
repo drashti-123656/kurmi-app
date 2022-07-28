@@ -67,10 +67,10 @@ const Card = ({navigation, item, id}) => {
               <Text style={styles.profileIntroText}>Age - {item.userAge},</Text>
 
               <Text style={styles.profileIntroText}>
-                {item.userPersonalInfo?.userPersonalInfoHeight?.name},{' '}
+                {item.userPersonalInfo?.userPersonalInfoHeight?.heightTitleEn},{' '}
                 {item?.userCity?.cityName},
               </Text>
-              <Text style={styles.profileIntroText}>{item.userState.name}</Text>
+              <Text style={styles.profileIntroText}>{item.userState.heightTitleEn}</Text>
             </View>
           </View>
           <View style={styles.line} />

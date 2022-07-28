@@ -56,10 +56,10 @@ const NewsFeedCard = ({navigation, item, id}) => {
         </Text>
         <Text style={styles.profileIntroText}>
           Age - {item.userAge},{' '}
-          {item.userPersonalInfo?.userPersonalInfoHeight?.name},
+          Height - {item.userPersonalInfo?.userPersonalInfoHeight?.heightTitleEn},
         </Text>
         <Text style={styles.profileIntroText}>
-          {item.userCity.cityName},{item.userState.name}
+          {item.userCity.cityName},{' '}{item.userState.name}
         </Text>
       </View>
     </TouchableOpacity>
